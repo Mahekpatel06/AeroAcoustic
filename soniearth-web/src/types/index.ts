@@ -9,6 +9,8 @@ export interface RegionFeature {
   stdDeviation: number;
   brightPixelDensity: number;
   activeNote: string;
+  frequencyHz?: number;
+  calibratedScore?: number;
 }
 
 export interface ChangeClassification {
@@ -18,6 +20,8 @@ export interface ChangeClassification {
   visualNetChange: number;
   purplePixelCount: number;
   orangePixelCount: number;
+  purpleMeanIntensity?: number;
+  orangeMeanIntensity?: number;
   validPixelCount: number;
   confidenceScore: number;
 }
@@ -25,8 +29,8 @@ export interface ChangeClassification {
 export interface FrameFeature {
   frameIndex: number;
   timestampSeconds: number;
-  phase: "annual_series" | "change_transition" | "global_change" | "regional_zoom";
-  year?: number;
+  phase: "annual_series" | "change_transition" | "global_change" | "fade_transition" | "regional_zoom" | "decadal_summary";
+  year?: number | null;
   regionFocus: string;
   globalMeanBrightness: number;
   globalMedianBrightness: number;
@@ -34,7 +38,7 @@ export interface FrameFeature {
   brightPixelDensity: number;
   temporalDelta: number;
   spatialGrid: RegionFeature[];
-  changeClassification?: ChangeClassification;
+  changeClassification?: ChangeClassification | null;
   dataOrigin: string;
   confidenceScore: number;
 }
@@ -58,10 +62,17 @@ export interface AudioNoteEvent {
   pan: number;
   instrument: string;
   eventType: string;
+  frameIndex?: number;
+  year?: number | null;
+  mode?: string;
+  regionFocus?: string;
+  regionId?: string;
+  regionName?: string;
 }
 
 export interface AudioScore {
   datasetId: string;
+  version?: string;
   totalDurationSeconds: number;
   tempoBpm: number;
   scaleName: string;

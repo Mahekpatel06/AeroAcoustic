@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Header } from "@/components/Header";
 import { SatelliteStage } from "@/components/SatelliteStage";
 import { AcousticStage } from "@/components/AcousticStage";
@@ -12,47 +12,65 @@ import { FrameFeature, DatasetFeatureCollection } from "@/types";
 import { audioEngine } from "@/lib/audioEngine";
 import { speechNarrator } from "@/lib/speechNarrator";
 
-// --- 1. Mode A: Annual Evolution (2012–2023) Harmonic Progression in C Lydian ---
-const ANNUAL_HARMONIES: Record<number, { root: string; fifth: string; scaleName: string }> = {
-  2012: { root: "C3", fifth: "G3", scaleName: "C Major Lydian (2012 Baseline)" },
-  2013: { root: "D3", fifth: "A3", scaleName: "C Major Lydian (2013 Expansion)" },
-  2014: { root: "E3", fifth: "B3", scaleName: "C Major Lydian (2014 Expansion)" },
-  2015: { root: "G3", fifth: "D4", scaleName: "C Major Lydian (2015 Expansion)" },
-  2016: { root: "A3", fifth: "E4", scaleName: "C Major Lydian (2016 Mid-Decade)" },
-  2017: { root: "C4", fifth: "G4", scaleName: "C Major Lydian (2017 Expansion)" },
-  2018: { root: "D4", fifth: "A4", scaleName: "C Major Lydian (2018 Expansion)" },
-  2019: { root: "E4", fifth: "B4", scaleName: "C Major Lydian (2019 Pre-Pandemic)" },
-  2020: { root: "F#4", fifth: "C#5", scaleName: "C Lydian Shift (2020 Global Transition)" },
-  2021: { root: "G4", fifth: "D5", scaleName: "C Major Lydian (2021 Recovery)" },
-  2022: { root: "A4", fifth: "E5", scaleName: "C Major Lydian (2022 Electrification)" },
-  2023: { root: "C5", fifth: "G5", scaleName: "C Major Lydian (2023 Peak Radiance)" },
-};
+// --- C Major Pentatonic Scale Across Octaves 3, 4, 5 ---
+const PENTATONIC_SCALE = [
+  { note: "C3", freq: 130.81 },
+  { note: "D3", freq: 146.83 },
+  { note: "E3", freq: 164.81 },
+  { note: "G3", freq: 196.00 },
+  { note: "A3", freq: 220.00 },
+  { note: "C4", freq: 261.63 },
+  { note: "D4", freq: 293.66 },
+  { note: "E4", freq: 329.63 },
+  { note: "G4", freq: 392.00 },
+  { note: "A4", freq: 440.00 },
+  { note: "C5", freq: 523.25 },
+];
 
-// --- 2. Mode C: Regional Zoom Exploration Profiles ---
-const REGIONAL_PROFILES: Record<string, { scaleName: string; instrumentName: string; root: string }> = {
+// --- Mode C: Authentic Regional Profiles ---
+const REGIONAL_PROFILES: Record<string, { scaleName: string; instrumentName: string; defaultNote: string; freq: number; pan: number; frameIndex: number }> = {
   India: {
-    scaleName: "E Mixolydian (Raag Desh - Electrification)",
+    scaleName: "E Mixolydian (Raag Desh - Rural Electrification)",
     instrumentName: "Snappy Marimba Pluck",
-    root: "E4",
+    defaultNote: "E4",
+    freq: 329.63,
+    pan: 0.5,
+    frameIndex: 780,
   },
   Ukraine: {
     scaleName: "A Natural Minor (Blackout Corridors)",
     instrumentName: "Solemn Bowed Cello",
-    root: "A2",
+    defaultNote: "A2",
+    freq: 110.0,
+    pan: -0.3,
+    frameIndex: 910,
   },
   "Western Europe": {
     scaleName: "G Lydian (Continental LED Grid)",
     instrumentName: "Ambient Glass Pad",
-    root: "G4",
+    defaultNote: "G4",
+    freq: 392.0,
+    pan: -0.5,
+    frameIndex: 1040,
   },
   "Eastern Mediterranean": {
     scaleName: "D Phrygian Dominant (Maqam Hijaz)",
     instrumentName: "Evocative Modal Synth",
-    root: "D3",
+    defaultNote: "D3",
+    freq: 146.83,
+    pan: 0.15,
+    frameIndex: 1180,
   },
+  "Overview (All Insets)": {
+    scaleName: "Poly-Regional Composite Scale",
+    instrumentName: "Spatial Multi-Instrument Array",
+    defaultNote: "C4",
+    freq: 261.63,
+    pan: 0.0,
+    frameIndex: 720,
+  }
 };
 
-// --- Note to Frequency Mapping ---
 const FREQ_MAP: Record<string, number> = {
   D2: 73.42, E2: 82.41, F2: 87.31, G2: 98.0, A2: 110.0, B2: 123.47,
   C3: 130.81, "C#3": 138.59, D3: 146.83, Eb3: 155.56, E3: 164.81, F3: 174.61, "F#3": 185.0, G3: 196.0, "G#3": 207.65, A3: 220.0, Bb3: 233.08, B3: 246.94,
@@ -61,24 +79,65 @@ const FREQ_MAP: Record<string, number> = {
   C6: 1046.5,
 };
 
+// Mode video durations in seconds
+const MODE_DURATIONS = {
+  annual: 12.0,
+  change: 11.5,
+  regional: 19.8,
+};
+
+/**
+ * Derives root note and fifth harmony directly from measured global radiance & delta.
+ * No hardcoded pitch ladders!
+ */
+function deriveAnnualHarmony(meanBrightness: number, delta: number) {
+  const norm = Math.max(0.0, Math.min(1.0, (meanBrightness - 0.0215) / (0.0245 - 0.0215)));
+  const rootIdx = Math.round(norm * (PENTATONIC_SCALE.length - 1));
+  const root = PENTATONIC_SCALE[rootIdx] || PENTATONIC_SCALE[0];
+  const intervalShift = delta >= 0 ? 3 : 2;
+  const fifthIdx = Math.min(PENTATONIC_SCALE.length - 1, rootIdx + intervalShift);
+  const fifth = PENTATONIC_SCALE[fifthIdx] || PENTATONIC_SCALE[3];
+  return { root, fifth, norm };
+}
+
 export default function Home() {
   const [featureData, setFeatureData] = useState<DatasetFeatureCollection | null>(null);
-  const [currentFrameIndex, setCurrentFrameIndex] = useState<number>(0);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentMode, setCurrentMode] = useState<"annual" | "change" | "regional">("annual");
+  const [currentTime, setCurrentTime] = useState<number>(0.0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [useVideo, setUseVideo] = useState<boolean>(true);
+  const [selectedRegion, setSelectedRegion] = useState<string>("India");
   const [activeDataset, setActiveDataset] = useState<string>("night-lights");
-  const [voiceEnabled, setVoiceEnabled] = useState<boolean>(true);
+  const [voiceEnabled, setVoiceEnabled] = useState<boolean>(false); // Start voice off by default
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
-  const [activeNote, setActiveNote] = useState<string>("C3");
-  const [activeFreq, setActiveFreq] = useState<number>(130.81);
-  const [activeScaleName, setActiveScaleName] = useState<string>("C Major Lydian (2012 Baseline)");
+  const [activeNote, setActiveNote] = useState<string>("A3");
+  const [activeFreq, setActiveFreq] = useState<number>(220.0);
+  const [activeScaleName, setActiveScaleName] = useState<string>("C Major Lydian / Pentatonic");
   const [activeInstrument, setActiveInstrument] = useState<string>("Ambient Sine Pad (Annual Series)");
   const [ariaAnnouncement, setAriaAnnouncement] = useState<string>(
     "SoniEarth initialized. Press Space to play."
   );
 
-  const playbackTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const isPlayingRef = useRef<boolean>(false);
+  const playbackSpeedRef = useRef<number>(1.0);
+  const currentTimeRef = useRef<number>(0.0);
+  const currentModeRef = useRef<"annual" | "change" | "regional">("annual");
+  const lastTimeRef = useRef<number | null>(null);
+
+  // Audio trigger tracking refs to prevent re-trigger chatter
+  const lastEvaluatedSecondRef = useRef<number>(-1);
+  const lastChimeTriggerRef = useRef<number>(-1);
+  const lastCelloTriggerRef = useRef<number>(-1);
+  const lastDroneTriggerRef = useRef<number>(-1);
+  const lastRegionalTriggerRef = useRef<number>(-1);
+
+  // Sync refs with state
+  isPlayingRef.current = isPlaying;
+  playbackSpeedRef.current = playbackSpeed;
+  currentTimeRef.current = currentTime;
+  currentModeRef.current = currentMode;
 
   // 1. Load Feature Data on Mount
   useEffect(() => {
@@ -90,235 +149,365 @@ export default function Home() {
       .catch((err) => console.error("Failed to load dataset features:", err));
   }, []);
 
-  // Filter frames according to active mode
-  const getFilteredFrames = useCallback(() => {
+  // Filter frames strictly belonging to the currently selected mode
+  const modeFrames = useMemo(() => {
     if (!featureData?.frames) return [];
     if (currentMode === "annual") {
       return featureData.frames.filter((f) => f.phase === "annual_series");
     } else if (currentMode === "change") {
       return featureData.frames.filter(
-        (f) => f.phase === "change_transition" || f.phase === "global_change"
+        (f) => f.phase === "global_change" || f.phase === "change_transition"
       );
     } else {
       return featureData.frames.filter((f) => f.phase === "regional_zoom");
     }
   }, [featureData, currentMode]);
 
-  const activeFrames = getFilteredFrames();
-  const currentFeature: FrameFeature | null =
-    activeFrames[currentFrameIndex] || featureData?.frames[0] || null;
+  // Current active frame feature derived strictly from active mode and time
+  const currentFeature: FrameFeature | null = useMemo(() => {
+    if (modeFrames.length === 0) return featureData?.frames[0] || null;
 
-  // 2. Play Sound for Current Frame with Multi-Scale & Mode Logic
-  const playFrameSound = useCallback(
-    async (feat: FrameFeature) => {
+    if (currentMode === "annual") {
+      const yearIdx = Math.min(modeFrames.length - 1, Math.floor(currentTime));
+      return modeFrames[yearIdx] || modeFrames[0];
+    } else if (currentMode === "change") {
+      const frameIdx = Math.min(
+        modeFrames.length - 1,
+        Math.floor((currentTime / MODE_DURATIONS.change) * modeFrames.length)
+      );
+      return modeFrames[frameIdx] || modeFrames[0];
+    } else {
+      const regionalMatch = modeFrames.find((f) => f.regionFocus === selectedRegion);
+      return regionalMatch || modeFrames[0];
+    }
+  }, [modeFrames, currentMode, currentTime, selectedRegion, featureData]);
+
+  // 2. Play Sound for Current Mode with Dedicated Sonification (Strictly when isPlaying is true)
+  const playModeSound = useCallback(
+    async (timeSec: number, forceInstant = false) => {
+      // Never trigger sound if playback is stopped
+      if (!isPlayingRef.current && !forceInstant) return;
       await audioEngine.initialize();
+      const mode = currentModeRef.current;
 
       // ==========================================
       // MODE A: ANNUAL EVOLUTION (2012–2023)
       // ==========================================
-      if (currentMode === "annual") {
-        const yr = feat.year || 2012;
-        const harmony = ANNUAL_HARMONIES[yr] || ANNUAL_HARMONIES[2012];
+      if (mode === "annual") {
+        const yearIdx = Math.floor(timeSec) % 12;
+        if (forceInstant || yearIdx !== lastEvaluatedSecondRef.current) {
+          lastEvaluatedSecondRef.current = yearIdx;
 
-        setActiveNote(harmony.root);
-        setActiveFreq(FREQ_MAP[harmony.root] || 130.81);
-        setActiveScaleName(harmony.scaleName);
-        setActiveInstrument("Ambient Sine Pad + Spatial Arp");
+          const feat = modeFrames[yearIdx] || modeFrames[0];
+          if (!feat) return;
 
-        // Baseline global root & fifth (Center)
-        audioEngine.triggerNote(harmony.root, 0.75, 0.65, 0.0, "sine_pad");
-        audioEngine.triggerNote(harmony.fifth, 0.6, 0.45, 0.0, "sine_pad");
+          const { root, fifth, norm } = deriveAnnualHarmony(
+            feat.globalMeanBrightness,
+            feat.temporalDelta
+          );
 
-        // Spatial Grid Arpeggiations across stereo channels
-        if (feat.spatialGrid && feat.spatialGrid.length >= 3) {
-          // West (Americas: Pan -0.8)
-          const westNote = feat.spatialGrid[0]?.activeNote || harmony.root;
+          setActiveNote(root.note);
+          setActiveFreq(root.freq);
+          setActiveScaleName(`C Major Lydian / Pentatonic (Luma ${(feat.globalMeanBrightness * 100).toFixed(2)}%)`);
+          setActiveInstrument("Sine Pad + 3-Zone Longitudinal Sweep");
+
+          const velocity = Math.min(0.9, Math.max(0.5, 0.6 + 0.3 * norm));
+
+          // Sustained root and fifth harmonic chord
+          audioEngine.triggerNote(root.note, 0.9, velocity, 0.0, "sine_pad");
           setTimeout(() => {
-            audioEngine.triggerNote(westNote, 0.45, 0.5, -0.8, "sine_pad");
+            audioEngine.triggerNote(fifth.note, 0.8, velocity * 0.85, 0.0, "sine_pad");
           }, 60);
 
-          // Center (Europe/Africa: Pan 0.0)
-          const centerNote = feat.spatialGrid[1]?.activeNote || harmony.fifth;
+          // Spatial Stereo Accents locked to laser sweep:
           setTimeout(() => {
-            audioEngine.triggerNote(centerNote, 0.45, 0.5, 0.0, "sine_pad");
-          }, 120);
+            const westCell = feat.spatialGrid?.find((c) => c.pan < -0.3);
+            const westNote = westCell?.activeNote || root.note;
+            audioEngine.triggerNote(westNote, 0.45, velocity * 0.75, -0.75, "sine_pad");
+          }, 150);
 
-          // East (Asia/Oceania: Pan +0.8)
-          const eastNote = feat.spatialGrid[2]?.activeNote || harmony.root;
           setTimeout(() => {
-            audioEngine.triggerNote(eastNote, 0.45, 0.55, 0.8, "sine_pad");
-          }, 180);
+            const centerCell = feat.spatialGrid?.find((c) => Math.abs(c.pan) < 0.2);
+            const centerNote = centerCell?.activeNote || fifth.note;
+            audioEngine.triggerNote(centerNote, 0.45, velocity * 0.75, 0.0, "sine_pad");
+          }, 450);
+
+          setTimeout(() => {
+            const eastCell = feat.spatialGrid?.find((c) => c.pan > 0.3);
+            const eastNote = eastCell?.activeNote || root.note;
+            audioEngine.triggerNote(eastNote, 0.45, velocity * 0.75, 0.75, "sine_pad");
+          }, 750);
         }
       }
 
       // ==========================================
-      // MODE B: DECADAL CHANGE MAP (D Dorian / A Minor Dual Polarity)
+      // MODE B: DECADAL CHANGE MAP (Purple & Orange Polarity)
       // ==========================================
-      else if (currentMode === "change") {
+      else if (mode === "change") {
         setActiveNote("D3");
         setActiveFreq(FREQ_MAP["D3"]);
-        setActiveScaleName("D Dorian / A Minor (Decadal Polarity)");
-        setActiveInstrument("Dual Polarity: Crystalline Chimes & Cello");
+        setActiveScaleName("D Dorian & A Minor (Decadal Polarity)");
+        setActiveInstrument("Chimes (Growth) & Warm Cello (Blackouts)");
 
-        // D Dorian low sustained baseline
-        audioEngine.triggerNote("D3", 0.7, 0.55, 0.0, "sine_pad");
-
-        // Purple Electrification Motif (Ascending Crystalline Chimes on Right)
-        if (feat.changeClassification && feat.changeClassification.increaseRatio > 0.008) {
-          audioEngine.triggerNote("A4", 0.35, 0.85, 0.6, "crystalline_chime_bell");
-          setTimeout(() => {
-            audioEngine.triggerNote("C5", 0.4, 0.9, 0.7, "crystalline_chime_bell");
-          }, 120);
-          setTimeout(() => {
-            audioEngine.triggerNote("E5", 0.45, 0.95, 0.8, "crystalline_chime_bell");
-          }, 240);
+        // D Dorian ground drone every 1.6 seconds
+        const droneSlot = Math.floor(timeSec / 1.6);
+        if (forceInstant || droneSlot !== lastDroneTriggerRef.current) {
+          lastDroneTriggerRef.current = droneSlot;
+          audioEngine.triggerNote("D3", 1.4, 0.55, 0.0, "sine_pad");
         }
 
-        // Orange Blackout / Reduction Motif (Descending Warm Cello on Left)
-        if (feat.changeClassification && feat.changeClassification.decreaseRatio > 0.001) {
-          audioEngine.triggerNote("E3", 0.6, 0.75, -0.6, "warm_cello_synth");
-          setTimeout(() => {
-            audioEngine.triggerNote("D3", 0.7, 0.8, -0.7, "warm_cello_synth");
-          }, 150);
-          setTimeout(() => {
-            audioEngine.triggerNote("A2", 0.8, 0.85, -0.8, "warm_cello_synth");
-          }, 300);
+        // Purple Electrification (Chimes on Right Channel)
+        const chimeSlot = Math.floor(timeSec / 1.4);
+        if (forceInstant || chimeSlot !== lastChimeTriggerRef.current) {
+          lastChimeTriggerRef.current = chimeSlot;
+          audioEngine.triggerNote("A4", 0.4, 0.85, 0.75, "crystalline_chime_bell");
+        }
+
+        // Orange Blackouts (Cello on Left Channel)
+        const celloSlot = Math.floor((timeSec + 0.7) / 1.4);
+        if (forceInstant || celloSlot !== lastCelloTriggerRef.current) {
+          lastCelloTriggerRef.current = celloSlot;
+          audioEngine.triggerNote("A2", 0.8, 0.8, -0.75, "warm_cello_synth");
         }
       }
 
       // ==========================================
-      // MODE C: REGIONAL ZOOM EXPLORATION (Authentic Regional Scales)
+      // MODE C: REGIONAL INSETS (Cultural Scales & Physical Instruments)
       // ==========================================
       else {
-        const region = feat.regionFocus || "India";
-        const profile = REGIONAL_PROFILES[region] || REGIONAL_PROFILES["India"];
+        const profile = REGIONAL_PROFILES[selectedRegion] || REGIONAL_PROFILES["India"];
 
-        setActiveNote(profile.root);
-        setActiveFreq(FREQ_MAP[profile.root] || 220.0);
+        setActiveNote(profile.defaultNote);
+        setActiveFreq(profile.freq);
         setActiveScaleName(profile.scaleName);
         setActiveInstrument(profile.instrumentName);
 
-        if (region === "India") {
-          audioEngine.triggerNote("E4", 0.3, 0.9, 0.4, "marimba_pluck");
-          setTimeout(() => {
-            audioEngine.triggerNote("G#4", 0.3, 0.85, 0.6, "marimba_pluck");
-          }, 100);
-          setTimeout(() => {
-            audioEngine.triggerNote("B4", 0.35, 0.9, 0.7, "marimba_pluck");
-          }, 200);
-        } else if (region === "Ukraine") {
-          audioEngine.triggerNote("E3", 0.65, 0.8, -0.5, "warm_cello_synth");
-          setTimeout(() => {
-            audioEngine.triggerNote("C3", 0.75, 0.85, -0.6, "warm_cello_synth");
-          }, 180);
-          setTimeout(() => {
-            audioEngine.triggerNote("A2", 0.85, 0.9, -0.7, "warm_cello_synth");
-          }, 360);
-        } else if (region === "Western Europe") {
-          audioEngine.triggerNote("G4", 0.8, 0.7, 0.0, "glass_pad");
-          audioEngine.triggerNote("D4", 0.8, 0.6, -0.3, "glass_pad");
-          audioEngine.triggerNote("F#4", 0.8, 0.65, 0.3, "glass_pad");
-        } else {
-          audioEngine.triggerNote("D3", 0.6, 0.8, 0.2, "modal_synth");
-          setTimeout(() => {
-            audioEngine.triggerNote("Eb3", 0.6, 0.85, 0.4, "modal_synth");
-          }, 130);
-          setTimeout(() => {
-            audioEngine.triggerNote("F#3", 0.7, 0.85, 0.3, "modal_synth");
-          }, 260);
+        const regionSlot = Math.floor(timeSec / 1.8);
+        if (forceInstant || regionSlot !== lastRegionalTriggerRef.current) {
+          lastRegionalTriggerRef.current = regionSlot;
+
+          if (selectedRegion === "India") {
+            audioEngine.triggerNote("E4", 0.4, 0.85, profile.pan, "marimba_pluck");
+            setTimeout(() => {
+              audioEngine.triggerNote("B4", 0.45, 0.9, profile.pan + 0.1, "marimba_pluck");
+            }, 160);
+          } else if (selectedRegion === "Ukraine") {
+            audioEngine.triggerNote("E3", 0.75, 0.8, profile.pan, "warm_cello_synth");
+            setTimeout(() => {
+              audioEngine.triggerNote("A2", 0.9, 0.85, profile.pan - 0.1, "warm_cello_synth");
+            }, 220);
+          } else if (selectedRegion === "Western Europe") {
+            audioEngine.triggerNote("G4", 0.9, 0.75, profile.pan, "glass_pad");
+            setTimeout(() => {
+              audioEngine.triggerNote("D4", 0.85, 0.7, profile.pan - 0.1, "glass_pad");
+            }, 200);
+          } else if (selectedRegion === "Eastern Mediterranean") {
+            audioEngine.triggerNote("D3", 0.7, 0.8, profile.pan, "modal_synth");
+            setTimeout(() => {
+              audioEngine.triggerNote("F#3", 0.75, 0.85, profile.pan + 0.1, "modal_synth");
+            }, 180);
+          } else {
+            audioEngine.triggerNote("C4", 0.8, 0.75, 0.0, "sine_pad");
+          }
         }
       }
     },
-    [currentMode]
+    [modeFrames, selectedRegion]
   );
 
-  // 3. Playback Loop
+  // 3. Central Animation & Repeat Loop (Never runs unless isPlaying is true)
   useEffect(() => {
-    if (isPlaying && activeFrames.length > 0) {
-      const stepDuration = 800 / playbackSpeed;
+    let animId: number;
 
-      playbackTimerRef.current = setInterval(() => {
-        setCurrentFrameIndex((prev) => {
-          const nextIdx = (prev + 1) % activeFrames.length;
-          const nextFeat = activeFrames[nextIdx];
-          if (nextFeat) {
-            playFrameSound(nextFeat);
-            if (nextFeat.year) {
-              setAriaAnnouncement(`Year ${nextFeat.year}. Playing ${activeScaleName}.`);
-            } else if (nextFeat.regionFocus !== "global") {
-              setAriaAnnouncement(`Zoom: ${nextFeat.regionFocus}. Tuned to ${activeScaleName}.`);
-            }
+    const clockLoop = (timestamp: number) => {
+      if (isPlayingRef.current) {
+        if (lastTimeRef.current === null) {
+          lastTimeRef.current = timestamp;
+        }
+        const deltaSec = (timestamp - lastTimeRef.current) / 1000;
+        lastTimeRef.current = timestamp;
+
+        const maxDuration = MODE_DURATIONS[currentModeRef.current];
+        let nextTime = currentTimeRef.current;
+
+        // If video element is actively playing this mode chunk, read directly from video clock
+        if (useVideo && videoRef.current && !videoRef.current.paused && !videoRef.current.ended) {
+          nextTime = videoRef.current.currentTime;
+        } else {
+          // Internal frame clock
+          nextTime += deltaSec * playbackSpeedRef.current;
+        }
+
+        // Loop strictly within this mode chunk on repeat!
+        if (nextTime >= maxDuration) {
+          nextTime = 0.0;
+          if (useVideo && videoRef.current) {
+            videoRef.current.currentTime = 0.0;
           }
-          return nextIdx;
-        });
-      }, stepDuration);
-    } else {
-      if (playbackTimerRef.current) clearInterval(playbackTimerRef.current);
-      audioEngine.stopAll();
-    }
+        }
+
+        currentTimeRef.current = nextTime;
+        setCurrentTime(nextTime);
+
+        // Drive real-time sonification
+        playModeSound(nextTime);
+      } else {
+        lastTimeRef.current = null;
+      }
+
+      animId = requestAnimationFrame(clockLoop);
+    };
+
+    animId = requestAnimationFrame(clockLoop);
 
     return () => {
-      if (playbackTimerRef.current) clearInterval(playbackTimerRef.current);
+      cancelAnimationFrame(animId);
     };
-  }, [isPlaying, activeFrames, playbackSpeed, playFrameSound, activeScaleName]);
+  }, [useVideo, playModeSound]);
 
-  // 4. Toggle Playback
+  // 4. Toggle Playback (Spacebar or Play Button)
   const handleTogglePlay = async () => {
     await audioEngine.initialize();
     const willPlay = !isPlaying;
     setIsPlaying(willPlay);
-    if (willPlay && currentFeature) {
-      playFrameSound(currentFeature);
-      speechNarrator.speak("Playback started. Experiencing NASA Decadal Night Lights.");
-      setAriaAnnouncement("Playback started.");
+    isPlayingRef.current = willPlay;
+
+    if (willPlay) {
+      if (useVideo && videoRef.current) {
+        videoRef.current.playbackRate = playbackSpeed;
+        videoRef.current.play().catch(() => {
+          console.warn("Video play prevented or unsupported, using frame engine.");
+        });
+      }
+      playModeSound(currentTimeRef.current, true);
+      const modeTitles = {
+        annual: "Mode A: Annual Evolution (2012 to 2023)",
+        change: "Mode B: Decadal Change Map",
+        regional: `Mode C: Regional Insets (${selectedRegion})`,
+      };
+      if (voiceEnabled) {
+        speechNarrator.speak(`Playing ${modeTitles[currentMode]} on repeat.`);
+      }
+      setAriaAnnouncement(`Playing ${modeTitles[currentMode]} on repeat.`);
     } else {
-      speechNarrator.speak("Playback paused.");
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+      audioEngine.stopAll();
+      if (voiceEnabled) {
+        speechNarrator.speak("Playback paused.");
+      }
       setAriaAnnouncement("Playback paused.");
     }
   };
 
-  // 5. Mode Switching
+  // 5. Explicit Mode Switching (Never auto-starts sound if paused!)
   const handleSelectMode = (mode: "annual" | "change" | "regional") => {
     setCurrentMode(mode);
-    setCurrentFrameIndex(0);
-    const modeNames = {
-      annual: "Mode A: Annual Evolution (2012 to 2023) in C Major Lydian",
-      change: "Mode B: Decadal Change Map in D Dorian & A Minor",
-      regional: "Mode C: Regional Zoom Exploration with Authentic Regional Scales",
+    currentModeRef.current = mode;
+    setCurrentTime(0.0);
+    currentTimeRef.current = 0.0;
+
+    // Reset trigger trackers
+    lastEvaluatedSecondRef.current = -1;
+    lastChimeTriggerRef.current = -1;
+    lastCelloTriggerRef.current = -1;
+    lastDroneTriggerRef.current = -1;
+    lastRegionalTriggerRef.current = -1;
+
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0.0;
+      if (isPlayingRef.current) {
+        videoRef.current.play().catch(() => {});
+      } else {
+        videoRef.current.pause();
+      }
+    }
+
+    // Only play sound if actively playing!
+    if (isPlayingRef.current) {
+      playModeSound(0.0, true);
+    } else {
+      audioEngine.stopAll();
+    }
+
+    const modeDescriptions = {
+      annual: "Mode A: Annual Evolution timeline on repeat (2012 to 2023).",
+      change: "Mode B: Decadal Change Map on repeat with chimes and cello.",
+      regional: "Mode C: Regional Insets on repeat with cultural scales.",
     };
-    speechNarrator.speak(`Switched to ${modeNames[mode]}`);
-    setAriaAnnouncement(`Switched to ${modeNames[mode]}`);
+    if (voiceEnabled) {
+      speechNarrator.speak(`Switched to ${modeDescriptions[mode]}`);
+    }
+    setAriaAnnouncement(`Switched to ${modeDescriptions[mode]}`);
   };
 
-  // 6. Regional Jump Handler (Mode C)
+  // 6. Regional Selection (Mode C) - Never auto-starts sound if paused
   const handleSelectRegion = (regName: string) => {
-    const idx = activeFrames.findIndex((f) => f.regionFocus === regName);
-    if (idx !== -1) {
-      setCurrentFrameIndex(idx);
-      const targetFeat = activeFrames[idx];
-      if (targetFeat) {
-        playFrameSound(targetFeat);
-      }
+    setSelectedRegion(regName);
+    setCurrentMode("regional");
+    currentModeRef.current = "regional";
+
+    if (isPlayingRef.current) {
+      playModeSound(currentTimeRef.current, true);
+    }
+    if (voiceEnabled) {
       speechNarrator.speak(`Targeting ${regName}.`);
-      setAriaAnnouncement(`Targeting ${regName}.`);
     }
   };
 
-  // 7. Dataset Switching
-  const handleSelectDataset = (id: string) => {
-    setActiveDataset(id);
-    const dsNames: Record<string, string> = {
-      "night-lights": "Decadal Night Lights",
-      "ocean-currents": "Sea Surface Currents",
-      "iss-lightning": "ISS Lightning Events",
-      "dyamond-co2": "DYAMOND Global Carbon Dioxide",
-    };
-    const title = dsNames[id] || id;
-    speechNarrator.speak(`Selected ${title}.`);
-    setAriaAnnouncement(`Selected ${title}.`);
+  // 7. Prev / Next Step (Steps through current mode)
+  const handlePrev = () => {
+    const maxDur = MODE_DURATIONS[currentMode];
+    let nextT = currentTimeRef.current - 1.0;
+    if (nextT < 0) nextT = maxDur - 1.0;
+    setCurrentTime(nextT);
+    currentTimeRef.current = nextT;
+    if (videoRef.current) videoRef.current.currentTime = nextT;
+    if (isPlayingRef.current) {
+      playModeSound(nextT, true);
+    }
   };
 
-  // 8. Keyboard Navigation (Accessibility Requirement)
+  const handleNext = () => {
+    const maxDur = MODE_DURATIONS[currentMode];
+    let nextT = (currentTimeRef.current + 1.0) % maxDur;
+    setCurrentTime(nextT);
+    currentTimeRef.current = nextT;
+    if (videoRef.current) videoRef.current.currentTime = nextT;
+    if (isPlayingRef.current) {
+      playModeSound(nextT, true);
+    }
+  };
+
+  // 8. Speed Selection
+  const handleChangeSpeed = (speed: number) => {
+    setPlaybackSpeed(speed);
+    playbackSpeedRef.current = speed;
+    if (videoRef.current) {
+      videoRef.current.playbackRate = speed;
+    }
+  };
+
+  // 9. Dataset Switching
+  const handleSelectDataset = (id: string) => {
+    if (id === "night-lights") {
+      setActiveDataset(id);
+      if (voiceEnabled) speechNarrator.speak("Decadal Night Lights active.");
+      setAriaAnnouncement("Decadal Night Lights active.");
+    } else {
+      const titles: Record<string, string> = {
+        "ocean-currents": "Sea Surface Currents",
+        "iss-lightning": "ISS Lightning Events",
+        "dyamond-co2": "DYAMOND Global CO2",
+      };
+      const title = titles[id] || id;
+      if (voiceEnabled) speechNarrator.speak(`${title} is scheduled for Phase 2.`);
+      setAriaAnnouncement(`${title} is scheduled for Phase 2.`);
+    }
+  };
+
+  // 10. Keyboard Navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (["INPUT", "TEXTAREA"].includes((e.target as HTMLElement)?.tagName)) return;
@@ -336,10 +525,10 @@ export default function Home() {
         handleSelectDataset("dyamond-co2");
       } else if (e.key === "ArrowLeft") {
         e.preventDefault();
-        setCurrentFrameIndex((prev) => Math.max(0, prev - 1));
+        handlePrev();
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
-        setCurrentFrameIndex((prev) => (prev + 1) % activeFrames.length);
+        handleNext();
       } else if (e.key.toLowerCase() === "v") {
         const status = speechNarrator.toggle();
         setVoiceEnabled(status);
@@ -365,16 +554,20 @@ export default function Home() {
         onToggleMute={() => setIsMuted(audioEngine.toggleMute())}
       />
 
-      {/* Main Single-Page Workspace */}
+      {/* Main Workspace */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
-        {/* 2. Large-Format Hero Satellite Stage (Expansive Panoramic Display) */}
+        {/* 2. Hero Satellite Optical Stage (Clean Projection • Zero Slider Bar • Zero Dots in Mode B • Stable Mode C Frame) */}
         <section className="w-full">
           <SatelliteStage
             currentFeature={currentFeature}
-            currentFrameIndex={currentFrameIndex}
-            totalFrames={activeFrames.length}
+            currentTime={currentTime}
+            currentMode={currentMode}
+            selectedRegion={selectedRegion}
             isPlaying={isPlaying}
             onSelectRegion={handleSelectRegion}
+            videoRef={videoRef}
+            useVideo={useVideo}
+            onToggleVideoMode={() => setUseVideo(!useVideo)}
           />
         </section>
 
@@ -384,12 +577,14 @@ export default function Home() {
             <MasterController
               isPlaying={isPlaying}
               onTogglePlay={handleTogglePlay}
-              onPrev={() => setCurrentFrameIndex((prev) => Math.max(0, prev - 1))}
-              onNext={() => setCurrentFrameIndex((prev) => (prev + 1) % activeFrames.length)}
+              onPrev={handlePrev}
+              onNext={handleNext}
               currentMode={currentMode}
               onSelectMode={handleSelectMode}
               playbackSpeed={playbackSpeed}
-              onChangeSpeed={(s) => setPlaybackSpeed(s)}
+              onChangeSpeed={handleChangeSpeed}
+              loopMode={true}
+              onToggleLoopMode={() => {}}
             />
           </div>
           <div className="lg:col-span-5 flex flex-col">

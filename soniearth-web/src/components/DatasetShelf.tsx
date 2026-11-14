@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Moon, Waves, Zap, Wind } from "lucide-react";
+import { Moon, Waves, Zap, Wind, Lock } from "lucide-react";
 
 interface DatasetShelfProps {
   selectedDataset: string;
@@ -17,45 +17,57 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       id: "night-lights",
       key: "1",
       title: "Decadal Night Lights",
-      svs: "SVS #5313",
+      svs: "NASA SVS #5313",
       years: "2012–2023",
-      description: "Urban expansion & electrification mapped to pentatonic bells.",
+      description: "Planetary illumination, electrification, and blackout corridors mapped to data-driven harmonies.",
       icon: Moon,
       color: "from-sky-500 to-indigo-600",
       activeRing: "border-sky-400 shadow-[0_0_15px_rgba(56,189,248,0.3)]",
+      isAvailable: true,
+      badge: "Phase 1 Live",
+      badgeColor: "bg-emerald-950/80 text-emerald-400 border-emerald-700/60",
     },
     {
       id: "ocean-currents",
       key: "2",
       title: "Sea Surface Currents",
-      svs: "SVS #5283",
+      svs: "NASA SVS #5283",
       years: "2011–2012",
-      description: "Thermal fluid motion mapped to warm cello & stereo pan.",
+      description: "Thermal fluid motion mapped to warm cello and dynamic stereo panning.",
       icon: Waves,
-      color: "from-teal-500 to-emerald-600",
-      activeRing: "border-teal-400 shadow-[0_0_15px_rgba(20,184,166,0.3)]",
+      color: "from-teal-600 to-emerald-700",
+      activeRing: "border-teal-400",
+      isAvailable: false,
+      badge: "Coming in Phase 2",
+      badgeColor: "bg-slate-900 text-slate-400 border-slate-700/60",
     },
     {
       id: "iss-lightning",
       key: "3",
       title: "ISS Lightning Events",
-      svs: "SVS #5078",
+      svs: "NASA SVS #5078",
       years: "2017–2023",
-      description: "Optical lightning strikes mapped to sudden glockenspiel chimes.",
+      description: "Optical transient lightning strikes mapped to rapid glockenspiel chimes.",
       icon: Zap,
-      color: "from-amber-400 to-orange-500",
-      activeRing: "border-amber-400 shadow-[0_0_15px_rgba(251,191,36,0.3)]",
+      color: "from-amber-500 to-orange-600",
+      activeRing: "border-amber-400",
+      isAvailable: false,
+      badge: "Coming in Phase 2",
+      badgeColor: "bg-slate-900 text-slate-400 border-slate-700/60",
     },
     {
       id: "dyamond-co2",
       key: "4",
       title: "DYAMOND Global CO2",
-      svs: "SVS #5118",
+      svs: "NASA SVS #5118",
       years: "2020",
-      description: "Planetary carbon respiration mapped to atmospheric synth pads.",
+      description: "Planetary carbon respiration cycle mapped to ambient harmonic pads.",
       icon: Wind,
-      color: "from-purple-500 to-pink-600",
-      activeRing: "border-purple-400 shadow-[0_0_15px_rgba(192,132,252,0.3)]",
+      color: "from-purple-600 to-pink-700",
+      activeRing: "border-purple-400",
+      isAvailable: false,
+      badge: "Coming in Phase 2",
+      badgeColor: "bg-slate-900 text-slate-400 border-slate-700/60",
     },
   ];
 
@@ -66,7 +78,7 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
           <span>NASA Planetary Playlist Shelf</span>
           <span className="text-slate-500">•</span>
           <span className="text-[11px] font-mono text-slate-400 font-normal">
-            Press keys [1] - [4] to switch
+            Phase 1 Dataset Active • Keys [2]-[4] Scheduled for Phase 2
           </span>
         </h3>
       </div>
@@ -79,23 +91,42 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
           return (
             <button
               key={ds.id}
-              onClick={() => onSelectDataset(ds.id)}
+              disabled={!ds.isAvailable}
+              onClick={() => {
+                if (ds.isAvailable) {
+                  onSelectDataset(ds.id);
+                }
+              }}
               className={`relative text-left p-3.5 rounded-2xl border transition-all duration-200 flex flex-col justify-between ${
                 isActive
-                  ? `bg-slate-900 ${ds.activeRing} ring-2 ring-yellow-400/50`
-                  : "bg-slate-900/60 border-slate-800/80 hover:bg-slate-900 hover:border-slate-700"
+                  ? `bg-slate-900 ${ds.activeRing} ring-2 ring-sky-400/50`
+                  : ds.isAvailable
+                  ? "bg-slate-900/60 border-slate-800/80 hover:bg-slate-900 hover:border-slate-700 cursor-pointer"
+                  : "bg-slate-950/40 border-slate-900 opacity-60 cursor-not-allowed"
               }`}
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <div
-                    className={`p-2 rounded-xl bg-gradient-to-br ${ds.color} text-white shadow-md`}
+                    className={`p-2 rounded-xl bg-gradient-to-br ${ds.color} text-white shadow-md ${
+                      !ds.isAvailable ? "grayscale opacity-70" : ""
+                    }`}
                   >
                     <Icon className="w-4 h-4" />
                   </div>
-                  <span className="font-mono text-xs px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-slate-300 font-bold">
-                    Key [{ds.key}]
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <span
+                      className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded border ${ds.badgeColor} flex items-center gap-1`}
+                    >
+                      {!ds.isAvailable && <Lock className="w-2.5 h-2.5" />}
+                      {ds.badge}
+                    </span>
+                    {ds.isAvailable && (
+                      <span className="font-mono text-xs px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-sky-400 font-bold">
+                        Key [{ds.key}]
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <h4 className="text-sm font-semibold text-slate-100 tracking-tight">

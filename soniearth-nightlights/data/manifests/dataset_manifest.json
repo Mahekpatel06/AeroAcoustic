@@ -18,6 +18,7 @@
     "durationYears": 11
   },
   "featuresPath": "data/features/night_lights_features.json",
+  "audioEventsPath": "data/intermediate/audio_events.json",
   "mappingProfile": "profiles/night_lights.py",
   "audioOutputs": {
     "ambientAnnual": "audio/generated/night_lights_ambient.wav",

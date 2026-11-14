@@ -5,6 +5,14 @@ Tests computer vision color classification and spatial grid extraction on synthe
 import unittest
 import numpy as np
 import cv2
+import os
+import sys
+
+TESTS_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(TESTS_DIR)
+if PROJECT_DIR not in sys.path:
+    sys.path.insert(0, PROJECT_DIR)
+
 from analysis.spatial_analysis import analyze_spatial_grid
 from analysis.change_detection import classify_change_map
 
@@ -22,9 +30,22 @@ class TestExtraction(unittest.TestCase):
         # 100x100 completely white frame
         frame = np.full((100, 100, 3), 255, dtype=np.uint8)
         grid = analyze_spatial_grid(frame, rows=3, cols=3)
+        self.assertEqual(len(grid), 9)
         for cell in grid:
             self.assertAlmostEqual(cell["meanBrightness"], 1.0, places=2)
             self.assertEqual(cell["activeNote"], "C5")
+
+    def test_all_nine_cells_labeled_and_panned(self):
+        frame = np.zeros((270, 960, 3), dtype=np.uint8)
+        grid = analyze_spatial_grid(frame, rows=3, cols=3)
+        self.assertEqual(len(grid), 9)
+        cols_seen = [c["col"] for c in grid]
+        rows_seen = [c["row"] for c in grid]
+        self.assertEqual(set(cols_seen), {0, 1, 2})
+        self.assertEqual(set(rows_seen), {0, 1, 2})
+        for c in grid:
+            self.assertTrue(len(c["name"]) > 0)
+            self.assertIn(c["pan"], [-0.75, 0.0, 0.75])
 
     def test_purple_orange_detection(self):
         frame = np.zeros((100, 100, 3), dtype=np.uint8)
@@ -38,6 +59,8 @@ class TestExtraction(unittest.TestCase):
         self.assertGreater(res["orangePixelCount"], 350)
         self.assertGreater(res["increaseRatio"], 0.0)
         self.assertGreater(res["decreaseRatio"], 0.0)
+        self.assertGreater(res["purpleMeanIntensity"], 0.0)
+        self.assertGreater(res["orangeMeanIntensity"], 0.0)
 
 if __name__ == "__main__":
     unittest.main()

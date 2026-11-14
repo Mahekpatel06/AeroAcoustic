@@ -2,13 +2,12 @@
 scheduler.py
 Schedules and mixes musical audio events into a continuous stereo master audio track.
 Applies gain staging, polyphony limiting, and master limiting to prevent clipping.
+Supports all 6 synthesized instruments.
 """
 import numpy as np
 from scipy.io import wavfile
 from sonification.instruments import (
-    synthesize_sine_pad,
-    synthesize_crystalline_chime,
-    synthesize_cello_synth,
+    synthesize_instrument,
     apply_stereo_panning,
     apply_master_limiter,
     SAMPLE_RATE
@@ -30,13 +29,7 @@ def render_score_to_audio(audio_events, total_duration_sec, sample_rate=SAMPLE_R
         pan = ev.get("pan", 0.0)
         inst = ev.get("instrument", "sine_pad")
 
-        if inst == "crystalline_chime_bell":
-            mono_note = synthesize_crystalline_chime(freq_hz, duration_sec, velocity=velocity, sr=sample_rate)
-        elif inst == "warm_cello_synth":
-            mono_note = synthesize_cello_synth(freq_hz, duration_sec, velocity=velocity, sr=sample_rate)
-        else:
-            mono_note = synthesize_sine_pad(freq_hz, duration_sec, velocity=velocity, sr=sample_rate)
-
+        mono_note = synthesize_instrument(inst, freq_hz, duration_sec, velocity=velocity, sr=sample_rate)
         stereo_note = apply_stereo_panning(mono_note, pan)
         end_idx = start_idx + len(stereo_note)
 
