@@ -84,7 +84,7 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
               Why am I hearing this? (Scientific Explainability)
             </h4>
             <span className="text-[10px] font-mono text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40">
-              Data-Driven Synthesis
+              {isLightning ? "NASA SVS #5011 • ISS LIS Science" : "Data-Driven Synthesis"}
             </span>
           </div>
           <p className="text-slate-300 leading-relaxed font-sans">{explanation}</p>
