@@ -105,7 +105,6 @@ export default function Home() {
   const [currentMode, setCurrentMode] = useState<"annual" | "change" | "regional">("annual");
   const [currentTime, setCurrentTime] = useState<number>(0.0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [useVideo, setUseVideo] = useState<boolean>(true);
   const [selectedRegion, setSelectedRegion] = useState<string>("India");
   const [activeDataset, setActiveDataset] = useState<string>("night-lights");
   const [voiceEnabled, setVoiceEnabled] = useState<boolean>(false); // Start voice off by default
@@ -315,7 +314,7 @@ export default function Home() {
     [modeFrames, selectedRegion]
   );
 
-  // 3. Central Animation & Repeat Loop (Never runs unless isPlaying is true)
+  // 3. Central Animation & Repeat Loop (Driven by High-Precision Master Frame Clock)
   useEffect(() => {
     let animId: number;
 
@@ -327,22 +326,26 @@ export default function Home() {
         const deltaSec = (timestamp - lastTimeRef.current) / 1000;
         lastTimeRef.current = timestamp;
 
+        // Cap deltaSec between 0.0s and 0.1s to avoid huge time jumps when switching tabs
+        const safeDelta = Math.min(0.1, Math.max(0.0, deltaSec));
         const maxDuration = MODE_DURATIONS[currentModeRef.current];
-        let nextTime = currentTimeRef.current;
 
-        // If video element is actively playing this mode chunk, read directly from video clock
-        if (useVideo && videoRef.current && !videoRef.current.paused && !videoRef.current.ended) {
-          nextTime = videoRef.current.currentTime;
-        } else {
-          // Internal frame clock
-          nextTime += deltaSec * playbackSpeedRef.current;
-        }
+        // MASTER CLOCK: Always increments smoothly at 60 FPS (zero video buffering freeze)
+        let nextTime = currentTimeRef.current + safeDelta * playbackSpeedRef.current;
 
         // Loop strictly within this mode chunk on repeat!
         if (nextTime >= maxDuration) {
           nextTime = 0.0;
-          if (useVideo && videoRef.current) {
+          if (videoRef.current) {
             videoRef.current.currentTime = 0.0;
+          }
+        }
+
+        // Soft Video Synchronization with 100% local WebM chunks
+        if (videoRef.current && !videoRef.current.seeking) {
+          const currentVidTime = videoRef.current.currentTime;
+          if (Math.abs(currentVidTime - nextTime) > 0.35) {
+            videoRef.current.currentTime = nextTime;
           }
         }
 
@@ -363,7 +366,7 @@ export default function Home() {
     return () => {
       cancelAnimationFrame(animId);
     };
-  }, [useVideo, playModeSound]);
+  }, [playModeSound]);
 
   // 4. Toggle Playback (Spacebar or Play Button)
   const handleTogglePlay = async () => {
@@ -373,11 +376,9 @@ export default function Home() {
     isPlayingRef.current = willPlay;
 
     if (willPlay) {
-      if (useVideo && videoRef.current) {
+      if (videoRef.current) {
         videoRef.current.playbackRate = playbackSpeed;
-        videoRef.current.play().catch(() => {
-          console.warn("Video play prevented or unsupported, using frame engine.");
-        });
+        videoRef.current.play().catch(() => {});
       }
       playModeSound(currentTimeRef.current, true);
       const modeTitles = {
@@ -448,8 +449,25 @@ export default function Home() {
     setCurrentMode("regional");
     currentModeRef.current = "regional";
 
+    const regionOffsets: Record<string, number> = {
+      "Overview (All Insets)": 0.0,
+      India: 2.0,
+      Ukraine: 6.5,
+      "Western Europe": 11.0,
+      "Eastern Mediterranean": 15.0,
+    };
+    const offset = regionOffsets[regName] ?? 0.0;
+    setCurrentTime(offset);
+    currentTimeRef.current = offset;
+    if (videoRef.current) {
+      videoRef.current.currentTime = offset;
+      if (isPlayingRef.current) {
+        videoRef.current.play().catch(() => {});
+      }
+    }
+
     if (isPlayingRef.current) {
-      playModeSound(currentTimeRef.current, true);
+      playModeSound(offset, true);
     }
     if (voiceEnabled) {
       speechNarrator.speak(`Targeting ${regName}.`);
@@ -477,6 +495,20 @@ export default function Home() {
     if (videoRef.current) videoRef.current.currentTime = nextT;
     if (isPlayingRef.current) {
       playModeSound(nextT, true);
+    }
+  };
+
+  // 7b. Interactive Seek Handler for Timeline Progress Scrubber
+  const handleSeek = (targetSec: number) => {
+    const maxDur = MODE_DURATIONS[currentMode];
+    const clamped = Math.max(0, Math.min(maxDur, targetSec));
+    setCurrentTime(clamped);
+    currentTimeRef.current = clamped;
+    if (videoRef.current) {
+      videoRef.current.currentTime = clamped;
+    }
+    if (isPlayingRef.current) {
+      playModeSound(clamped, true);
     }
   };
 
@@ -556,7 +588,7 @@ export default function Home() {
 
       {/* Main Workspace */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
-        {/* 2. Hero Satellite Optical Stage (Clean Projection • Zero Slider Bar • Zero Dots in Mode B • Stable Mode C Frame) */}
+        {/* 2. Hero Satellite Optical Stage (Clean Projection • High-Precision Timeline Progress Bar) */}
         <section className="w-full">
           <SatelliteStage
             currentFeature={currentFeature}
@@ -565,9 +597,8 @@ export default function Home() {
             selectedRegion={selectedRegion}
             isPlaying={isPlaying}
             onSelectRegion={handleSelectRegion}
+            onSeek={handleSeek}
             videoRef={videoRef}
-            useVideo={useVideo}
-            onToggleVideoMode={() => setUseVideo(!useVideo)}
           />
         </section>
 

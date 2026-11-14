@@ -13,8 +13,11 @@ import {
   Flame,
   Zap,
   Info,
-  Film,
-  Image as ImageIcon
+  Maximize2,
+  Minimize2,
+  Clock,
+  Activity,
+  Calendar,
 } from "lucide-react";
 
 interface SatelliteStageProps {
@@ -24,19 +27,14 @@ interface SatelliteStageProps {
   selectedRegion: string;
   isPlaying: boolean;
   onSelectRegion?: (region: string) => void;
+  onSeek?: (timeSec: number) => void;
   videoRef: React.Ref<HTMLVideoElement>;
-  useVideo: boolean;
-  onToggleVideoMode: () => void;
 }
 
-// Calibrated geographic bounding boxes for Mode C regional targets on the dual-equirectangular NASA map
+// Regional Telemetry metadata for Mode C
 const REGION_BOUNDS: Record<
   string,
   {
-    left: number;
-    top: number;
-    width: number;
-    height: number;
     title: string;
     subtitle: string;
     deltaText: string;
@@ -44,55 +42,42 @@ const REGION_BOUNDS: Record<
   }
 > = {
   India: {
-    left: 63.0,
-    top: 32.0,
-    width: 11.0,
-    height: 25.0,
     title: "SOUTH ASIA • INDIA",
     subtitle: "Saubhagya Rural Electrification Expansion",
     deltaText: "+34.2% Radiance Growth",
     deltaType: "increase",
   },
   Ukraine: {
-    left: 49.5,
-    top: 20.5,
-    width: 9.0,
-    height: 18.0,
     title: "EASTERN EUROPE • UKRAINE",
     subtitle: "Conflict-Impacted Power Grid Corridors",
     deltaText: "-42.1% Blackout Decline",
     deltaType: "decrease",
   },
   "Western Europe": {
-    left: 41.0,
-    top: 19.5,
-    width: 10.0,
-    height: 20.0,
     title: "WESTERN EUROPE • CONTINENTAL GRID",
     subtitle: "High-Efficiency LED Grid Transition",
     deltaText: "Stable Grid / LED Shift",
     deltaType: "increase",
   },
   "Eastern Mediterranean": {
-    left: 49.0,
-    top: 31.5,
-    width: 8.5,
-    height: 18.0,
     title: "EASTERN MEDITERRANEAN & LEVANT",
     subtitle: "Demographic & Infrastructure Variance",
     deltaText: "Localized Dynamic Variance",
     deltaType: "decrease",
   },
   "Overview (All Insets)": {
-    left: 38.0,
-    top: 16.0,
-    width: 38.0,
-    height: 44.0,
     title: "GLOBAL MAP • 4 REGIONAL INSETS",
     subtitle: "Simultaneous Display of India, Ukraine, Western Europe, and Levant",
     deltaText: "4-Region Inset Array",
     deltaType: "increase",
   }
+};
+
+// Scientific video duration definitions in seconds
+const MODE_DURATIONS: Record<string, number> = {
+  annual: 12.0,
+  change: 11.5,
+  regional: 19.8,
 };
 
 export const SatelliteStage: React.FC<SatelliteStageProps> = ({
@@ -102,17 +87,16 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   selectedRegion,
   isPlaying,
   onSelectRegion,
+  onSeek,
   videoRef,
-  useVideo,
-  onToggleVideoMode,
 }) => {
   const [contrastBoost, setContrastBoost] = useState<boolean>(true);
   const [manualZoom, setManualZoom] = useState<number>(1.0);
   const [manualPan, setManualPan] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
   const [isManualOverride, setIsManualOverride] = useState<boolean>(false);
-  const [videoError, setVideoError] = useState<boolean>(false);
+  const [fitMode, setFitMode] = useState<"contain" | "cover">("contain");
 
-  // Dedicated chunk video file per mode - only this chunk plays and repeats!
+  // High-performance, zero-buffering local mode clips
   const videoSrc =
     currentMode === "annual"
       ? "/datasets/night-lights/chunk_mode_a.webm"
@@ -120,8 +104,6 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
       ? "/datasets/night-lights/chunk_mode_b.webm"
       : "/datasets/night-lights/chunk_mode_c.webm";
 
-  const frameNum = currentFeature?.frameIndex ?? 10;
-  const frameImgUrl = `/datasets/night-lights/frames/frame_${String(frameNum).padStart(4, "0")}.png`;
   const isRegional = currentMode === "regional";
   const isChangePhase = currentMode === "change";
   const isAnnualPhase = currentMode === "annual";
@@ -129,7 +111,6 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   // Active target bounding box for Mode C
   const activeBounds = REGION_BOUNDS[selectedRegion] || REGION_BOUNDS["India"];
 
-  // Manual zoom override handler (never applied automatically so map stays stable)
   const targetScale = isManualOverride ? manualZoom : 1.0;
   const targetOrigin = isManualOverride ? `${manualPan.x}% ${manualPan.y}%` : "50% 50%";
 
@@ -153,8 +134,28 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
     setManualPan({ x: 50, y: 50 });
   };
 
-  // Laser scan line position across the map in Mode A (0% to 100% per 1-second year)
-  const laserPercent = isAnnualPhase ? (currentTime % 1.0) * 100 : 50;
+  // Pure dynamic position: 0% (West) to 100% (East) per 1-second calendar year
+  // Zero hardcoded center lingering (: 50 removed completely)
+  const laserPercent = (currentTime % 1.0) * 100;
+
+  // Overall Timeline Progress Bar Calculations ("Kitna Chala" & "End Kab Hua")
+  const maxDuration = MODE_DURATIONS[currentMode] || 12.0;
+  const progressPercent = Math.min(100, Math.max(0, (currentTime / maxDuration) * 100));
+
+  const formatTime = (sec: number) => {
+    const mins = Math.floor(sec / 60);
+    const secs = (sec % 60).toFixed(1);
+    const padSecs = Number(secs) < 10 ? `0${secs}` : secs;
+    return `0${mins}:${padSecs}s`;
+  };
+
+  const handleTimelineClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!onSeek) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+    onSeek(ratio * maxDuration);
+  };
 
   return (
     <div className="relative flex flex-col bg-slate-900/95 border border-slate-800 rounded-3xl p-4 sm:p-5 shadow-2xl overflow-hidden group">
@@ -181,41 +182,28 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           <span className="text-slate-600">|</span>
           <span className="font-mono text-sky-400 font-semibold bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-800/40">
             {currentMode === "annual"
-              ? "Chunk A: Annual 2012–2023"
+              ? "Mode A: Annual 2012–2023"
               : currentMode === "change"
-              ? "Chunk B: Decadal Change Map"
-              : `Chunk C: Regional Insets (${selectedRegion})`}
+              ? "Mode B: Decadal Change Map"
+              : `Mode C: Regional Insets (${selectedRegion})`}
           </span>
-          {currentFeature?.year && (
+          {currentFeature?.year && currentMode === "annual" && (
             <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40">
               Year {currentFeature.year}
             </span>
           )}
         </div>
 
-        {/* Right: Stage Action Controls */}
-        <div className="flex items-center gap-2">
-          {/* Video / Frames Mode Toggle */}
+        {/* Right: Stage Action Controls (Clean, minimal, zero extra debug buttons) */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Aspect Fit Mode: Sharp Contain vs Cover */}
           <button
-            onClick={onToggleVideoMode}
-            title={useVideo ? "Switch to High-Definition Frame Engine" : "Switch to Mode Video Chunk"}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all border ${
-              useVideo && !videoError
-                ? "bg-sky-950/80 text-sky-300 border-sky-500 shadow-[0_0_10px_rgba(56,189,248,0.2)]"
-                : "bg-slate-800 text-slate-300 border-slate-700 hover:text-white"
-            }`}
+            onClick={() => setFitMode(fitMode === "contain" ? "cover" : "contain")}
+            title={fitMode === "contain" ? "Switch to Fill Screen (Cropped)" : "Switch to 100% Sharp (Uncropped)"}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all border bg-slate-800 text-slate-300 border-slate-700 hover:text-white"
           >
-            {useVideo && !videoError ? (
-              <>
-                <Film className="w-3.5 h-3.5 text-sky-400" />
-                <span>Video Chunk</span>
-              </>
-            ) : (
-              <>
-                <ImageIcon className="w-3.5 h-3.5 text-amber-400" />
-                <span>HD Frames</span>
-              </>
-            )}
+            {fitMode === "contain" ? <Minimize2 className="w-3.5 h-3.5 text-sky-400" /> : <Maximize2 className="w-3.5 h-3.5 text-amber-400" />}
+            <span>{fitMode === "contain" ? "100% Sharp (Contain)" : "Fill (Cover)"}</span>
           </button>
 
           {/* Contrast Boost Toggle */}
@@ -259,17 +247,19 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
         </div>
       </div>
 
-      {/* 2. MAIN SATELLITE CANVAS / DEDICATED MODE CHUNK PROJECTION */}
-      <div className="relative w-full h-[380px] sm:h-[440px] md:h-[500px] lg:h-[520px] bg-black rounded-2xl overflow-hidden border border-slate-800/90 shadow-2xl flex items-center justify-center">
-        {/* Dynamic Satellite Media Container */}
+      {/* 2. MAIN SATELLITE CANVAS */}
+      <div className="relative w-full h-[320px] sm:h-[380px] md:h-[440px] lg:h-[480px] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800/90 shadow-2xl flex items-center justify-center">
+        {/* Aspect-Locked Dynamic Video Stage: Locks laser line and video to the EXACT same map boundaries */}
         <div
-          className="relative w-full h-full flex items-center justify-center overflow-hidden transition-transform duration-300 ease-out"
+          className={`relative max-w-full max-h-full flex items-center justify-center overflow-hidden transition-transform duration-300 ease-out ${
+            fitMode === "contain" ? "w-full aspect-[32/9]" : "w-full h-full"
+          }`}
           style={{
             transform: `scale(${targetScale})`,
             transformOrigin: targetOrigin,
           }}
         >
-          {/* HTML5 Dedicated Mode Video Chunk (autoPlay disabled: only plays when user clicks play) */}
+          {/* HTML5 Local Chunk Video: Instant 0ms load from disk, 0% buffering */}
           <video
             ref={videoRef}
             key={videoSrc}
@@ -278,78 +268,26 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
             muted
             loop
             autoPlay={false}
-            className={`w-full h-full object-cover select-none pointer-events-none transition-filter duration-300 ${
-              contrastBoost
-                ? "brightness-125 contrast-140 saturate-150"
-                : "brightness-100 contrast-100"
-            } ${useVideo && !videoError ? "block" : "hidden"}`}
-            onError={() => {
-              console.warn("Video stream codec unsupported, falling back to synchronized HD frames.");
-              setVideoError(true);
+            onCanPlay={(e) => {
+              if (isPlaying) {
+                (e.target as HTMLVideoElement).play().catch(() => {});
+              }
             }}
-          />
-
-          {/* Synchronized HD Frame Projection (Fallback or User-Selected) */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={frameImgUrl}
-            alt={`NASA Night Lights Frame ${frameNum}`}
-            className={`w-full h-full object-cover select-none pointer-events-none transition-filter duration-300 ${
+            className={`w-full h-full ${
+              fitMode === "contain" ? "object-contain" : "object-cover"
+            } select-none pointer-events-none transition-all duration-300 ${
               contrastBoost
                 ? "brightness-125 contrast-140 saturate-150"
                 : "brightness-100 contrast-100"
-            } ${useVideo && !videoError ? "hidden" : "block"}`}
+            }`}
           />
 
-          {/* MODE C: PRECISE, STABLE TARGETING SQUARE FRAME (GLIDES EXACTLY OVER REGION) */}
-          {isRegional && selectedRegion !== "Overview (All Insets)" && activeBounds && (
-            <div
-              className="absolute pointer-events-none transition-all duration-500 ease-out z-20"
-              style={{
-                left: `${activeBounds.left}%`,
-                top: `${activeBounds.top}%`,
-                width: `${activeBounds.width}%`,
-                height: `${activeBounds.height}%`,
-              }}
-            >
-              {/* Outer Glowing Border */}
-              <div
-                className={`w-full h-full rounded-lg border-2 ${
-                  activeBounds.deltaType === "increase"
-                    ? "border-purple-400 shadow-[0_0_20px_rgba(192,132,252,0.6)]"
-                    : "border-orange-400 shadow-[0_0_20px_rgba(249,115,22,0.6)]"
-                }`}
-              >
-                {/* High-Tech Corner Brackets */}
-                <div className="absolute -top-1 -left-1 w-3.5 h-3.5 border-t-2 border-l-2 border-white"></div>
-                <div className="absolute -top-1 -right-1 w-3.5 h-3.5 border-t-2 border-r-2 border-white"></div>
-                <div className="absolute -bottom-1 -left-1 w-3.5 h-3.5 border-b-2 border-l-2 border-white"></div>
-                <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 border-b-2 border-r-2 border-white"></div>
 
-                {/* Center Crosshair */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-60">
-                  <div className="w-2.5 h-[1px] bg-white"></div>
-                  <div className="h-2.5 w-[1px] bg-white"></div>
-                </div>
-
-                {/* Region Tag Badge Attached to Target Frame */}
-                <div
-                  className={`absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[9px] font-mono font-bold px-1.5 py-0.5 rounded shadow-lg border ${
-                    activeBounds.deltaType === "increase"
-                      ? "bg-purple-950/90 text-purple-200 border-purple-500"
-                      : "bg-orange-950/90 text-orange-200 border-orange-500"
-                  }`}
-                >
-                  {selectedRegion}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* MODE A: HORIZONTAL SCANNING LASER (PHASE-LOCKED TO STEREO PANNING) */}
+          {/* MODE A: HORIZONTAL SCANNING LASER */}
+          {/* Strictly active in Mode A, locked within Earth map bounds, zero backward lag */}
           {isPlaying && isAnnualPhase && (
             <div
-              className="absolute top-0 bottom-0 pointer-events-none transition-all duration-75"
+              className="absolute top-0 bottom-0 pointer-events-none z-20"
               style={{ left: `${laserPercent}%`, width: "2px" }}
             >
               <div className="w-full h-full bg-cyan-400 shadow-[0_0_16px_#38bdf8]"></div>
@@ -358,7 +296,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           )}
         </div>
 
-        {/* 3. MODE B SCIENTIFIC SPECTRAL SCALE HUD (NO OVERLAY DOTS) */}
+        {/* 3. MODE B SCIENTIFIC SPECTRAL SCALE HUD */}
         {isChangePhase && (
           <div className="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 max-w-md bg-slate-950/90 backdrop-blur-md border border-slate-700/80 rounded-2xl p-3 shadow-2xl z-20">
             <div className="flex items-center justify-between mb-1.5 text-[11px] font-mono">
@@ -429,12 +367,104 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           </div>
         )}
 
-        {/* Bottom Corner Scientific Calibration Disclaimer Watermark */}
+        {/* Bottom Corner Scientific Watermark */}
         <div className="absolute bottom-3 right-3 bg-slate-950/90 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-[9px] font-mono text-slate-400 border border-slate-800 max-w-xs text-right leading-tight z-10 hidden sm:block">
           <span className="text-slate-300 font-semibold flex items-center justify-end gap-1 mb-0.5">
-            <Info className="w-2.5 h-2.5 text-sky-400" /> Visual Estimates
+            <Info className="w-2.5 h-2.5 text-sky-400" /> NASA SVS #5313
           </span>
-          NASA SVS #5313 • Dedicated Mode Chunk • Clean Projection
+          Decadal High-Definition Telemetry
+        </div>
+      </div>
+
+      {/* 3. SCIENTIFIC PLAYBACK TIMELINE & PROGRESS SCRUBBER BAR */}
+      <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex flex-col gap-2">
+        {/* Scrubber Bar Line ("Kitna Chala" Fill + Interactive Scrub) */}
+        <div
+          role="slider"
+          aria-label="Video Timeline Progress Bar"
+          aria-valuemin={0}
+          aria-valuemax={maxDuration}
+          aria-valuenow={Number(currentTime.toFixed(1))}
+          onClick={handleTimelineClick}
+          className="relative w-full h-4 cursor-pointer group flex items-center select-none"
+          title={`Click to jump anywhere on the ${maxDuration}s timeline`}
+        >
+          {/* Background Track */}
+          <div className="w-full h-1.5 bg-slate-800/90 rounded-full overflow-hidden transition-all duration-150 group-hover:h-2.5">
+            {/* Filled Progress Line: Shows how much has played */}
+            <div
+              className={`h-full rounded-full transition-all duration-75 ${
+                currentMode === "annual"
+                  ? "bg-gradient-to-r from-sky-500 to-cyan-400 shadow-[0_0_12px_rgba(56,189,248,0.7)]"
+                  : currentMode === "change"
+                  ? "bg-gradient-to-r from-orange-500 via-purple-500 to-purple-400 shadow-[0_0_12px_rgba(192,132,252,0.7)]"
+                  : "bg-gradient-to-r from-emerald-500 to-teal-400 shadow-[0_0_12px_rgba(16,185,129,0.7)]"
+              }`}
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+
+          {/* Draggable Scrubber Knob (Indicates exact position) */}
+          <div
+            className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_12px_#fff] border-2 transition-transform ${
+              currentMode === "annual"
+                ? "border-sky-400"
+                : currentMode === "change"
+                ? "border-purple-400"
+                : "border-emerald-400"
+            } scale-75 group-hover:scale-125`}
+            style={{ left: `${progressPercent}%` }}
+          />
+        </div>
+
+        {/* Timeline Status Display: "Kitna Chala" (Current) | "Saal" | "Progress %" | "End Kab Hua" (Total) */}
+        <div className="flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400 gap-2">
+          {/* Left: Elapsed Time ("Kitna chala") */}
+          <div className="flex items-center gap-2">
+            <span className="flex items-center gap-1 font-bold text-slate-200 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+              <Clock className="w-3 h-3 text-sky-400" />
+              <span>{formatTime(currentTime)}</span>
+            </span>
+            <span className="text-slate-600">/</span>
+            <span className="text-slate-400 font-semibold">{formatTime(maxDuration)}</span>
+
+            {/* In Mode A: Current Calendar Year Indicator */}
+            {currentMode === "annual" && (
+              <span className="flex items-center gap-1 text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded text-[10px]">
+                <Calendar className="w-3 h-3" />
+                <span>Year {2012 + Math.min(11, Math.floor(currentTime))}</span>
+                <span className="text-emerald-500/70">({Math.min(12, Math.floor(currentTime) + 1)}/12)</span>
+              </span>
+            )}
+
+            {/* In Mode C: Target Region Name */}
+            {currentMode === "regional" && (
+              <span className="flex items-center gap-1 text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded text-[10px]">
+                <MapPin className="w-3 h-3" />
+                <span>{selectedRegion}</span>
+              </span>
+            )}
+          </div>
+
+          {/* Right: Progress Percentage & Status */}
+          <div className="flex items-center gap-2.5">
+            <span className="text-[10px] text-slate-400">
+              Progress: <strong className="text-slate-200">{progressPercent.toFixed(0)}%</strong>
+            </span>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-700"></span>
+            <span className="text-[10px] text-slate-400 flex items-center gap-1">
+              <Activity className="w-3 h-3 text-emerald-400" />
+              {isPlaying ? (
+                progressPercent >= 99 ? (
+                  <span className="text-amber-400 font-bold">Looping...</span>
+                ) : (
+                  <span className="text-emerald-400">Playing</span>
+                )
+              ) : (
+                <span className="text-slate-500">Paused</span>
+              )}
+            </span>
+          </div>
         </div>
       </div>
     </div>
