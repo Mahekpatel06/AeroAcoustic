@@ -46,7 +46,13 @@ def analyze_spatial_grid(frame_bgr, rows=3, cols=3):
             reg_id = f"R{r_idx}_{c_idx}"
             reg_name = region_names[r_idx][c_idx]
 
-            note, freq = quantize_to_pentatonic(mean_b)
+            # Calibrated terrestrial luminance scaling:
+            # Dark ocean/desert floor baseline ~0.008; intensely lit regions ~0.045
+            norm_mean = (mean_b - 0.008) / (0.045 - 0.008)
+            norm_density = bright_density / 0.25
+            calibrated_score = float(np.clip(0.55 * norm_mean + 0.45 * norm_density, 0.0, 1.0))
+
+            note, freq = quantize_to_pentatonic(calibrated_score)
 
             grid_features.append({
                 "regionId": reg_id,
@@ -58,7 +64,8 @@ def analyze_spatial_grid(frame_bgr, rows=3, cols=3):
                 "medianBrightness": round(median_b, 4),
                 "stdDeviation": round(std_b, 4),
                 "brightPixelDensity": round(bright_density, 4),
-                "activeNote": note
+                "activeNote": note,
+                "calibratedScore": round(calibrated_score, 4)
             })
 
     return grid_features

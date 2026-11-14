@@ -9,6 +9,8 @@ interface AcousticStageProps {
   isPlaying: boolean;
   activeNote: string;
   activeFreq: number;
+  activeScaleName?: string;
+  activeInstrument?: string;
 }
 
 export const AcousticStage: React.FC<AcousticStageProps> = ({
@@ -16,17 +18,10 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
   isPlaying,
   activeNote,
   activeFreq,
+  activeScaleName = "C Major Pentatonic",
+  activeInstrument = "Ambient Sine Pad",
 }) => {
   const lumaPct = Math.round((currentFeature?.globalMeanBrightness ?? 0.03) * 1000) / 10;
-  const isPurpleActive = (currentFeature?.changeClassification?.increaseRatio ?? 0) > 0.01;
-  const isOrangeActive = (currentFeature?.changeClassification?.decreaseRatio ?? 0) > 0.01;
-
-  // Active instrument based on phase and color classification
-  const activeInstrument = isPurpleActive
-    ? "Crystalline Chimes (Increase)"
-    : isOrangeActive
-    ? "Warm Cello Synth (Decrease)"
-    : "Ambient Sine Pad (Baseline)";
 
   return (
     <div className="relative flex flex-col bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl overflow-hidden justify-between">
@@ -36,8 +31,8 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
           <Waves className="w-3.5 h-3.5 text-sky-400" />
           Acoustic Frequency Stage
         </span>
-        <span className="font-mono text-[11px] text-yellow-400 font-semibold px-2 py-0.5 rounded bg-yellow-950/40 border border-yellow-800/40">
-          Scale: C Major Pentatonic
+        <span className="font-mono text-[11px] text-yellow-400 font-semibold px-2 py-0.5 rounded bg-yellow-950/40 border border-yellow-800/40 truncate max-w-[260px]">
+          {activeScaleName}
         </span>
       </div>
 
@@ -83,7 +78,7 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
         </div>
       </div>
 
-      {/* Animated Equalizer Bars (Tone.js Bouncing Frequency Spectrum) */}
+      {/* Animated Equalizer Bars (Tone.js Limiter Spectrum) */}
       <div className="mt-2 bg-slate-950/80 border border-slate-800 rounded-xl p-3">
         <div className="flex items-center justify-between mb-2">
           <span className="text-[10px] uppercase font-mono text-slate-400 flex items-center gap-1">
@@ -98,23 +93,13 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
           ].map((baseHeight, idx) => {
             const dynamicHeight = isPlaying
               ? Math.max(15, (baseHeight + ((idx * 7) % 30)) * (0.6 + Math.random() * 0.4))
-              : 10;
+              : 8;
             return (
               <div
                 key={idx}
-                className="flex-1 bg-slate-800 rounded-t-sm overflow-hidden flex flex-col justify-end"
-              >
-                <div
-                  className={`w-full transition-all duration-150 rounded-t-sm ${
-                    isPurpleActive
-                      ? "bg-gradient-to-t from-purple-500 to-sky-300"
-                      : isOrangeActive
-                      ? "bg-gradient-to-t from-orange-500 to-yellow-300"
-                      : "bg-gradient-to-t from-sky-500 via-cyan-400 to-emerald-300"
-                  }`}
-                  style={{ height: `${dynamicHeight}%` }}
-                ></div>
-              </div>
+                className="w-full bg-gradient-to-t from-sky-500 via-indigo-500 to-cyan-400 rounded-t-sm transition-all duration-100 shadow-[0_0_8px_rgba(56,189,248,0.3)]"
+                style={{ height: `${dynamicHeight}%` }}
+              ></div>
             );
           })}
         </div>

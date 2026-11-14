@@ -12,6 +12,55 @@ import { FrameFeature, DatasetFeatureCollection } from "@/types";
 import { audioEngine } from "@/lib/audioEngine";
 import { speechNarrator } from "@/lib/speechNarrator";
 
+// --- 1. Mode A: Annual Evolution (2012–2023) Harmonic Progression in C Lydian ---
+const ANNUAL_HARMONIES: Record<number, { root: string; fifth: string; scaleName: string }> = {
+  2012: { root: "C3", fifth: "G3", scaleName: "C Major Lydian (2012 Baseline)" },
+  2013: { root: "D3", fifth: "A3", scaleName: "C Major Lydian (2013 Expansion)" },
+  2014: { root: "E3", fifth: "B3", scaleName: "C Major Lydian (2014 Expansion)" },
+  2015: { root: "G3", fifth: "D4", scaleName: "C Major Lydian (2015 Expansion)" },
+  2016: { root: "A3", fifth: "E4", scaleName: "C Major Lydian (2016 Mid-Decade)" },
+  2017: { root: "C4", fifth: "G4", scaleName: "C Major Lydian (2017 Expansion)" },
+  2018: { root: "D4", fifth: "A4", scaleName: "C Major Lydian (2018 Expansion)" },
+  2019: { root: "E4", fifth: "B4", scaleName: "C Major Lydian (2019 Pre-Pandemic)" },
+  2020: { root: "F#4", fifth: "C#5", scaleName: "C Lydian Shift (2020 Global Transition)" },
+  2021: { root: "G4", fifth: "D5", scaleName: "C Major Lydian (2021 Recovery)" },
+  2022: { root: "A4", fifth: "E5", scaleName: "C Major Lydian (2022 Electrification)" },
+  2023: { root: "C5", fifth: "G5", scaleName: "C Major Lydian (2023 Peak Radiance)" },
+};
+
+// --- 2. Mode C: Regional Zoom Exploration Profiles ---
+const REGIONAL_PROFILES: Record<string, { scaleName: string; instrumentName: string; root: string }> = {
+  India: {
+    scaleName: "E Mixolydian (Raag Desh - Electrification)",
+    instrumentName: "Snappy Marimba Pluck",
+    root: "E4",
+  },
+  Ukraine: {
+    scaleName: "A Natural Minor (Blackout Corridors)",
+    instrumentName: "Solemn Bowed Cello",
+    root: "A2",
+  },
+  "Western Europe": {
+    scaleName: "G Lydian (Continental LED Grid)",
+    instrumentName: "Ambient Glass Pad",
+    root: "G4",
+  },
+  "Eastern Mediterranean": {
+    scaleName: "D Phrygian Dominant (Maqam Hijaz)",
+    instrumentName: "Evocative Modal Synth",
+    root: "D3",
+  },
+};
+
+// --- Note to Frequency Mapping ---
+const FREQ_MAP: Record<string, number> = {
+  D2: 73.42, E2: 82.41, F2: 87.31, G2: 98.0, A2: 110.0, B2: 123.47,
+  C3: 130.81, "C#3": 138.59, D3: 146.83, Eb3: 155.56, E3: 164.81, F3: 174.61, "F#3": 185.0, G3: 196.0, "G#3": 207.65, A3: 220.0, Bb3: 233.08, B3: 246.94,
+  C4: 261.63, "C#4": 277.18, D4: 293.66, Eb4: 311.13, E4: 329.63, F4: 349.23, "F#4": 369.99, G4: 392.0, "G#4": 415.3, A4: 440.0, Bb4: 466.16, B4: 493.88,
+  C5: 523.25, "C#5": 554.37, D5: 587.33, E5: 659.25, "F#5": 739.99, G5: 783.99, A5: 880.0, B5: 987.77,
+  C6: 1046.5,
+};
+
 export default function Home() {
   const [featureData, setFeatureData] = useState<DatasetFeatureCollection | null>(null);
   const [currentFrameIndex, setCurrentFrameIndex] = useState<number>(0);
@@ -23,6 +72,8 @@ export default function Home() {
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
   const [activeNote, setActiveNote] = useState<string>("C3");
   const [activeFreq, setActiveFreq] = useState<number>(130.81);
+  const [activeScaleName, setActiveScaleName] = useState<string>("C Major Lydian (2012 Baseline)");
+  const [activeInstrument, setActiveInstrument] = useState<string>("Ambient Sine Pad (Annual Series)");
   const [ariaAnnouncement, setAriaAnnouncement] = useState<string>(
     "SoniEarth initialized. Press Space to play."
   );
@@ -45,7 +96,9 @@ export default function Home() {
     if (currentMode === "annual") {
       return featureData.frames.filter((f) => f.phase === "annual_series");
     } else if (currentMode === "change") {
-      return featureData.frames.filter((f) => f.phase === "change_transition" || f.phase === "global_change");
+      return featureData.frames.filter(
+        (f) => f.phase === "change_transition" || f.phase === "global_change"
+      );
     } else {
       return featureData.frames.filter((f) => f.phase === "regional_zoom");
     }
@@ -55,49 +108,132 @@ export default function Home() {
   const currentFeature: FrameFeature | null =
     activeFrames[currentFrameIndex] || featureData?.frames[0] || null;
 
-  // 2. Play Sound for Current Frame
+  // 2. Play Sound for Current Frame with Multi-Scale & Mode Logic
   const playFrameSound = useCallback(
     async (feat: FrameFeature) => {
       await audioEngine.initialize();
 
-      // Determine root note from global luminance
-      const rootNote = feat.spatialGrid[1]?.activeNote || "C3";
-      setActiveNote(rootNote);
+      // ==========================================
+      // MODE A: ANNUAL EVOLUTION (2012–2023)
+      // ==========================================
+      if (currentMode === "annual") {
+        const yr = feat.year || 2012;
+        const harmony = ANNUAL_HARMONIES[yr] || ANNUAL_HARMONIES[2012];
 
-      const freqMap: Record<string, number> = {
-        C3: 130.81, D3: 146.83, E3: 164.81, G3: 196.00, A3: 220.00,
-        C4: 261.63, D4: 293.66, E4: 329.63, G4: 392.00, A4: 440.00, C5: 523.25
-      };
-      setActiveFreq(freqMap[rootNote] || 261.63);
+        setActiveNote(harmony.root);
+        setActiveFreq(FREQ_MAP[harmony.root] || 130.81);
+        setActiveScaleName(harmony.scaleName);
+        setActiveInstrument("Ambient Sine Pad + Spatial Arp");
 
-      // Trigger baseline pad note
-      audioEngine.triggerNote(rootNote, 0.7, 0.6 + feat.globalMeanBrightness * 0.3, 0.0, "sine_pad");
+        // Baseline global root & fifth (Center)
+        audioEngine.triggerNote(harmony.root, 0.75, 0.65, 0.0, "sine_pad");
+        audioEngine.triggerNote(harmony.fifth, 0.6, 0.45, 0.0, "sine_pad");
 
-      // Trigger spatial notes (West and East)
-      if (feat.spatialGrid[0]) {
-        audioEngine.triggerNote(feat.spatialGrid[0].activeNote, 0.5, 0.4, -0.7, "sine_pad");
-      }
-      if (feat.spatialGrid[2]) {
-        audioEngine.triggerNote(feat.spatialGrid[2].activeNote, 0.5, 0.4, 0.7, "sine_pad");
-      }
-
-      // Check for Purple Increase / Orange Decrease change motifs
-      if (feat.changeClassification) {
-        if (feat.changeClassification.increaseRatio > 0.01) {
-          audioEngine.triggerNote("C4", 0.4, 0.8, 0.6, "crystalline_chime_bell");
+        // Spatial Grid Arpeggiations across stereo channels
+        if (feat.spatialGrid && feat.spatialGrid.length >= 3) {
+          // West (Americas: Pan -0.8)
+          const westNote = feat.spatialGrid[0]?.activeNote || harmony.root;
           setTimeout(() => {
-            audioEngine.triggerNote("G4", 0.5, 0.9, 0.7, "crystalline_chime_bell");
-          }, 150);
-        }
-        if (feat.changeClassification.decreaseRatio > 0.01) {
-          audioEngine.triggerNote("E3", 0.6, 0.7, -0.6, "warm_cello_synth");
+            audioEngine.triggerNote(westNote, 0.45, 0.5, -0.8, "sine_pad");
+          }, 60);
+
+          // Center (Europe/Africa: Pan 0.0)
+          const centerNote = feat.spatialGrid[1]?.activeNote || harmony.fifth;
           setTimeout(() => {
-            audioEngine.triggerNote("C3", 0.7, 0.8, -0.7, "warm_cello_synth");
+            audioEngine.triggerNote(centerNote, 0.45, 0.5, 0.0, "sine_pad");
+          }, 120);
+
+          // East (Asia/Oceania: Pan +0.8)
+          const eastNote = feat.spatialGrid[2]?.activeNote || harmony.root;
+          setTimeout(() => {
+            audioEngine.triggerNote(eastNote, 0.45, 0.55, 0.8, "sine_pad");
           }, 180);
         }
       }
+
+      // ==========================================
+      // MODE B: DECADAL CHANGE MAP (D Dorian / A Minor Dual Polarity)
+      // ==========================================
+      else if (currentMode === "change") {
+        setActiveNote("D3");
+        setActiveFreq(FREQ_MAP["D3"]);
+        setActiveScaleName("D Dorian / A Minor (Decadal Polarity)");
+        setActiveInstrument("Dual Polarity: Crystalline Chimes & Cello");
+
+        // D Dorian low sustained baseline
+        audioEngine.triggerNote("D3", 0.7, 0.55, 0.0, "sine_pad");
+
+        // Purple Electrification Motif (Ascending Crystalline Chimes panned Right)
+        if (feat.changeClassification && feat.changeClassification.increaseRatio > 0.008) {
+          audioEngine.triggerNote("A4", 0.35, 0.85, 0.6, "crystalline_chime_bell");
+          setTimeout(() => {
+            audioEngine.triggerNote("C5", 0.4, 0.9, 0.7, "crystalline_chime_bell");
+          }, 120);
+          setTimeout(() => {
+            audioEngine.triggerNote("E5", 0.45, 0.95, 0.8, "crystalline_chime_bell");
+          }, 240);
+        }
+
+        // Orange Blackout / Reduction Motif (Descending Warm Cello panned Left)
+        if (feat.changeClassification && feat.changeClassification.decreaseRatio > 0.001) {
+          audioEngine.triggerNote("E3", 0.6, 0.75, -0.6, "warm_cello_synth");
+          setTimeout(() => {
+            audioEngine.triggerNote("D3", 0.7, 0.8, -0.7, "warm_cello_synth");
+          }, 150);
+          setTimeout(() => {
+            audioEngine.triggerNote("A2", 0.8, 0.85, -0.8, "warm_cello_synth");
+          }, 300);
+        }
+      }
+
+      // ==========================================
+      // MODE C: REGIONAL ZOOM EXPLORATION (Authentic Regional Scales)
+      // ==========================================
+      else {
+        const region = feat.regionFocus || "India";
+        const profile = REGIONAL_PROFILES[region] || REGIONAL_PROFILES["India"];
+
+        setActiveNote(profile.root);
+        setActiveFreq(FREQ_MAP[profile.root] || 220.0);
+        setActiveScaleName(profile.scaleName);
+        setActiveInstrument(profile.instrumentName);
+
+        if (region === "India") {
+          // India: E Mixolydian (Raag Desh) fast plucks representing electrification boom
+          audioEngine.triggerNote("E4", 0.3, 0.9, 0.4, "marimba_pluck");
+          setTimeout(() => {
+            audioEngine.triggerNote("G#4", 0.3, 0.85, 0.6, "marimba_pluck");
+          }, 100);
+          setTimeout(() => {
+            audioEngine.triggerNote("B4", 0.35, 0.9, 0.7, "marimba_pluck");
+          }, 200);
+        } else if (region === "Ukraine") {
+          // Ukraine: A Natural Minor solemn descending cello
+          audioEngine.triggerNote("E3", 0.65, 0.8, -0.5, "warm_cello_synth");
+          setTimeout(() => {
+            audioEngine.triggerNote("C3", 0.75, 0.85, -0.6, "warm_cello_synth");
+          }, 180);
+          setTimeout(() => {
+            audioEngine.triggerNote("A2", 0.85, 0.9, -0.7, "warm_cello_synth");
+          }, 360);
+        } else if (region === "Western Europe") {
+          // Western Europe: G Lydian ambient glass pad chord
+          audioEngine.triggerNote("G4", 0.8, 0.7, 0.0, "glass_pad");
+          audioEngine.triggerNote("D4", 0.8, 0.6, -0.3, "glass_pad");
+          audioEngine.triggerNote("F#4", 0.8, 0.65, 0.3, "glass_pad");
+        } else {
+          // Eastern Mediterranean: D Phrygian Dominant (Maqam Hijaz) modal texture
+          audioEngine.triggerNote("D3", 0.6, 0.8, 0.2, "modal_synth");
+          setTimeout(() => {
+            audioEngine.triggerNote("Eb3", 0.6, 0.85, 0.4, "modal_synth");
+          }, 130);
+          setTimeout(() => {
+            audioEngine.triggerNote("F#3", 0.7, 0.85, 0.3, "modal_synth");
+          }, 260);
+        }
+      }
     },
-    []
+    [currentMode]
   );
 
   // 3. Playback Loop
@@ -112,7 +248,9 @@ export default function Home() {
           if (nextFeat) {
             playFrameSound(nextFeat);
             if (nextFeat.year) {
-              setAriaAnnouncement(`Year ${nextFeat.year}. Playing ${nextFeat.spatialGrid[1]?.activeNote || "note"}.`);
+              setAriaAnnouncement(`Year ${nextFeat.year}. Playing ${activeScaleName}.`);
+            } else if (nextFeat.regionFocus !== "global") {
+              setAriaAnnouncement(`Zoom: ${nextFeat.regionFocus}. Tuned to ${activeScaleName}.`);
             }
           }
           return nextIdx;
@@ -126,7 +264,7 @@ export default function Home() {
     return () => {
       if (playbackTimerRef.current) clearInterval(playbackTimerRef.current);
     };
-  }, [isPlaying, activeFrames, playbackSpeed, playFrameSound]);
+  }, [isPlaying, activeFrames, playbackSpeed, playFrameSound, activeScaleName]);
 
   // 4. Toggle Playback
   const handleTogglePlay = async () => {
@@ -148,9 +286,9 @@ export default function Home() {
     setCurrentMode(mode);
     setCurrentFrameIndex(0);
     const modeNames = {
-      annual: "Mode A: Annual Evolution 2012 to 2023",
-      change: "Mode B: Decadal Change Map",
-      regional: "Mode C: Regional Zoom Exploration",
+      annual: "Mode A: Annual Evolution (2012 to 2023) in C Major Lydian",
+      change: "Mode B: Decadal Change Map in D Dorian & A Minor",
+      regional: "Mode C: Regional Zoom Exploration with Authentic Regional Scales",
     };
     speechNarrator.speak(`Switched to ${modeNames[mode]}`);
     setAriaAnnouncement(`Switched to ${modeNames[mode]}`);
@@ -173,7 +311,6 @@ export default function Home() {
   // 7. Keyboard Navigation (Accessibility Requirement)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't intercept if user is typing in an input
       if (["INPUT", "TEXTAREA"].includes((e.target as HTMLElement)?.tagName)) return;
 
       if (e.code === "Space") {
@@ -233,6 +370,8 @@ export default function Home() {
             isPlaying={isPlaying}
             activeNote={activeNote}
             activeFreq={activeFreq}
+            activeScaleName={activeScaleName}
+            activeInstrument={activeInstrument}
           />
         </section>
 
@@ -255,6 +394,7 @@ export default function Home() {
           <ExplainPanel
             currentFeature={currentFeature}
             activeNote={activeNote}
+            activeScaleName={activeScaleName}
           />
         </section>
 

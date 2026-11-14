@@ -2,36 +2,50 @@
 
 import React from "react";
 import { FrameFeature } from "@/types";
-import { HelpCircle, Info } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 
 interface ExplainPanelProps {
   currentFeature: FrameFeature | null;
   activeNote: string;
+  activeScaleName?: string;
 }
 
 export const ExplainPanel: React.FC<ExplainPanelProps> = ({
   currentFeature,
   activeNote,
+  activeScaleName = "C Major Lydian",
 }) => {
   const lumaPct = currentFeature
     ? (currentFeature.globalMeanBrightness * 100).toFixed(1)
     : "3.1";
   const phase = currentFeature?.phase;
+  const year = currentFeature?.year;
   const isPurple = (currentFeature?.changeClassification?.increaseRatio ?? 0) > 0.01;
   const isOrange = (currentFeature?.changeClassification?.decreaseRatio ?? 0) > 0.01;
 
-  let explanation = `Playing ${activeNote} baseline chord because global mean illumination is ${lumaPct}%. Normalized brightness maps monotonically to the C Major Pentatonic scale.`;
+  let explanation = `Year ${year || "2012–2023"}: Playing harmonic chord rooted at ${activeNote} (${activeScaleName}). Planetary illumination of ${lumaPct}% is mapped across 3 spatial channels: West (Americas), Center (Europe/Africa), and East (Asia/Oceania).`;
 
   if (phase === "global_change") {
     if (isPurple && isOrange) {
-      explanation = `Detected both Purple Expansion (${(currentFeature!.changeClassification!.increaseRatio * 100).toFixed(1)}%) triggering ascending crystalline chimes, and Orange Declines (${(currentFeature!.changeClassification!.decreaseRatio * 100).toFixed(1)}%) triggering mellow cello tones.`;
+      explanation = `Decadal Change in ${activeScaleName}: Detected both Purple Expansion (${(currentFeature!.changeClassification!.increaseRatio * 100).toFixed(1)}%) triggering ascending crystalline chimes on the right channel, and Orange Declines (${(currentFeature!.changeClassification!.decreaseRatio * 100).toFixed(1)}%) triggering deep melancholic cello tones on the left channel.`;
     } else if (isPurple) {
-      explanation = `Triggering bright Crystalline Chimes (Ascending Triad) because purple pixels indicate significant electrification and urban lighting growth.`;
+      explanation = `Decadal Change in ${activeScaleName}: Triggering high crystalline chimes (F Lydian / A Minor) because purple pixels indicate significant electrification and new urban infrastructure.`;
     } else if (isOrange) {
-      explanation = `Triggering warm Cello descending interval because orange pixels identify lighting reduction clusters (energy transition, blackouts).`;
+      explanation = `Decadal Change in ${activeScaleName}: Triggering deep cello descending interval (D Minor / Phrygian) because orange pixels identify blackout corridors and energy reduction.`;
     }
   } else if (phase === "regional_zoom") {
-    explanation = `Focused on regional zoom over ${currentFeature?.regionFocus}. Local spatial density drives localized stereo pan (${currentFeature?.spatialGrid[1]?.pan ?? 0.0}) and harmonic voicings.`;
+    const region = currentFeature?.regionFocus || "Global";
+    if (region === "India") {
+      explanation = `Regional Zoom: India. Tuned to E Mixolydian (Raag Desh tradition). Snappy marimba plucks and ascending arpeggios reflect massive rural electrification and infrastructure growth.`;
+    } else if (region === "Ukraine") {
+      explanation = `Regional Zoom: Ukraine. Tuned to A Natural Minor. Sparse, deep bowed cello descending notes convey grid blackouts and darkened corridors.`;
+    } else if (region === "Western Europe") {
+      explanation = `Regional Zoom: Western Europe. Tuned to G Lydian. Ambient crystal glass pad chords represent a dense, highly stable interconnected power grid transitioning to energy-efficient LED lighting.`;
+    } else if (region === "Eastern Mediterranean") {
+      explanation = `Regional Zoom: Eastern Mediterranean. Tuned to D Phrygian Dominant (Maqam Hijaz). Evocative modal textures reflect a dynamic crossroads of geopolitical and demographic shifts.`;
+    } else {
+      explanation = `Focused on regional zoom over ${region}. Tuned to ${activeScaleName} with localized stereo panning and regional instrument timbres.`;
+    }
   }
 
   return (

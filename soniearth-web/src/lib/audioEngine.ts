@@ -5,7 +5,8 @@
  * - User-gesture Autoplay policy compliance
  * - Master Limiter at -3dBFS (zero clipping)
  * - 90/10 Speech Ducking gain automation
- * - Spatial Panning
+ * - Dynamic Spatial Panning (-1.0 to +1.0)
+ * - Multi-mode synthesized instruments (Pads, Chimes, Cello, Marimba Pluck, Glass Pad, Modal Synth)
  */
 import * as Tone from "tone";
 
@@ -17,6 +18,9 @@ class SoniEarthAudioEngine {
   private padSynth: Tone.PolySynth | null = null;
   private chimeSynth: Tone.PolySynth | null = null;
   private celloSynth: Tone.PolySynth | null = null;
+  private pluckSynth: Tone.PolySynth | null = null;
+  private glassSynth: Tone.PolySynth | null = null;
+  private modalSynth: Tone.PolySynth | null = null;
   private panner: Tone.Panner | null = null;
 
   public async initialize(): Promise<boolean> {
@@ -31,7 +35,7 @@ class SoniEarthAudioEngine {
       // Stereo panner connected to master gain
       this.panner = new Tone.Panner(0.0).connect(this.masterGain);
 
-      // 1. Ambient Baseline Pad Synth (Warm sine pad)
+      // 1. Ambient Baseline Pad Synth (Warm sine pad for Mode A baseline)
       this.padSynth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "sine" },
         envelope: { attack: 0.08, decay: 0.15, sustain: 0.7, release: 0.3 }
@@ -47,12 +51,34 @@ class SoniEarthAudioEngine {
       }).connect(this.panner);
       this.chimeSynth.volume.value = -4;
 
-      // 3. Warm Cello Synth (Mellow triangle for Orange illumination decrease)
+      // 3. Warm Cello Synth (Mellow triangle for Orange illumination decrease & Ukraine)
       this.celloSynth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "triangle" },
         envelope: { attack: 0.15, decay: 0.3, sustain: 0.6, release: 0.4 }
       }).connect(this.panner);
       this.celloSynth.volume.value = -5;
+
+      // 4. Snappy Marimba Pluck (Fast attack for India's rapid rural electrification)
+      this.pluckSynth = new Tone.PolySynth(Tone.Synth, {
+        oscillator: { type: "triangle8" },
+        envelope: { attack: 0.005, decay: 0.22, sustain: 0.1, release: 0.25 }
+      }).connect(this.panner);
+      this.pluckSynth.volume.value = -4;
+
+      // 5. Crystal Glass Pad (Shimmering ambient chords for Western Europe's LED grid)
+      this.glassSynth = new Tone.PolySynth(Tone.AMSynth, {
+        harmonicity: 3.01,
+        oscillator: { type: "sine" },
+        envelope: { attack: 0.12, decay: 0.35, sustain: 0.75, release: 0.5 }
+      }).connect(this.panner);
+      this.glassSynth.volume.value = -6;
+
+      // 6. Modal Synth (Evocative modal texture for Eastern Mediterranean)
+      this.modalSynth = new Tone.PolySynth(Tone.Synth, {
+        oscillator: { type: "sawtooth4" },
+        envelope: { attack: 0.06, decay: 0.28, sustain: 0.5, release: 0.4 }
+      }).connect(this.panner);
+      this.modalSynth.volume.value = -7;
 
       this.isInitialized = true;
       return true;
@@ -80,6 +106,12 @@ class SoniEarthAudioEngine {
         this.chimeSynth.triggerAttackRelease(note, durationSec, undefined, velocity);
       } else if (instrument === "warm_cello_synth" && this.celloSynth) {
         this.celloSynth.triggerAttackRelease(note, durationSec, undefined, velocity);
+      } else if (instrument === "marimba_pluck" && this.pluckSynth) {
+        this.pluckSynth.triggerAttackRelease(note, durationSec, undefined, velocity);
+      } else if (instrument === "glass_pad" && this.glassSynth) {
+        this.glassSynth.triggerAttackRelease(note, durationSec, undefined, velocity);
+      } else if (instrument === "modal_synth" && this.modalSynth) {
+        this.modalSynth.triggerAttackRelease(note, durationSec, undefined, velocity);
       } else if (this.padSynth) {
         this.padSynth.triggerAttackRelease(note, durationSec, undefined, velocity);
       }
@@ -109,6 +141,9 @@ class SoniEarthAudioEngine {
     this.padSynth?.releaseAll();
     this.chimeSynth?.releaseAll();
     this.celloSynth?.releaseAll();
+    this.pluckSynth?.releaseAll();
+    this.glassSynth?.releaseAll();
+    this.modalSynth?.releaseAll();
   }
 }
 

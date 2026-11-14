@@ -1,6 +1,6 @@
 {
   "datasetId": "nasa-svs-5313",
-  "generatedAt": "2026-11-14T06:32:46.586874Z",
+  "generatedAt": "2026-11-14T08:03:45.364075Z",
   "version": "1.0.0",
   "samplingFps": 30.0,
   "totalFrames": 28,
@@ -28,7 +28,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0518,
           "brightPixelDensity": 0.2099,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8254
         },
         {
           "regionId": "R0_1",
@@ -40,7 +41,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0514,
           "brightPixelDensity": 0.2377,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9192
         },
         {
           "regionId": "R0_2",
@@ -52,7 +54,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0506,
           "brightPixelDensity": 0.2174,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8608
         },
         {
           "regionId": "R1_0",
@@ -64,7 +67,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0307,
           "brightPixelDensity": 0.0651,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2324
         },
         {
           "regionId": "R1_1",
@@ -76,7 +80,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0292,
           "brightPixelDensity": 0.0165,
-          "activeNote": "C3"
+          "activeNote": "D3",
+          "calibratedScore": 0.055
         },
         {
           "regionId": "R1_2",
@@ -88,7 +93,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0315,
           "brightPixelDensity": 0.0662,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2552
         },
         {
           "regionId": "R2_0",
@@ -100,7 +106,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2889,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9648
         },
         {
           "regionId": "R2_1",
@@ -112,7 +119,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3009,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -124,7 +132,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0574,
           "brightPixelDensity": 0.3257,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -153,7 +162,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0523,
           "brightPixelDensity": 0.2119,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8306
         },
         {
           "regionId": "R0_1",
@@ -165,7 +175,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0517,
           "brightPixelDensity": 0.2398,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.924
         },
         {
           "regionId": "R0_2",
@@ -177,7 +188,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0511,
           "brightPixelDensity": 0.219,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8654
         },
         {
           "regionId": "R1_0",
@@ -189,7 +201,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0314,
           "brightPixelDensity": 0.0663,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2359
         },
         {
           "regionId": "R1_1",
@@ -201,7 +214,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0303,
           "brightPixelDensity": 0.0187,
-          "activeNote": "C3"
+          "activeNote": "D3",
+          "calibratedScore": 0.0614
         },
         {
           "regionId": "R1_2",
@@ -213,7 +227,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0327,
           "brightPixelDensity": 0.0694,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.265
         },
         {
           "regionId": "R2_0",
@@ -225,7 +240,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0557,
           "brightPixelDensity": 0.289,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9632
         },
         {
           "regionId": "R2_1",
@@ -237,7 +253,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0561,
           "brightPixelDensity": 0.3011,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -249,7 +266,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0576,
           "brightPixelDensity": 0.3257,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -278,7 +296,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0522,
           "brightPixelDensity": 0.2114,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8311
         },
         {
           "regionId": "R0_1",
@@ -290,7 +309,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0516,
           "brightPixelDensity": 0.2397,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9233
         },
         {
           "regionId": "R0_2",
@@ -302,7 +322,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0513,
           "brightPixelDensity": 0.2196,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8703
         },
         {
           "regionId": "R1_0",
@@ -314,7 +335,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0315,
           "brightPixelDensity": 0.0661,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2385
         },
         {
           "regionId": "R1_1",
@@ -326,7 +348,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0304,
           "brightPixelDensity": 0.0195,
-          "activeNote": "C3"
+          "activeNote": "D3",
+          "calibratedScore": 0.0664
         },
         {
           "regionId": "R1_2",
@@ -338,7 +361,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0331,
           "brightPixelDensity": 0.0701,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2709
         },
         {
           "regionId": "R2_0",
@@ -350,7 +374,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2891,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9651
         },
         {
           "regionId": "R2_1",
@@ -362,7 +387,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3009,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -374,7 +400,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3257,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -403,7 +430,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0525,
           "brightPixelDensity": 0.2126,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8352
         },
         {
           "regionId": "R0_1",
@@ -415,7 +443,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0518,
           "brightPixelDensity": 0.241,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9273
         },
         {
           "regionId": "R0_2",
@@ -427,7 +456,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0517,
           "brightPixelDensity": 0.2226,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8782
         },
         {
           "regionId": "R1_0",
@@ -439,7 +469,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0318,
           "brightPixelDensity": 0.0675,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2417
         },
         {
           "regionId": "R1_1",
@@ -451,7 +482,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0306,
           "brightPixelDensity": 0.0203,
-          "activeNote": "C3"
+          "activeNote": "D3",
+          "calibratedScore": 0.0691
         },
         {
           "regionId": "R1_2",
@@ -463,7 +495,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0337,
           "brightPixelDensity": 0.0715,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2777
         },
         {
           "regionId": "R2_0",
@@ -475,7 +508,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2892,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9649
         },
         {
           "regionId": "R2_1",
@@ -487,7 +521,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.301,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -499,7 +534,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0574,
           "brightPixelDensity": 0.3258,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -528,7 +564,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0528,
           "brightPixelDensity": 0.2134,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8383
         },
         {
           "regionId": "R0_1",
@@ -540,7 +577,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0522,
           "brightPixelDensity": 0.2418,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9314
         },
         {
           "regionId": "R0_2",
@@ -552,7 +590,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0523,
           "brightPixelDensity": 0.2246,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8859
         },
         {
           "regionId": "R1_0",
@@ -564,7 +603,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.032,
           "brightPixelDensity": 0.067,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2411
         },
         {
           "regionId": "R1_1",
@@ -576,7 +616,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0314,
           "brightPixelDensity": 0.0213,
-          "activeNote": "C3"
+          "activeNote": "D3",
+          "calibratedScore": 0.0749
         },
         {
           "regionId": "R1_2",
@@ -588,7 +629,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0343,
           "brightPixelDensity": 0.0723,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2802
         },
         {
           "regionId": "R2_0",
@@ -600,7 +642,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0557,
           "brightPixelDensity": 0.2892,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.965
         },
         {
           "regionId": "R2_1",
@@ -612,7 +655,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3011,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -624,7 +668,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3258,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -653,7 +698,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0528,
           "brightPixelDensity": 0.2129,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8367
         },
         {
           "regionId": "R0_1",
@@ -665,7 +711,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0525,
           "brightPixelDensity": 0.2414,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9321
         },
         {
           "regionId": "R0_2",
@@ -677,7 +724,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0526,
           "brightPixelDensity": 0.2252,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8879
         },
         {
           "regionId": "R1_0",
@@ -689,7 +737,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0322,
           "brightPixelDensity": 0.0671,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2425
         },
         {
           "regionId": "R1_1",
@@ -701,7 +750,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.032,
           "brightPixelDensity": 0.0223,
-          "activeNote": "C3"
+          "activeNote": "D3",
+          "calibratedScore": 0.0778
         },
         {
           "regionId": "R1_2",
@@ -713,7 +763,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0349,
           "brightPixelDensity": 0.074,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2854
         },
         {
           "regionId": "R2_0",
@@ -725,7 +776,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2892,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9656
         },
         {
           "regionId": "R2_1",
@@ -737,7 +789,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.301,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -749,7 +802,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3258,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -778,7 +832,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0539,
           "brightPixelDensity": 0.2185,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8549
         },
         {
           "regionId": "R0_1",
@@ -790,7 +845,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0538,
           "brightPixelDensity": 0.2456,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9477
         },
         {
           "regionId": "R0_2",
@@ -802,7 +858,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0537,
           "brightPixelDensity": 0.2306,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9059
         },
         {
           "regionId": "R1_0",
@@ -814,7 +871,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0332,
           "brightPixelDensity": 0.0695,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2512
         },
         {
           "regionId": "R1_1",
@@ -826,7 +884,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0347,
           "brightPixelDensity": 0.0289,
-          "activeNote": "C3"
+          "activeNote": "D3",
+          "calibratedScore": 0.1022
         },
         {
           "regionId": "R1_2",
@@ -838,7 +897,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0369,
           "brightPixelDensity": 0.0809,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.309
         },
         {
           "regionId": "R2_0",
@@ -850,7 +910,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0557,
           "brightPixelDensity": 0.2895,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9661
         },
         {
           "regionId": "R2_1",
@@ -862,7 +923,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0561,
           "brightPixelDensity": 0.3012,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -874,7 +936,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3258,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -903,7 +966,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0539,
           "brightPixelDensity": 0.2181,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8551
         },
         {
           "regionId": "R0_1",
@@ -915,7 +979,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0539,
           "brightPixelDensity": 0.2462,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9498
         },
         {
           "regionId": "R0_2",
@@ -927,7 +992,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0538,
           "brightPixelDensity": 0.2305,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9062
         },
         {
           "regionId": "R1_0",
@@ -939,7 +1005,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0332,
           "brightPixelDensity": 0.07,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2533
         },
         {
           "regionId": "R1_1",
@@ -951,7 +1018,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0348,
           "brightPixelDensity": 0.0288,
-          "activeNote": "C3"
+          "activeNote": "D3",
+          "calibratedScore": 0.1019
         },
         {
           "regionId": "R1_2",
@@ -963,7 +1031,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.037,
           "brightPixelDensity": 0.0805,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.3095
         },
         {
           "regionId": "R2_0",
@@ -975,7 +1044,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0557,
           "brightPixelDensity": 0.2895,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.966
         },
         {
           "regionId": "R2_1",
@@ -987,7 +1057,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0562,
           "brightPixelDensity": 0.3012,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -999,7 +1070,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3257,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -1028,7 +1100,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0539,
           "brightPixelDensity": 0.2183,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8557
         },
         {
           "regionId": "R0_1",
@@ -1040,7 +1113,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0539,
           "brightPixelDensity": 0.2461,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9501
         },
         {
           "regionId": "R0_2",
@@ -1052,7 +1126,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0537,
           "brightPixelDensity": 0.2309,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9078
         },
         {
           "regionId": "R1_0",
@@ -1064,7 +1139,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0332,
           "brightPixelDensity": 0.0703,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2548
         },
         {
           "regionId": "R1_1",
@@ -1076,7 +1152,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0348,
           "brightPixelDensity": 0.0285,
-          "activeNote": "C3"
+          "activeNote": "D3",
+          "calibratedScore": 0.1017
         },
         {
           "regionId": "R1_2",
@@ -1088,7 +1165,8 @@
           "medianBrightness": 0.0021,
           "stdDeviation": 0.037,
           "brightPixelDensity": 0.0802,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.3097
         },
         {
           "regionId": "R2_0",
@@ -1100,7 +1178,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0557,
           "brightPixelDensity": 0.2893,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9662
         },
         {
           "regionId": "R2_1",
@@ -1112,7 +1191,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0561,
           "brightPixelDensity": 0.3013,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -1124,7 +1204,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3257,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -1153,7 +1234,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0466,
           "brightPixelDensity": 0.1914,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.754
         },
         {
           "regionId": "R0_1",
@@ -1165,7 +1247,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0487,
           "brightPixelDensity": 0.2315,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8906
         },
         {
           "regionId": "R0_2",
@@ -1177,7 +1260,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0473,
           "brightPixelDensity": 0.2064,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8168
         },
         {
           "regionId": "R1_0",
@@ -1189,7 +1273,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0287,
           "brightPixelDensity": 0.0622,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2199
         },
         {
           "regionId": "R1_1",
@@ -1201,7 +1286,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0233,
           "brightPixelDensity": 0.0165,
-          "activeNote": "C3"
+          "activeNote": "C3",
+          "calibratedScore": 0.0486
         },
         {
           "regionId": "R1_2",
@@ -1213,7 +1299,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0302,
           "brightPixelDensity": 0.0672,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2572
         },
         {
           "regionId": "R2_0",
@@ -1225,7 +1312,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2887,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9627
         },
         {
           "regionId": "R2_1",
@@ -1237,7 +1325,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0559,
           "brightPixelDensity": 0.3009,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -1249,7 +1338,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0574,
           "brightPixelDensity": 0.3255,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -1278,7 +1368,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.051,
           "brightPixelDensity": 0.218,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8466
         },
         {
           "regionId": "R0_1",
@@ -1290,7 +1381,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0508,
           "brightPixelDensity": 0.2449,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9373
         },
         {
           "regionId": "R0_2",
@@ -1302,7 +1394,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0506,
           "brightPixelDensity": 0.2272,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8886
         },
         {
           "regionId": "R1_0",
@@ -1314,7 +1407,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0299,
           "brightPixelDensity": 0.0664,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2342
         },
         {
           "regionId": "R1_1",
@@ -1326,7 +1420,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0806,
           "brightPixelDensity": 0.0447,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.259
         },
         {
           "regionId": "R1_2",
@@ -1338,7 +1433,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0323,
           "brightPixelDensity": 0.0757,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2837
         },
         {
           "regionId": "R2_0",
@@ -1350,7 +1446,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2889,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9625
         },
         {
           "regionId": "R2_1",
@@ -1362,7 +1459,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.301,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -1374,7 +1472,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3257,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -1403,7 +1502,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.051,
           "brightPixelDensity": 0.2174,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8449
         },
         {
           "regionId": "R0_1",
@@ -1415,7 +1515,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0508,
           "brightPixelDensity": 0.2447,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9367
         },
         {
           "regionId": "R0_2",
@@ -1427,7 +1528,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0506,
           "brightPixelDensity": 0.2284,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8905
         },
         {
           "regionId": "R1_0",
@@ -1439,7 +1541,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0299,
           "brightPixelDensity": 0.0663,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2346
         },
         {
           "regionId": "R1_1",
@@ -1451,7 +1554,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0806,
           "brightPixelDensity": 0.0445,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2586
         },
         {
           "regionId": "R1_2",
@@ -1463,7 +1567,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0323,
           "brightPixelDensity": 0.0756,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2834
         },
         {
           "regionId": "R2_0",
@@ -1475,7 +1580,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2889,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9626
         },
         {
           "regionId": "R2_1",
@@ -1487,7 +1593,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3009,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -1499,7 +1606,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3256,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": null,
@@ -1528,7 +1636,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.051,
           "brightPixelDensity": 0.2183,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8474
         },
         {
           "regionId": "R0_1",
@@ -1540,7 +1649,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0508,
           "brightPixelDensity": 0.2446,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9367
         },
         {
           "regionId": "R0_2",
@@ -1552,7 +1662,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0506,
           "brightPixelDensity": 0.2278,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8897
         },
         {
           "regionId": "R1_0",
@@ -1564,7 +1675,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0299,
           "brightPixelDensity": 0.0663,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2349
         },
         {
           "regionId": "R1_1",
@@ -1576,7 +1688,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0806,
           "brightPixelDensity": 0.0448,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2593
         },
         {
           "regionId": "R1_2",
@@ -1588,7 +1701,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0323,
           "brightPixelDensity": 0.0758,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2838
         },
         {
           "regionId": "R2_0",
@@ -1600,7 +1714,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2889,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9626
         },
         {
           "regionId": "R2_1",
@@ -1612,7 +1727,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3008,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -1624,7 +1740,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3256,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": {
@@ -1662,7 +1779,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0509,
           "brightPixelDensity": 0.2173,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8448
         },
         {
           "regionId": "R0_1",
@@ -1674,7 +1792,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0508,
           "brightPixelDensity": 0.2449,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9371
         },
         {
           "regionId": "R0_2",
@@ -1686,7 +1805,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0505,
           "brightPixelDensity": 0.2274,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8884
         },
         {
           "regionId": "R1_0",
@@ -1698,7 +1818,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0299,
           "brightPixelDensity": 0.0661,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.234
         },
         {
           "regionId": "R1_1",
@@ -1710,7 +1831,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0806,
           "brightPixelDensity": 0.0447,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2588
         },
         {
           "regionId": "R1_2",
@@ -1722,7 +1844,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0323,
           "brightPixelDensity": 0.0761,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.284
         },
         {
           "regionId": "R2_0",
@@ -1734,7 +1857,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2888,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9621
         },
         {
           "regionId": "R2_1",
@@ -1746,7 +1870,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3008,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -1758,7 +1883,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3256,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": {
@@ -1796,7 +1922,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0509,
           "brightPixelDensity": 0.2178,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8463
         },
         {
           "regionId": "R0_1",
@@ -1808,7 +1935,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0508,
           "brightPixelDensity": 0.2443,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9362
         },
         {
           "regionId": "R0_2",
@@ -1820,7 +1948,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0506,
           "brightPixelDensity": 0.2277,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8892
         },
         {
           "regionId": "R1_0",
@@ -1832,7 +1961,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0299,
           "brightPixelDensity": 0.0658,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2335
         },
         {
           "regionId": "R1_1",
@@ -1844,7 +1974,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0806,
           "brightPixelDensity": 0.0447,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2591
         },
         {
           "regionId": "R1_2",
@@ -1856,7 +1987,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0323,
           "brightPixelDensity": 0.0758,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2834
         },
         {
           "regionId": "R2_0",
@@ -1868,7 +2000,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2887,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9618
         },
         {
           "regionId": "R2_1",
@@ -1880,7 +2013,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3009,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -1892,7 +2026,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3257,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": {
@@ -1930,7 +2065,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.051,
           "brightPixelDensity": 0.2179,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8461
         },
         {
           "regionId": "R0_1",
@@ -1942,7 +2078,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0508,
           "brightPixelDensity": 0.2449,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9371
         },
         {
           "regionId": "R0_2",
@@ -1954,7 +2091,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0506,
           "brightPixelDensity": 0.228,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8897
         },
         {
           "regionId": "R1_0",
@@ -1966,7 +2104,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0299,
           "brightPixelDensity": 0.066,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2339
         },
         {
           "regionId": "R1_1",
@@ -1978,7 +2117,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0806,
           "brightPixelDensity": 0.0443,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2581
         },
         {
           "regionId": "R1_2",
@@ -1990,7 +2130,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0323,
           "brightPixelDensity": 0.0758,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2839
         },
         {
           "regionId": "R2_0",
@@ -2002,7 +2143,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2888,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9624
         },
         {
           "regionId": "R2_1",
@@ -2014,7 +2156,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3009,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -2026,7 +2169,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3257,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": {
@@ -2064,7 +2208,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.051,
           "brightPixelDensity": 0.218,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8464
         },
         {
           "regionId": "R0_1",
@@ -2076,7 +2221,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0508,
           "brightPixelDensity": 0.2448,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9365
         },
         {
           "regionId": "R0_2",
@@ -2088,7 +2234,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0506,
           "brightPixelDensity": 0.2279,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8894
         },
         {
           "regionId": "R1_0",
@@ -2100,7 +2247,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0299,
           "brightPixelDensity": 0.0662,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.2342
         },
         {
           "regionId": "R1_1",
@@ -2112,7 +2260,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0806,
           "brightPixelDensity": 0.0445,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2586
         },
         {
           "regionId": "R1_2",
@@ -2124,7 +2273,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0323,
           "brightPixelDensity": 0.0755,
-          "activeNote": "C3"
+          "activeNote": "G3",
+          "calibratedScore": 0.2825
         },
         {
           "regionId": "R2_0",
@@ -2136,7 +2286,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0556,
           "brightPixelDensity": 0.2889,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9622
         },
         {
           "regionId": "R2_1",
@@ -2148,7 +2299,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3009,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -2160,7 +2312,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3256,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": {
@@ -2198,7 +2351,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.042,
           "brightPixelDensity": 0.1653,
-          "activeNote": "C3"
+          "activeNote": "E4",
+          "calibratedScore": 0.65
         },
         {
           "regionId": "R0_1",
@@ -2210,7 +2364,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0457,
           "brightPixelDensity": 0.2128,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8193
         },
         {
           "regionId": "R0_2",
@@ -2222,7 +2377,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0435,
           "brightPixelDensity": 0.1778,
-          "activeNote": "C3"
+          "activeNote": "E4",
+          "calibratedScore": 0.713
         },
         {
           "regionId": "R1_0",
@@ -2234,7 +2390,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0244,
           "brightPixelDensity": 0.0522,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.1745
         },
         {
           "regionId": "R1_1",
@@ -2246,7 +2403,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.013,
           "brightPixelDensity": 0.0006,
-          "activeNote": "C3"
+          "activeNote": "C3",
+          "calibratedScore": 0.0
         },
         {
           "regionId": "R1_2",
@@ -2258,7 +2416,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0251,
           "brightPixelDensity": 0.0523,
-          "activeNote": "C3"
+          "activeNote": "E3",
+          "calibratedScore": 0.1945
         },
         {
           "regionId": "R2_0",
@@ -2270,7 +2429,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0555,
           "brightPixelDensity": 0.288,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9576
         },
         {
           "regionId": "R2_1",
@@ -2282,7 +2442,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0559,
           "brightPixelDensity": 0.2999,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -2294,7 +2455,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0575,
           "brightPixelDensity": 0.3253,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": {
@@ -2332,7 +2494,8 @@
           "medianBrightness": 0.0039,
           "stdDeviation": 0.0604,
           "brightPixelDensity": 0.243,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9642
         },
         {
           "regionId": "R0_1",
@@ -2344,7 +2507,8 @@
           "medianBrightness": 0.0205,
           "stdDeviation": 0.0648,
           "brightPixelDensity": 0.1954,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8951
         },
         {
           "regionId": "R0_2",
@@ -2356,7 +2520,8 @@
           "medianBrightness": 0.0261,
           "stdDeviation": 0.0572,
           "brightPixelDensity": 0.2234,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9821
         },
         {
           "regionId": "R1_0",
@@ -2368,7 +2533,8 @@
           "medianBrightness": 0.0148,
           "stdDeviation": 0.089,
           "brightPixelDensity": 0.174,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9254
         },
         {
           "regionId": "R1_1",
@@ -2380,7 +2546,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0652,
           "brightPixelDensity": 0.0571,
-          "activeNote": "C3"
+          "activeNote": "A3",
+          "calibratedScore": 0.3736
         },
         {
           "regionId": "R1_2",
@@ -2392,7 +2559,8 @@
           "medianBrightness": 0.0139,
           "stdDeviation": 0.0544,
           "brightPixelDensity": 0.1142,
-          "activeNote": "C3"
+          "activeNote": "D4",
+          "calibratedScore": 0.6009
         },
         {
           "regionId": "R2_0",
@@ -2404,7 +2572,8 @@
           "medianBrightness": 0.0039,
           "stdDeviation": 0.078,
           "brightPixelDensity": 0.3194,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -2416,7 +2585,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.301,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -2428,7 +2598,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0559,
           "brightPixelDensity": 0.2431,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9342
         }
       ],
       "changeClassification": {
@@ -2466,7 +2637,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0636,
           "brightPixelDensity": 0.2444,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.976
         },
         {
           "regionId": "R0_1",
@@ -2478,7 +2650,8 @@
           "medianBrightness": 0.0174,
           "stdDeviation": 0.0723,
           "brightPixelDensity": 0.1873,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8607
         },
         {
           "regionId": "R0_2",
@@ -2490,7 +2663,8 @@
           "medianBrightness": 0.0291,
           "stdDeviation": 0.0612,
           "brightPixelDensity": 0.2224,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9981
         },
         {
           "regionId": "R1_0",
@@ -2502,7 +2676,8 @@
           "medianBrightness": 0.0051,
           "stdDeviation": 0.1062,
           "brightPixelDensity": 0.237,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_1",
@@ -2514,7 +2689,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0772,
           "brightPixelDensity": 0.1251,
-          "activeNote": "C3"
+          "activeNote": "D4",
+          "calibratedScore": 0.5687
         },
         {
           "regionId": "R1_2",
@@ -2526,7 +2702,8 @@
           "medianBrightness": 0.0116,
           "stdDeviation": 0.0628,
           "brightPixelDensity": 0.1502,
-          "activeNote": "C3"
+          "activeNote": "E4",
+          "calibratedScore": 0.7376
         },
         {
           "regionId": "R2_0",
@@ -2538,7 +2715,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0894,
           "brightPixelDensity": 0.3261,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -2550,7 +2728,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0561,
           "brightPixelDensity": 0.3011,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -2562,7 +2741,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0605,
           "brightPixelDensity": 0.2515,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9255
         }
       ],
       "changeClassification": {
@@ -2600,7 +2780,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0636,
           "brightPixelDensity": 0.2447,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9761
         },
         {
           "regionId": "R0_1",
@@ -2612,7 +2793,8 @@
           "medianBrightness": 0.0174,
           "stdDeviation": 0.0723,
           "brightPixelDensity": 0.1879,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8615
         },
         {
           "regionId": "R0_2",
@@ -2624,7 +2806,8 @@
           "medianBrightness": 0.0291,
           "stdDeviation": 0.0611,
           "brightPixelDensity": 0.2229,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9991
         },
         {
           "regionId": "R1_0",
@@ -2636,7 +2819,8 @@
           "medianBrightness": 0.0051,
           "stdDeviation": 0.1062,
           "brightPixelDensity": 0.2376,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_1",
@@ -2648,7 +2832,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0772,
           "brightPixelDensity": 0.1236,
-          "activeNote": "C3"
+          "activeNote": "D4",
+          "calibratedScore": 0.5663
         },
         {
           "regionId": "R1_2",
@@ -2660,7 +2845,8 @@
           "medianBrightness": 0.0116,
           "stdDeviation": 0.0628,
           "brightPixelDensity": 0.1506,
-          "activeNote": "C3"
+          "activeNote": "E4",
+          "calibratedScore": 0.7383
         },
         {
           "regionId": "R2_0",
@@ -2672,7 +2858,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0894,
           "brightPixelDensity": 0.326,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -2684,7 +2871,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0561,
           "brightPixelDensity": 0.3008,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -2696,7 +2884,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0604,
           "brightPixelDensity": 0.2514,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9251
         }
       ],
       "changeClassification": {
@@ -2734,7 +2923,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0643,
           "brightPixelDensity": 0.2468,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9871
         },
         {
           "regionId": "R0_1",
@@ -2746,7 +2936,8 @@
           "medianBrightness": 0.0174,
           "stdDeviation": 0.0729,
           "brightPixelDensity": 0.1879,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8654
         },
         {
           "regionId": "R0_2",
@@ -2758,7 +2949,8 @@
           "medianBrightness": 0.0291,
           "stdDeviation": 0.0615,
           "brightPixelDensity": 0.2248,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_0",
@@ -2770,7 +2962,8 @@
           "medianBrightness": 0.0055,
           "stdDeviation": 0.1079,
           "brightPixelDensity": 0.24,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_1",
@@ -2782,7 +2975,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.077,
           "brightPixelDensity": 0.1265,
-          "activeNote": "C3"
+          "activeNote": "D4",
+          "calibratedScore": 0.5737
         },
         {
           "regionId": "R1_2",
@@ -2794,7 +2988,8 @@
           "medianBrightness": 0.0116,
           "stdDeviation": 0.0639,
           "brightPixelDensity": 0.1552,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.7563
         },
         {
           "regionId": "R2_0",
@@ -2806,7 +3001,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0897,
           "brightPixelDensity": 0.3281,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -2818,7 +3014,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0561,
           "brightPixelDensity": 0.301,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -2830,7 +3027,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0607,
           "brightPixelDensity": 0.2517,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9268
         }
       ],
       "changeClassification": {
@@ -2868,7 +3066,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0653,
           "brightPixelDensity": 0.2485,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9955
         },
         {
           "regionId": "R0_1",
@@ -2880,7 +3079,8 @@
           "medianBrightness": 0.0174,
           "stdDeviation": 0.076,
           "brightPixelDensity": 0.1914,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8849
         },
         {
           "regionId": "R0_2",
@@ -2892,7 +3092,8 @@
           "medianBrightness": 0.0291,
           "stdDeviation": 0.0628,
           "brightPixelDensity": 0.228,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_0",
@@ -2904,7 +3105,8 @@
           "medianBrightness": 0.0051,
           "stdDeviation": 0.1067,
           "brightPixelDensity": 0.2368,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_1",
@@ -2916,7 +3118,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0782,
           "brightPixelDensity": 0.1273,
-          "activeNote": "C3"
+          "activeNote": "D4",
+          "calibratedScore": 0.5821
         },
         {
           "regionId": "R1_2",
@@ -2928,7 +3131,8 @@
           "medianBrightness": 0.0116,
           "stdDeviation": 0.0672,
           "brightPixelDensity": 0.1714,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.817
         },
         {
           "regionId": "R2_0",
@@ -2940,7 +3144,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0905,
           "brightPixelDensity": 0.3282,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -2952,7 +3157,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0561,
           "brightPixelDensity": 0.301,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -2964,7 +3170,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0622,
           "brightPixelDensity": 0.2582,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9504
         }
       ],
       "changeClassification": {
@@ -3002,7 +3209,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0654,
           "brightPixelDensity": 0.247,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9904
         },
         {
           "regionId": "R0_1",
@@ -3014,7 +3222,8 @@
           "medianBrightness": 0.0174,
           "stdDeviation": 0.078,
           "brightPixelDensity": 0.1967,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9061
         },
         {
           "regionId": "R0_2",
@@ -3026,7 +3235,8 @@
           "medianBrightness": 0.0291,
           "stdDeviation": 0.0642,
           "brightPixelDensity": 0.2294,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_0",
@@ -3038,7 +3248,8 @@
           "medianBrightness": 0.0051,
           "stdDeviation": 0.1045,
           "brightPixelDensity": 0.2294,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_1",
@@ -3050,7 +3261,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0779,
           "brightPixelDensity": 0.1269,
-          "activeNote": "C3"
+          "activeNote": "D4",
+          "calibratedScore": 0.5815
         },
         {
           "regionId": "R1_2",
@@ -3062,7 +3274,8 @@
           "medianBrightness": 0.0116,
           "stdDeviation": 0.0669,
           "brightPixelDensity": 0.1683,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8066
         },
         {
           "regionId": "R2_0",
@@ -3074,7 +3287,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0888,
           "brightPixelDensity": 0.3219,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -3086,7 +3300,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0561,
           "brightPixelDensity": 0.3012,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -3098,7 +3313,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0627,
           "brightPixelDensity": 0.259,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9537
         }
       ],
       "changeClassification": {
@@ -3136,7 +3352,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0679,
           "brightPixelDensity": 0.2549,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R0_1",
@@ -3148,7 +3365,8 @@
           "medianBrightness": 0.0174,
           "stdDeviation": 0.0823,
           "brightPixelDensity": 0.2105,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.962
         },
         {
           "regionId": "R0_2",
@@ -3160,7 +3378,8 @@
           "medianBrightness": 0.0291,
           "stdDeviation": 0.0646,
           "brightPixelDensity": 0.2354,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_0",
@@ -3172,7 +3391,8 @@
           "medianBrightness": 0.0051,
           "stdDeviation": 0.1018,
           "brightPixelDensity": 0.2237,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_1",
@@ -3184,7 +3404,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0805,
           "brightPixelDensity": 0.1334,
-          "activeNote": "C3"
+          "activeNote": "D4",
+          "calibratedScore": 0.6148
         },
         {
           "regionId": "R1_2",
@@ -3196,7 +3417,8 @@
           "medianBrightness": 0.0116,
           "stdDeviation": 0.0744,
           "brightPixelDensity": 0.1965,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9258
         },
         {
           "regionId": "R2_0",
@@ -3208,7 +3430,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0911,
           "brightPixelDensity": 0.327,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -3220,7 +3443,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0561,
           "brightPixelDensity": 0.3012,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -3232,7 +3456,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0697,
           "brightPixelDensity": 0.2847,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         }
       ],
       "changeClassification": {
@@ -3270,7 +3495,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0586,
           "brightPixelDensity": 0.2243,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8947
         },
         {
           "regionId": "R0_1",
@@ -3282,7 +3508,8 @@
           "medianBrightness": 0.0174,
           "stdDeviation": 0.0666,
           "brightPixelDensity": 0.1758,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8061
         },
         {
           "regionId": "R0_2",
@@ -3294,7 +3521,8 @@
           "medianBrightness": 0.0291,
           "stdDeviation": 0.0545,
           "brightPixelDensity": 0.2077,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9266
         },
         {
           "regionId": "R1_0",
@@ -3306,7 +3534,8 @@
           "medianBrightness": 0.0051,
           "stdDeviation": 0.0772,
           "brightPixelDensity": 0.1847,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8487
         },
         {
           "regionId": "R1_1",
@@ -3318,7 +3547,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0579,
           "brightPixelDensity": 0.1196,
-          "activeNote": "C3"
+          "activeNote": "C4",
+          "calibratedScore": 0.503
         },
         {
           "regionId": "R1_2",
@@ -3330,7 +3560,8 @@
           "medianBrightness": 0.0116,
           "stdDeviation": 0.0603,
           "brightPixelDensity": 0.1545,
-          "activeNote": "C3"
+          "activeNote": "E4",
+          "calibratedScore": 0.7369
         },
         {
           "regionId": "R2_0",
@@ -3342,7 +3573,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0715,
           "brightPixelDensity": 0.2927,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -3354,7 +3586,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0559,
           "brightPixelDensity": 0.3007,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -3366,7 +3599,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0593,
           "brightPixelDensity": 0.2551,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.9309
         }
       ],
       "changeClassification": {
@@ -3404,7 +3638,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0623,
           "brightPixelDensity": 0.2512,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9948
         },
         {
           "regionId": "R0_1",
@@ -3416,7 +3651,8 @@
           "medianBrightness": 0.0174,
           "stdDeviation": 0.064,
           "brightPixelDensity": 0.194,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8596
         },
         {
           "regionId": "R0_2",
@@ -3428,7 +3664,8 @@
           "medianBrightness": 0.03,
           "stdDeviation": 0.0581,
           "brightPixelDensity": 0.2305,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_0",
@@ -3440,7 +3677,8 @@
           "medianBrightness": 0.0055,
           "stdDeviation": 0.0852,
           "brightPixelDensity": 0.2212,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_1",
@@ -3452,7 +3690,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0954,
           "brightPixelDensity": 0.1478,
-          "activeNote": "C3"
+          "activeNote": "E4",
+          "calibratedScore": 0.7256
         },
         {
           "regionId": "R1_2",
@@ -3464,7 +3703,8 @@
           "medianBrightness": 0.0118,
           "stdDeviation": 0.0621,
           "brightPixelDensity": 0.1794,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.819
         },
         {
           "regionId": "R2_0",
@@ -3476,7 +3716,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.075,
           "brightPixelDensity": 0.3162,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -3488,7 +3729,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.301,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -3500,7 +3742,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0594,
           "brightPixelDensity": 0.2686,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9704
         }
       ],
       "changeClassification": {
@@ -3538,7 +3781,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0623,
           "brightPixelDensity": 0.2518,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9964
         },
         {
           "regionId": "R0_1",
@@ -3550,7 +3794,8 @@
           "medianBrightness": 0.0174,
           "stdDeviation": 0.064,
           "brightPixelDensity": 0.1942,
-          "activeNote": "C3"
+          "activeNote": "A4",
+          "calibratedScore": 0.8604
         },
         {
           "regionId": "R0_2",
@@ -3562,7 +3807,8 @@
           "medianBrightness": 0.03,
           "stdDeviation": 0.0581,
           "brightPixelDensity": 0.2299,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_0",
@@ -3574,7 +3820,8 @@
           "medianBrightness": 0.0051,
           "stdDeviation": 0.0852,
           "brightPixelDensity": 0.2211,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R1_1",
@@ -3586,7 +3833,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.0954,
           "brightPixelDensity": 0.148,
-          "activeNote": "C3"
+          "activeNote": "E4",
+          "calibratedScore": 0.7261
         },
         {
           "regionId": "R1_2",
@@ -3598,7 +3846,8 @@
           "medianBrightness": 0.0116,
           "stdDeviation": 0.0621,
           "brightPixelDensity": 0.18,
-          "activeNote": "C3"
+          "activeNote": "G4",
+          "calibratedScore": 0.8204
         },
         {
           "regionId": "R2_0",
@@ -3610,7 +3859,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.075,
           "brightPixelDensity": 0.3165,
-          "activeNote": "D3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_1",
@@ -3622,7 +3872,8 @@
           "medianBrightness": 0.0009,
           "stdDeviation": 0.056,
           "brightPixelDensity": 0.3009,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 1.0
         },
         {
           "regionId": "R2_2",
@@ -3634,7 +3885,8 @@
           "medianBrightness": 0.0025,
           "stdDeviation": 0.0594,
           "brightPixelDensity": 0.2689,
-          "activeNote": "C3"
+          "activeNote": "C5",
+          "calibratedScore": 0.9708
         }
       ],
       "changeClassification": {
