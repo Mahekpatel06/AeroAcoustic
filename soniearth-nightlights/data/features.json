@@ -1,0 +1,1699 @@
+{
+  "dataset": "Change in Night Lights between 2012 and 2023",
+  "svs_id": "5276 / 5475 / 5634 / 5313",
+  "frameCount": 18,
+  "frames": [
+    {
+      "frameIndex": 0,
+      "timestamp": 0.0,
+      "phase": "annual_series",
+      "year": 2012,
+      "globalMeanBrightness": 0.05225,
+      "temporalDelta": 0.0,
+      "activeNote": "C3",
+      "fundamentalFrequency": 130.81,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0614,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0568,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0794,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0134,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.051,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0229,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0542,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.06,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0712,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 1,
+      "timestamp": 1.0,
+      "phase": "annual_series",
+      "year": 2013,
+      "globalMeanBrightness": 0.05261,
+      "temporalDelta": 0.00036,
+      "activeNote": "A3",
+      "fundamentalFrequency": 220.0,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0619,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0573,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.08,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0137,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0515,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0233,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0544,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0601,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0714,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 2,
+      "timestamp": 2.0,
+      "phase": "annual_series",
+      "year": 2014,
+      "globalMeanBrightness": 0.05263,
+      "temporalDelta": 2e-05,
+      "activeNote": "C4",
+      "fundamentalFrequency": 261.63,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0619,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0573,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.08,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0137,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0515,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0234,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0544,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0601,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0714,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 3,
+      "timestamp": 3.0,
+      "phase": "annual_series",
+      "year": 2015,
+      "globalMeanBrightness": 0.05242,
+      "temporalDelta": -0.00021,
+      "activeNote": "E3",
+      "fundamentalFrequency": 164.81,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0615,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0572,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0795,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0136,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0513,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0234,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0543,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0599,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0712,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 4,
+      "timestamp": 4.0,
+      "phase": "annual_series",
+      "year": 2016,
+      "globalMeanBrightness": 0.05269,
+      "temporalDelta": 0.00027,
+      "activeNote": "C4",
+      "fundamentalFrequency": 261.63,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0618,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0575,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.08,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0137,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0518,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0237,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0544,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0601,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0714,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 5,
+      "timestamp": 5.0,
+      "phase": "annual_series",
+      "year": 2017,
+      "globalMeanBrightness": 0.05272,
+      "temporalDelta": 3e-05,
+      "activeNote": "D4",
+      "fundamentalFrequency": 293.66,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0617,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0576,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0801,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0136,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0517,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0239,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0544,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0601,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0714,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 6,
+      "timestamp": 6.0,
+      "phase": "annual_series",
+      "year": 2018,
+      "globalMeanBrightness": 0.05258,
+      "temporalDelta": -0.00014,
+      "activeNote": "A3",
+      "fundamentalFrequency": 220.0,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0614,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0575,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0798,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0135,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0517,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.024,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0543,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.06,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0712,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 7,
+      "timestamp": 7.0,
+      "phase": "annual_series",
+      "year": 2019,
+      "globalMeanBrightness": 0.05285,
+      "temporalDelta": 0.00027,
+      "activeNote": "E4",
+      "fundamentalFrequency": 329.63,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0618,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0578,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0804,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0137,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0519,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0242,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0544,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0601,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0714,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 8,
+      "timestamp": 8.0,
+      "phase": "annual_series",
+      "year": 2020,
+      "globalMeanBrightness": 0.05274,
+      "temporalDelta": -0.00011,
+      "activeNote": "D4",
+      "fundamentalFrequency": 293.66,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0615,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0574,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0803,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0136,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.052,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0241,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0544,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0601,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0714,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 9,
+      "timestamp": 9.0,
+      "phase": "annual_series",
+      "year": 2021,
+      "globalMeanBrightness": 0.05266,
+      "temporalDelta": -8e-05,
+      "activeNote": "C4",
+      "fundamentalFrequency": 261.63,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0613,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0576,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0802,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0136,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0517,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0243,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0543,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.06,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0712,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 10,
+      "timestamp": 10.0,
+      "phase": "annual_series",
+      "year": 2022,
+      "globalMeanBrightness": 0.05293,
+      "temporalDelta": 0.00026,
+      "activeNote": "G4",
+      "fundamentalFrequency": 392.0,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0617,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.058,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0806,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0137,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.052,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.025,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0543,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.06,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0712,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 11,
+      "timestamp": 11.0,
+      "phase": "annual_series",
+      "year": 2023,
+      "globalMeanBrightness": 0.05305,
+      "temporalDelta": 0.00013,
+      "activeNote": "C5",
+      "fundamentalFrequency": 523.25,
+      "scale": "C Major Lydian / Pentatonic",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0619,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.058,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0808,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0138,
+          "activeNote": "D3",
+          "frequency": 146.83,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0522,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0255,
+          "activeNote": "E4",
+          "frequency": 329.63,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0543,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0599,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0712,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 12,
+      "timestamp": 12.0,
+      "phase": "global_change",
+      "year": 2023,
+      "globalMeanBrightness": 0.05624,
+      "temporalDelta": 0.00228,
+      "activeNote": "D3",
+      "fundamentalFrequency": 146.83,
+      "scale": "D Dorian & A Minor (Polarity)",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0653,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0613,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0835,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0176,
+          "activeNote": "E3",
+          "frequency": 164.81,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0535,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0286,
+          "activeNote": "G4",
+          "frequency": 392.0,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0579,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0636,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0749,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 20,
+      "timestamp": 20.0,
+      "phase": "regional_zoom",
+      "regionFocus": "Overview (All Insets)",
+      "globalMeanBrightness": 0.09237,
+      "temporalDelta": 0.0,
+      "activeNote": "C4",
+      "fundamentalFrequency": 261.63,
+      "scale": "Poly-Regional Composite Scale",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.1181,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0901,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.0898,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0312,
+          "activeNote": "G4",
+          "frequency": 392.0,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0795,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0869,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0795,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.1113,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.1449,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 21,
+      "timestamp": 21.0,
+      "phase": "regional_zoom",
+      "regionFocus": "India",
+      "globalMeanBrightness": 0.08242,
+      "temporalDelta": 0.0,
+      "activeNote": "E4",
+      "fundamentalFrequency": 329.63,
+      "scale": "E Mixolydian (Raag Desh)",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.1367,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.1485,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.1048,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0785,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.1093,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.075,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.0189,
+          "activeNote": "A3",
+          "frequency": 220.0,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.033,
+          "activeNote": "A4",
+          "frequency": 440.0,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0371,
+          "activeNote": "A4",
+          "frequency": 440.0,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 22,
+      "timestamp": 22.0,
+      "phase": "regional_zoom",
+      "regionFocus": "Ukraine",
+      "globalMeanBrightness": 0.0899,
+      "temporalDelta": 0.0,
+      "activeNote": "A2",
+      "fundamentalFrequency": 110.0,
+      "scale": "A Natural Minor (Blackout Corridors)",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0761,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0803,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.1077,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.1055,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.0837,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.0889,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.1155,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.0706,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0806,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 23,
+      "timestamp": 23.0,
+      "phase": "regional_zoom",
+      "regionFocus": "Western Europe",
+      "globalMeanBrightness": 0.07464,
+      "temporalDelta": 0.0,
+      "activeNote": "G4",
+      "fundamentalFrequency": 392.0,
+      "scale": "G Lydian (Continental LED Grid)",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0181,
+          "activeNote": "E3",
+          "frequency": 164.81,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0547,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.079,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0206,
+          "activeNote": "G3",
+          "frequency": 196.0,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.1274,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.1189,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.043,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.1269,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.0831,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    },
+    {
+      "frameIndex": 24,
+      "timestamp": 24.0,
+      "phase": "regional_zoom",
+      "regionFocus": "Eastern Mediterranean",
+      "globalMeanBrightness": 0.12294,
+      "temporalDelta": 0.0,
+      "activeNote": "D3",
+      "fundamentalFrequency": 146.83,
+      "scale": "D Phrygian Dominant (Maqam Hijaz)",
+      "spatialGrid": [
+        {
+          "cellIndex": 0,
+          "row": 0,
+          "col": 0,
+          "brightness": 0.0865,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 1,
+          "row": 0,
+          "col": 1,
+          "brightness": 0.0962,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 2,
+          "row": 0,
+          "col": 2,
+          "brightness": 0.1003,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 3,
+          "row": 1,
+          "col": 0,
+          "brightness": 0.0912,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 4,
+          "row": 1,
+          "col": 1,
+          "brightness": 0.1285,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 5,
+          "row": 1,
+          "col": 2,
+          "brightness": 0.1672,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        },
+        {
+          "cellIndex": 6,
+          "row": 2,
+          "col": 0,
+          "brightness": 0.1522,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": -0.75
+        },
+        {
+          "cellIndex": 7,
+          "row": 2,
+          "col": 1,
+          "brightness": 0.1257,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.0
+        },
+        {
+          "cellIndex": 8,
+          "row": 2,
+          "col": 2,
+          "brightness": 0.1588,
+          "activeNote": "C5",
+          "frequency": 523.25,
+          "pan": 0.75
+        }
+      ]
+    }
+  ]
+}
