@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #020617;
+  --foreground: #f8fafc;
+}
+
+body {
+  background-color: #020617;
+  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Accessible High-Contrast Focus Ring */
+*:focus-visible {
+  outline: 3px solid #FACC15 !important;
+  outline-offset: 2px !important;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Pulsing radar laser animation */
+@keyframes laserSweep {
+  0% { transform: translateY(-100%); opacity: 0.2; }
+  50% { opacity: 0.9; }
+  100% { transform: translateY(100%); opacity: 0.2; }
+}
+
+.animate-laser {
+  animation: laserSweep 3s ease-in-out infinite alternate;
+}

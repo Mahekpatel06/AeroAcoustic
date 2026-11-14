@@ -1,0 +1,57 @@
+{
+  "scale": {
+    "name": "C Major Pentatonic",
+    "root": "C",
+    "octaves": [3, 4],
+    "notes": ["C3", "D3", "E3", "G3", "A3", "C4", "D4", "E4", "G4", "A4"],
+    "frequencies_hz": [130.81, 146.83, 164.81, 196.00, 220.00, 261.63, 293.66, 329.63, 392.00, 440.00]
+  },
+  "mappings": {
+    "mean_brightness_to_pitch": {
+      "input_range": [0.0, 1.0],
+      "output_notes": ["C3", "D3", "E3", "G3", "A3", "C4", "D4", "E4", "G4", "A4"],
+      "interpolation": "quantized"
+    },
+    "density_to_polyphony": {
+      "input_range": [0.0, 0.4],
+      "max_voices": 4,
+      "rule": "Sparse < 0.05 -> 1 note, Moderate 0.05-0.15 -> 2 notes, Dense > 0.15 -> 3-4 notes"
+    },
+    "brightness_to_amplitude": {
+      "min_amplitude_db": -24.0,
+      "max_amplitude_db": -6.0,
+      "master_limiter_threshold_db": -3.0
+    },
+    "spatial_x_to_pan": {
+      "formula": "pan = 2 * (x / width) - 1",
+      "range": [-1.0, 1.0]
+    },
+    "change_motifs": {
+      "purple_increase": {
+        "instrument": "crystalline_chime_bell",
+        "movement": "ascending_triad",
+        "interval_semitones": [0, 4, 7],
+        "register": "octave_4_to_5"
+      },
+      "orange_decrease": {
+        "instrument": "warm_cello_synth",
+        "movement": "descending_fifth",
+        "interval_semitones": [0, -5, -7],
+        "register": "octave_2_to_3"
+      }
+    }
+  },
+  "synthesis": {
+    "sample_rate": 44100,
+    "tempo_bpm": 80,
+    "events_per_second": 3,
+    "envelope": {
+      "attack_sec": 0.08,
+      "decay_sec": 0.15,
+      "sustain_level": 0.7,
+      "release_sec": 0.4
+    },
+    "reverb_mix": 0.35,
+    "limiter_enabled": true
+  }
+}

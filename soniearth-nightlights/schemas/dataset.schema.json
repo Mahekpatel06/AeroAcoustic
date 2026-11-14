@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DatasetManifest",
+  "type": "object",
+  "required": ["id", "title", "description", "source", "timeRange", "featuresPath", "mappingProfile"],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "source": {
+      "type": "object",
+      "required": ["organization", "catalogId", "url"],
+      "properties": {
+        "organization": { "type": "string" },
+        "facility": { "type": "string" },
+        "studio": { "type": "string" },
+        "catalogId": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "citation": { "type": "string" },
+        "underlyingInstrument": { "type": "string" },
+        "underlyingProduct": { "type": "string" }
+      }
+    },
+    "timeRange": {
+      "type": "object",
+      "required": ["startYear", "endYear"],
+      "properties": {
+        "startYear": { "type": "integer" },
+        "endYear": { "type": "integer" },
+        "durationYears": { "type": "integer" }
+      }
+    },
+    "featuresPath": { "type": "string" },
+    "mappingProfile": { "type": "string" }
+  }
+}

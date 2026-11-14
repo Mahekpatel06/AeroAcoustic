@@ -1,0 +1,3492 @@
+{
+  "datasetId": "nasa-svs-5313",
+  "totalDurationSeconds": 8.0,
+  "tempoBpm": 80,
+  "scaleName": "C Major Pentatonic",
+  "notesVocabulary": [
+    "C3",
+    "D3",
+    "E3",
+    "G3",
+    "A3",
+    "C4",
+    "D4",
+    "E4",
+    "G4",
+    "A4",
+    "C5"
+  ],
+  "eventsCount": 347,
+  "events": [
+    {
+      "timestampSeconds": 0.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.05,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.85,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 1.65,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 1.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 2.45,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 2.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.4,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.2,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 3.25,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 3.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.4,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 4.05,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.4,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 4.85,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 4.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.4,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 5.65,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 5.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.4,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 6.45,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.4,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.2,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 7.25,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 7.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 8.05,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 8.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 8.85,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 8.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 8.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.48999999999999994,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.05,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.15,
+      "note": "C4",
+      "frequencyHz": 261.63,
+      "velocity": 0.5,
+      "durationSeconds": 0.5,
+      "pan": 0.5,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 0.3,
+      "note": "G4",
+      "frequencyHz": 392.0,
+      "velocity": 0.6,
+      "durationSeconds": 0.6,
+      "pan": 0.7,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 0.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.95,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.05,
+      "note": "C4",
+      "frequencyHz": 261.63,
+      "velocity": 0.51,
+      "durationSeconds": 0.5,
+      "pan": 0.5,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 1.2,
+      "note": "G4",
+      "frequencyHz": 392.0,
+      "velocity": 0.61,
+      "durationSeconds": 0.6,
+      "pan": 0.7,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 1.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 1.85,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 1.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.9,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.95,
+      "note": "C4",
+      "frequencyHz": 261.63,
+      "velocity": 0.51,
+      "durationSeconds": 0.5,
+      "pan": 0.5,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "G4",
+      "frequencyHz": 392.0,
+      "velocity": 0.61,
+      "durationSeconds": 0.6,
+      "pan": 0.7,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 2.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 2.75,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 2.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.8,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.85,
+      "note": "C4",
+      "frequencyHz": 261.63,
+      "velocity": 0.51,
+      "durationSeconds": 0.5,
+      "pan": 0.5,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 3.0,
+      "note": "G4",
+      "frequencyHz": 392.0,
+      "velocity": 0.61,
+      "durationSeconds": 0.6,
+      "pan": 0.7,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 3.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 3.65,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 3.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.7,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.75,
+      "note": "C4",
+      "frequencyHz": 261.63,
+      "velocity": 0.5,
+      "durationSeconds": 0.5,
+      "pan": 0.5,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 3.9,
+      "note": "G4",
+      "frequencyHz": 392.0,
+      "velocity": 0.6,
+      "durationSeconds": 0.6,
+      "pan": 0.7,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 4.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 4.55,
+      "note": "G3",
+      "frequencyHz": 196.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 4.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.6,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 5.45,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.5,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.6,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.47,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 5.75,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.57,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 6.3,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 6.35,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.8,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.4,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.5599999999999999,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.5,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.5,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 6.65,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.6,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 0.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.05,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 0.2,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.5,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 0.35,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.6,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 1.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 1.05,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 1.2,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 1.35,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.61,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 2.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 2.05,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 2.2,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.52,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 2.35,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.62,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 3.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 3.05,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 3.2,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 3.35,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.61,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 4.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 4.05,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 4.2,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.55,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 4.35,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.65,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 5.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 5.05,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.41,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 5.2,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.44,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 5.35,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.54,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 6.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 6.05,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 6.15,
+      "note": "C4",
+      "frequencyHz": 261.63,
+      "velocity": 0.62,
+      "durationSeconds": 0.5,
+      "pan": 0.5,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 6.3,
+      "note": "G4",
+      "frequencyHz": 392.0,
+      "velocity": 0.72,
+      "durationSeconds": 0.6,
+      "pan": 0.7,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 6.2,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.46,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 6.35,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.56,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 7.0,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 7.05,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "A3",
+      "frequencyHz": 220.0,
+      "velocity": 0.51,
+      "durationSeconds": 0.9,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "density_chord"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "D3",
+      "frequencyHz": 146.83,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": -0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.0,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.1,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.42,
+      "durationSeconds": 0.63,
+      "pan": 0.8,
+      "instrument": "sine_pad",
+      "eventType": "arpeggio"
+    },
+    {
+      "timestampSeconds": 7.15,
+      "note": "C4",
+      "frequencyHz": 261.63,
+      "velocity": 0.61,
+      "durationSeconds": 0.5,
+      "pan": 0.5,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 7.3,
+      "note": "G4",
+      "frequencyHz": 392.0,
+      "velocity": 0.71,
+      "durationSeconds": 0.6,
+      "pan": 0.7,
+      "instrument": "crystalline_chime_bell",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 7.2,
+      "note": "E3",
+      "frequencyHz": 164.81,
+      "velocity": 0.46,
+      "durationSeconds": 0.7,
+      "pan": -0.5,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    },
+    {
+      "timestampSeconds": 7.35,
+      "note": "C3",
+      "frequencyHz": 130.81,
+      "velocity": 0.56,
+      "durationSeconds": 0.8,
+      "pan": -0.7,
+      "instrument": "warm_cello_synth",
+      "eventType": "change_motif"
+    }
+  ]
+}

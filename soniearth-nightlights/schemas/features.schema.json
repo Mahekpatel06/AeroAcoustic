@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NightLightsFeatureCollection",
+  "type": "object",
+  "required": ["datasetId", "generatedAt", "samplingFps", "totalFrames", "frames"],
+  "properties": {
+    "datasetId": { "type": "string" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "samplingFps": { "type": "number" },
+    "totalFrames": { "type": "integer" },
+    "frames": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["frameIndex", "timestampSeconds", "phase", "globalMeanBrightness", "brightPixelDensity", "spatialGrid", "dataOrigin"],
+        "properties": {
+          "frameIndex": { "type": "integer" },
+          "timestampSeconds": { "type": "number" },
+          "phase": { "type": "string", "enum": ["annual_series", "change_transition", "global_change", "regional_zoom"] },
+          "year": { "type": "integer" },
+          "globalMeanBrightness": { "type": "number", "minimum": 0, "maximum": 1 },
+          "brightPixelDensity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "dataOrigin": { "type": "string", "enum": ["scientific", "visual-estimate"] }
+        }
+      }
+    }
+  }
+}

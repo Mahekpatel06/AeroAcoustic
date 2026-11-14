@@ -1,0 +1,48 @@
+{
+  "source_video_path": "soniearth-nightlights/assets/original/nightlights_svs5313.mp4",
+  "extracted_frames_dir": "soniearth-nightlights/assets/extracted_frames",
+  "processed_frames_dir": "soniearth-nightlights/assets/processed_frames",
+  "analysis_resolution": {
+    "width": 480,
+    "height": 270
+  },
+  "sampling_strategy": {
+    "mode": "phase_keyed",
+    "annual_samples_per_year": 1,
+    "change_map_samples": 5,
+    "regional_zoom_samples_per_region": 3,
+    "max_total_frames": 30
+  },
+  "color_analysis": {
+    "rec601_luma_coefficients": {
+      "r": 0.299,
+      "g": 0.587,
+      "b": 0.114
+    },
+    "hsv_bounds": {
+      "purple_increase": {
+        "lower_hsv": [125, 40, 40],
+        "upper_hsv": [165, 255, 255]
+      },
+      "orange_decrease": {
+        "lower_hsv": [8, 80, 80],
+        "upper_hsv": [28, 255, 255]
+      }
+    }
+  },
+  "grid_layout": {
+    "rows": 3,
+    "cols": 3,
+    "regions": [
+      {"id": "NW", "name": "North America / Pacific", "col": 0, "row": 0, "pan": -0.8},
+      {"id": "N",  "name": "North Atlantic / Arctic",  "col": 1, "row": 0, "pan": 0.0},
+      {"id": "NE", "name": "Northern Eurasia",        "col": 2, "row": 0, "pan": 0.8},
+      {"id": "W",  "name": "Central / South America", "col": 0, "row": 1, "pan": -0.7},
+      {"id": "C",  "name": "Europe / Africa",         "col": 1, "row": 1, "pan": 0.0},
+      {"id": "E",  "name": "South & East Asia",       "col": 2, "row": 1, "pan": 0.7},
+      {"id": "SW", "name": "South Pacific Ocean",     "col": 0, "row": 2, "pan": -0.8},
+      {"id": "S",  "name": "Southern Ocean / Africa", "col": 1, "row": 2, "pan": 0.0},
+      {"id": "SE", "name": "Oceania / Australia",      "col": 2, "row": 2, "pan": 0.8}
+    ]
+  }
+}

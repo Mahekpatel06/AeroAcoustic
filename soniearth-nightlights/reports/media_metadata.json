@@ -1,0 +1,26 @@
+{
+  "source_dataset": "NASA SVS #5313",
+  "title": "Change in Night Lights between 2012 and 2023 — EIC Version",
+  "source_url": "https://svs.gsfc.nasa.gov/5313/",
+  "downloaded_file": "soniearth-nightlights/assets/original/nightlights_svs5313.mp4",
+  "file_size_bytes": 34306797,
+  "file_size_mb": 32.72,
+  "video_metadata": {
+    "width": 7680,
+    "height": 2160,
+    "aspect_ratio": "32:9 (Dual-4K EIC Hyperwall Display)",
+    "fps": 30.0,
+    "total_frames": 1300,
+    "duration_seconds": 43.33,
+    "codec": "H.265 / HEVC",
+    "pixel_format": "YUV420p (BGR in OpenCV)"
+  },
+  "phases_empirical": {
+    "annual_timeline": "Frames 0 - 360 (approx 0.0s - 12.0s): Annual series 2012 through 2023",
+    "transition_to_change": "Frames 361 - 450 (approx 12.0s - 15.0s): Cross-fade into decadal difference map",
+    "global_change_map": "Frames 451 - 750 (approx 15.0s - 25.0s): Purple/Orange global change map",
+    "regional_zooms": "Frames 751 - 1300 (approx 25.0s - 43.33s): Zooms on India, Ukraine, Western Europe, Mediterranean"
+  },
+  "scientific_instrument": "Suomi NPP / VIIRS (Visible Infrared Imaging Radiometer Suite)",
+  "scientific_product": "Black Marble (VNP46A2 / VNP46A4)"
+}

@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large binary assets
+assets/original/*.mp4
+assets/original/*.mov
+assets/extracted_frames/*.png
+assets/extracted_frames/*.webp
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Audio outputs (keep samples if small, ignore large generated batches)
+audio/generated/*.raw
+
+# OS files
+.DS_Store
+Thumbs.db

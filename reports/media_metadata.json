@@ -1,0 +1,24 @@
+{
+  "dataset_id": "NASA SVS 5313",
+  "title": "NASA SVS | Change in Night Lights between 2012 and 2023 - EIC Version",
+  "source_url": "https://svs.gsfc.nasa.gov/5313/",
+  "total_media_links": 14,
+  "mp4_assets": [
+    "https://svs.gsfc.nasa.gov/vis/a000000/a005300/a005313/nightlights_flat_series_and_change_wZooms_13_EIC_2160p30_h265.mp4"
+  ],
+  "mov_assets": [
+    "https://svs.gsfc.nasa.gov/vis/a000000/a005300/a005313/nightlights_flat_series_and_change_wZooms_13_EIC_prores.mov"
+  ],
+  "sample_images": [
+    "https://svs.gsfc.nasa.gov/vis/a000000/a005300/a005313/nightlights_flat_series_and_change_wZooms_13_EIC.02599_print.jpg",
+    "https://svs.gsfc.nasa.gov/vis/a000000/a005300/a005313/nightlights_flat_series_and_change_wZooms_13_EIC.02599_searchweb.png",
+    "https://svs.gsfc.nasa.gov/vis/a000000/a005300/a005313/nightlights_flat_series_and_change_wZooms_13_EIC.02599_thm.png",
+    "https://nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-128x128.png",
+    "https://nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-16x16.png",
+    "https://nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-192x192.png",
+    "https://nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-196x196.png",
+    "https://nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-228x228.png",
+    "https://nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-32x32.png",
+    "https://nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-57x57.png"
+  ]
+}

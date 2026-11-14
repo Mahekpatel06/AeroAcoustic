@@ -1,0 +1,39 @@
+{
+  "id": "nasa-svs-5313",
+  "title": "Decadal Night Lights (2012\u20132023) \u2014 EIC Version",
+  "description": "Visualizes annual average nighttime illumination from 2012 to 2023 and decadal change patterns (purple for increase, orange for decrease), derived from Suomi NPP VIIRS Black Marble observations.",
+  "source": {
+    "organization": "NASA",
+    "facility": "Goddard Space Flight Center (GSFC)",
+    "studio": "Scientific Visualization Studio (SVS)",
+    "catalogId": "5313",
+    "url": "https://svs.gsfc.nasa.gov/5313/",
+    "citation": "NASA's Scientific Visualization Studio. (2024). Change in Night Lights between 2012 and 2023 \u2014 EIC Version (SVS 5313).",
+    "underlyingInstrument": "Suomi NPP / VIIRS (Visible Infrared Imaging Radiometer Suite)",
+    "underlyingProduct": "Black Marble (VNP46A2 / VNP46A4)"
+  },
+  "timeRange": {
+    "startYear": 2012,
+    "endYear": 2023,
+    "durationYears": 11
+  },
+  "featuresPath": "data/features/night_lights_features.json",
+  "mappingProfile": "profiles/night_lights.py",
+  "audioOutputs": {
+    "ambientAnnual": "audio/generated/night_lights_ambient.wav",
+    "globalChange": "audio/generated/night_lights_change.wav",
+    "regionalZooms": "audio/generated/night_lights_regional.wav"
+  },
+  "phases": {
+    "annualSeries": "2012-2023 annual average illumination",
+    "changeTransition": "Cross-fade into purple/orange decadal difference map",
+    "globalChange": "Full global change distribution (purple=increase, orange=decrease)",
+    "regionalZooms": [
+      "India",
+      "Ukraine",
+      "Western Europe",
+      "Eastern Mediterranean"
+    ]
+  },
+  "scientificNotice": "Rendered video pixels represent cartographic estimates and visual classifications, not calibrated raw radiometric radiance."
+}
