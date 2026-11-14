@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 interface SatelliteStageProps {
+  currentDataset?: string;
   currentFeature: FrameFeature | null;
   currentTime: number;
   currentMode: "annual" | "change" | "regional";
@@ -81,6 +82,7 @@ const MODE_DURATIONS: Record<string, number> = {
 };
 
 export const SatelliteStage: React.FC<SatelliteStageProps> = ({
+  currentDataset = "night-lights",
   currentFeature,
   currentTime,
   currentMode,
@@ -96,13 +98,16 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   const [isManualOverride, setIsManualOverride] = useState<boolean>(false);
   const [fitMode, setFitMode] = useState<"contain" | "cover">("contain");
 
+  const isLightning = currentDataset === "iss-lightning";
+
   // High-performance, zero-buffering local mode clips
-  const videoSrc =
-    currentMode === "annual"
-      ? "/datasets/night-lights/chunk_mode_a.webm"
-      : currentMode === "change"
-      ? "/datasets/night-lights/chunk_mode_b.webm"
-      : "/datasets/night-lights/chunk_mode_c.webm";
+  const videoSrc = isLightning
+    ? "/datasets/iss-lightning/chunk_iss_lightning.webm"
+    : currentMode === "annual"
+    ? "/datasets/night-lights/chunk_mode_a.webm"
+    : currentMode === "change"
+    ? "/datasets/night-lights/chunk_mode_b.webm"
+    : "/datasets/night-lights/chunk_mode_c.webm";
 
   const isRegional = currentMode === "regional";
   const isChangePhase = currentMode === "change";
@@ -139,7 +144,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   const laserPercent = (currentTime % 1.0) * 100;
 
   // Overall Timeline Progress Bar Calculations ("Kitna Chala" & "End Kab Hua")
-  const maxDuration = MODE_DURATIONS[currentMode] || 12.0;
+  const maxDuration = isLightning ? 216.7 : (MODE_DURATIONS[currentMode] || 12.0);
   const progressPercent = Math.min(100, Math.max(0, (currentTime / maxDuration) * 100));
 
   const formatTime = (sec: number) => {
@@ -176,18 +181,31 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
             ></span>
           </span>
           <span className="font-semibold text-slate-100 uppercase tracking-wider text-xs flex items-center gap-1.5 font-mono">
-            <Scan className="w-4 h-4 text-sky-400" />
-            NASA Satellite Optical Stage
+            {isLightning ? <Zap className="w-4 h-4 text-amber-400" /> : <Scan className="w-4 h-4 text-sky-400" />}
+            {isLightning ? "ISS Optical Lightning Stage" : "NASA Satellite Optical Stage"}
           </span>
           <span className="text-slate-600">|</span>
-          <span className="font-mono text-sky-400 font-semibold bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-800/40">
-            {currentMode === "annual"
+          <span className={`font-mono font-semibold px-2.5 py-0.5 rounded border ${
+            isLightning
+              ? "text-amber-300 bg-amber-950/60 border-amber-800/40"
+              : "text-sky-400 bg-sky-950/60 border-sky-800/40"
+          }`}>
+            {isLightning
+              ? "NASA SVS #5011 • LIS on ISS (2017–2023)"
+              : currentMode === "annual"
               ? "Mode A: Annual 2012–2023"
               : currentMode === "change"
               ? "Mode B: Decadal Change Map"
               : `Mode C: Regional Insets (${selectedRegion})`}
           </span>
-          {currentFeature?.year && currentMode === "annual" && (
+          {isLightning && (
+            <span className="font-mono text-amber-400 text-xs font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-800/40 hidden md:inline-flex items-center gap-1.5">
+              <span>Alt: 408 km</span>
+              <span className="text-slate-500">•</span>
+              <span>Speed: 7.66 km/s</span>
+            </span>
+          )}
+          {!isLightning && currentFeature?.year && currentMode === "annual" && (
             <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40">
               Year {currentFeature.year}
             </span>
@@ -252,7 +270,11 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
         {/* Aspect-Locked Dynamic Video Stage: Locks laser line and video to the EXACT same map boundaries */}
         <div
           className={`relative max-w-full max-h-full flex items-center justify-center overflow-hidden transition-transform duration-300 ease-out ${
-            fitMode === "contain" ? "w-full aspect-[32/9]" : "w-full h-full"
+            fitMode === "contain"
+              ? isLightning
+                ? "w-full aspect-video"
+                : "w-full aspect-[32/9]"
+              : "w-full h-full"
           }`}
           style={{
             transform: `scale(${targetScale})`,
@@ -282,10 +304,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
             }`}
           />
 
-
-          {/* MODE A: HORIZONTAL SCANNING LASER */}
-          {/* Strictly active in Mode A, locked within Earth map bounds, zero backward lag */}
-          {isPlaying && isAnnualPhase && (
+          {/* MODE A: HORIZONTAL SCANNING LASER (Only for Night Lights) */}
+          {isPlaying && !isLightning && isAnnualPhase && (
             <div
               className="absolute top-0 bottom-0 pointer-events-none z-20"
               style={{ left: `${laserPercent}%`, width: "2px" }}
@@ -294,10 +314,12 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               <div className="absolute -top-1 -left-1.5 w-4 h-4 rounded-full bg-cyan-300 shadow-[0_0_12px_#38bdf8] opacity-80"></div>
             </div>
           )}
+
+
         </div>
 
-        {/* 3. MODE B SCIENTIFIC SPECTRAL SCALE HUD */}
-        {isChangePhase && (
+        {/* 3. MODE B SCIENTIFIC SPECTRAL SCALE HUD (Only for Night Lights) */}
+        {!isLightning && isChangePhase && (
           <div className="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 max-w-md bg-slate-950/90 backdrop-blur-md border border-slate-700/80 rounded-2xl p-3 shadow-2xl z-20">
             <div className="flex items-center justify-between mb-1.5 text-[11px] font-mono">
               <span className="font-bold text-slate-200 flex items-center gap-1.5">
@@ -321,8 +343,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           </div>
         )}
 
-        {/* 4. MODE C REGIONAL TELEMETRY MISSION CARD */}
-        {isRegional && activeBounds && (
+        {/* 4. MODE C REGIONAL TELEMETRY MISSION CARD (Only for Night Lights) */}
+        {!isLightning && isRegional && activeBounds && (
           <div className="absolute top-4 left-4 max-w-sm bg-slate-950/90 backdrop-blur-md border border-sky-500/60 rounded-2xl p-3.5 shadow-2xl z-20">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-mono text-sky-400 font-bold tracking-wider flex items-center gap-1 uppercase">
@@ -345,8 +367,26 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           </div>
         )}
 
-        {/* 5. MODE C REGIONAL QUICK-SELECTOR BUTTONS */}
-        {isRegional && (
+        {/* 4b. ISS SPACECRAFT MISSION TELEMETRY CARD (Only for ISS Lightning) */}
+        {isLightning && (
+          <div className="absolute top-4 left-4 max-w-sm bg-slate-950/90 backdrop-blur-md border border-amber-500/60 rounded-2xl p-3.5 shadow-2xl z-20">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[10px] font-mono text-amber-400 font-bold tracking-wider flex items-center gap-1 uppercase">
+                <Zap className="w-3.5 h-3.5 text-amber-400" /> ISS Spacecraft Telemetry
+              </span>
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border bg-amber-950/60 text-amber-300 border-amber-700">
+                LEO Orbit • 51.6°
+              </span>
+            </div>
+            <h3 className="text-base font-bold text-white tracking-tight">INTERNATIONAL SPACE STATION</h3>
+            <p className="text-xs text-slate-300 mt-0.5 font-sans leading-tight">
+              Lightning Imaging Sensor (LIS) nocturnal orbital pass detecting transient optical thunderstorm flashes.
+            </p>
+          </div>
+        )}
+
+        {/* 5. MODE C REGIONAL QUICK-SELECTOR BUTTONS (Only for Night Lights) */}
+        {!isLightning && isRegional && (
           <div className="absolute bottom-4 left-4 flex flex-wrap gap-1.5 z-20">
             {Object.keys(REGION_BOUNDS).map((regName) => {
               const isCurrent = selectedRegion === regName;
@@ -369,10 +409,21 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
         {/* Bottom Corner Scientific Watermark */}
         <div className="absolute bottom-3 right-3 bg-slate-950/90 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-[9px] font-mono text-slate-400 border border-slate-800 max-w-xs text-right leading-tight z-10 hidden sm:block">
-          <span className="text-slate-300 font-semibold flex items-center justify-end gap-1 mb-0.5">
-            <Info className="w-2.5 h-2.5 text-sky-400" /> NASA SVS #5313
-          </span>
-          Decadal High-Definition Telemetry
+          {isLightning ? (
+            <>
+              <span className="text-amber-300 font-semibold flex items-center justify-end gap-1 mb-0.5">
+                <Zap className="w-2.5 h-2.5 text-amber-400" /> NASA SVS #5011
+              </span>
+              ISS LIS Transient Lightning Telemetry
+            </>
+          ) : (
+            <>
+              <span className="text-slate-300 font-semibold flex items-center justify-end gap-1 mb-0.5">
+                <Info className="w-2.5 h-2.5 text-sky-400" /> NASA SVS #5313
+              </span>
+              Decadal High-Definition Telemetry
+            </>
+          )}
         </div>
       </div>
 
@@ -394,7 +445,9 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
             {/* Filled Progress Line: Shows how much has played */}
             <div
               className={`h-full rounded-full transition-all duration-75 ${
-                currentMode === "annual"
+                isLightning
+                  ? "bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 shadow-[0_0_14px_rgba(245,158,11,0.8)]"
+                  : currentMode === "annual"
                   ? "bg-gradient-to-r from-sky-500 to-cyan-400 shadow-[0_0_12px_rgba(56,189,248,0.7)]"
                   : currentMode === "change"
                   ? "bg-gradient-to-r from-orange-500 via-purple-500 to-purple-400 shadow-[0_0_12px_rgba(192,132,252,0.7)]"
@@ -407,7 +460,9 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           {/* Draggable Scrubber Knob (Indicates exact position) */}
           <div
             className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_12px_#fff] border-2 transition-transform ${
-              currentMode === "annual"
+              isLightning
+                ? "border-amber-400"
+                : currentMode === "annual"
                 ? "border-sky-400"
                 : currentMode === "change"
                 ? "border-purple-400"
@@ -428,8 +483,23 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
             <span className="text-slate-600">/</span>
             <span className="text-slate-400 font-semibold">{formatTime(maxDuration)}</span>
 
+            {/* In Lightning Mode: Dynamic Optical Strike Indicator */}
+            {isLightning ? (
+              currentFeature?.isStrike ? (
+                <span className="flex items-center gap-1 text-amber-300 font-bold bg-amber-950/80 border border-amber-600/80 px-2.5 py-0.5 rounded text-[10px] animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]">
+                  <Zap className="w-3 h-3 text-yellow-300 fill-yellow-300" />
+                  <span>BURST: {currentFeature.strikeEnergyMicroJoules} µJ</span>
+                </span>
+              ) : (
+                <span className="flex items-center gap-1 text-amber-500/80 bg-slate-950 border border-slate-800 px-2 py-0.5 rounded text-[10px]">
+                  <Zap className="w-3 h-3 text-amber-500/50" />
+                  <span>55 Hz Sub-Bass Orbit</span>
+                </span>
+              )
+            ) : null}
+
             {/* In Mode A: Current Calendar Year Indicator */}
-            {currentMode === "annual" && (
+            {!isLightning && currentMode === "annual" && (
               <span className="flex items-center gap-1 text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded text-[10px]">
                 <Calendar className="w-3 h-3" />
                 <span>Year {2012 + Math.min(11, Math.floor(currentTime))}</span>
@@ -438,7 +508,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
             )}
 
             {/* In Mode C: Target Region Name */}
-            {currentMode === "regional" && (
+            {!isLightning && currentMode === "regional" && (
               <span className="flex items-center gap-1 text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded text-[10px]">
                 <MapPin className="w-3 h-3" />
                 <span>{selectedRegion}</span>

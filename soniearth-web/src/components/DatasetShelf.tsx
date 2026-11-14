@@ -45,15 +45,15 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       id: "iss-lightning",
       key: "3",
       title: "ISS Lightning Events",
-      svs: "NASA SVS #5078",
+      svs: "NASA SVS #5011",
       years: "2017–2023",
-      description: "Optical transient lightning strikes mapped to rapid glockenspiel chimes.",
+      description: "Severe optical thunderstorm strikes mapped to high metallic chimes, dynamic stereo pan, and haptic pulses.",
       icon: Zap,
-      color: "from-amber-500 to-orange-600",
-      activeRing: "border-amber-400",
-      isAvailable: false,
-      badge: "Coming in Phase 2",
-      badgeColor: "bg-slate-900 text-slate-400 border-slate-700/60",
+      color: "from-amber-500 to-yellow-600",
+      activeRing: "border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.35)]",
+      isAvailable: true,
+      badge: "Phase 2 Live",
+      badgeColor: "bg-amber-950/80 text-amber-300 border-amber-600/60",
     },
     {
       id: "dyamond-co2",
@@ -78,7 +78,7 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
           <span>NASA Planetary Playlist Shelf</span>
           <span className="text-slate-500">•</span>
           <span className="text-[11px] font-mono text-slate-400 font-normal">
-            Phase 1 Dataset Active • Keys [2]-[4] Scheduled for Phase 2
+            Phase 1 & Phase 2 Datasets Live • Keys [1] & [3] Active
           </span>
         </h3>
       </div>

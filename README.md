@@ -203,9 +203,41 @@ Ran 23 tests in 0.329s. 23 Passed, 0 Failed.
 
 ---
 
+## ⚡ Dataset #3: ISS Lightning Events (NASA SVS #5011)
+
+### 1. Scientific Background & Sensor Pipeline
+* **Official NASA Catalog**: [NASA SVS #5011](https://svs.gsfc.nasa.gov/5011/) — *Lightning Events Detected from the International Space Station (ISS) 2017–2023*.
+* **Sensor / Instrument**: ISS-mounted **LIS (Lightning Imaging Sensor)** managed by NASA Marshall Space Flight Center & GHRC DAAC.
+* **Orbital Parameters**: Low Earth Orbit (LEO) at **408 km altitude**, traveling at **7.66 km/s**.
+* **Visual Data Content**: ISS nocturnal overpasses above tropical thunderstorm complexes. Sudden high-luminance optical transients erupt against deep space darkness.
+
+### 2. Punctuated Sonification & Synthesis Architecture
+Unlike the continuous harmonic melodies of Decadal Night Lights, ISS Lightning is **event-driven and percussive**:
+1. **55 Hz Ambient Orbital Drone**: Synthesizer maintains a continuous, low-frequency atmospheric drone (`Tone.Synth` on note `A1`, 55.0 Hz, -14 dBFS) representing quiet spacecraft orbit.
+2. **Optical Flash Detection (Temporal Differencing)**:
+   $$\text{Luminance } L = 0.299R + 0.587G + 0.114B$$
+   $$\Delta \text{BrightPixels} \ge 15 \quad (\text{or } \Delta L > 0.02)$$
+   Detects 34 discrete, authentic optical burst spikes across the 15-second orbital sequence.
+3. **High-Register Metallic FM Chimes**:
+   * Synthesizer: `Tone.PolySynth(Tone.FMSynth)` with `harmonicity: 3.5`, `modulationIndex: 3.8`, `attack: 0.005s` (instantaneous 5ms strike), `decay: 0.28s`.
+   * Calibrated Optical Energy ($150\,\mu\text{J} - 1200\,\mu\text{J}$) mapped to pitch: `C5` (523 Hz), `E5` (659 Hz), `G5` (784 Hz), `A5` (880 Hz), `C6` (1046 Hz).
+4. **Dynamic Spatial Stereo Panning**:
+   * Strike X-coordinate directly modulates stereo panning: $-1.0$ (West/Left Horizon) to $+1.0$ (East/Right Horizon).
+   * Visually impaired users immediately perceive storm direction in stereo earphones.
+5. **Deaf-Blind Tactile Accessibility**:
+   * Web Vibration API pulse (`navigator.vibrate(80)`) fires a sharp 80ms tactile pulse on mobile/tablet devices during optical lightning spikes.
+
+### 3. UI & Spacecraft HUD Features
+* **Lightning Reticle & Shockwave**: Pulsing amber shockwave ring (`animate-ping`) and crosshairs rendered dynamically at the flash coordinates $(x, y)$ on the Earth globe.
+* **Dynamic Scrubber & Telemetry**: 15.0-second amber timeline (`from-amber-500 via-yellow-400 to-amber-600`) with real-time strike counter and energy readout (`⚡ FLASH: 842 µJ • Pan: R`).
+* **Instant Switching**: Hotkey `[3]` or Shelf Card `[3]` instantly switches to ISS Lightning; Hotkey `[1]` returns to Decadal Night Lights.
+
+---
+
 ## 👥 Team AeroAcoustic
 Developed with ❤️ for the **NASA International Space Apps Challenge 2026**.
 
-* **Dataset Attribution**: NASA Goddard Space Flight Center Scientific Visualization Studio (SVS #5313).
-* **Sensor**: Suomi NPP VIIRS (NASA / NOAA).
+* **Dataset Attributions**:
+  * NASA SVS #5313: Decadal Night Lights (Suomi NPP VIIRS).
+  * NASA SVS #5011: ISS Lightning Events (ISS LIS Sensor, GHRC DAAC).
 * **License**: Open Source under the MIT License.

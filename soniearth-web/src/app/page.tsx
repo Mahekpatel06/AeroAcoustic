@@ -131,26 +131,49 @@ export default function Home() {
   const lastCelloTriggerRef = useRef<number>(-1);
   const lastDroneTriggerRef = useRef<number>(-1);
   const lastRegionalTriggerRef = useRef<number>(-1);
+  const lastStrikeTimestampRef = useRef<number>(0);
+
+  const activeDatasetRef = useRef<string>("night-lights");
 
   // Sync refs with state
   isPlayingRef.current = isPlaying;
   playbackSpeedRef.current = playbackSpeed;
   currentTimeRef.current = currentTime;
   currentModeRef.current = currentMode;
+  activeDatasetRef.current = activeDataset;
 
-  // 1. Load Feature Data on Mount
+  // 1. Load Feature Data on Mount or Dataset Switch
   useEffect(() => {
-    fetch("/datasets/night-lights/features.json")
+    const jsonUrl =
+      activeDataset === "iss-lightning"
+        ? "/datasets/iss-lightning/features.json"
+        : "/datasets/night-lights/features.json";
+
+    fetch(jsonUrl)
       .then((res) => res.json())
       .then((data: DatasetFeatureCollection) => {
         setFeatureData(data);
+        if (activeDataset === "iss-lightning") {
+          setActiveNote("A1");
+          setActiveFreq(55.0);
+          setActiveScaleName("A1 Sub-Bass (55Hz) + High FM Chimes");
+          setActiveInstrument("FM Glockenspiel & 55Hz Orbital Drone");
+        } else {
+          setActiveNote("A3");
+          setActiveFreq(220.0);
+          setActiveScaleName("C Major Lydian / Pentatonic");
+          setActiveInstrument("Ambient Sine Pad (Annual Series)");
+        }
       })
       .catch((err) => console.error("Failed to load dataset features:", err));
-  }, []);
+  }, [activeDataset]);
 
   // Filter frames strictly belonging to the currently selected mode
   const modeFrames = useMemo(() => {
     if (!featureData?.frames) return [];
+    if (activeDataset === "iss-lightning") {
+      return featureData.frames;
+    }
     if (currentMode === "annual") {
       return featureData.frames.filter((f) => f.phase === "annual_series");
     } else if (currentMode === "change") {
@@ -160,11 +183,22 @@ export default function Home() {
     } else {
       return featureData.frames.filter((f) => f.phase === "regional_zoom");
     }
-  }, [featureData, currentMode]);
+  }, [featureData, currentMode, activeDataset]);
 
   // Current active frame feature derived strictly from active mode and time
   const currentFeature: FrameFeature | null = useMemo(() => {
-    if (modeFrames.length === 0) return featureData?.frames[0] || null;
+    if (!featureData?.frames || featureData.frames.length === 0) return null;
+
+    if (activeDataset === "iss-lightning") {
+      const lightningDuration = featureData.durationSeconds || 216.7;
+      const idx = Math.min(
+        featureData.frames.length - 1,
+        Math.floor((currentTime / lightningDuration) * featureData.frames.length)
+      );
+      return featureData.frames[idx] || featureData.frames[0];
+    }
+
+    if (modeFrames.length === 0) return featureData.frames[0] || null;
 
     if (currentMode === "annual") {
       const yearIdx = Math.min(modeFrames.length - 1, Math.floor(currentTime));
@@ -179,7 +213,7 @@ export default function Home() {
       const regionalMatch = modeFrames.find((f) => f.regionFocus === selectedRegion);
       return regionalMatch || modeFrames[0];
     }
-  }, [modeFrames, currentMode, currentTime, selectedRegion, featureData]);
+  }, [activeDataset, featureData, modeFrames, currentMode, currentTime, selectedRegion]);
 
   // 2. Play Sound for Current Mode with Dedicated Sonification (Strictly when isPlaying is true)
   const playModeSound = useCallback(
@@ -187,6 +221,50 @@ export default function Home() {
       // Never trigger sound if playback is stopped
       if (!isPlayingRef.current && !forceInstant) return;
       await audioEngine.initialize();
+
+      // ==========================================
+      // ISS LIGHTNING SONIFICATION PIPELINE
+      // ==========================================
+      if (activeDatasetRef.current === "iss-lightning") {
+        if (!featureData?.frames || featureData.frames.length === 0) return;
+
+        const lightningDuration = featureData.durationSeconds || 216.7;
+        const frameIdx = Math.min(
+          featureData.frames.length - 1,
+          Math.floor((timeSec / lightningDuration) * featureData.frames.length)
+        );
+        const feat = featureData.frames[frameIdx];
+
+        if (feat && feat.isStrike) {
+          const nowMs = Date.now();
+          if (nowMs - lastStrikeTimestampRef.current >= 180 || forceInstant) {
+            lastStrikeTimestampRef.current = nowMs;
+
+            const strikeNote = feat.activeNote || "E5";
+            const strikeFreq = feat.frequencyHz || 659.25;
+            const strikePan = feat.strikePan || 0.0;
+            const strikeEnergy = feat.strikeEnergyMicroJoules || 450;
+
+            setActiveNote(strikeNote);
+            setActiveFreq(strikeFreq);
+            setActiveInstrument(`FM Lightning Chime (${strikeEnergy} µJ)`);
+
+            // Trigger FM metallic chime attack with spatial stereo panning
+            audioEngine.triggerLightningStrike(strikeNote, 0.9, strikePan);
+
+            // Deaf-Blind Accessibility: Web Vibration API 80ms pulse
+            if (typeof navigator !== "undefined" && navigator.vibrate) {
+              try {
+                navigator.vibrate(80);
+              } catch (e) {
+                // Ignore mobile restrictions
+              }
+            }
+          }
+        }
+        return;
+      }
+
       const mode = currentModeRef.current;
 
       // ==========================================
@@ -328,7 +406,10 @@ export default function Home() {
 
         // Cap deltaSec between 0.0s and 0.1s to avoid huge time jumps when switching tabs
         const safeDelta = Math.min(0.1, Math.max(0.0, deltaSec));
-        const maxDuration = MODE_DURATIONS[currentModeRef.current];
+        const maxDuration =
+          activeDatasetRef.current === "iss-lightning"
+            ? (featureData?.durationSeconds || 216.7)
+            : MODE_DURATIONS[currentModeRef.current];
 
         // MASTER CLOCK: Always increments smoothly at 60 FPS (zero video buffering freeze)
         let nextTime = currentTimeRef.current + safeDelta * playbackSpeedRef.current;
@@ -380,16 +461,23 @@ export default function Home() {
         videoRef.current.playbackRate = playbackSpeed;
         videoRef.current.play().catch(() => {});
       }
+      if (activeDatasetRef.current === "iss-lightning") {
+        audioEngine.startOrbitalDrone();
+      }
       playModeSound(currentTimeRef.current, true);
       const modeTitles = {
         annual: "Mode A: Annual Evolution (2012 to 2023)",
         change: "Mode B: Decadal Change Map",
         regional: `Mode C: Regional Insets (${selectedRegion})`,
       };
+      const title =
+        activeDatasetRef.current === "iss-lightning"
+          ? "ISS Lightning Events (NASA SVS #5011)"
+          : modeTitles[currentMode];
       if (voiceEnabled) {
-        speechNarrator.speak(`Playing ${modeTitles[currentMode]} on repeat.`);
+        speechNarrator.speak(`Playing ${title} on repeat.`);
       }
-      setAriaAnnouncement(`Playing ${modeTitles[currentMode]} on repeat.`);
+      setAriaAnnouncement(`Playing ${title} on repeat.`);
     } else {
       if (videoRef.current) {
         videoRef.current.pause();
@@ -476,7 +564,8 @@ export default function Home() {
 
   // 7. Prev / Next Step (Steps through current mode)
   const handlePrev = () => {
-    const maxDur = MODE_DURATIONS[currentMode];
+    const maxDur =
+      activeDatasetRef.current === "iss-lightning" ? (featureData?.durationSeconds || 216.7) : MODE_DURATIONS[currentMode];
     let nextT = currentTimeRef.current - 1.0;
     if (nextT < 0) nextT = maxDur - 1.0;
     setCurrentTime(nextT);
@@ -488,7 +577,8 @@ export default function Home() {
   };
 
   const handleNext = () => {
-    const maxDur = MODE_DURATIONS[currentMode];
+    const maxDur =
+      activeDatasetRef.current === "iss-lightning" ? (featureData?.durationSeconds || 216.7) : MODE_DURATIONS[currentMode];
     let nextT = (currentTimeRef.current + 1.0) % maxDur;
     setCurrentTime(nextT);
     currentTimeRef.current = nextT;
@@ -500,7 +590,8 @@ export default function Home() {
 
   // 7b. Interactive Seek Handler for Timeline Progress Scrubber
   const handleSeek = (targetSec: number) => {
-    const maxDur = MODE_DURATIONS[currentMode];
+    const maxDur =
+      activeDatasetRef.current === "iss-lightning" ? (featureData?.durationSeconds || 216.7) : MODE_DURATIONS[currentMode];
     const clamped = Math.max(0, Math.min(maxDur, targetSec));
     setCurrentTime(clamped);
     currentTimeRef.current = clamped;
@@ -523,14 +614,34 @@ export default function Home() {
 
   // 9. Dataset Switching
   const handleSelectDataset = (id: string) => {
+    if (id === activeDataset) return;
+    audioEngine.stopAll();
+
     if (id === "night-lights") {
+      audioEngine.stopOrbitalDrone();
       setActiveDataset(id);
+      activeDatasetRef.current = id;
+      setCurrentTime(0.0);
+      currentTimeRef.current = 0.0;
+      lastEvaluatedSecondRef.current = -1;
+      if (videoRef.current) videoRef.current.currentTime = 0.0;
       if (voiceEnabled) speechNarrator.speak("Decadal Night Lights active.");
-      setAriaAnnouncement("Decadal Night Lights active.");
+      setAriaAnnouncement("Decadal Night Lights active (NASA SVS #5313). Press Space to play.");
+    } else if (id === "iss-lightning") {
+      setActiveDataset(id);
+      activeDatasetRef.current = id;
+      setCurrentTime(0.0);
+      currentTimeRef.current = 0.0;
+      lastEvaluatedSecondRef.current = -1;
+      if (videoRef.current) videoRef.current.currentTime = 0.0;
+      if (isPlayingRef.current) {
+        audioEngine.startOrbitalDrone();
+      }
+      if (voiceEnabled) speechNarrator.speak("ISS Lightning Events active.");
+      setAriaAnnouncement("ISS Lightning Events active (NASA SVS #5011). Press Space to play.");
     } else {
       const titles: Record<string, string> = {
         "ocean-currents": "Sea Surface Currents",
-        "iss-lightning": "ISS Lightning Events",
         "dyamond-co2": "DYAMOND Global CO2",
       };
       const title = titles[id] || id;
@@ -591,6 +702,7 @@ export default function Home() {
         {/* 2. Hero Satellite Optical Stage (Clean Projection • High-Precision Timeline Progress Bar) */}
         <section className="w-full">
           <SatelliteStage
+            currentDataset={activeDataset}
             currentFeature={currentFeature}
             currentTime={currentTime}
             currentMode={currentMode}
@@ -606,6 +718,7 @@ export default function Home() {
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
           <div className="lg:col-span-7 flex flex-col">
             <MasterController
+              currentDataset={activeDataset}
               isPlaying={isPlaying}
               onTogglePlay={handleTogglePlay}
               onPrev={handlePrev}
@@ -620,6 +733,7 @@ export default function Home() {
           </div>
           <div className="lg:col-span-5 flex flex-col">
             <AcousticStage
+              currentDataset={activeDataset}
               currentFeature={currentFeature}
               isPlaying={isPlaying}
               activeNote={activeNote}
@@ -633,6 +747,7 @@ export default function Home() {
         {/* 4. "Why am I hearing this?" Explainability Panel */}
         <section>
           <ExplainPanel
+            currentDataset={activeDataset}
             currentFeature={currentFeature}
             activeNote={activeNote}
             activeScaleName={activeScaleName}

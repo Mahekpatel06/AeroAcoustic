@@ -21,6 +21,7 @@ class SoniEarthAudioEngine {
   private isInitialized = false;
   private isMuted = false;
   private isDucked = false;
+  private isDroneActive = false;
 
   // Master Gain Stage
   private masterLimiter: Tone.Limiter | null = null;
@@ -37,6 +38,7 @@ class SoniEarthAudioEngine {
   private pluckPanner: Tone.Panner | null = null;
   private glassPanner: Tone.Panner | null = null;
   private modalPanner: Tone.Panner | null = null;
+  private lightningPanner: Tone.Panner | null = null;
 
   // Dedicated Synthesizers
   private padSynthCenter: Tone.PolySynth | null = null;
@@ -47,8 +49,19 @@ class SoniEarthAudioEngine {
   private pluckSynth: Tone.PolySynth | null = null;
   private glassSynth: Tone.PolySynth | null = null;
   private modalSynth: Tone.PolySynth | null = null;
+  private lightningStrikeSynth: Tone.PolySynth | null = null;
+  private subDroneSynth: Tone.Synth | null = null;
 
   public async initialize(): Promise<boolean> {
+    try {
+      if (Tone.context.state !== "running") {
+        await Tone.start();
+        await Tone.context.resume();
+      }
+    } catch (e) {
+      // Ignore
+    }
+
     if (this.isInitialized) return true;
     try {
       await Tone.start();
@@ -126,6 +139,26 @@ class SoniEarthAudioEngine {
         envelope: { attack: 0.06, decay: 0.28, sustain: 0.5, release: 0.4 }
       }).connect(this.modalPanner);
       this.modalSynth.volume.value = -7;
+
+      // 7. ISS Lightning Dynamic Spatial Panner
+      this.lightningPanner = new Tone.Panner(0.0).connect(this.duckGain);
+
+      // 8. ISS Lightning Strike Synth (High-register metallic FM bell chime)
+      this.lightningStrikeSynth = new Tone.PolySynth(Tone.FMSynth, {
+        harmonicity: 3.5,
+        modulationIndex: 3.8,
+        oscillator: { type: "sine" as const },
+        envelope: { attack: 0.005, decay: 0.28, sustain: 0.05, release: 0.35 },
+        modulationEnvelope: { attack: 0.005, decay: 0.2, sustain: 0.02, release: 0.3 }
+      }).connect(this.lightningPanner);
+      this.lightningStrikeSynth.volume.value = -3;
+
+      // 9. 55 Hz Ambient Orbital Drone Synth (Low-frequency space station atmosphere on A1)
+      this.subDroneSynth = new Tone.Synth({
+        oscillator: { type: "triangle" as const },
+        envelope: { attack: 1.2, decay: 0.5, sustain: 1.0, release: 1.5 }
+      }).connect(this.centerPanner);
+      this.subDroneSynth.volume.value = -14;
 
       this.isInitialized = true;
       return true;
@@ -218,6 +251,52 @@ class SoniEarthAudioEngine {
     return new Float32Array(16);
   }
 
+  /**
+   * Starts the 55 Hz ambient orbital drone (A1) for ISS Lightning mode.
+   */
+  public startOrbitalDrone() {
+    if (!this.isInitialized || this.isMuted || !this.subDroneSynth || this.isDroneActive) return;
+    try {
+      if (Tone.context.state !== "running") {
+        Tone.context.resume();
+      }
+      this.subDroneSynth.triggerAttack("A1");
+      this.isDroneActive = true;
+    } catch (e) {
+      // Ignore if already active
+    }
+  }
+
+  /**
+   * Stops the ambient orbital drone.
+   */
+  public stopOrbitalDrone() {
+    if (!this.subDroneSynth) return;
+    try {
+      if (this.isDroneActive) {
+        this.subDroneSynth.triggerRelease();
+        this.isDroneActive = false;
+      }
+    } catch (e) {
+      this.isDroneActive = false;
+    }
+  }
+
+  /**
+   * Triggers a lightning strike chime with dynamic spatial stereo panning.
+   */
+  public triggerLightningStrike(note: string, velocity = 0.85, pan = 0.0) {
+    if (!this.isInitialized || this.isMuted || !this.lightningStrikeSynth) return;
+    try {
+      if (this.lightningPanner) {
+        this.lightningPanner.pan.rampTo(Math.max(-1.0, Math.min(1.0, pan)), 0.02);
+      }
+      this.lightningStrikeSynth.triggerAttackRelease(note, 0.35, undefined, velocity);
+    } catch (e) {
+      // Ignore transient polyphony warnings
+    }
+  }
+
   public stopAll() {
     this.padSynthCenter?.releaseAll();
     this.padSynthWest?.releaseAll();
@@ -227,6 +306,8 @@ class SoniEarthAudioEngine {
     this.pluckSynth?.releaseAll();
     this.glassSynth?.releaseAll();
     this.modalSynth?.releaseAll();
+    this.lightningStrikeSynth?.releaseAll();
+    this.stopOrbitalDrone();
   }
 }
 

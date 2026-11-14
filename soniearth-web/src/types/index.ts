@@ -11,6 +11,7 @@ export interface RegionFeature {
   activeNote: string;
   frequencyHz?: number;
   calibratedScore?: number;
+  strikeInZone?: boolean;
 }
 
 export interface ChangeClassification {
@@ -41,14 +42,29 @@ export interface FrameFeature {
   changeClassification?: ChangeClassification | null;
   dataOrigin: string;
   confidenceScore: number;
+  // ISS Lightning Transient Fields
+  isStrike?: boolean;
+  strikeEnergyMicroJoules?: number;
+  strikePan?: number;
+  strikeCoord?: [number, number];
+  activeNote?: string;
+  frequencyHz?: number;
+  hapticTrigger?: boolean;
 }
 
 export interface DatasetFeatureCollection {
   datasetId: string;
+  title?: string;
+  catalogUrl?: string;
   generatedAt: string;
   version: string;
   samplingFps: number;
   totalFrames: number;
+  durationSeconds?: number;
+  totalStrikesDetected?: number;
+  orbitalAltitudeKm?: number;
+  orbitalVelocityKmS?: number;
+  instrument?: string;
   scientificNotice: string;
   frames: FrameFeature[];
 }

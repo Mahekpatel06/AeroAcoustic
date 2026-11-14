@@ -6,6 +6,7 @@ import { Music, Radio, Waves, Activity } from "lucide-react";
 import { audioEngine } from "@/lib/audioEngine";
 
 interface AcousticStageProps {
+  currentDataset?: string;
   currentFeature: FrameFeature | null;
   isPlaying: boolean;
   activeNote: string;
@@ -15,6 +16,7 @@ interface AcousticStageProps {
 }
 
 export const AcousticStage: React.FC<AcousticStageProps> = ({
+  currentDataset = "night-lights",
   currentFeature,
   isPlaying,
   activeNote,
@@ -22,6 +24,7 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
   activeScaleName = "C Major Pentatonic",
   activeInstrument = "Ambient Sine Pad",
 }) => {
+  const isLightning = currentDataset === "iss-lightning";
   const lumaPct = Math.round((currentFeature?.globalMeanBrightness ?? 0.023) * 1000) / 10;
   const [barHeights, setBarHeights] = useState<number[]>([10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]);
   const animationFrameRef = useRef<number | null>(null);
@@ -78,38 +81,56 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
         {/* Active Note Card */}
         <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
           <div className="text-[10px] text-slate-400 uppercase tracking-wider font-mono flex items-center gap-1">
-            <Music className="w-3 h-3 text-sky-400" />
+            <Music className={`w-3 h-3 ${isLightning ? "text-amber-400" : "text-sky-400"}`} />
             Active Note
           </div>
           <div className="my-1 flex items-baseline gap-2">
-            <span className="text-3xl font-bold font-mono text-sky-400 tracking-tight">
-              {activeNote || "C3"}
+            <span className={`text-3xl font-bold font-mono tracking-tight ${
+              isLightning
+                ? currentFeature?.isStrike
+                  ? "text-yellow-300 drop-shadow-[0_0_12px_#f59e0b] animate-pulse"
+                  : "text-amber-400"
+                : "text-sky-400"
+            }`}>
+              {activeNote || (isLightning ? "A1" : "C3")}
             </span>
             <span className="text-xs font-mono text-slate-400">
-              {activeFreq ? `${activeFreq.toFixed(1)} Hz` : "130.8 Hz"}
+              {activeFreq ? `${activeFreq.toFixed(1)} Hz` : isLightning ? "55.0 Hz" : "130.8 Hz"}
             </span>
           </div>
-          <div className="text-[11px] font-mono text-emerald-400 truncate">
+          <div className={`text-[11px] font-mono truncate ${isLightning ? "text-amber-300" : "text-emerald-400"}`}>
             {activeInstrument}
           </div>
         </div>
 
-        {/* Global Luminance Gauge */}
+        {/* Dynamic Metric Gauge: Optical Energy (Lightning) or Global Radiance (Night Lights) */}
         <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
           <div className="text-[10px] text-slate-400 uppercase tracking-wider font-mono flex items-center gap-1">
-            <Radio className="w-3 h-3 text-emerald-400" />
-            Global Radiance
+            <Radio className={`w-3 h-3 ${isLightning ? "text-amber-400" : "text-emerald-400"}`} />
+            {isLightning ? "Optical Flash Energy" : "Global Radiance"}
           </div>
           <div className="my-1 flex items-baseline gap-2">
-            <span className="text-3xl font-bold font-mono text-emerald-400">
-              {lumaPct.toFixed(1)}%
+            <span className={`text-3xl font-bold font-mono ${isLightning ? "text-amber-400" : "text-emerald-400"}`}>
+              {isLightning
+                ? `${currentFeature?.strikeEnergyMicroJoules ? currentFeature.strikeEnergyMicroJoules.toFixed(0) : "0"} µJ`
+                : `${lumaPct.toFixed(1)}%`}
             </span>
-            <span className="text-xs text-slate-400">Rec. 601</span>
+            <span className="text-xs text-slate-400">
+              {isLightning ? "LIS CCD" : "Rec. 601"}
+            </span>
           </div>
           <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
             <div
-              className="bg-gradient-to-r from-sky-500 to-emerald-400 h-full rounded-full transition-all duration-300"
-              style={{ width: `${Math.min(100, Math.max(5, lumaPct * 25))}%` }}
+              className={`h-full rounded-full transition-all duration-300 ${
+                isLightning
+                  ? "bg-gradient-to-r from-amber-500 to-yellow-300 shadow-[0_0_8px_#f59e0b]"
+                  : "bg-gradient-to-r from-sky-500 to-emerald-400"
+              }`}
+              style={{
+                width: isLightning
+                  ? `${Math.min(100, Math.max(5, ((currentFeature?.strikeEnergyMicroJoules || 0) / 1200) * 100))}%`
+                  : `${Math.min(100, Math.max(5, lumaPct * 25))}%`,
+              }}
             ></div>
           </div>
         </div>
@@ -119,18 +140,22 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
       <div className="mt-2 bg-slate-950/80 border border-slate-800 rounded-xl p-3">
         <div className="flex items-center justify-between mb-2">
           <span className="text-[10px] uppercase font-mono text-slate-300 flex items-center gap-1">
-            <Activity className="w-3 h-3 text-emerald-400" />
+            <Activity className={`w-3 h-3 ${isLightning ? "text-amber-400" : "text-emerald-400"}`} />
             Tone.js FFT Spectrum (-3 dBFS Limiter Master)
           </span>
           <span className="text-[10px] font-mono text-slate-400">
-            {isPlaying ? "Live FFT • Stereo" : "Idle"}
+            {isPlaying ? (isLightning ? "Live FFT • LIS Chimes" : "Live FFT • Stereo") : "Idle"}
           </span>
         </div>
         <div className="flex items-end justify-between h-14 gap-1.5 px-2">
           {barHeights.map((h, idx) => (
             <div
               key={idx}
-              className="w-full bg-gradient-to-t from-sky-600 via-indigo-500 to-emerald-400 rounded-t-sm transition-all duration-75 shadow-[0_0_8px_rgba(56,189,248,0.25)]"
+              className={`w-full rounded-t-sm transition-all duration-75 ${
+                isLightning
+                  ? "bg-gradient-to-t from-amber-600 via-amber-400 to-yellow-300 shadow-[0_0_8px_rgba(245,158,11,0.4)]"
+                  : "bg-gradient-to-t from-sky-600 via-indigo-500 to-emerald-400 shadow-[0_0_8px_rgba(56,189,248,0.25)]"
+              }`}
               style={{ height: `${h}%` }}
             />
           ))}
