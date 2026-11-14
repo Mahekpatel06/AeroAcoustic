@@ -80,22 +80,30 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
             <span>9-Cell Planetary Spatial Grid Notes (West → Center → East Stereo Sweep)</span>
           </div>
           <div className="grid grid-cols-3 gap-2">
-            {spatialGrid.map((cell) => (
-              <div
-                key={cell.regionId}
-                className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-2 flex items-center justify-between font-mono text-[10px]"
-              >
-                <div>
-                  <div className="text-slate-300 font-semibold truncate max-w-[140px]">{cell.name}</div>
-                  <div className="text-slate-500 text-[9px]">
-                    Pan {cell.pan > 0 ? `+${cell.pan}` : cell.pan} • Luma {(cell.meanBrightness * 100).toFixed(1)}%
+            {spatialGrid.map((cell, idx) => {
+              const cellKey = cell.regionId || `grid_cell_${cell.row ?? Math.floor(idx / 3)}_${cell.col ?? (idx % 3)}_${idx}`;
+              const cellName = cell.name || `Zone ${idx + 1} (${cell.col === 0 ? "West" : cell.col === 1 ? "Center" : "East"})`;
+              const cellPan = cell.pan ?? (cell.col === 0 ? -0.75 : cell.col === 1 ? 0.0 : 0.75);
+              const cellLuma = ((cell.meanBrightness ?? (cell as any).brightness ?? 0) * 100).toFixed(1);
+              const note = cell.activeNote || "C4";
+
+              return (
+                <div
+                  key={cellKey}
+                  className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-2 flex items-center justify-between font-mono text-[10px]"
+                >
+                  <div>
+                    <div className="text-slate-300 font-semibold truncate max-w-[140px]">{cellName}</div>
+                    <div className="text-slate-500 text-[9px]">
+                      Pan {cellPan > 0 ? `+${cellPan}` : cellPan} • Luma {cellLuma}%
+                    </div>
+                  </div>
+                  <div className="px-2 py-0.5 rounded bg-sky-950/80 border border-sky-800/60 text-sky-300 font-bold text-xs">
+                    {note}
                   </div>
                 </div>
-                <div className="px-2 py-0.5 rounded bg-sky-950/80 border border-sky-800/60 text-sky-300 font-bold text-xs">
-                  {cell.activeNote}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}

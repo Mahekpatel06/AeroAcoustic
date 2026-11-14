@@ -79,19 +79,19 @@ const FREQ_MAP: Record<string, number> = {
   C6: 1046.5,
 };
 
-// Mode video durations in seconds
+// Mode durations in seconds
 const MODE_DURATIONS = {
   annual: 12.0,
-  change: 11.5,
-  regional: 19.8,
+  change: 12.0,
+  regional: 10.0,
 };
 
 /**
  * Derives root note and fifth harmony directly from measured global radiance & delta.
- * No hardcoded pitch ladders!
+ * Calibrated precisely to the 11-year satellite radiance expansion.
  */
 function deriveAnnualHarmony(meanBrightness: number, delta: number) {
-  const norm = Math.max(0.0, Math.min(1.0, (meanBrightness - 0.0215) / (0.0245 - 0.0215)));
+  const norm = Math.max(0.0, Math.min(1.0, (meanBrightness - 0.0522) / (0.0531 - 0.0522)));
   const rootIdx = Math.round(norm * (PENTATONIC_SCALE.length - 1));
   const root = PENTATONIC_SCALE[rootIdx] || PENTATONIC_SCALE[0];
   const intervalShift = delta >= 0 ? 3 : 2;
@@ -240,33 +240,60 @@ export default function Home() {
       }
 
       // ==========================================
-      // MODE B: DECADAL CHANGE MAP (Purple & Orange Polarity)
+      // MODE B: DECADAL CHANGE MAP (Purple & Orange Polarity - Caldwell 73 Spatial Scan)
       // ==========================================
       else if (mode === "change") {
-        setActiveNote("D3");
-        setActiveFreq(FREQ_MAP["D3"]);
         setActiveScaleName("D Dorian & A Minor (Decadal Polarity)");
-        setActiveInstrument("Chimes (Growth) & Warm Cello (Blackouts)");
+        setActiveInstrument("Longitudinal Scanner: Cello (Orange) & Chimes (Purple)");
 
-        // D Dorian ground drone every 1.6 seconds
-        const droneSlot = Math.floor(timeSec / 1.6);
+        // 1. D Dorian Ground Drone (Planetary Baseline every 2.4s)
+        const droneSlot = Math.floor(timeSec / 2.4);
         if (forceInstant || droneSlot !== lastDroneTriggerRef.current) {
           lastDroneTriggerRef.current = droneSlot;
-          audioEngine.triggerNote("D3", 1.4, 0.55, 0.0, "sine_pad");
+          audioEngine.triggerNote("D3", 1.8, 0.55, 0.0, "sine_pad");
+          setActiveNote("D3");
+          setActiveFreq(FREQ_MAP["D3"]);
         }
 
-        // Purple Electrification (Chimes on Right Channel)
-        const chimeSlot = Math.floor(timeSec / 1.4);
-        if (forceInstant || chimeSlot !== lastChimeTriggerRef.current) {
-          lastChimeTriggerRef.current = chimeSlot;
-          audioEngine.triggerNote("A4", 0.4, 0.85, 0.75, "crystalline_chime_bell");
+        // 2. West Channel Sweep (Americas & Atlantic: t = 1.0s to 3.8s)
+        if (timeSec >= 1.2 && timeSec < 3.8) {
+          const westSlot = Math.floor(timeSec / 1.2);
+          if (forceInstant || westSlot !== lastRegionalTriggerRef.current) {
+            lastRegionalTriggerRef.current = westSlot;
+            audioEngine.triggerNote("G3", 0.6, 0.65, -0.65, "glass_pad");
+            setActiveNote("G3");
+            setActiveFreq(FREQ_MAP["G3"]);
+          }
         }
 
-        // Orange Blackouts (Cello on Left Channel)
-        const celloSlot = Math.floor((timeSec + 0.7) / 1.4);
-        if (forceInstant || celloSlot !== lastCelloTriggerRef.current) {
-          lastCelloTriggerRef.current = celloSlot;
-          audioEngine.triggerNote("A2", 0.8, 0.8, -0.75, "warm_cello_synth");
+        // 3. Center Channel Sweep (Orange Blackout Corridors: Ukraine, Syria, Levant: t = 4.8s to 7.4s)
+        // Passes longitude 20E to 45E directly over the war blackout corridors
+        if (timeSec >= 4.8 && timeSec < 7.4) {
+          const celloSlot = Math.floor(timeSec / 1.1);
+          if (forceInstant || celloSlot !== lastCelloTriggerRef.current) {
+            lastCelloTriggerRef.current = celloSlot;
+            audioEngine.triggerNote("A2", 0.9, 0.9, -0.3, "warm_cello_synth");
+            setTimeout(() => {
+              audioEngine.triggerNote("E3", 0.8, 0.85, -0.2, "warm_cello_synth");
+            }, 180);
+            setActiveNote("A2");
+            setActiveFreq(FREQ_MAP["A2"]);
+          }
+        }
+
+        // 4. East Channel Sweep (Purple Electrification Corridors: South Asia, India, East Asia: t = 7.8s to 11.5s)
+        // Passes longitude 70E to 125E directly over India's rural electrification & East Asian expansion
+        if (timeSec >= 7.8 && timeSec <= 11.5) {
+          const chimeSlot = Math.floor(timeSec / 0.85);
+          if (forceInstant || chimeSlot !== lastChimeTriggerRef.current) {
+            lastChimeTriggerRef.current = chimeSlot;
+            audioEngine.triggerNote("A4", 0.45, 0.9, 0.65, "crystalline_chime_bell");
+            setTimeout(() => {
+              audioEngine.triggerNote("C5", 0.4, 0.95, 0.75, "crystalline_chime_bell");
+            }, 140);
+            setActiveNote("C5");
+            setActiveFreq(FREQ_MAP["C5"]);
+          }
         }
       }
 
@@ -443,31 +470,26 @@ export default function Home() {
     setAriaAnnouncement(`Switched to ${modeDescriptions[mode]}`);
   };
 
-  // 6. Regional Selection (Mode C) - Never auto-starts sound if paused
+  // 6. Regional Selection (Mode C) - Decoupled from annual timeline
   const handleSelectRegion = (regName: string) => {
     setSelectedRegion(regName);
     setCurrentMode("regional");
     currentModeRef.current = "regional";
+    setCurrentTime(0.0);
+    currentTimeRef.current = 0.0;
 
-    const regionOffsets: Record<string, number> = {
-      "Overview (All Insets)": 0.0,
-      India: 2.0,
-      Ukraine: 6.5,
-      "Western Europe": 11.0,
-      "Eastern Mediterranean": 15.0,
-    };
-    const offset = regionOffsets[regName] ?? 0.0;
-    setCurrentTime(offset);
-    currentTimeRef.current = offset;
+    // Reset regional triggers
+    lastRegionalTriggerRef.current = -1;
+
     if (videoRef.current) {
-      videoRef.current.currentTime = offset;
+      videoRef.current.currentTime = 0.0;
       if (isPlayingRef.current) {
         videoRef.current.play().catch(() => {});
       }
     }
 
     if (isPlayingRef.current) {
-      playModeSound(offset, true);
+      playModeSound(0.0, true);
     }
     if (voiceEnabled) {
       speechNarrator.speak(`Targeting ${regName}.`);
