@@ -163,7 +163,7 @@ export default function Home() {
         // D Dorian low sustained baseline
         audioEngine.triggerNote("D3", 0.7, 0.55, 0.0, "sine_pad");
 
-        // Purple Electrification Motif (Ascending Crystalline Chimes panned Right)
+        // Purple Electrification Motif (Ascending Crystalline Chimes on Right)
         if (feat.changeClassification && feat.changeClassification.increaseRatio > 0.008) {
           audioEngine.triggerNote("A4", 0.35, 0.85, 0.6, "crystalline_chime_bell");
           setTimeout(() => {
@@ -174,7 +174,7 @@ export default function Home() {
           }, 240);
         }
 
-        // Orange Blackout / Reduction Motif (Descending Warm Cello panned Left)
+        // Orange Blackout / Reduction Motif (Descending Warm Cello on Left)
         if (feat.changeClassification && feat.changeClassification.decreaseRatio > 0.001) {
           audioEngine.triggerNote("E3", 0.6, 0.75, -0.6, "warm_cello_synth");
           setTimeout(() => {
@@ -199,7 +199,6 @@ export default function Home() {
         setActiveInstrument(profile.instrumentName);
 
         if (region === "India") {
-          // India: E Mixolydian (Raag Desh) fast plucks representing electrification boom
           audioEngine.triggerNote("E4", 0.3, 0.9, 0.4, "marimba_pluck");
           setTimeout(() => {
             audioEngine.triggerNote("G#4", 0.3, 0.85, 0.6, "marimba_pluck");
@@ -208,7 +207,6 @@ export default function Home() {
             audioEngine.triggerNote("B4", 0.35, 0.9, 0.7, "marimba_pluck");
           }, 200);
         } else if (region === "Ukraine") {
-          // Ukraine: A Natural Minor solemn descending cello
           audioEngine.triggerNote("E3", 0.65, 0.8, -0.5, "warm_cello_synth");
           setTimeout(() => {
             audioEngine.triggerNote("C3", 0.75, 0.85, -0.6, "warm_cello_synth");
@@ -217,12 +215,10 @@ export default function Home() {
             audioEngine.triggerNote("A2", 0.85, 0.9, -0.7, "warm_cello_synth");
           }, 360);
         } else if (region === "Western Europe") {
-          // Western Europe: G Lydian ambient glass pad chord
           audioEngine.triggerNote("G4", 0.8, 0.7, 0.0, "glass_pad");
           audioEngine.triggerNote("D4", 0.8, 0.6, -0.3, "glass_pad");
           audioEngine.triggerNote("F#4", 0.8, 0.65, 0.3, "glass_pad");
         } else {
-          // Eastern Mediterranean: D Phrygian Dominant (Maqam Hijaz) modal texture
           audioEngine.triggerNote("D3", 0.6, 0.8, 0.2, "modal_synth");
           setTimeout(() => {
             audioEngine.triggerNote("Eb3", 0.6, 0.85, 0.4, "modal_synth");
@@ -294,7 +290,21 @@ export default function Home() {
     setAriaAnnouncement(`Switched to ${modeNames[mode]}`);
   };
 
-  // 6. Dataset Switching
+  // 6. Regional Jump Handler (Mode C)
+  const handleSelectRegion = (regName: string) => {
+    const idx = activeFrames.findIndex((f) => f.regionFocus === regName);
+    if (idx !== -1) {
+      setCurrentFrameIndex(idx);
+      const targetFeat = activeFrames[idx];
+      if (targetFeat) {
+        playFrameSound(targetFeat);
+      }
+      speechNarrator.speak(`Targeting ${regName}.`);
+      setAriaAnnouncement(`Targeting ${regName}.`);
+    }
+  };
+
+  // 7. Dataset Switching
   const handleSelectDataset = (id: string) => {
     setActiveDataset(id);
     const dsNames: Record<string, string> = {
@@ -308,7 +318,7 @@ export default function Home() {
     setAriaAnnouncement(`Selected ${title}.`);
   };
 
-  // 7. Keyboard Navigation (Accessibility Requirement)
+  // 8. Keyboard Navigation (Accessibility Requirement)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (["INPUT", "TEXTAREA"].includes((e.target as HTMLElement)?.tagName)) return;
@@ -356,37 +366,42 @@ export default function Home() {
       />
 
       {/* Main Single-Page Workspace */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-5">
-        {/* 2. Main Stage Split View (Satellite on Left, Acoustic Frequency on Right) */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
+        {/* 2. Large-Format Hero Satellite Stage (Expansive Panoramic Display) */}
+        <section className="w-full">
           <SatelliteStage
             currentFeature={currentFeature}
             currentFrameIndex={currentFrameIndex}
             totalFrames={activeFrames.length}
             isPlaying={isPlaying}
-          />
-          <AcousticStage
-            currentFeature={currentFeature}
-            isPlaying={isPlaying}
-            activeNote={activeNote}
-            activeFreq={activeFreq}
-            activeScaleName={activeScaleName}
-            activeInstrument={activeInstrument}
+            onSelectRegion={handleSelectRegion}
           />
         </section>
 
-        {/* 3. Master Playback Deck */}
-        <section>
-          <MasterController
-            isPlaying={isPlaying}
-            onTogglePlay={handleTogglePlay}
-            onPrev={() => setCurrentFrameIndex((prev) => Math.max(0, prev - 1))}
-            onNext={() => setCurrentFrameIndex((prev) => (prev + 1) % activeFrames.length)}
-            currentMode={currentMode}
-            onSelectMode={handleSelectMode}
-            playbackSpeed={playbackSpeed}
-            onChangeSpeed={(s) => setPlaybackSpeed(s)}
-          />
+        {/* 3. Interactive Master Controller & Acoustic Frequency Stage */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+          <div className="lg:col-span-7 flex flex-col">
+            <MasterController
+              isPlaying={isPlaying}
+              onTogglePlay={handleTogglePlay}
+              onPrev={() => setCurrentFrameIndex((prev) => Math.max(0, prev - 1))}
+              onNext={() => setCurrentFrameIndex((prev) => (prev + 1) % activeFrames.length)}
+              currentMode={currentMode}
+              onSelectMode={handleSelectMode}
+              playbackSpeed={playbackSpeed}
+              onChangeSpeed={(s) => setPlaybackSpeed(s)}
+            />
+          </div>
+          <div className="lg:col-span-5 flex flex-col">
+            <AcousticStage
+              currentFeature={currentFeature}
+              isPlaying={isPlaying}
+              activeNote={activeNote}
+              activeFreq={activeFreq}
+              activeScaleName={activeScaleName}
+              activeInstrument={activeInstrument}
+            />
+          </div>
         </section>
 
         {/* 4. "Why am I hearing this?" Explainability Panel */}
