@@ -112,7 +112,6 @@ export default function Home() {
   const [voiceEnabled, setVoiceEnabled] = useState<boolean>(false); // Start voice off by default
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
-  const [oceanAudioMode, setOceanAudioMode] = useState<"procedural" | "stem">("procedural");
   const [depthMeters, setDepthMeters] = useState<number>(0);
   const [selectedBasin, setSelectedBasin] = useState<string>("ALL");
   const [activeNote, setActiveNote] = useState<string>("A3");
@@ -610,11 +609,7 @@ export default function Home() {
       if (activeDatasetRef.current === "iss-lightning") {
         audioEngine.startOrbitalDrone();
       } else if (activeDatasetRef.current === "ocean-currents") {
-        if (audioEngine.isOceanStemActive()) {
-          audioEngine.startOceanStem(currentTimeRef.current);
-        } else {
-          audioEngine.startOceanAmbience();
-        }
+        audioEngine.startOceanAmbience();
       }
       playModeSound(currentTimeRef.current, true);
       const modeTitles = {
@@ -724,9 +719,6 @@ export default function Home() {
     setCurrentTime(nextT);
     currentTimeRef.current = nextT;
     if (videoRef.current) videoRef.current.currentTime = nextT;
-    if (activeDatasetRef.current === "ocean-currents") {
-      audioEngine.seekOceanStem(nextT);
-    }
     if (isPlayingRef.current) {
       playModeSound(nextT, true);
     }
@@ -743,9 +735,6 @@ export default function Home() {
     setCurrentTime(nextT);
     currentTimeRef.current = nextT;
     if (videoRef.current) videoRef.current.currentTime = nextT;
-    if (activeDatasetRef.current === "ocean-currents") {
-      audioEngine.seekOceanStem(nextT);
-    }
     if (isPlayingRef.current) {
       playModeSound(nextT, true);
     }
@@ -765,9 +754,6 @@ export default function Home() {
     if (videoRef.current) {
       videoRef.current.currentTime = clamped;
     }
-    if (activeDatasetRef.current === "ocean-currents") {
-      audioEngine.seekOceanStem(clamped);
-    }
     if (isPlayingRef.current) {
       playModeSound(clamped, true);
     }
@@ -780,23 +766,6 @@ export default function Home() {
     if (videoRef.current) {
       videoRef.current.playbackRate = speed;
     }
-  };
-
-  // 8b. Toggle Ocean Audio Mode between Smooth Procedural Synth and Master WAV Soundtrack
-  const handleToggleOceanAudioMode = () => {
-    const nextMode = oceanAudioMode === "procedural" ? "stem" : "procedural";
-    setOceanAudioMode(nextMode);
-    audioEngine.setOceanAudioMode(nextMode);
-    if (isPlayingRef.current) {
-      if (nextMode === "stem") {
-        audioEngine.startOceanStem(currentTimeRef.current);
-      } else {
-        audioEngine.startOceanAmbience();
-      }
-    }
-    const modeName = nextMode === "stem" ? "Master WAV Soundtrack" : "Smooth Sonification";
-    if (voiceEnabled) speechNarrator.speak(`Ocean audio set to ${modeName}.`);
-    setAriaAnnouncement(`Ocean audio mode switched to ${modeName}.`);
   };
 
   // 8b. Thermocline Depth Handler (0m -> 200m -> 1000m)
@@ -863,11 +832,7 @@ export default function Home() {
       lastRegionalTriggerRef.current = -1;
       if (videoRef.current) videoRef.current.currentTime = 0.0;
       if (isPlayingRef.current) {
-        if (audioEngine.isOceanStemActive()) {
-          audioEngine.startOceanStem(0.0);
-        } else {
-          audioEngine.startOceanAmbience();
-        }
+        audioEngine.startOceanAmbience();
       }
       if (voiceEnabled) speechNarrator.speak("Sea Surface Currents active.");
       setAriaAnnouncement("Sea Surface Currents active (NASA SVS #3912). Press Space to play.");
@@ -924,88 +889,86 @@ export default function Home() {
         <LandingPage onEnter={() => setHasEntered(true)} />
       ) : (
         <>
-      {/* 1. Header */}
-      <Header
-        voiceEnabled={voiceEnabled}
-        onToggleVoice={() => setVoiceEnabled(speechNarrator.toggle())}
-        isMuted={isMuted}
-        onToggleMute={() => setIsMuted(audioEngine.toggleMute())}
-        onGoHome={() => setHasEntered(false)}
-      />
-
-      {/* Main Workspace */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
-        {/* 2. Hero Satellite Optical Stage (Clean Projection • High-Precision Timeline Progress Bar) */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-start">
-          <div className="lg:col-span-8 flex flex-col gap-2.5 sm:gap-3">
-            <section className="w-full">
-          <SatelliteStage
-            currentDataset={activeDataset}
-            currentFeature={currentFeature}
-            currentTime={currentTime}
-            currentMode={currentMode}
-            selectedRegion={selectedRegion}
-            isPlaying={isPlaying}
-            onSelectRegion={handleSelectRegion}
-            onSeek={handleSeek}
-            videoRef={videoRef}
-            depthMeters={depthMeters}
-            onChangeDepth={handleChangeDepth}
-            selectedBasin={selectedBasin}
-            onSelectBasin={handleSelectBasin}
+          {/* 1. Header */}
+          <Header
+            voiceEnabled={voiceEnabled}
+            onToggleVoice={() => setVoiceEnabled(speechNarrator.toggle())}
+            isMuted={isMuted}
+            onToggleMute={() => setIsMuted(audioEngine.toggleMute())}
+            onGoHome={() => setHasEntered(false)}
           />
+
+          {/* Main Workspace */}
+          <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
+            {/* 2. Hero Satellite Optical Stage (Clean Projection • High-Precision Timeline Progress Bar) */}
+            <section className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-start">
+              <div className="lg:col-span-8 flex flex-col gap-2.5 sm:gap-3">
+                <section className="w-full">
+                  <SatelliteStage
+                    currentDataset={activeDataset}
+                    currentFeature={currentFeature}
+                    currentTime={currentTime}
+                    currentMode={currentMode}
+                    selectedRegion={selectedRegion}
+                    isPlaying={isPlaying}
+                    onSelectRegion={handleSelectRegion}
+                    onSeek={handleSeek}
+                    videoRef={videoRef}
+                    depthMeters={depthMeters}
+                    onChangeDepth={handleChangeDepth}
+                    selectedBasin={selectedBasin}
+                    onSelectBasin={handleSelectBasin}
+                  />
+                </section>
+
+                {/* Seamless Attached Master Controller directly beneath the video */}
+                <MasterController
+                  currentDataset={activeDataset}
+                  isPlaying={isPlaying}
+                  onTogglePlay={handleTogglePlay}
+                  onPrev={handlePrev}
+                  onNext={handleNext}
+                  currentMode={currentMode}
+                  onSelectMode={handleSelectMode}
+                  playbackSpeed={playbackSpeed}
+                  onChangeSpeed={handleChangeSpeed}
+                  loopMode={true}
+                  onToggleLoopMode={() => { }}
+                />
+              </div>
+
+              {/* Right Column: 30% Width (col-span-4) - Stacked Acoustic Telemetry + Explainability */}
+              <div className="lg:col-span-4 flex flex-col gap-2.5 sm:gap-3">
+                <AcousticStage
+                  currentDataset={activeDataset}
+                  currentFeature={currentFeature}
+                  isPlaying={isPlaying}
+                  activeNote={activeNote}
+                  activeFreq={activeFreq}
+                  activeScaleName={activeScaleName}
+                  activeInstrument={activeInstrument}
+                />
+
+                <ExplainPanel
+                  currentDataset={activeDataset}
+                  currentFeature={currentFeature}
+                  activeNote={activeNote}
+                  activeScaleName={activeScaleName}
+                />
+              </div>
             </section>
 
-            {/* Seamless Attached Master Controller directly beneath the video */}
-            <MasterController
-              currentDataset={activeDataset}
-              isPlaying={isPlaying}
-              onTogglePlay={handleTogglePlay}
-              onPrev={handlePrev}
-              onNext={handleNext}
-              currentMode={currentMode}
-              onSelectMode={handleSelectMode}
-              playbackSpeed={playbackSpeed}
-              onChangeSpeed={handleChangeSpeed}
-              loopMode={true}
-              onToggleLoopMode={() => { }}
-            />
-          </div>
+            {/* Bottom Shelf: Dataset Playlist Shelf (Full Width) */}
+            <section className="pt-1">
+              <DatasetShelf
+                selectedDataset={activeDataset}
+                onSelectDataset={handleSelectDataset}
+              />
+            </section>
+          </main>
 
-          {/* Right Column: 30% Width (col-span-4) - Stacked Acoustic Telemetry + Explainability */}
-          <div className="lg:col-span-4 flex flex-col gap-2.5 sm:gap-3">
-            <AcousticStage
-              currentDataset={activeDataset}
-              currentFeature={currentFeature}
-              isPlaying={isPlaying}
-              activeNote={activeNote}
-              activeFreq={activeFreq}
-              activeScaleName={activeScaleName}
-              activeInstrument={activeInstrument}
-              oceanAudioMode={oceanAudioMode}
-              onToggleOceanAudioMode={handleToggleOceanAudioMode}
-            />
-
-            <ExplainPanel
-              currentDataset={activeDataset}
-              currentFeature={currentFeature}
-              activeNote={activeNote}
-              activeScaleName={activeScaleName}
-            />
-          </div>
-        </section>
-
-        {/* Bottom Shelf: Dataset Playlist Shelf (Full Width) */}
-        <section className="pt-1">
-          <DatasetShelf
-            selectedDataset={activeDataset}
-            onSelectDataset={handleSelectDataset}
-          />
-        </section>
-      </main>
-
-      {/* 6. Sticky Accessibility Footer */}
-      <AccessibilityFooter ariaAnnouncement={ariaAnnouncement} />
+          {/* 6. Sticky Accessibility Footer */}
+          <AccessibilityFooter ariaAnnouncement={ariaAnnouncement} />
         </>
       )}
     </div>

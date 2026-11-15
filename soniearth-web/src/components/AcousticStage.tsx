@@ -13,8 +13,6 @@ interface AcousticStageProps {
   activeFreq: number;
   activeScaleName?: string;
   activeInstrument?: string;
-  oceanAudioMode?: "procedural" | "stem";
-  onToggleOceanAudioMode?: () => void;
 }
 
 export const AcousticStage: React.FC<AcousticStageProps> = ({
@@ -25,8 +23,6 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
   activeFreq,
   activeScaleName = "C Major Pentatonic",
   activeInstrument = "Ambient Sine Pad",
-  oceanAudioMode = "procedural",
-  onToggleOceanAudioMode,
 }) => {
   const isLightning = currentDataset === "iss-lightning";
   const isOcean = currentDataset === "ocean-currents";
@@ -79,20 +75,6 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
           Acoustic Frequency Stage
         </span>
         <div className="flex items-center gap-2">
-          {isOcean && onToggleOceanAudioMode && (
-            <button
-              onClick={onToggleOceanAudioMode}
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold border transition-all duration-200 cursor-pointer ${
-                oceanAudioMode === "stem"
-                  ? "bg-teal-900/60 border-teal-500/60 text-teal-200 shadow-[0_0_8px_rgba(45,212,191,0.3)]"
-                  : "bg-slate-800/80 border-slate-700 text-teal-300 hover:border-teal-500/40"
-              }`}
-              title="Click to toggle between Smooth Synth (procedural sonification) and Master WAV (soundtrack)"
-            >
-              <Radio className="w-3 h-3 text-teal-400" />
-              {oceanAudioMode === "stem" ? "Master WAV" : "Smooth Synth"}
-            </button>
-          )}
           <span className="font-mono text-[11px] text-yellow-400 font-semibold px-2 py-0.5 rounded bg-yellow-950/40 border border-yellow-800/40 truncate max-w-[210px]">
             {activeScaleName}
           </span>
@@ -124,7 +106,7 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
             </span>
           </div>
           <div className={`text-[11px] font-mono truncate ${isOcean ? "text-teal-300" : isLightning ? "text-amber-300" : "text-emerald-400"}`}>
-            {isOcean && oceanAudioMode === "stem" ? "Master WAV Soundtrack (ECCO2 Ambient)" : activeInstrument}
+            {activeInstrument}
           </div>
         </div>
 
