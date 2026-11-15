@@ -13,6 +13,9 @@ export interface RegionFeature {
   calibratedScore?: number;
   strikeInZone?: boolean;
   meanTemperature?: number;
+  ppm?: number;
+  status?: string;
+  pitchLevel?: "LOW" | "MID" | "HIGH";
 }
 
 export interface ChangeClassification {
@@ -57,6 +60,17 @@ export interface FrameFeature {
   currentVelocityKnots?: number;
   tempoBpm?: number;
   flowDirection?: "west_to_east" | "east_to_west";
+  // NASA SVS #5436 DYAMOND Global CO2 Fields
+  co2Ppm?: number;
+  co2NetFlux?: number;
+  harmonicTensionScore?: number;
+  isPlumeBurst?: boolean;
+  plumeCentroid?: [number, number];
+  dominantSourceRegion?: string;
+  pitchLevel?: "LOW" | "MID" | "HIGH";
+  simulationDate?: string;
+  simulationTimeUtc?: string;
+  simulationDay?: number;
 }
 
 export interface DatasetFeatureCollection {
@@ -72,6 +86,9 @@ export interface DatasetFeatureCollection {
   orbitalAltitudeKm?: number;
   orbitalVelocityKmS?: number;
   instrument?: string;
+  meanPpm?: number;
+  maxPpm?: number;
+  minPpm?: number;
   scientificNotice: string;
   frames: FrameFeature[];
 }

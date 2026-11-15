@@ -19,6 +19,7 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
 }) => {
   const isLightning = currentDataset === "iss-lightning";
   const isOcean = currentDataset === "ocean-currents";
+  const isCO2 = currentDataset === "dyamond-co2";
   const lumaPct = currentFeature?.globalMeanBrightness !== undefined
     ? (currentFeature.globalMeanBrightness * 100).toFixed(2)
     : "2.30";
@@ -31,7 +32,15 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
 
   let explanation = "";
 
-  if (isOcean) {
+  if (isCO2) {
+    const ppm = currentFeature?.co2Ppm ?? 414.3;
+    const flux = currentFeature?.co2NetFlux ?? 0.0;
+    const tension = currentFeature?.harmonicTensionScore ?? 0.5;
+    const region = currentFeature?.dominantSourceRegion || "European Grid & African Biomass";
+    const pan = currentFeature?.strikePan ?? 0.0;
+
+    explanation = `NASA SVS #5436 DYAMOND Global Carbon Dioxide (GEOS 3D Fluid Model): Atmospheric greenhouse concentration is measured at ${ppm.toFixed(1)} ppm with carbon flux rate of ${flux > 0 ? `+${flux.toFixed(2)}` : flux.toFixed(2)} ppm/s. Greenhouse infrared radiative forcing tension is at ${Math.round(tension * 100)}%, opening the low-pass resonant audio filter. Tonal harmonic pad is sounding on ${activeNote}. Main emission plume is focused in ${region}, steering stereo panning to ${pan > 0 ? `Right (+${pan.toFixed(2)})` : pan < 0 ? `Left (${pan.toFixed(2)})` : "Center"}.${currentFeature?.isPlumeBurst ? " Rapid localized carbon flux surge detected! High metallic warning chime triggered." : ""}`;
+  } else if (isOcean) {
     const sst = (currentFeature as any)?.temperatureCelsius ?? 18.0;
     const vel = (currentFeature as any)?.currentVelocityKnots ?? 1.5;
     const bpm = (currentFeature as any)?.tempoBpm ?? 80;
@@ -97,7 +106,7 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
               Why am I hearing this? (Scientific Explainability)
             </h4>
             <span className="text-[10px] font-mono text-emerald-300 px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 shadow-[0_0_8px_rgba(0,245,155,0.2)]">
-              {isOcean ? "NASA SVS #3912 • ECCO2 Hydrodynamics" : isLightning ? "NASA SVS #5011 • ISS LIS Science" : "Data-Driven Synthesis"}
+              {isCO2 ? "NASA SVS #5436 • GEOS-5 Carbon Dynamics" : isOcean ? "NASA SVS #3912 • ECCO2 Hydrodynamics" : isLightning ? "NASA SVS #5011 • ISS LIS Science" : "Data-Driven Synthesis"}
             </span>
           </div>
           <p className="text-slate-300 leading-relaxed font-sans">{explanation}</p>
@@ -105,7 +114,7 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
       </div>
 
       {/* Mode A: 3x3 Spatial Grid Notes Telemetry (Night Lights) */}
-      {!isLightning && !isOcean && phase === "annual_series" && spatialGrid.length === 9 && (
+      {!isLightning && !isOcean && !isCO2 && phase === "annual_series" && spatialGrid.length === 9 && (
         <div className="mt-1 pt-3 border-t border-slate-800/80">
           <div className="flex items-center gap-1.5 mb-2 text-[10px] font-mono text-slate-400 uppercase tracking-wider">
             <Grid className="w-3.5 h-3.5 text-sky-400" />
@@ -181,29 +190,98 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
       {/* Ocean Currents: 3-Basin Oceanic Telemetry */}
       {isOcean && spatialGrid.length === 3 && (
         <div className="mt-1 pt-3 border-t border-slate-800/80">
-          <div className="flex items-center gap-1.5 mb-2 text-[10px] font-mono text-teal-400 uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 mb-2.5 text-[10px] font-mono text-teal-400 uppercase tracking-wider">
             <Compass className="w-3.5 h-3.5 text-teal-400" />
             <span>Ocean Basins & Thermal Telemetry (West Pacific → Atlantic Gulf Stream → Indian/Southern Ocean)</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
             {spatialGrid.map((basin) => (
               <div
                 key={basin.regionId}
-                className="bg-slate-950/70 border border-teal-800/40 rounded-xl p-2.5 flex items-center justify-between font-mono text-[10px]"
+                className="bg-slate-950/80 border border-teal-500/30 rounded-xl p-3 flex flex-col justify-between gap-2 font-mono shadow-md hover:border-teal-500/60 transition-all"
               >
-                <div>
-                  <div className="font-semibold text-teal-300">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="font-bold text-teal-300 text-[11px] leading-tight">
                     {basin.name}
                   </div>
-                  <div className="text-slate-500 text-[9px]">
-                    Stereo Pan {basin.pan > 0 ? `+${basin.pan}` : basin.pan}
-                  </div>
+                  <span className="shrink-0 px-2 py-0.5 rounded bg-teal-950/90 border border-teal-500/60 text-teal-300 font-bold text-xs shadow-sm">
+                    {basin.meanTemperature !== undefined ? `${basin.meanTemperature}°C` : "18.0°C"}
+                  </span>
                 </div>
-                <div className="px-2 py-0.5 rounded bg-teal-950/80 border border-teal-700/60 text-teal-300 font-bold text-xs">
-                  {basin.meanTemperature !== undefined ? `${basin.meanTemperature}°C` : "18.0°C"}
+                <div className="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[9px] text-slate-400">
+                  <span>
+                    Stereo Pan: <strong className="text-slate-200">{basin.pan > 0 ? `+${basin.pan}` : basin.pan}</strong>
+                  </span>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* DYAMOND Global CO2: 3-Zone Continental Emission Telemetry */}
+      {isCO2 && spatialGrid.length === 3 && (
+        <div className="mt-1 pt-3 border-t border-slate-800/80">
+          <div className="flex items-center gap-1.5 mb-2.5 text-[10px] font-mono text-emerald-400 uppercase tracking-wider">
+            <Compass className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Planetary Emission Grid (Western Americas → Central EMEA → East Asia)</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+            {spatialGrid.map((zone) => {
+              const shortTitle =
+                zone.regionId === "CO2_WEST"
+                  ? "Western Americas"
+                  : zone.regionId === "CO2_CENTER"
+                  ? "Central EMEA"
+                  : "East Asia & Pacific";
+              const subTitle =
+                zone.regionId === "CO2_WEST"
+                  ? "Pacific / Atlantic"
+                  : zone.regionId === "CO2_CENTER"
+                  ? "Europe & Africa"
+                  : "Western Pacific";
+
+              return (
+                <div
+                  key={zone.regionId}
+                  className="bg-slate-950/80 border border-emerald-500/30 rounded-xl p-3 flex flex-col justify-between gap-2 font-mono shadow-md hover:border-emerald-500/60 transition-all"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <div className="font-bold text-emerald-300 text-[11px] leading-tight">
+                        {shortTitle}
+                      </div>
+                      <div className="text-slate-400 text-[9px] mt-0.5 leading-tight">
+                        {subTitle}
+                      </div>
+                    </div>
+                    <span className="shrink-0 px-2 py-0.5 rounded bg-emerald-950/90 border border-emerald-500/60 text-emerald-300 font-bold text-xs shadow-sm">
+                      {zone.ppm !== undefined ? `${zone.ppm.toFixed(1)} ppm` : "414.0 ppm"}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[9px] text-slate-400">
+                    <span>
+                      Pan: <strong className="text-slate-200">{zone.pan > 0 ? `+${zone.pan}` : zone.pan}</strong>
+                    </span>
+                    <span>
+                      Note: <strong className="text-emerald-400 font-bold">{zone.activeNote || "G3"}</strong>
+                    </span>
+                    <span
+                      className={`px-1.5 py-0.5 rounded text-[8px] font-bold ${
+                        zone.pitchLevel === "HIGH"
+                          ? "bg-rose-950/80 text-rose-300 border border-rose-700/60 animate-pulse"
+                          : zone.pitchLevel === "LOW"
+                          ? "bg-cyan-950/80 text-cyan-300 border border-cyan-700/60"
+                          : "bg-emerald-950/80 text-emerald-300 border border-emerald-700/60"
+                      }`}
+                    >
+                      {zone.pitchLevel || "MID"} PITCH
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

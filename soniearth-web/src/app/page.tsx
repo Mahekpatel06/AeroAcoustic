@@ -153,7 +153,9 @@ export default function Home() {
   // 1. Load Feature Data on Mount or Dataset Switch
   useEffect(() => {
     const jsonUrl =
-      activeDataset === "iss-lightning"
+      activeDataset === "dyamond-co2"
+        ? "/datasets/dyamond-co2/features.json"
+        : activeDataset === "iss-lightning"
         ? "/datasets/iss-lightning/features.json"
         : activeDataset === "ocean-currents"
           ? "/datasets/ocean-currents/features.json"
@@ -163,7 +165,12 @@ export default function Home() {
       .then((res) => res.json())
       .then((data: DatasetFeatureCollection) => {
         setFeatureData(data);
-        if (activeDataset === "iss-lightning") {
+        if (activeDataset === "dyamond-co2") {
+          setActiveNote("G3");
+          setActiveFreq(196.0);
+          setActiveScaleName("Greenhouse Forcing (413.5–415.0 ppm)");
+          setActiveInstrument("Greenhouse Resonance Pad & Plume Chimes");
+        } else if (activeDataset === "iss-lightning") {
           setActiveNote("A1");
           setActiveFreq(55.0);
           setActiveScaleName("A1 Sub-Bass (55Hz) + High FM Chimes");
@@ -186,7 +193,7 @@ export default function Home() {
   // Filter frames strictly belonging to the currently selected mode
   const modeFrames = useMemo(() => {
     if (!featureData?.frames) return [];
-    if (activeDataset === "iss-lightning" || activeDataset === "ocean-currents") {
+    if (activeDataset === "iss-lightning" || activeDataset === "ocean-currents" || activeDataset === "dyamond-co2") {
       return featureData.frames;
     }
     if (currentMode === "annual") {
@@ -204,8 +211,10 @@ export default function Home() {
   const currentFeature: FrameFeature | null = useMemo(() => {
     if (!featureData?.frames || featureData.frames.length === 0) return null;
 
-    if (activeDataset === "iss-lightning" || activeDataset === "ocean-currents") {
-      const datasetDuration = featureData.durationSeconds || (activeDataset === "iss-lightning" ? 216.7 : 66.7);
+    if (activeDataset === "iss-lightning" || activeDataset === "ocean-currents" || activeDataset === "dyamond-co2") {
+      const datasetDuration =
+        featureData.durationSeconds ||
+        (activeDataset === "dyamond-co2" ? 39.2 : activeDataset === "iss-lightning" ? 216.7 : 66.7);
       const idx = Math.min(
         featureData.frames.length - 1,
         Math.floor((currentTime / datasetDuration) * featureData.frames.length)
@@ -359,6 +368,56 @@ export default function Home() {
 
             // Velvety soft velocity (0.48) with slow 0.85s attack and 3.2s release
             audioEngine.triggerOceanCurrent(note, sst, pan, 0.48);
+          }
+        }
+        return;
+      }
+
+      // ==========================================
+      // DYAMOND GLOBAL CO2 SONIFICATION PIPELINE
+      // ==========================================
+      if (activeDatasetRef.current === "dyamond-co2") {
+        if (!featureData?.frames || featureData.frames.length === 0) return;
+
+        const co2Duration = featureData.durationSeconds || 39.2;
+        const frameIdx = Math.min(
+          featureData.frames.length - 1,
+          Math.floor((timeSec / co2Duration) * featureData.frames.length)
+        );
+        const feat = featureData.frames[frameIdx];
+        if (feat) {
+          const ppm = feat.co2Ppm ?? 415.0;
+          const tension = feat.harmonicTensionScore ?? 0.5;
+          const pan = feat.strikePan ?? 0.0;
+          const note = feat.activeNote || "G3";
+          const freq = feat.frequencyHz || 196.0;
+          const pitchLevel = feat.pitchLevel || "MID";
+
+          setActiveNote(note);
+          setActiveFreq(freq);
+          setActiveScaleName(`Atmospheric CO2 (${ppm.toFixed(1)} ppm • ${pitchLevel} PITCH • ${Math.round(tension * 100)}% Forcing)`);
+          setActiveInstrument(
+            feat.isPlumeBurst
+              ? `Plume Surge Celesta (${feat.dominantSourceRegion || "Plume Front"})`
+              : `${pitchLevel} Pitch Pad (${feat.dominantSourceRegion || "Circulation"})`
+          );
+
+          // Real-time continuous stereo and filter cutoff tracking every frame
+          audioEngine.updateCO2Dynamics(pan, tension);
+
+          const nowMs = Date.now();
+          // Breathe at 1200ms cadence for continuous pad modulation (or instant on seek/click)
+          if (nowMs - lastRegionalTriggerRef.current >= 1200 || forceInstant) {
+            lastRegionalTriggerRef.current = nowMs;
+            audioEngine.triggerCO2Atmosphere(note, ppm, tension, pan, 0.46);
+          }
+
+          // Transient Plume Burst Warning Chime (paced at >= 1200ms to eliminate polyphony distortion)
+          if (feat.isPlumeBurst) {
+            if (nowMs - lastStrikeTimestampRef.current >= 1200) {
+              lastStrikeTimestampRef.current = nowMs;
+              audioEngine.triggerCO2PlumeBurst(note, pan, 0.40);
+            }
           }
         }
         return;
@@ -533,18 +592,22 @@ export default function Home() {
         // Cap deltaSec between 0.0s and 0.1s to avoid huge time jumps when switching tabs
         const safeDelta = Math.min(0.1, Math.max(0.0, deltaSec));
         const maxDuration =
-          activeDatasetRef.current === "iss-lightning"
+          activeDatasetRef.current === "dyamond-co2"
+            ? (featureData?.durationSeconds || 39.2)
+            : activeDatasetRef.current === "iss-lightning"
             ? (featureData?.durationSeconds || 216.7)
             : activeDatasetRef.current === "ocean-currents"
               ? (featureData?.durationSeconds || 66.7)
               : MODE_DURATIONS[currentModeRef.current];
 
-        // MASTER CLOCK: For ISS Lightning & Ocean Currents, lock directly to hardware video presentation timestamp (PTS)
+        // MASTER CLOCK: For ISS Lightning, Ocean Currents & DYAMOND CO2, lock directly to hardware video presentation timestamp (PTS)
         // For Night Lights modes, increment smoothly at 60 FPS (zero video buffering freeze)
         let nextTime: number;
 
         if (
-          (activeDatasetRef.current === "iss-lightning" || activeDatasetRef.current === "ocean-currents") &&
+          (activeDatasetRef.current === "iss-lightning" ||
+            activeDatasetRef.current === "ocean-currents" ||
+            activeDatasetRef.current === "dyamond-co2") &&
           videoRef.current &&
           !videoRef.current.paused &&
           !videoRef.current.seeking &&
@@ -610,6 +673,8 @@ export default function Home() {
         audioEngine.startOrbitalDrone();
       } else if (activeDatasetRef.current === "ocean-currents") {
         audioEngine.startOceanAmbience();
+      } else if (activeDatasetRef.current === "dyamond-co2") {
+        audioEngine.startCO2Atmosphere();
       }
       playModeSound(currentTimeRef.current, true);
       const modeTitles = {
@@ -618,7 +683,9 @@ export default function Home() {
         regional: `Mode C: Regional Insets (${selectedRegion})`,
       };
       const title =
-        activeDatasetRef.current === "iss-lightning"
+        activeDatasetRef.current === "dyamond-co2"
+          ? "DYAMOND Global Carbon Dioxide (NASA SVS #5436)"
+          : activeDatasetRef.current === "iss-lightning"
           ? "ISS Lightning Events (NASA SVS #5011)"
           : activeDatasetRef.current === "ocean-currents"
             ? "Sea Surface Currents (NASA SVS #3912)"
@@ -709,7 +776,9 @@ export default function Home() {
   // 7. Prev / Next Step (Steps through current mode)
   const handlePrev = () => {
     const maxDur =
-      activeDatasetRef.current === "iss-lightning"
+      activeDatasetRef.current === "dyamond-co2"
+        ? (featureData?.durationSeconds || 39.2)
+        : activeDatasetRef.current === "iss-lightning"
         ? (featureData?.durationSeconds || 216.7)
         : activeDatasetRef.current === "ocean-currents"
           ? (featureData?.durationSeconds || 66.7)
@@ -726,7 +795,9 @@ export default function Home() {
 
   const handleNext = () => {
     const maxDur =
-      activeDatasetRef.current === "iss-lightning"
+      activeDatasetRef.current === "dyamond-co2"
+        ? (featureData?.durationSeconds || 39.2)
+        : activeDatasetRef.current === "iss-lightning"
         ? (featureData?.durationSeconds || 216.7)
         : activeDatasetRef.current === "ocean-currents"
           ? (featureData?.durationSeconds || 66.7)
@@ -743,7 +814,9 @@ export default function Home() {
   // 7b. Interactive Seek Handler for Timeline Progress Scrubber
   const handleSeek = (targetSec: number) => {
     const maxDur =
-      activeDatasetRef.current === "iss-lightning"
+      activeDatasetRef.current === "dyamond-co2"
+        ? (featureData?.durationSeconds || 39.2)
+        : activeDatasetRef.current === "iss-lightning"
         ? (featureData?.durationSeconds || 216.7)
         : activeDatasetRef.current === "ocean-currents"
           ? (featureData?.durationSeconds || 66.7)
@@ -836,13 +909,21 @@ export default function Home() {
       }
       if (voiceEnabled) speechNarrator.speak("Sea Surface Currents active.");
       setAriaAnnouncement("Sea Surface Currents active (NASA SVS #3912). Press Space to play.");
-    } else {
-      const titles: Record<string, string> = {
-        "dyamond-co2": "DYAMOND Global CO2",
-      };
-      const title = titles[id] || id;
-      if (voiceEnabled) speechNarrator.speak(`${title} is scheduled for Phase 2.`);
-      setAriaAnnouncement(`${title} is scheduled for Phase 2.`);
+    } else if (id === "dyamond-co2") {
+      audioEngine.stopOrbitalDrone();
+      audioEngine.stopOceanAmbience();
+      setActiveDataset(id);
+      activeDatasetRef.current = id;
+      setCurrentTime(0.0);
+      currentTimeRef.current = 0.0;
+      lastEvaluatedSecondRef.current = -1;
+      lastRegionalTriggerRef.current = -1;
+      if (videoRef.current) videoRef.current.currentTime = 0.0;
+      if (isPlayingRef.current) {
+        audioEngine.startCO2Atmosphere();
+      }
+      if (voiceEnabled) speechNarrator.speak("DYAMOND Global Carbon Dioxide active.");
+      setAriaAnnouncement("DYAMOND Global Carbon Dioxide active (NASA SVS #5436). Press Space to play.");
     }
   };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Play, Pause, SkipBack, SkipForward, Clock, Globe, Zap, Waves, MapPin, Repeat } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Clock, Globe, Zap, Waves, Wind, MapPin, Repeat } from "lucide-react";
 
 interface MasterControllerProps {
   currentDataset?: string;
@@ -32,6 +32,7 @@ export const MasterController: React.FC<MasterControllerProps> = ({
 }) => {
   const isLightning = currentDataset === "iss-lightning";
   const isOcean = currentDataset === "ocean-currents";
+  const isCO2 = currentDataset === "dyamond-co2";
 
   return (
     <div className="w-full bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col gap-4">
@@ -97,6 +98,38 @@ export const MasterController: React.FC<MasterControllerProps> = ({
             </span>
             <span className="px-2.5 py-1 rounded-lg bg-black/60 border border-emerald-500/20 text-slate-300">
               Sensor: <strong className="text-emerald-400">LIS CCD</strong>
+            </span>
+          </div>
+        </div>
+      ) : isCO2 ? (
+        <div className="bg-slate-950/80 border border-emerald-600/40 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-inner">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+              <Wind className="w-5 h-5 text-emerald-400" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs font-bold text-emerald-300 uppercase tracking-wider">
+                  NASA SVS #5436 • DYAMOND Global Carbon Circulation
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 animate-pulse">
+                  GEOS 3D MODEL LIVE
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 mt-0.5 font-sans">
+                High-resolution 3D simulation of atmospheric carbon respiration, urban plumes, and hemispheric transport.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 font-mono text-[11px]">
+            <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+              Model: <strong className="text-emerald-400">GEOS-5 3D</strong>
+            </span>
+            <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+              Concentration: <strong className="text-emerald-400">410–417 ppm</strong>
+            </span>
+            <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+              Duration: <strong className="text-emerald-400">39.2s Loop</strong>
             </span>
           </div>
         </div>

@@ -23,6 +23,7 @@ import {
   Eye,
   Split,
   Waves,
+  Wind,
 } from "lucide-react";
 import { InteractiveGlobe } from "./InteractiveGlobe";
 
@@ -121,6 +122,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
   const isLightning = currentDataset === "iss-lightning";
   const isOcean = currentDataset === "ocean-currents";
+  const isCO2 = currentDataset === "dyamond-co2";
   const isRegional = currentMode === "regional";
   const isChangePhase = currentMode === "change";
   const isAnnualPhase = currentMode === "annual";
@@ -132,7 +134,9 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   const hydrostaticAtm = 1 + Math.round(depthMeters / 10);
 
   // High-performance, zero-buffering local mode clips
-  const videoSrc = isLightning
+  const videoSrc = isCO2
+    ? "/datasets/dyamond-co2/chunk_dyamond_co2.mp4"
+    : isLightning
     ? "/datasets/iss-lightning/chunk_iss_lightning.webm"
     : isOcean
     ? "/datasets/ocean-currents/chunk_ocean_currents.webm"
@@ -201,7 +205,13 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   };
 
   const activeBounds = REGION_BOUNDS[selectedRegion] || REGION_BOUNDS["India"];
-  const maxDuration = isLightning ? 216.7 : isOcean ? 66.7 : (MODE_DURATIONS[currentMode] || 12.0);
+  const maxDuration = isCO2
+    ? 39.2
+    : isLightning
+    ? 216.7
+    : isOcean
+    ? 66.7
+    : (MODE_DURATIONS[currentMode] || 12.0);
   const progressPercent = Math.min(100, Math.max(0, (currentTime / maxDuration) * 100));
 
   // Reset zoom & regional sub-view when mode or region changes
@@ -252,14 +262,18 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
         {/* Left: Telemetry & Status */}
         <div className="flex items-center gap-2.5">
           <span className="flex items-center gap-1.5 font-mono font-bold text-slate-200">
-            {isOcean ? (
+            {isCO2 ? (
+              <Wind className="w-4 h-4 text-emerald-400" />
+            ) : isOcean ? (
               <Waves className="w-4 h-4 text-teal-400" />
             ) : isLightning ? (
               <Zap className="w-4 h-4 text-amber-400" />
             ) : (
               <Scan className="w-4 h-4 text-sky-400" />
             )}
-            {isOcean
+            {isCO2
+              ? "NASA DYAMOND Global CO2 Stage"
+              : isOcean
               ? "NASA ECCO2 Ocean Currents Stage"
               : isLightning
               ? "ISS Optical Lightning Stage"
@@ -268,14 +282,18 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           <span className="text-emerald-900">|</span>
           <span
             className={`font-mono font-semibold px-2.5 py-0.5 rounded border ${
-              isOcean
+              isCO2
+                ? "text-emerald-300 bg-emerald-950/60 border-emerald-800/40"
+                : isOcean
                 ? "text-teal-300 bg-teal-950/60 border-teal-800/40"
                 : isLightning
                 ? "text-amber-300 bg-amber-950/60 border-amber-800/40"
                 : "text-sky-400 bg-sky-950/60 border-sky-800/40"
             }`}
           >
-            {isOcean
+            {isCO2
+              ? "NASA SVS #5436 • GEOS Model (2020)"
+              : isOcean
               ? "NASA SVS #3912 • ECCO2 Model (2005–2007)"
               : isLightning
               ? "NASA SVS #5011 • LIS on ISS (2017–2023)"
@@ -285,6 +303,13 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               ? "Mode B: Decadal Change Map"
               : `Mode C: Regional Insets (${selectedRegion})`}
           </span>
+          {isCO2 && (
+            <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-800/40 hidden md:inline-flex items-center gap-1.5 shadow-[0_0_8px_rgba(0,245,155,0.15)]">
+              <span>Model: GEOS-5 3D</span>
+              <span className="text-slate-600">•</span>
+              <span>Baseline: 414.3 ppm</span>
+            </span>
+          )}
           {isLightning && (
             <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-800/40 hidden md:inline-flex items-center gap-1.5 shadow-[0_0_8px_rgba(0,245,155,0.15)]">
               <span>Alt: 408 km</span>
@@ -301,7 +326,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           )}
 
           {/* Mode A: Clean Calendar Year */}
-          {!isLightning && !isOcean && currentMode === "annual" && (
+          {!isLightning && !isOcean && !isCO2 && currentMode === "annual" && (
             <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40 flex items-center gap-1">
               <Calendar className="w-3 h-3" />
               Year {currentYear}
@@ -311,7 +336,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
         {/* Right: Stage Action Controls */}
         <div className="flex flex-wrap items-center gap-2">
-          {/* 2D Flat Map vs 3D Interactive Globe Toggle (Only for Night Lights) */}
+          {/* 2D Flat Map vs 3D Interactive Globe Toggle (Enabled for Night Lights, Ocean Currents & DYAMOND CO2) */}
           {!isLightning && (
             <div className="flex items-center bg-black/60 rounded-xl border border-emerald-500/20 p-0.5 text-[11px] font-mono shadow-md">
               <button
@@ -388,7 +413,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
       </div>
 
       {/* 2. REGIONAL TELEMETRY BANNER (Only for Night Lights Mode C in 2D) */}
-      {!isLightning && !isOcean && isRegional && activeBounds && viewFormat === "2d" && (
+      {!isLightning && !isOcean && !isCO2 && isRegional && activeBounds && viewFormat === "2d" && (
         <div className="mb-3 p-3.5 rounded-2xl bg-slate-950/95 border border-sky-500/50 shadow-xl flex flex-wrap items-center justify-between gap-3 animate-fadeIn">
           {/* Target Metadata Info */}
           <div className="flex flex-col gap-0.5 min-w-[260px]">
@@ -563,11 +588,13 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
           </div>
         ) : viewFormat === "3d" ? (
-          /* VIEW A: 3D INTERACTIVE GLOBE (NASA SVS #5475 for Night Lights / #3912 for Ocean Currents) */
+          /* VIEW A: 3D INTERACTIVE GLOBE (NASA SVS #5475 for Night Lights / #3912 for Ocean / #5436 for CO2) */
           <InteractiveGlobe
             currentDataset={currentDataset}
             currentMode={currentMode}
             currentYear={currentYear}
+            currentTime={currentTime}
+            currentFeature={currentFeature}
             isPlaying={isPlaying}
             depthMeters={depthMeters}
             selectedBasin={selectedBasin}
@@ -612,54 +639,18 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               }`}
             />
 
-            {/* Oceanographic Fluid Telemetry Card */}
-            <div className="absolute top-4 left-4 max-w-sm bg-slate-950/90 backdrop-blur-md border border-teal-500/60 rounded-2xl p-3.5 shadow-2xl z-20">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-mono text-teal-400 font-bold tracking-wider flex items-center gap-1 uppercase">
-                  <Waves className="w-3.5 h-3.5 text-teal-400" /> Oceanographic Telemetry
-                </span>
-                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border bg-teal-950/60 text-teal-300 border-teal-700">
-                  ECCO2 Model
-                </span>
-              </div>
-              <h3 className="text-base font-bold text-white tracking-tight">GLOBAL OCEAN CURRENTS</h3>
-              <p className="text-xs text-slate-300 mt-0.5 font-sans leading-tight">
-                Perpetual Ocean: Sea surface temperature and streamline velocity circulation heat transport.
-              </p>
-              <div className="mt-2.5 pt-2 border-t border-slate-800 grid grid-cols-2 gap-2 text-[10px] font-mono">
-                <div>
-                  <span className="text-slate-400">Thermocline SST: </span>
-                  <span className="text-teal-300 font-bold">
-                    {thermoclineTemp}°C {depthMeters > 0 && <span className="text-slate-500 font-normal">({rawSST.toFixed(1)}° at 0m)</span>}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-slate-400">Velocity: </span>
-                  <span className="text-amber-300 font-bold">
-                    {currentFeature?.currentVelocityKnots !== undefined
-                      ? `${currentFeature.currentVelocityKnots.toFixed(1)} kts`
-                      : "1.5 kts"}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-slate-400">Depth & Pressure: </span>
-                  <span className="text-cyan-300 font-bold">
-                    {depthMeters}m • {hydrostaticAtm} atm
-                  </span>
-                </div>
-                <div>
-                  <span className="text-slate-400">Focused Basin: </span>
-                  <span className="text-sky-300 font-bold truncate">
-                    {selectedBasin === "OCEAN_PACIFIC"
-                      ? "Pacific (-0.65)"
-                      : selectedBasin === "OCEAN_ATLANTIC"
-                      ? "Atlantic (0.00)"
-                      : selectedBasin === "OCEAN_INDIAN"
-                      ? "Indian (+0.65)"
-                      : "Global Circuit"}
-                  </span>
-                </div>
-              </div>
+            {/* Sleek Minimalist Oceanographic Telemetry Pill - 100% Unobstructed Video */}
+            <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-20 pointer-events-none">
+              <span className="font-mono text-[11px] font-bold text-white bg-[#06080A]/85 px-3 py-1 rounded-xl border border-teal-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-xl">
+                <Waves className="w-3.5 h-3.5 text-teal-400" />
+                <span>ECCO2 Ocean</span>
+                <span className="text-slate-600">•</span>
+                <span className="text-teal-300">{thermoclineTemp}°C</span>
+                <span className="text-slate-600">•</span>
+                <span className="text-amber-300 font-normal">{currentFeature?.currentVelocityKnots !== undefined ? `${currentFeature.currentVelocityKnots.toFixed(1)} kts` : "1.5 kts"}</span>
+                <span className="text-slate-600">•</span>
+                <span className="text-cyan-300 font-normal">{depthMeters}m</span>
+              </span>
             </div>
 
             {/* Thermal Spectrum Legend Bar */}
@@ -674,6 +665,109 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               <span className="text-slate-600">───</span>
               <span className="flex items-center gap-1 text-rose-400">
                 <span className="w-2 h-2 rounded-full bg-rose-400"></span> 30°C Equatorial Strings
+              </span>
+            </div>
+          </div>
+        ) : isCO2 ? (
+          /* VIEW CO2: 2D SATELLITE OPTICAL DYAMOND GLOBAL CO2 FLIGHT DECK */
+          <div
+            className={`relative max-w-full max-h-full flex items-center justify-center overflow-hidden transition-transform duration-300 ease-out ${
+              fitMode === "contain" ? "w-full aspect-[2/1]" : "w-full h-full"
+            }`}
+            style={{
+              transform: isManualOverride ? `scale(${manualZoom})` : "scale(1)",
+            }}
+          >
+            <video
+              ref={videoRef}
+              key={videoSrc}
+              src={videoSrc}
+              playsInline
+              muted
+              loop
+              autoPlay={false}
+              onCanPlay={(e) => {
+                if (isPlaying) {
+                  (e.target as HTMLVideoElement).play().catch(() => {});
+                }
+              }}
+              className={`w-full h-full ${
+                fitMode === "contain" ? "object-contain" : "object-cover"
+              } select-none pointer-events-none transition-all duration-300 ${
+                contrastBoost
+                  ? "brightness-110 contrast-125 saturate-125"
+                  : "brightness-100 contrast-100"
+              }`}
+            />
+
+            {/* Sleek Minimalist DYAMOND CO2 Telemetry Pill - 100% Unobstructed Video */}
+            <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-20 pointer-events-none">
+              <span className="font-mono text-[11px] font-bold text-white bg-[#06080A]/85 px-3 py-1 rounded-xl border border-emerald-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-xl">
+                <Wind className="w-3.5 h-3.5 text-emerald-400" />
+                <span>DYAMOND CO2</span>
+                <span className="text-slate-600">•</span>
+                <span className="text-emerald-300 font-bold">{currentFeature?.co2Ppm ? currentFeature.co2Ppm.toFixed(1) : "415.0"} ppm</span>
+                <span className="text-slate-600">•</span>
+                <span className="text-amber-300 font-normal">{currentFeature?.dominantSourceRegion || "Global Circulation"}</span>
+              </span>
+
+              {/* Real-time Sonic Pitch Level & Frequency Equalizer Waveform */}
+              <div className="flex items-center gap-2 bg-[#06080A]/90 backdrop-blur-md px-3 py-1 rounded-xl border border-emerald-500/30 shadow-xl">
+                <span className="text-[10px] font-mono font-bold text-slate-400">PITCH:</span>
+                <span
+                  className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold transition-all ${
+                    currentFeature?.pitchLevel === "HIGH"
+                      ? "bg-rose-950 text-rose-300 border border-rose-500/80 shadow-[0_0_10px_rgba(244,63,94,0.4)] animate-pulse"
+                      : currentFeature?.pitchLevel === "LOW"
+                      ? "bg-cyan-950 text-cyan-300 border border-cyan-500/60 shadow-[0_0_10px_rgba(6,182,212,0.3)]"
+                      : "bg-emerald-950 text-emerald-300 border border-emerald-500/60 shadow-[0_0_10px_rgba(0,245,155,0.3)]"
+                  }`}
+                >
+                  {currentFeature?.pitchLevel || "MID"} ({currentFeature?.activeNote || "G3"} • {currentFeature?.frequencyHz ? Math.round(currentFeature.frequencyHz) : 196} Hz)
+                </span>
+                {/* 6-Bar Equalizer dancing in sync with active pitch */}
+                <div className="flex items-end gap-0.5 h-3.5 w-10 px-0.5">
+                  {[0.4, 0.7, 1.0, 0.6, 0.85, 0.5].map((_, i) => {
+                    const isHigh = currentFeature?.pitchLevel === "HIGH";
+                    const isLow = currentFeature?.pitchLevel === "LOW";
+                    const heightPct = isHigh
+                      ? 60 + Math.sin(currentTime * 14 + i * 1.5) * 35
+                      : isLow
+                      ? 22 + Math.sin(currentTime * 4 + i * 1.5) * 12
+                      : 42 + Math.sin(currentTime * 8 + i * 1.5) * 20;
+                    return (
+                      <div
+                        key={i}
+                        className={`w-1 rounded-full transition-all duration-75 ${
+                          isHigh ? "bg-rose-400" : isLow ? "bg-cyan-400" : "bg-[#00F59B]"
+                        }`}
+                        style={{ height: `${Math.max(18, Math.min(100, heightPct))}%` }}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+
+              {isPlaying && currentFeature?.isPlumeBurst && (
+                <span className="font-mono text-[11px] font-bold text-rose-300 bg-rose-950/90 px-3 py-1 rounded-xl border border-rose-500/80 shadow-[0_0_15px_rgba(244,63,94,0.4)] flex items-center gap-1.5 animate-pulse">
+                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping inline-block"></span>
+                  <span>PLUME SURGE: {currentFeature.co2NetFlux ? (currentFeature.co2NetFlux > 0 ? `+${currentFeature.co2NetFlux.toFixed(2)}` : currentFeature.co2NetFlux.toFixed(2)) : "+0.11"} PPM</span>
+                </span>
+              )}
+            </div>
+
+            {/* CO2 Concentration Color Spectrum Legend Bar */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-xl px-4 py-1.5 z-20 flex items-center gap-3 text-[10px] font-mono shadow-2xl">
+              <span className="flex items-center gap-1 text-cyan-400">
+                <span className="w-2 h-2 rounded-full bg-cyan-400"></span> &lt; 405 ppm (Clean Air)
+              </span>
+              <span className="text-slate-600">───</span>
+              <span className="flex items-center gap-1 text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span> 410–414 ppm (Baseline)
+              </span>
+              <span className="text-slate-600">───</span>
+              <span className="flex items-center gap-1 text-rose-400">
+                <span className="w-2 h-2 rounded-full bg-rose-400"></span> &gt; 416 ppm (Plume)
               </span>
             </div>
           </div>
@@ -790,8 +884,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           </div>
         )}
 
-        {/* MODE C REGIONAL QUICK-SELECTOR BUTTONS (Only for Night Lights in 2D) */}
-        {!isLightning && isRegional && viewFormat === "2d" && (
+        {/* MODE C REGIONAL QUICK-SELECTOR BUTTONS (Strictly for Night Lights in 2D Mode C) */}
+        {currentDataset === "night-lights" && isRegional && viewFormat === "2d" && (
           <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5 z-20">
             {Object.keys(REGION_BOUNDS).map((regName) => {
               const isCurrent = selectedRegion === regName;
@@ -812,26 +906,52 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           </div>
         )}
 
-        {/* Scientific Watermark */}
-        <div
-          className={`absolute ${
-            isLightning ? "top-3 right-3" : "bottom-3 right-3"
-          } bg-[#06080A]/85 backdrop-blur-sm px-2 py-1 rounded-lg text-[9px] font-mono text-slate-400 border border-emerald-500/20 max-w-xs text-right leading-tight z-10 hidden sm:block`}
-        >
-          {isLightning ? (
-            <>
-              <span className="text-emerald-300 font-semibold flex items-center justify-end gap-1 mb-0.5">
-                <Zap className="w-2.5 h-2.5 text-emerald-400" /> NASA SVS #5011
-              </span>
-              ISS LIS Transient Lightning Telemetry
-            </>
+        {/* RIGHT SIDE BOTTOM CORNER: Scientific Dataset Timeline & Verified Simulation Epoch */}
+        <div className="absolute bottom-3 right-3 z-20 flex flex-col items-end gap-1 pointer-events-none">
+          {isCO2 ? (
+            <div className="bg-[#06080A]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-emerald-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-white">
+                <Calendar className="w-3.5 h-3.5 text-emerald-400" />
+                <span>{currentFeature?.simulationDate || "Jan 20, 2020"}</span>
+                <span className="text-slate-500">•</span>
+                <span className="text-emerald-300 font-semibold">{currentFeature?.simulationTimeUtc || "00:00 UTC"}</span>
+              </div>
+              <div className="text-[9px] text-slate-400 mt-0.5 flex items-center gap-1.5">
+                <span>Simulation: <strong className="text-emerald-400">Jan 20 – Mar 01, 2020 (Winter 2020)</strong></span>
+                <span className="text-slate-600">•</span>
+                <span className="text-slate-300">Day {currentFeature?.simulationDay || 1}/42</span>
+              </div>
+            </div>
+          ) : isOcean ? (
+            <div className="bg-[#06080A]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-teal-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-white">
+                <Clock className="w-3.5 h-3.5 text-teal-400" />
+                <span>June 2005 – Dec 2007 (Continuous Run)</span>
+              </div>
+              <div className="text-[9px] text-slate-400 mt-0.5">
+                NASA SVS #3912 • ECCO2 Global Ocean Model
+              </div>
+            </div>
+          ) : isLightning ? (
+            <div className="bg-[#06080A]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-emerald-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-white">
+                <Zap className="w-3.5 h-3.5 text-emerald-400" />
+                <span>ISS LIS Real-Time Flight Pass</span>
+              </div>
+              <div className="text-[9px] text-slate-400 mt-0.5">
+                NASA SVS #5011 • High-Speed Optical Transient
+              </div>
+            </div>
           ) : (
-            <>
-              <span className="text-slate-300 font-semibold flex items-center justify-end gap-1 mb-0.5">
-                <Info className="w-2.5 h-2.5 text-emerald-400" /> NASA SVS #5276 / #5475 / #5634
-              </span>
-              Decadal High-Definition Telemetry
-            </>
+            <div className="bg-[#06080A]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-emerald-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-white">
+                <Calendar className="w-3.5 h-3.5 text-emerald-400" />
+                <span>2012 – 2023 Decadal Epoch</span>
+              </div>
+              <div className="text-[9px] text-slate-400 mt-0.5">
+                NASA SVS #5276 / #5475 • VIIRS Day/Night Band
+              </div>
+            </div>
           )}
         </div>
       </div>
@@ -877,8 +997,16 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               )
             ) : null}
 
+            {/* In CO2 Mode: Dynamic Plume Readout */}
+            {isCO2 && currentFeature?.co2Ppm && (
+              <span className="flex items-center gap-1 text-emerald-300 font-bold bg-emerald-950/80 border border-emerald-500/80 px-2.5 py-0.5 rounded text-[10px] shadow-[0_0_8px_rgba(0,245,155,0.2)]">
+                <Wind className="w-3 h-3 text-emerald-400" />
+                <span>{currentFeature.co2Ppm.toFixed(1)} ppm</span>
+              </span>
+            )}
+
             {/* In Mode A: Current Calendar Year Indicator */}
-            {!isLightning && currentMode === "annual" && (
+            {!isLightning && !isOcean && !isCO2 && currentMode === "annual" && (
               <span className="flex items-center gap-1 text-emerald-300 font-bold bg-emerald-950/60 border border-emerald-500/40 px-2 py-0.5 rounded text-[10px] shadow-[0_0_8px_rgba(0,245,155,0.15)]">
                 <Calendar className="w-3 h-3" />
                 <span>Year {currentYear}</span>
@@ -887,7 +1015,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
             )}
 
             {/* In Mode C: Target Region Name */}
-            {!isLightning && currentMode === "regional" && (
+            {!isLightning && !isOcean && !isCO2 && currentMode === "regional" && (
               <span className="flex items-center gap-1 text-emerald-300 font-bold bg-emerald-950/60 border border-emerald-500/40 px-2 py-0.5 rounded text-[10px]">
                 <MapPin className="w-3 h-3" />
                 <span>{selectedRegion}</span>

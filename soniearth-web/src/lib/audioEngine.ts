@@ -65,6 +65,15 @@ class SoniEarthAudioEngine {
   private isOceanDepthDroneActive = false;
   private oceanBasinId: string = "ALL";
 
+  // DYAMOND Global CO2 Atmospheric Synthesizers
+  private isCO2AtmosphereActive = false;
+  private co2Panner: Tone.Panner | null = null;
+  private co2FilterNode: Tone.Filter | null = null;
+  private co2DroneSynth: Tone.PolySynth | null = null;
+  private co2PlumeSynth: Tone.PolySynth | null = null;
+  private co2WindNode: Tone.Noise | null = null;
+  private co2WindFilter: Tone.AutoFilter | null = null;
+
   public async initialize(): Promise<boolean> {
     try {
       if (Tone.context.state !== "running") {
@@ -80,13 +89,21 @@ class SoniEarthAudioEngine {
       await Tone.start();
 
       // Master Pipeline in series:
-      // duckGain -> muteGain -> masterLimiter -> Tone.Destination & analyser
-      this.masterLimiter = new Tone.Limiter(-3.0).toDestination();
+      // duckGain -> muteGain -> masterCompressor -> masterLimiter -> Tone.Destination & analyser
+      const masterCompressor = new Tone.Compressor({
+        threshold: -12.0,
+        ratio: 2.5,
+        attack: 0.015,
+        release: 0.25,
+      });
+      this.masterLimiter = new Tone.Limiter(-2.0).toDestination();
+      masterCompressor.connect(this.masterLimiter);
+
       this.analyser = new Tone.Analyser("fft", 32);
       this.masterLimiter.connect(this.analyser);
 
       // Mute Gain (always wins)
-      this.muteGain = new Tone.Gain(this.isMuted ? 0.0 : 1.0).connect(this.masterLimiter);
+      this.muteGain = new Tone.Gain(this.isMuted ? 0.0 : 1.0).connect(masterCompressor);
 
       // Duck Gain (automated for speech)
       this.duckGain = new Tone.Gain(1.0).connect(this.muteGain);
@@ -225,6 +242,42 @@ class SoniEarthAudioEngine {
         envelope: { attack: 1.8, decay: 1.2, sustain: 1.0, release: 2.5 }
       }).connect(this.oceanPanner);
       this.oceanDepthDrone.volume.value = -24;
+
+      // 16. DYAMOND Global CO2 Spatial Panner & Dynamics
+      this.co2Panner = new Tone.Panner(0.0).connect(this.duckGain);
+      this.co2FilterNode = new Tone.Filter(350, "lowpass", -12).connect(this.co2Panner);
+
+      // 17. Atmospheric Greenhouse Baseline Pad Synth (Silky Warm Ambient Pad)
+      this.co2DroneSynth = new Tone.PolySynth(Tone.Synth, {
+        oscillator: { type: "fatsine", count: 2, spread: 15 },
+        envelope: { attack: 0.8, decay: 1.2, sustain: 0.75, release: 1.8 }
+      }).connect(this.co2FilterNode);
+      this.co2DroneSynth.volume.value = -16.0;
+
+      // 18. Plume Burst Alert Chimes (Silky Crystal Bell Chimes)
+      this.co2PlumeSynth = new Tone.PolySynth(Tone.Synth, {
+        oscillator: { type: "sine" as const },
+        envelope: { attack: 0.02, decay: 0.5, sustain: 0.0, release: 0.8 }
+      }).connect(this.co2Panner);
+      this.co2PlumeSynth.volume.value = -15.0;
+
+      // 19. Global Circulation Jetstream Wind Sweep (Subtle Pink Noise with 0.05 Hz circulation breathing)
+      this.co2WindFilter = new Tone.AutoFilter({
+        frequency: 0.05,
+        type: "sine",
+        depth: 0.4,
+        baseFrequency: 180,
+        octaves: 1.2,
+        filter: {
+          type: "bandpass",
+          rolloff: -12,
+          Q: 1.0
+        }
+      }).connect(this.co2Panner);
+      this.co2WindFilter.start();
+
+      this.co2WindNode = new Tone.Noise("pink").connect(this.co2WindFilter);
+      this.co2WindNode.volume.value = -28.0;
 
       this.isInitialized = true;
       return true;
@@ -520,6 +573,101 @@ class SoniEarthAudioEngine {
     } catch (e) {}
   }
 
+  /**
+   * Starts ambient planetary atmospheric circulation wind for DYAMOND CO2.
+   */
+  public startCO2Atmosphere() {
+    if (!this.isInitialized || this.isMuted) return;
+    try {
+      if (this.co2WindNode && this.co2WindNode.state !== "started") {
+        this.co2WindNode.start();
+        this.co2WindNode.volume.rampTo(-24, 1.5);
+      }
+      this.isCO2AtmosphereActive = true;
+    } catch (e) {}
+  }
+
+  /**
+   * Stops ambient atmospheric circulation wind for DYAMOND CO2.
+   */
+  public stopCO2Atmosphere() {
+    try {
+      if (this.co2WindNode && this.co2WindNode.state === "started") {
+        this.co2WindNode.volume.rampTo(-60, 0.5);
+        setTimeout(() => {
+          try {
+            if (this.co2WindNode && !this.isCO2AtmosphereActive) {
+              this.co2WindNode.stop();
+            }
+          } catch (e) {}
+        }, 550);
+      }
+      this.isCO2AtmosphereActive = false;
+      this.co2DroneSynth?.releaseAll();
+      this.co2PlumeSynth?.releaseAll();
+    } catch (e) {}
+  }
+
+  /**
+   * Continuously tracks and modulates atmospheric spatial panning and filter resonance
+   * in real time to match video plume migration across longitudes.
+   */
+  public updateCO2Dynamics(pan: number, tensionScore: number) {
+    if (!this.isInitialized || this.isMuted) return;
+    try {
+      if (this.co2Panner) {
+        this.co2Panner.pan.rampTo(Math.max(-0.85, Math.min(0.85, pan)), 0.25);
+      }
+      if (this.co2FilterNode) {
+        const targetCutoff = 220 + Math.min(1.0, Math.max(0.0, tensionScore)) * 1280;
+        this.co2FilterNode.frequency.rampTo(targetCutoff, 0.30);
+      }
+    } catch (e) {}
+  }
+
+  /**
+   * Triggers DYAMOND Global CO2 greenhouse atmospheric pad sound.
+   * Modulates dynamic filter cutoff based on greenhouse tension score and positions stereo pan.
+   */
+  public triggerCO2Atmosphere(
+    note: string,
+    ppm: number,
+    tensionScore: number,
+    pan = 0.0,
+    velocity = 0.45
+  ) {
+    if (!this.isInitialized || this.isMuted) return;
+    try {
+      if (this.co2Panner) {
+        this.co2Panner.pan.rampTo(Math.max(-0.85, Math.min(0.85, pan)), 0.35);
+      }
+      if (this.co2FilterNode) {
+        // Cutoff opens from 220 Hz (clean baseline) up to 1500 Hz (high emission forcing)
+        const targetCutoff = 220 + Math.min(1.0, Math.max(0.0, tensionScore)) * 1280;
+        this.co2FilterNode.frequency.rampTo(targetCutoff, 0.45);
+      }
+      this.co2DroneSynth?.triggerAttackRelease(note, 1.6, undefined, velocity);
+    } catch (e) {}
+  }
+
+  /**
+   * Triggers high-emission plume burst alert chime (fires when localized carbon flux surges).
+   */
+  public triggerCO2PlumeBurst(note: string, pan = 0.0, velocity = 0.38) {
+    if (!this.isInitialized || this.isMuted || !this.co2PlumeSynth) return;
+    try {
+      if (this.co2Panner) {
+        this.co2Panner.pan.rampTo(Math.max(-0.85, Math.min(0.85, pan)), 0.15);
+      }
+      // Transpose chime to upper sparkling octave (e.g. C5/E5/G5) to highlight plume surges
+      let chimeNote = note;
+      if (note.includes("2")) chimeNote = note.replace("2", "4");
+      else if (note.includes("3")) chimeNote = note.replace("3", "5");
+      else if (note.includes("4")) chimeNote = note.replace("4", "5");
+      this.co2PlumeSynth.triggerAttackRelease(chimeNote, 0.45, undefined, velocity);
+    } catch (e) {}
+  }
+
   public stopAll() {
     this.padSynthCenter?.releaseAll();
     this.padSynthWest?.releaseAll();
@@ -535,6 +683,9 @@ class SoniEarthAudioEngine {
     this.oceanRippleSynth?.releaseAll();
     this.stopOrbitalDrone();
     this.stopOceanAmbience();
+    this.stopCO2Atmosphere();
+    this.co2DroneSynth?.releaseAll();
+    this.co2PlumeSynth?.releaseAll();
     if (this.isOceanDepthDroneActive && this.oceanDepthDrone) {
       this.oceanDepthDrone.triggerRelease();
       this.isOceanDepthDroneActive = false;

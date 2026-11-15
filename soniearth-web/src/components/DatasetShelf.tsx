@@ -59,15 +59,15 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       id: "dyamond-co2",
       key: "4",
       title: "DYAMOND Global CO2",
-      svs: "NASA SVS #5118",
+      svs: "NASA SVS #5436",
       years: "2020",
-      description: "Planetary carbon respiration cycle mapped to ambient harmonic pads.",
+      description: "Atmospheric carbon respiration & plume transport mapped to harmonic pads and emission chimes.",
       icon: Wind,
-      color: "from-emerald-700 to-teal-800",
-      activeRing: "border-emerald-500/40",
-      isAvailable: false,
-      badge: "Coming in Phase 2",
-      badgeColor: "bg-black/60 text-slate-500 border-slate-800",
+      color: "from-emerald-400 to-teal-500",
+      activeRing: "border-emerald-400 shadow-[0_0_20px_rgba(0,245,155,0.4)]",
+      isAvailable: true,
+      badge: "Phase 2 Live",
+      badgeColor: "bg-emerald-950/80 text-emerald-300 border-emerald-500/50",
     },
   ];
 
@@ -78,7 +78,7 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
           <span>NASA Planetary Playlist Shelf</span>
           <span className="text-slate-600">•</span>
           <span className="text-[11px] font-mono text-slate-400 font-normal">
-            Phase 1 & Phase 2 Datasets Live • Keys [1], [2] & [3] Active
+            Phase 1 & Phase 2 Datasets Live • Keys [1], [2], [3] & [4] Active
           </span>
         </h3>
       </div>

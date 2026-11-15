@@ -2,12 +2,15 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
-import { RotateCcw, Play, Pause, ZoomIn, ZoomOut, Sparkles } from "lucide-react";
+import { RotateCcw, Play, Pause, ZoomIn, ZoomOut, Sparkles, Calendar, Wind, Clock } from "lucide-react";
+import { FrameFeature } from "@/types";
 
 interface InteractiveGlobeProps {
   currentDataset?: string;
   currentMode: "annual" | "change" | "regional";
   currentYear?: number;
+  currentTime?: number;
+  currentFeature?: FrameFeature | null;
   textureMode?: "annual" | "change" | "sos";
   isPlaying?: boolean;
   depthMeters?: number;
@@ -19,6 +22,8 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
   currentDataset = "night-lights",
   currentMode,
   currentYear = 2012,
+  currentTime = 0,
+  currentFeature,
   isPlaying = false,
   depthMeters = 0,
   selectedBasin = "ALL",
@@ -31,6 +36,9 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
   const materialRef = useRef<THREE.MeshBasicMaterial | null>(null);
   const atmosMatRef = useRef<THREE.MeshBasicMaterial | null>(null);
   const basinMarkersRef = useRef<THREE.Group | null>(null);
+  const co2MarkersRef = useRef<THREE.Group | null>(null);
+  const videoElementRef = useRef<HTMLVideoElement | null>(null);
+  const videoTextureRef = useRef<THREE.VideoTexture | null>(null);
   const textureLoaderRef = useRef<THREE.TextureLoader | null>(null);
   const cachedTexturesRef = useRef<Record<string, THREE.Texture>>({});
 
@@ -164,6 +172,42 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
       sphere.add(basinGroup);
     }
 
+    // 3D Glowing Continental Emission Plume Hotspots for DYAMOND CO2
+    if (currentDataset === "dyamond-co2") {
+      const co2Group = new THREE.Group();
+      co2MarkersRef.current = co2Group;
+
+      const createCO2Marker = (lat: number, lon: number, colorHex: number) => {
+        const latRad = lat * (Math.PI / 180);
+        const lonRad = lon * (Math.PI / 180);
+        const r = 1.022;
+        const x = r * Math.cos(latRad) * Math.sin(lonRad);
+        const y = r * Math.sin(latRad);
+        const z = -r * Math.cos(latRad) * Math.cos(lonRad);
+
+        const markerGeo = new THREE.RingGeometry(0.028, 0.052, 32);
+        const markerMat = new THREE.MeshBasicMaterial({
+          color: new THREE.Color(colorHex),
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.85,
+        });
+        const marker = new THREE.Mesh(markerGeo, markerMat);
+        marker.position.set(x, y, z);
+        marker.lookAt(x * 2, y * 2, z * 2);
+        return marker;
+      };
+
+      // North America Industrial Corridor (38°N, -95°W)
+      co2Group.add(createCO2Marker(38, -95, 0x00f59b));
+      // Central EMEA / Europe & Africa (48°N, 15°E)
+      co2Group.add(createCO2Marker(48, 15, 0xf59e0b));
+      // East Asia Industrial Basin (34°N, 115°E)
+      co2Group.add(createCO2Marker(34, 115, 0xf43f5e));
+
+      sphere.add(co2Group);
+    }
+
     // Background Stars
     const starGeo = new THREE.BufferGeometry();
     const starCount = 500;
@@ -234,6 +278,18 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
         });
       }
 
+      // Pulse CO2 continental emission plume markers
+      if (co2MarkersRef.current) {
+        const time = performance.now() * 0.003;
+        co2MarkersRef.current.children.forEach((child, i) => {
+          if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshBasicMaterial) {
+            child.material.opacity = 0.50 + 0.45 * Math.sin(time * 2.5 + i * 2.0);
+            const scale = 1.0 + 0.18 * Math.sin(time * 2.5 + i * 2.0);
+            child.scale.set(scale, scale, scale);
+          }
+        });
+      }
+
       renderer.render(scene, camera);
     };
     animate();
@@ -278,8 +334,16 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
     };
   }, []);
 
-  // Dynamic Texture Update
+  // Dynamic Texture Update (Frame-synchronized for DYAMOND CO2 & Annual Evolution for Night Lights)
   useEffect(() => {
+    if (currentDataset === "dyamond-co2") {
+      // Dynamic frame sequence across the 39.2s timeline (frames 1 to 20)
+      const frameIdx = 1 + Math.min(19, Math.max(0, Math.floor((currentTime / 39.2) * 20)));
+      const frameUrl = `/datasets/dyamond-co2/frames/frame_${String(frameIdx).padStart(4, "0")}.jpg`;
+      applyTexture(frameUrl);
+      return;
+    }
+
     let targetUrl = `/datasets/night-lights/annual/year_${currentYear}.jpg`;
     if (currentDataset === "ocean-currents") {
       targetUrl = "/datasets/ocean-currents/ocean_currents_globe_2k.jpg";
@@ -287,7 +351,26 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
       targetUrl = "/datasets/night-lights/globe_change_2k.jpg";
     }
     applyTexture(targetUrl);
-  }, [currentDataset, currentYear, currentMode, activeTextureType, applyTexture]);
+  }, [currentDataset, currentYear, currentTime, currentMode, activeTextureType, applyTexture]);
+
+  // Dynamic Atmospheric Halo Color & Tension Modulation for CO2
+  useEffect(() => {
+    if (currentDataset !== "dyamond-co2" || !atmosMatRef.current) return;
+    const tension = currentFeature?.harmonicTensionScore ?? 0.5;
+    const isHigh = currentFeature?.pitchLevel === "HIGH";
+    const isLow = currentFeature?.pitchLevel === "LOW";
+
+    if (isHigh) {
+      atmosMatRef.current.color.setRGB(0.95, 0.25, 0.35); // Pulsing Rose for Plumes
+      atmosMatRef.current.opacity = 0.22 + tension * 0.15;
+    } else if (isLow) {
+      atmosMatRef.current.color.setRGB(0.10, 0.75, 0.95); // Oceanic Cyan for Clean Air
+      atmosMatRef.current.opacity = 0.16;
+    } else {
+      atmosMatRef.current.color.setRGB(0.00, 0.96, 0.60); // Laser Mint for Equilibrium
+      atmosMatRef.current.opacity = 0.18 + tension * 0.10;
+    }
+  }, [currentDataset, currentFeature]);
 
   // Thermocline Depth Tinting on 3D Globe & Atmospheric Glow
   useEffect(() => {
@@ -547,22 +630,54 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
           </div>
         )}
 
-        {/* Mode A: Clean Annual Indicator (No Decadal Change option) */}
-        {currentDataset !== "ocean-currents" && currentMode === "annual" && (
+        {/* DYAMOND Global CO2 Dynamic Telemetry Indicator */}
+        {currentDataset === "dyamond-co2" && (
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="font-mono text-[10px] font-bold text-emerald-300 bg-emerald-950/85 px-2.5 py-1 rounded-lg border border-emerald-500/50 shadow-xl flex items-center gap-1">
+              <Wind className="w-3 h-3 text-emerald-400" />
+              NASA GEOS 3D
+            </span>
+            <span className="font-mono text-[10px] font-bold text-white bg-slate-950/90 px-2.5 py-1 rounded-lg border border-emerald-500/30 shadow-xl flex items-center gap-1.5">
+              <Calendar className="w-3 h-3 text-emerald-400" />
+              <span>{currentFeature?.simulationDate || "Jan 20, 2020"}</span>
+              <span className="text-slate-600">•</span>
+              <span className="text-emerald-300">Day {currentFeature?.simulationDay || 1}/42</span>
+            </span>
+            <span className="font-mono text-[10px] font-bold text-white bg-slate-950/90 px-2.5 py-1 rounded-lg border border-emerald-500/30 shadow-xl flex items-center gap-1.5">
+              <span className="text-slate-400">PPM:</span>
+              <span className="text-emerald-300 font-bold">{currentFeature?.co2Ppm ? currentFeature.co2Ppm.toFixed(1) : "415.0"}</span>
+              <span className="text-slate-600">•</span>
+              <span
+                className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
+                  currentFeature?.pitchLevel === "HIGH"
+                    ? "bg-rose-950 text-rose-300 border border-rose-500/80 animate-pulse"
+                    : currentFeature?.pitchLevel === "LOW"
+                    ? "bg-cyan-950 text-cyan-300 border border-cyan-500/60"
+                    : "bg-emerald-950 text-emerald-300 border border-emerald-500/60"
+                }`}
+              >
+                {currentFeature?.pitchLevel || "MID"} PITCH ({currentFeature?.activeNote || "G3"})
+              </span>
+            </span>
+          </div>
+        )}
+
+        {/* Mode A: Clean Annual Indicator (Only for Night Lights) */}
+        {currentDataset === "night-lights" && currentMode === "annual" && (
           <span className="font-mono text-[10px] font-bold text-sky-300 bg-sky-950/85 px-2.5 py-1 rounded-lg border border-sky-700/60 shadow-xl flex items-center gap-1">
             Annual Evolution • Year {currentYear}
           </span>
         )}
 
-        {/* Mode B: Clean Decadal Change Indicator (No Annual option) */}
-        {currentMode === "change" && (
+        {/* Mode B: Clean Decadal Change Indicator (Only for Night Lights) */}
+        {currentDataset === "night-lights" && currentMode === "change" && (
           <span className="font-mono text-[10px] font-bold text-emerald-300 bg-emerald-950/85 px-2.5 py-1 rounded-lg border border-emerald-500/50 shadow-xl flex items-center gap-1">
             Decadal Change
           </span>
         )}
 
-        {/* Mode C: Both Options Available to Compare Together */}
-        {currentMode === "regional" && (
+        {/* Mode C: Both Options Available to Compare Together (Only for Night Lights) */}
+        {currentDataset === "night-lights" && currentMode === "regional" && (
           <div className="flex items-center bg-[#06080A]/90 backdrop-blur-md rounded-lg border border-emerald-500/30 p-0.5 text-[10px] font-mono shadow-xl">
             <button
               onClick={() => setActiveTextureType("annual")}
