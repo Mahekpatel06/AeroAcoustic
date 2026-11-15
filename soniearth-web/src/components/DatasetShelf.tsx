@@ -31,15 +31,15 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       id: "ocean-currents",
       key: "2",
       title: "Sea Surface Currents",
-      svs: "NASA SVS #5283",
-      years: "2011–2012",
-      description: "Thermal fluid motion mapped to warm cello and dynamic stereo panning.",
+      svs: "NASA SVS #3912",
+      years: "2005–2007",
+      description: "ECCO2 thermal fluid motion & streamlines mapped to deep cello, warm string swells, and dynamic stereo panning.",
       icon: Waves,
       color: "from-teal-600 to-emerald-700",
-      activeRing: "border-teal-400",
-      isAvailable: false,
-      badge: "Coming in Phase 2",
-      badgeColor: "bg-black/60 text-slate-500 border-slate-800",
+      activeRing: "border-teal-400 shadow-[0_0_15px_rgba(45,212,191,0.35)]",
+      isAvailable: true,
+      badge: "Phase 2 Live",
+      badgeColor: "bg-teal-950/80 text-teal-300 border-teal-700/60",
     },
     {
       id: "iss-lightning",
@@ -78,7 +78,7 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
           <span>NASA Planetary Playlist Shelf</span>
           <span className="text-slate-600">•</span>
           <span className="text-[11px] font-mono text-slate-400 font-normal">
-            Keys [1] & [3] Active
+            Phase 1 & Phase 2 Datasets Live • Keys [1], [2] & [3] Active
           </span>
         </h3>
       </div>

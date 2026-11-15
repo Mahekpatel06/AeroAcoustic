@@ -13,6 +13,8 @@ interface AcousticStageProps {
   activeFreq: number;
   activeScaleName?: string;
   activeInstrument?: string;
+  oceanAudioMode?: "procedural" | "stem";
+  onToggleOceanAudioMode?: () => void;
 }
 
 export const AcousticStage: React.FC<AcousticStageProps> = ({
@@ -23,9 +25,14 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
   activeFreq,
   activeScaleName = "C Major Pentatonic",
   activeInstrument = "Ambient Sine Pad",
+  oceanAudioMode = "procedural",
+  onToggleOceanAudioMode,
 }) => {
   const isLightning = currentDataset === "iss-lightning";
+  const isOcean = currentDataset === "ocean-currents";
   const lumaPct = Math.round((currentFeature?.globalMeanBrightness ?? 0.023) * 1000) / 10;
+  const sstTemp = (currentFeature as any)?.temperatureCelsius ?? 18.0;
+  const flowVelocity = (currentFeature as any)?.currentVelocityKnots ?? 1.5;
   const [barHeights, setBarHeights] = useState<number[]>([10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]);
   const animationFrameRef = useRef<number | null>(null);
 
@@ -66,14 +73,30 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
   return (
     <div className="relative flex flex-col bg-[#080D12]/85 backdrop-blur-xl border border-emerald-500/25 rounded-2xl p-4 shadow-[0_8px_32px_rgba(0,0,0,0.8)] overflow-hidden justify-between h-full">
       {/* Header */}
-      <div className="flex items-center justify-between mb-2 text-xs">
-        <span className="font-semibold text-white uppercase tracking-wider text-[11px] flex items-center gap-1.5 drop-shadow-[0_0_8px_rgba(0,245,155,0.3)]">
-          <Waves className="w-3.5 h-3.5 text-emerald-400" />
+      <div className="flex items-center justify-between mb-3 text-xs gap-2">
+        <span className="font-semibold text-slate-200 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+          <Waves className="w-3.5 h-3.5 text-sky-400" />
           Acoustic Frequency Stage
         </span>
-        <span className="font-mono text-[11px] text-emerald-300 font-semibold px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 truncate max-w-[260px] shadow-[0_0_8px_rgba(0,245,155,0.15)]">
-          {activeScaleName}
-        </span>
+        <div className="flex items-center gap-2">
+          {isOcean && onToggleOceanAudioMode && (
+            <button
+              onClick={onToggleOceanAudioMode}
+              className={`flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-semibold border transition-all duration-200 ${
+                oceanAudioMode === "stem"
+                  ? "bg-teal-900/60 border-teal-500/60 text-teal-200 shadow-[0_0_8px_rgba(45,212,191,0.3)]"
+                  : "bg-slate-800/80 border-slate-700 text-teal-300 hover:border-teal-500/40"
+              }`}
+              title="Click to toggle between Smooth Real-time Sonification and Master WAV Soundtrack"
+            >
+              <Radio className="w-2.5 h-2.5 text-teal-400" />
+              {oceanAudioMode === "stem" ? "Master WAV" : "Smooth Synth"}
+            </button>
+          )}
+          <span className="font-mono text-[11px] text-yellow-400 font-semibold px-2 py-0.5 rounded bg-yellow-950/40 border border-yellow-800/40 truncate max-w-[210px]">
+            {activeScaleName}
+          </span>
+        </div>
       </div>
 
       {/* Center Note & Frequency Metrics */}
@@ -81,43 +104,61 @@ export const AcousticStage: React.FC<AcousticStageProps> = ({
         {/* Active Note Card */}
         <div className="bg-black/60 border border-emerald-500/20 rounded-xl p-3 flex flex-col justify-between shadow-inner">
           <div className="text-[10px] text-slate-400 uppercase tracking-wider font-mono flex items-center gap-1">
-            <Music className="w-3 h-3 text-emerald-400" />
+            <Music className={`w-3 h-3 ${isOcean ? "text-teal-400" : isLightning ? "text-amber-400" : "text-sky-400"}`} />
             Active Note
           </div>
           <div className="my-1 flex items-baseline gap-2">
-            <span className="text-3xl font-bold font-mono tracking-tight text-white drop-shadow-[0_0_12px_rgba(0,245,155,0.5)]">
-              {activeNote || (isLightning ? "A1" : "C3")}
+            <span className={`text-3xl font-bold font-mono tracking-tight ${
+              isOcean
+                ? "text-teal-300 drop-shadow-[0_0_10px_rgba(45,212,191,0.4)]"
+                : isLightning
+                ? currentFeature?.isStrike
+                  ? "text-yellow-300 drop-shadow-[0_0_12px_#f59e0b] animate-pulse"
+                  : "text-amber-400"
+                : "text-sky-400"
+            }`}>
+              {activeNote || (isOcean ? "C3" : isLightning ? "A1" : "C3")}
             </span>
-            <span className="text-xs font-mono text-emerald-400/80">
-              {activeFreq ? `${activeFreq.toFixed(1)} Hz` : isLightning ? "55.0 Hz" : "130.8 Hz"}
+            <span className="text-xs font-mono text-slate-400">
+              {activeFreq ? `${activeFreq.toFixed(1)} Hz` : isOcean ? "130.8 Hz" : isLightning ? "55.0 Hz" : "130.8 Hz"}
             </span>
           </div>
-          <div className="text-[11px] font-mono truncate text-emerald-300">
-            {activeInstrument}
+          <div className={`text-[11px] font-mono truncate ${isOcean ? "text-teal-300" : isLightning ? "text-amber-300" : "text-emerald-400"}`}>
+            {isOcean && oceanAudioMode === "stem" ? "Master WAV Soundtrack (Hydrophone Swell)" : activeInstrument}
           </div>
         </div>
 
-        {/* Dynamic Metric Gauge: Optical Energy (Lightning) or Global Radiance (Night Lights) */}
-        <div className="bg-black/60 border border-emerald-500/20 rounded-xl p-3 flex flex-col justify-between shadow-inner">
+        {/* Dynamic Metric Gauge: Optical Energy (Lightning), SST (Ocean), or Global Radiance (Night Lights) */}
+        <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
           <div className="text-[10px] text-slate-400 uppercase tracking-wider font-mono flex items-center gap-1">
-            <Radio className="w-3 h-3 text-emerald-400" />
-            {isLightning ? "Optical Flash Energy" : "Global Radiance"}
+            <Radio className={`w-3 h-3 ${isOcean ? "text-teal-400" : isLightning ? "text-amber-400" : "text-emerald-400"}`} />
+            {isOcean ? "Sea Surface Temp (SST)" : isLightning ? "Optical Flash Energy" : "Global Radiance"}
           </div>
           <div className="my-1 flex items-baseline gap-2">
-            <span className="text-3xl font-bold font-mono text-emerald-400 drop-shadow-[0_0_10px_rgba(0,245,155,0.4)]">
-              {isLightning
+            <span className={`text-3xl font-bold font-mono ${isOcean ? "text-teal-300" : isLightning ? "text-amber-400" : "text-emerald-400"}`}>
+              {isOcean
+                ? `${sstTemp.toFixed(1)}°C`
+                : isLightning
                 ? `${currentFeature?.strikeEnergyMicroJoules ? currentFeature.strikeEnergyMicroJoules.toFixed(0) : "0"} µJ`
                 : `${lumaPct.toFixed(1)}%`}
             </span>
-            <span className="text-xs text-slate-500">
-              {isLightning ? "LIS CCD" : "Rec. 601"}
+            <span className="text-xs text-slate-400">
+              {isOcean ? `${flowVelocity.toFixed(1)} kts • ECCO2` : isLightning ? "LIS CCD" : "Rec. 601"}
             </span>
           </div>
           <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-emerald-500/20">
             <div
-              className="h-full rounded-full transition-all duration-300 bg-gradient-to-r from-emerald-600 via-emerald-400 to-[#00F59B] shadow-[0_0_8px_rgba(0,245,155,0.6)]"
+              className={`h-full rounded-full transition-all duration-300 ${
+                isOcean
+                  ? "bg-gradient-to-r from-cyan-500 via-teal-400 to-rose-400 shadow-[0_0_8px_rgba(45,212,191,0.5)]"
+                  : isLightning
+                  ? "bg-gradient-to-r from-amber-500 to-yellow-300 shadow-[0_0_8px_#f59e0b]"
+                  : "bg-gradient-to-r from-sky-500 to-emerald-400"
+              }`}
               style={{
-                width: isLightning
+                width: isOcean
+                  ? `${Math.min(100, Math.max(5, (sstTemp / 32.0) * 100))}%`
+                  : isLightning
                   ? `${Math.min(100, Math.max(5, ((currentFeature?.strikeEnergyMicroJoules || 0) / 1200) * 100))}%`
                   : `${Math.min(100, Math.max(5, lumaPct * 25))}%`,
               }}

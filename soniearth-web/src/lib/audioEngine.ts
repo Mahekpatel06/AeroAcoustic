@@ -22,6 +22,7 @@ class SoniEarthAudioEngine {
   private isMuted = false;
   private isDucked = false;
   private isDroneActive = false;
+  private isOceanDroneActive = false;
 
   // Master Gain Stage
   private masterLimiter: Tone.Limiter | null = null;
@@ -39,6 +40,7 @@ class SoniEarthAudioEngine {
   private glassPanner: Tone.Panner | null = null;
   private modalPanner: Tone.Panner | null = null;
   private lightningPanner: Tone.Panner | null = null;
+  private oceanPanner: Tone.Panner | null = null;
 
   // Dedicated Synthesizers
   private padSynthCenter: Tone.PolySynth | null = null;
@@ -51,6 +53,20 @@ class SoniEarthAudioEngine {
   private modalSynth: Tone.PolySynth | null = null;
   private lightningStrikeSynth: Tone.PolySynth | null = null;
   private subDroneSynth: Tone.Synth | null = null;
+  private oceanCelloSynth: Tone.MonoSynth | null = null;
+  private oceanStringSynth: Tone.PolySynth | null = null;
+  private oceanRippleSynth: Tone.PolySynth | null = null;
+  private oceanNoiseNode: Tone.Noise | null = null;
+  private oceanFilterNode: Tone.AutoFilter | null = null;
+  private oceanCelloFilter: Tone.Filter | null = null;
+  private oceanStringFilter: Tone.Filter | null = null;
+  private oceanStemPlayer: Tone.Player | null = null;
+  private isOceanStemMode = false;
+  private isStemPlaying = false;
+  private oceanDepthMeters: number = 0;
+  private oceanDepthDrone: Tone.Synth | null = null;
+  private isOceanDepthDroneActive = false;
+  private oceanBasinId: string = "ALL";
 
   public async initialize(): Promise<boolean> {
     try {
@@ -159,6 +175,71 @@ class SoniEarthAudioEngine {
         envelope: { attack: 1.2, decay: 0.5, sustain: 1.0, release: 1.5 }
       }).connect(this.centerPanner);
       this.subDroneSynth.volume.value = -14;
+
+      // 10. Ocean Currents Spatial Panner
+      this.oceanPanner = new Tone.Panner(0.0).connect(this.duckGain);
+
+      // 11. Ocean Cello Synth (Cold Waters: Deep Submerged Velvet Sine/Triangle)
+      this.oceanCelloFilter = new Tone.Filter(180, "lowpass", -24).connect(this.oceanPanner);
+      this.oceanCelloSynth = new Tone.MonoSynth({
+        oscillator: { type: "triangle" as const },
+        filter: { Q: 1.0, type: "lowpass" as const, rolloff: -24 },
+        envelope: { attack: 1.2, decay: 1.2, sustain: 0.9, release: 2.5 },
+        filterEnvelope: { attack: 0.8, decay: 0.8, sustain: 0.7, baseFrequency: 110, octaves: 1.5 }
+      }).connect(this.oceanCelloFilter);
+      this.oceanCelloSynth.volume.value = -11;
+
+      // 12. Ocean String Swell (Warm Waters: Silky Low-Pass Filtered Chorused Pad)
+      this.oceanStringFilter = new Tone.Filter(550, "lowpass", -24).connect(this.oceanPanner);
+      this.oceanStringSynth = new Tone.PolySynth(Tone.Synth, {
+        oscillator: { type: "sine" as const },
+        envelope: { attack: 1.4, decay: 1.6, sustain: 0.9, release: 3.0 }
+      }).connect(this.oceanStringFilter);
+      this.oceanStringSynth.volume.value = -13;
+
+      // 13. Ocean Ripple Arpeggiator (Soft Liquid Droplets)
+      this.oceanRippleSynth = new Tone.PolySynth(Tone.Synth, {
+        oscillator: { type: "sine" as const },
+        envelope: { attack: 0.06, decay: 0.35, sustain: 0.05, release: 0.6 }
+      }).connect(this.oceanPanner);
+      this.oceanRippleSynth.volume.value = -19;
+
+      // 14. Ocean Hydrophone Fluid Wave Swell (Pink noise passed through a 0.12 Hz slow tidal filter)
+      this.oceanFilterNode = new Tone.AutoFilter({
+        frequency: 0.12,
+        type: "sine",
+        depth: 0.7,
+        baseFrequency: 110,
+        octaves: 2.0,
+        filter: {
+          type: "lowpass",
+          rolloff: -24,
+          Q: 1.5
+        }
+      }).connect(this.oceanPanner);
+      this.oceanFilterNode.start();
+
+      this.oceanNoiseNode = new Tone.Noise("pink").connect(this.oceanFilterNode);
+      this.oceanNoiseNode.volume.value = -24;
+
+      // 15. Ocean Master Stem Player (Pre-rendered 66.7s studio WAV soundtrack)
+      try {
+        this.oceanStemPlayer = new Tone.Player({
+          url: "/datasets/ocean-currents/audio/ocean_currents_ambient.wav",
+          loop: true,
+          autostart: false,
+          volume: -8,
+        }).connect(this.duckGain);
+      } catch (e) {
+        console.warn("Ocean stem player load deferred:", e);
+      }
+
+      // 16. Infrasonic Abyssal Depth Sub-Drone (Reaches 40 Hz at 1000m depth)
+      this.oceanDepthDrone = new Tone.Synth({
+        oscillator: { type: "sine" as const },
+        envelope: { attack: 1.8, decay: 1.2, sustain: 1.0, release: 2.2 }
+      }).connect(this.oceanPanner);
+      this.oceanDepthDrone.volume.value = -35;
 
       this.isInitialized = true;
       return true;
@@ -283,6 +364,98 @@ class SoniEarthAudioEngine {
   }
 
   /**
+   * Starts the organic ocean hydrophone wave ambience (pink noise tidal swell).
+   */
+  public startOceanAmbience() {
+    if (this.isOceanStemMode) return;
+    if (!this.isInitialized || this.isMuted || !this.oceanNoiseNode || this.isOceanDroneActive) return;
+    try {
+      if (Tone.context.state !== "running") {
+        Tone.context.resume();
+      }
+      this.oceanNoiseNode.start();
+      this.isOceanDroneActive = true;
+    } catch (e) {
+      // Ignore if already active
+    }
+  }
+
+  /**
+   * Stops the organic ocean hydrophone wave ambience.
+   */
+  public stopOceanAmbience() {
+    if (!this.oceanNoiseNode) return;
+    try {
+      if (this.isOceanDroneActive) {
+        this.oceanNoiseNode.stop();
+        this.isOceanDroneActive = false;
+      }
+    } catch (e) {
+      this.isOceanDroneActive = false;
+    }
+  }
+
+  /**
+   * Configures Ocean Current audio playback mode:
+   * - "procedural": Soft, real-time procedural data sonification with low-pass filters.
+   * - "stem": High-fidelity studio master soundtrack (ocean_currents_ambient.wav).
+   */
+  public setOceanAudioMode(mode: "procedural" | "stem") {
+    this.isOceanStemMode = mode === "stem";
+    if (this.isOceanStemMode) {
+      this.oceanCelloSynth?.triggerRelease();
+      this.oceanStringSynth?.releaseAll();
+      this.oceanRippleSynth?.releaseAll();
+      this.stopOceanAmbience();
+    } else {
+      this.stopOceanStem();
+    }
+  }
+
+  public getOceanAudioMode(): "procedural" | "stem" {
+    return this.isOceanStemMode ? "stem" : "procedural";
+  }
+
+  public isOceanStemActive(): boolean {
+    return this.isOceanStemMode;
+  }
+
+  public startOceanStem(seekTime = 0) {
+    if (!this.isInitialized || this.isMuted || !this.oceanStemPlayer) return;
+    try {
+      if (Tone.context.state !== "running") Tone.context.resume();
+      if (this.oceanStemPlayer.loaded) {
+        this.oceanStemPlayer.start(undefined, Math.max(0, seekTime % 66.7));
+        this.isStemPlaying = true;
+      }
+    } catch (e) {
+      // Ignore transient audio context error
+    }
+  }
+
+  public stopOceanStem() {
+    if (!this.oceanStemPlayer) return;
+    try {
+      if (this.isStemPlaying) {
+        this.oceanStemPlayer.stop();
+        this.isStemPlaying = false;
+      }
+    } catch (e) {
+      this.isStemPlaying = false;
+    }
+  }
+
+  public seekOceanStem(timeSec: number) {
+    if (!this.oceanStemPlayer || !this.oceanStemPlayer.loaded) return;
+    if (this.isStemPlaying) {
+      try {
+        this.oceanStemPlayer.stop();
+        this.oceanStemPlayer.start(undefined, Math.max(0, timeSec % 66.7));
+      } catch (e) {}
+    }
+  }
+
+  /**
    * Triggers a lightning strike chime with dynamic spatial stereo panning.
    */
   public triggerLightningStrike(note: string, velocity = 0.85, pan = 0.0) {
@@ -297,6 +470,117 @@ class SoniEarthAudioEngine {
     }
   }
 
+  /**
+   * Sets the ocean thermocline depth level (0m to 1000m).
+   * Modulates low-pass filter cutoff frequencies down to 90 Hz
+   * and triggers the 40 Hz infrasonic abyssal sub-drone at deep levels.
+   */
+  public setOceanDepth(depthMeters: number) {
+    this.oceanDepthMeters = Math.max(0, Math.min(1000, depthMeters));
+    const depthRatio = this.oceanDepthMeters / 1000.0;
+
+    // Filter frequency modulation
+    if (this.oceanStringFilter) {
+      const targetCutoff = 550 * (1 - depthRatio * 0.82) + 90;
+      this.oceanStringFilter.frequency.rampTo(targetCutoff, 0.25);
+    }
+    if (this.oceanCelloFilter) {
+      const targetCutoff = 180 * (1 - depthRatio * 0.55) + 70;
+      this.oceanCelloFilter.frequency.rampTo(targetCutoff, 0.25);
+    }
+
+    // Infrasonic Abyssal Drone (down to 40 Hz at 1000m)
+    if (this.oceanDepthDrone) {
+      if (this.oceanDepthMeters > 50) {
+        // Interpolate pitch down to 40.0 Hz (D1/Eb1)
+        const targetHz = Math.round((65.0 - depthRatio * 25.0) * 10) / 10;
+        const targetVol = -28 + depthRatio * 15; // Ramps up to -13 dB
+        this.oceanDepthDrone.volume.rampTo(targetVol, 0.25);
+
+        if (!this.isOceanDepthDroneActive && Tone.context.state === "running") {
+          try {
+            this.oceanDepthDrone.triggerAttack(targetHz);
+            this.isOceanDepthDroneActive = true;
+          } catch (e) {}
+        } else if (this.isOceanDepthDroneActive) {
+          try {
+            this.oceanDepthDrone.setNote(targetHz);
+          } catch (e) {}
+        }
+      } else {
+        if (this.isOceanDepthDroneActive) {
+          this.oceanDepthDrone.triggerRelease();
+          this.isOceanDepthDroneActive = false;
+        }
+      }
+    }
+  }
+
+  public getOceanDepth(): number {
+    return this.oceanDepthMeters;
+  }
+
+  public setOceanBasin(basinId: string, pan = 0.0) {
+    this.oceanBasinId = basinId;
+    if (this.oceanPanner) {
+      this.oceanPanner.pan.rampTo(Math.max(-1.0, Math.min(1.0, pan)), 0.35);
+    }
+  }
+
+  public getOceanBasin(): string {
+    return this.oceanBasinId;
+  }
+
+  /**
+   * Triggers sea surface currents sonification based on water temperature and velocity.
+   * Completely redesigned with low-pass filters for a silky, gentle, warm ocean swell.
+   * Supports thermocline depth layers (0m to 1000m) down to 40 Hz infrasound.
+   */
+  public triggerOceanCurrent(note: string, sstCelsius: number, pan = 0.0, velocity = 0.65) {
+    if (!this.isInitialized || this.isMuted || this.isOceanStemMode) return;
+    try {
+      if (this.oceanPanner) {
+        this.oceanPanner.pan.rampTo(Math.max(-1.0, Math.min(1.0, pan)), 0.1);
+      }
+
+      // Depth-adjusted temperature and pitch (thermocline gradient)
+      const depthFactor = Math.exp(-this.oceanDepthMeters / 350.0);
+      const effectiveSST = sstCelsius * depthFactor + 2.0;
+
+      let effectiveNote = note;
+      if (this.oceanDepthMeters >= 800) {
+        effectiveNote = "D1"; // 40 Hz Infrasonic sub-bass
+      } else if (this.oceanDepthMeters >= 450) {
+        effectiveNote = "A1"; // 55 Hz Deep sub-bass
+      } else if (effectiveSST < 10.0) {
+        effectiveNote = "D2"; // Polar cold cello
+      } else if (effectiveSST < 18.0) {
+        effectiveNote = "A2"; // Temperate
+      }
+
+      if (effectiveSST < 14.0 || this.oceanDepthMeters > 300) {
+        // Cold polar waters or deep bathypelagic layers: deep submerged velvet cello bass (lowpass filtered @ 180Hz)
+        this.oceanCelloSynth?.triggerAttackRelease(effectiveNote, 2.2, undefined, velocity);
+      } else {
+        // Warm sunlit surface waters: silky warm harmonic string pad (lowpass filtered @ 550Hz)
+        this.oceanStringSynth?.triggerAttackRelease(effectiveNote, 2.0, undefined, velocity * 0.85);
+      }
+    } catch (e) {
+      // Ignore transient polyphony warnings
+    }
+  }
+
+  /**
+   * Triggers oceanic fluid ripple arpeggiator accents (soft liquid droplets).
+   */
+  public triggerOceanRipple(note: string, pan = 0.0, velocity = 0.5) {
+    // Surface streamline plucks are silenced in the deep ocean below 200m
+    if (!this.isInitialized || this.isMuted || this.isOceanStemMode || this.oceanDepthMeters > 200 || !this.oceanRippleSynth) return;
+    try {
+      this.oceanRippleSynth.triggerAttackRelease(note, 0.4, undefined, velocity);
+    } catch (e) {}
+  }
+
   public stopAll() {
     this.padSynthCenter?.releaseAll();
     this.padSynthWest?.releaseAll();
@@ -307,7 +591,16 @@ class SoniEarthAudioEngine {
     this.glassSynth?.releaseAll();
     this.modalSynth?.releaseAll();
     this.lightningStrikeSynth?.releaseAll();
+    this.oceanCelloSynth?.triggerRelease();
+    this.oceanStringSynth?.releaseAll();
+    this.oceanRippleSynth?.releaseAll();
     this.stopOrbitalDrone();
+    this.stopOceanAmbience();
+    this.stopOceanStem();
+    if (this.isOceanDepthDroneActive && this.oceanDepthDrone) {
+      this.oceanDepthDrone.triggerRelease();
+      this.isOceanDepthDroneActive = false;
+    }
   }
 }
 

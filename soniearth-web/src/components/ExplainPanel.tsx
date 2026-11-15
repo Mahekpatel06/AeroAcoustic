@@ -18,7 +18,8 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
   activeScaleName = "C Major Lydian / Pentatonic",
 }) => {
   const isLightning = currentDataset === "iss-lightning";
-  const lumaPct = currentFeature
+  const isOcean = currentDataset === "ocean-currents";
+  const lumaPct = currentFeature?.globalMeanBrightness !== undefined
     ? (currentFeature.globalMeanBrightness * 100).toFixed(2)
     : "2.30";
   const delta = currentFeature?.temporalDelta ?? 0.0;
@@ -30,7 +31,19 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
 
   let explanation = "";
 
-  if (isLightning) {
+  if (isOcean) {
+    const sst = (currentFeature as any)?.temperatureCelsius ?? 18.0;
+    const vel = (currentFeature as any)?.currentVelocityKnots ?? 1.5;
+    const bpm = (currentFeature as any)?.tempoBpm ?? 80;
+    const pan = currentFeature?.strikePan ?? 0.0;
+    const flowDir = (currentFeature as any)?.flowDirection === "west_to_east" ? "West-to-East (+Right)" : "East-to-West (-Left)";
+
+    explanation = `NASA SVS #3912 Perpetual Ocean (ECCO2 Model): Global ocean surface thermal fluid simulation. Current measured Sea Surface Temperature is ${sst.toFixed(1)}°C with current flow velocity of ${vel.toFixed(1)} knots. ${
+      sst < 14.0
+        ? `Cold polar waters trigger deep resonant cello bass (${activeNote}, 24dB LPF) with measured slow rhythmic gyres (${bpm} BPM).`
+        : `Warm equatorial boundary currents (Gulf Stream / Kuroshio) trigger harmonic string swells (${activeNote}) with accelerated fluid arpeggiation (${bpm} BPM).`
+    } Flow heading is directed ${flowDir}, driving stereo panning (pan: ${pan > 0 ? `+${pan.toFixed(2)}` : pan.toFixed(2)}).`;
+  } else if (isLightning) {
     if (currentFeature?.isStrike) {
       explanation = `Severe Lightning Strike Detected: Rapid optical flash detected by ISS LIS sensor (${currentFeature.strikeEnergyMicroJoules} µJ calibrated optical energy). Triggered sharp metallic FM chime on ${activeNote} (${(currentFeature.frequencyHz || 659.25).toFixed(1)} Hz, 5ms attack). Dynamic spatial stereo panning panned to ${
         currentFeature.strikePan! > 0.1
@@ -84,12 +97,48 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
               Why am I hearing this? (Scientific Explainability)
             </h4>
             <span className="text-[10px] font-mono text-emerald-300 px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 shadow-[0_0_8px_rgba(0,245,155,0.2)]">
-              {isLightning ? "NASA SVS #5011 • ISS LIS Science" : "Data-Driven Synthesis"}
+              {isOcean ? "NASA SVS #3912 • ECCO2 Hydrodynamics" : isLightning ? "NASA SVS #5011 • ISS LIS Science" : "Data-Driven Synthesis"}
             </span>
           </div>
           <p className="text-slate-300 leading-relaxed font-sans">{explanation}</p>
         </div>
       </div>
+
+      {/* Mode A: 3x3 Spatial Grid Notes Telemetry (Night Lights) */}
+      {!isLightning && !isOcean && phase === "annual_series" && spatialGrid.length === 9 && (
+        <div className="mt-1 pt-3 border-t border-slate-800/80">
+          <div className="flex items-center gap-1.5 mb-2 text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+            <Grid className="w-3.5 h-3.5 text-sky-400" />
+            <span>9-Cell Planetary Spatial Grid Notes (West → Center → East Stereo Sweep)</span>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            {spatialGrid.map((cell, idx) => {
+              const cellKey = cell.regionId || `grid_cell_${cell.row ?? Math.floor(idx / 3)}_${cell.col ?? (idx % 3)}_${idx}`;
+              const cellName = cell.name || `Zone ${idx + 1} (${cell.col === 0 ? "West" : cell.col === 1 ? "Center" : "East"})`;
+              const cellPan = cell.pan ?? (cell.col === 0 ? -0.75 : cell.col === 1 ? 0.0 : 0.75);
+              const cellLuma = ((cell.meanBrightness ?? (cell as any).brightness ?? 0) * 100).toFixed(1);
+              const note = cell.activeNote || "C4";
+
+              return (
+                <div
+                  key={cellKey}
+                  className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-2 flex items-center justify-between font-mono text-[10px]"
+                >
+                  <div>
+                    <div className="text-slate-300 font-semibold truncate max-w-[140px]">{cellName}</div>
+                    <div className="text-slate-500 text-[9px]">
+                      Pan {cellPan > 0 ? `+${cellPan}` : cellPan} • Luma {cellLuma}%
+                    </div>
+                  </div>
+                  <div className="px-2 py-0.5 rounded bg-sky-950/80 border border-sky-800/60 text-sky-300 font-bold text-xs">
+                    {note}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* ISS Lightning: 3-Horizon Stereo Field Telemetry */}
       {isLightning && spatialGrid.length === 3 && (
@@ -122,6 +171,36 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
                   }`}
                 >
                   {cell.strikeInZone ? "⚡ BURST" : "PASSIVE"}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Ocean Currents: 3-Basin Oceanic Telemetry */}
+      {isOcean && spatialGrid.length === 3 && (
+        <div className="mt-1 pt-3 border-t border-slate-800/80">
+          <div className="flex items-center gap-1.5 mb-2 text-[10px] font-mono text-teal-400 uppercase tracking-wider">
+            <Compass className="w-3.5 h-3.5 text-teal-400" />
+            <span>Ocean Basins & Thermal Telemetry (West Pacific → Atlantic Gulf Stream → Indian/Southern Ocean)</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {spatialGrid.map((basin) => (
+              <div
+                key={basin.regionId}
+                className="bg-slate-950/70 border border-teal-800/40 rounded-xl p-2.5 flex items-center justify-between font-mono text-[10px]"
+              >
+                <div>
+                  <div className="font-semibold text-teal-300">
+                    {basin.name}
+                  </div>
+                  <div className="text-slate-500 text-[9px]">
+                    Stereo Pan {basin.pan > 0 ? `+${basin.pan}` : basin.pan}
+                  </div>
+                </div>
+                <div className="px-2 py-0.5 rounded bg-teal-950/80 border border-teal-700/60 text-teal-300 font-bold text-xs">
+                  {basin.meanTemperature !== undefined ? `${basin.meanTemperature}°C` : "18.0°C"}
                 </div>
               </div>
             ))}

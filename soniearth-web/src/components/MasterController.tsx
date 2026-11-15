@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Play, Pause, SkipBack, SkipForward, Clock, Globe, Zap, MapPin, Repeat } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Clock, Globe, Zap, Waves, MapPin, Repeat } from "lucide-react";
 
 interface MasterControllerProps {
   currentDataset?: string;
@@ -31,15 +31,48 @@ export const MasterController: React.FC<MasterControllerProps> = ({
   onToggleLoopMode,
 }) => {
   const isLightning = currentDataset === "iss-lightning";
+  const isOcean = currentDataset === "ocean-currents";
 
   return (
-    <div className="w-full bg-[#080D12]/90 backdrop-blur-xl border border-emerald-500/25 rounded-2xl p-2.5 sm:p-3 shadow-[0_8px_32px_rgba(0,0,0,0.8)] flex flex-col gap-2">
-      {/* If ISS Lightning: Show Clean Spacecraft Mission Flight Deck in unified Laser Mint theme */}
-      {isLightning ? (
-        <div className="bg-black/60 border border-emerald-500/30 rounded-xl p-2 sm:p-2.5 flex flex-wrap items-center justify-between gap-2 shadow-inner">
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 shadow-[0_0_12px_rgba(0,245,155,0.2)]">
-              <Zap className="w-4 h-4 text-emerald-400 fill-emerald-400/30" />
+    <div className="w-full bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col gap-4">
+      {/* If Ocean Currents: Show Fluid Dynamics Flight Deck */}
+      {isOcean ? (
+        <div className="bg-slate-950/80 border border-teal-600/40 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-inner">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400">
+              <Waves className="w-5 h-5 text-teal-400" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs font-bold text-teal-300 uppercase tracking-wider">
+                  NASA SVS #3912 • ECCO2 Perpetual Ocean
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-950/80 text-teal-300 border border-teal-700/60 animate-pulse">
+                  FLUID DYNAMICS LIVE
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 mt-0.5 font-sans">
+                Global hydrodynamic circulation simulating sea surface currents, thermal heat transport, and ocean eddies.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 font-mono text-[11px]">
+            <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+              Model: <strong className="text-teal-400">ECCO2 MITgcm</strong>
+            </span>
+            <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+              Thermal: <strong className="text-teal-400">0°C – 32°C</strong>
+            </span>
+            <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+              Flow: <strong className="text-teal-400">0.5 – 5.2 kts</strong>
+            </span>
+          </div>
+        </div>
+      ) : isLightning ? (
+        <div className="bg-slate-950/80 border border-amber-600/40 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-inner">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400">
+              <Zap className="w-5 h-5 text-amber-400 fill-amber-400/30" />
             </div>
             <div>
               <div className="flex items-center gap-2">

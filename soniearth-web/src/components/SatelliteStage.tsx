@@ -22,6 +22,7 @@ import {
   Map,
   Eye,
   Split,
+  Waves,
 } from "lucide-react";
 import { InteractiveGlobe } from "./InteractiveGlobe";
 
@@ -35,6 +36,10 @@ interface SatelliteStageProps {
   onSelectRegion?: (region: string) => void;
   onSeek?: (timeSec: number) => void;
   videoRef: React.Ref<HTMLVideoElement>;
+  depthMeters?: number;
+  onChangeDepth?: (depth: number) => void;
+  selectedBasin?: string;
+  onSelectBasin?: (basinId: string, basinName: string, pan: number) => void;
 }
 
 // Regional Telemetry metadata for Mode C
@@ -102,6 +107,10 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   onSelectRegion,
   onSeek,
   videoRef,
+  depthMeters = 0,
+  onChangeDepth,
+  selectedBasin = "ALL",
+  onSelectBasin,
 }) => {
   const [viewFormat, setViewFormat] = useState<"2d" | "3d">("2d");
   const [contrastBoost, setContrastBoost] = useState<boolean>(true);
@@ -111,13 +120,22 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   const [regionalSubView, setRegionalSubView] = useState<"change" | "compare">("change");
 
   const isLightning = currentDataset === "iss-lightning";
+  const isOcean = currentDataset === "ocean-currents";
   const isRegional = currentMode === "regional";
   const isChangePhase = currentMode === "change";
   const isAnnualPhase = currentMode === "annual";
 
+  // Ocean Thermocline & Depth Calculations
+  const depthFactor = Math.exp(-depthMeters / 350.0);
+  const rawSST = currentFeature?.temperatureCelsius ?? 18.0;
+  const thermoclineTemp = Number((rawSST * depthFactor + 2.0).toFixed(1));
+  const hydrostaticAtm = 1 + Math.round(depthMeters / 10);
+
   // High-performance, zero-buffering local mode clips
   const videoSrc = isLightning
     ? "/datasets/iss-lightning/chunk_iss_lightning.webm"
+    : isOcean
+    ? "/datasets/ocean-currents/chunk_ocean_currents.webm"
     : currentMode === "annual"
     ? "/datasets/night-lights/chunk_mode_a.webm"
     : currentMode === "change"
@@ -183,7 +201,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   };
 
   const activeBounds = REGION_BOUNDS[selectedRegion] || REGION_BOUNDS["India"];
-  const maxDuration = isLightning ? 216.7 : (MODE_DURATIONS[currentMode] || 12.0);
+  const maxDuration = isLightning ? 216.7 : isOcean ? 66.7 : (MODE_DURATIONS[currentMode] || 12.0);
   const progressPercent = Math.min(100, Math.max(0, (currentTime / maxDuration) * 100));
 
   // Reset zoom & regional sub-view when mode or region changes
@@ -233,15 +251,33 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-2 mb-2 text-xs">
         {/* Left: Telemetry & Status */}
         <div className="flex items-center gap-2.5">
-          <span className="flex items-center gap-1.5 font-mono font-bold text-white drop-shadow-[0_0_8px_rgba(0,245,155,0.3)]">
-            {isLightning ? <Zap className="w-4 h-4 text-emerald-400" /> : <Scan className="w-4 h-4 text-emerald-400" />}
-            {isLightning ? "ISS Optical Lightning Stage" : "NASA Satellite Optical Stage"}
+          <span className="flex items-center gap-1.5 font-mono font-bold text-slate-200">
+            {isOcean ? (
+              <Waves className="w-4 h-4 text-teal-400" />
+            ) : isLightning ? (
+              <Zap className="w-4 h-4 text-amber-400" />
+            ) : (
+              <Scan className="w-4 h-4 text-sky-400" />
+            )}
+            {isOcean
+              ? "NASA ECCO2 Ocean Currents Stage"
+              : isLightning
+              ? "ISS Optical Lightning Stage"
+              : "NASA Satellite Optical Stage"}
           </span>
           <span className="text-emerald-900">|</span>
           <span
-            className="font-mono font-semibold px-2.5 py-0.5 rounded-full border shadow-sm text-emerald-300 bg-emerald-950/70 border-emerald-500/40 shadow-[0_0_10px_rgba(0,245,155,0.2)]"
+            className={`font-mono font-semibold px-2.5 py-0.5 rounded border ${
+              isOcean
+                ? "text-teal-300 bg-teal-950/60 border-teal-800/40"
+                : isLightning
+                ? "text-amber-300 bg-amber-950/60 border-amber-800/40"
+                : "text-sky-400 bg-sky-950/60 border-sky-800/40"
+            }`}
           >
-            {isLightning
+            {isOcean
+              ? "NASA SVS #3912 • ECCO2 Model (2005–2007)"
+              : isLightning
               ? "NASA SVS #5011 • LIS on ISS (2017–2023)"
               : currentMode === "annual"
               ? "Mode A: Annual Evolution (2012–2023)"
@@ -256,10 +292,17 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               <span>Speed: 7.66 km/s</span>
             </span>
           )}
+          {isOcean && (
+            <span className="font-mono text-teal-400 text-xs font-bold px-2 py-0.5 rounded bg-teal-950/60 border border-teal-800/40 hidden md:inline-flex items-center gap-1.5">
+              <span>Model: ECCO2</span>
+              <span className="text-slate-500">•</span>
+              <span>SST: 0°C–32°C</span>
+            </span>
+          )}
 
           {/* Mode A: Clean Calendar Year */}
-          {!isLightning && currentMode === "annual" && (
-            <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-800/40 flex items-center gap-1 shadow-[0_0_8px_rgba(0,245,155,0.15)]">
+          {!isLightning && !isOcean && currentMode === "annual" && (
+            <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40 flex items-center gap-1">
               <Calendar className="w-3 h-3" />
               Year {currentYear}
             </span>
@@ -345,8 +388,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
       </div>
 
       {/* 2. REGIONAL TELEMETRY BANNER (Only for Night Lights Mode C in 2D) */}
-      {!isLightning && isRegional && activeBounds && viewFormat === "2d" && (
-        <div className="mb-2 p-2.5 rounded-xl bg-black/60 border border-emerald-500/30 shadow-xl flex flex-wrap items-center justify-between gap-2 animate-fadeIn">
+      {!isLightning && !isOcean && isRegional && activeBounds && viewFormat === "2d" && (
+        <div className="mb-3 p-3.5 rounded-2xl bg-slate-950/95 border border-sky-500/50 shadow-xl flex flex-wrap items-center justify-between gap-3 animate-fadeIn">
           {/* Target Metadata Info */}
           <div className="flex flex-col gap-0.5 min-w-[260px]">
             <div className="flex items-center gap-2">
@@ -393,8 +436,84 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
         </div>
       )}
 
-      {/* 3. MAIN SATELLITE CANVAS - Option A: Natural 16:9 Edge-to-Edge Cinema Fit (Zero side space, Zero crop) */}
-      <div className="relative w-full aspect-video bg-[#06080A] rounded-2xl overflow-hidden border border-emerald-500/25 shadow-2xl flex items-center justify-center">
+      {/* 2b. Ocean Thermocline Depth Slice Controller (0m -> 200m -> 1000m) */}
+      {isOcean && onChangeDepth && (
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-3 bg-slate-950/90 border border-teal-800/60 p-3 rounded-2xl shadow-xl">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-teal-950/80 border border-teal-700/60 text-teal-400">
+              <Waves className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-mono font-bold text-teal-300 uppercase tracking-wider">
+                  Thermal Depth Slice / Thermocline
+                </span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-950 border border-cyan-700 text-cyan-200">
+                  {depthMeters}m Depth
+                </span>
+              </div>
+              <p className="text-[10px] text-slate-400 font-sans mt-0.5">
+                {depthMeters >= 800
+                  ? "Abyssal Bathypelagic Zone (40 Hz Infrasound • 101 atm • Near-Freezing Abyssal Plain)"
+                  : depthMeters >= 200
+                  ? "Mesopelagic Thermocline Zone (Steep thermal gradient • 21 atm • Rapid temperature drop)"
+                  : "Epipelagic Photic Zone (Sunlit solar heating • 1 atm • Rapid surface streamlines)"}
+              </p>
+            </div>
+          </div>
+
+          {/* Depth Preset Buttons & Slider */}
+          <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
+            <div className="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800">
+              <button
+                onClick={() => onChangeDepth(0)}
+                className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-semibold transition-all ${
+                  depthMeters === 0
+                    ? "bg-teal-500 text-black font-bold shadow"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                0m Surface
+              </button>
+              <button
+                onClick={() => onChangeDepth(200)}
+                className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-semibold transition-all ${
+                  depthMeters === 200
+                    ? "bg-cyan-500 text-black font-bold shadow"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                200m Thermocline
+              </button>
+              <button
+                onClick={() => onChangeDepth(1000)}
+                className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-semibold transition-all ${
+                  depthMeters === 1000
+                    ? "bg-indigo-600 text-white font-bold shadow-[0_0_10px_rgba(99,102,241,0.5)]"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                1000m Abyssal (40 Hz)
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2 min-w-[130px] flex-1 sm:flex-initial">
+              <input
+                type="range"
+                min="0"
+                max="1000"
+                step="25"
+                value={depthMeters}
+                onChange={(e) => onChangeDepth(Number(e.target.value))}
+                className="w-full accent-teal-400 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 3. MAIN SATELLITE CANVAS */}
+      <div className="relative w-full h-[340px] sm:h-[400px] md:h-[460px] lg:h-[500px] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800/90 shadow-2xl flex items-center justify-center">
         {/* IF ISS LIGHTNING: Dedicated NASA Optical Flight Deck Video */}
         {isLightning ? (
           <div
@@ -444,12 +563,120 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
           </div>
         ) : viewFormat === "3d" ? (
-          /* VIEW A: 3D INTERACTIVE GLOBE (NASA SVS #5475 for Night Lights) */
+          /* VIEW A: 3D INTERACTIVE GLOBE (NASA SVS #5475 for Night Lights / #3912 for Ocean Currents) */
           <InteractiveGlobe
+            currentDataset={currentDataset}
             currentMode={currentMode}
             currentYear={currentYear}
             isPlaying={isPlaying}
+            depthMeters={depthMeters}
+            selectedBasin={selectedBasin}
+            onSelectBasin={onSelectBasin}
           />
+        ) : isOcean ? (
+          /* VIEW OCEAN: 2D SATELLITE OPTICAL OCEAN FLIGHT DECK */
+          <div
+            className={`relative max-w-full max-h-full flex items-center justify-center overflow-hidden transition-transform duration-300 ease-out ${
+              fitMode === "contain" ? "w-full aspect-[2/1]" : "w-full h-full"
+            }`}
+            style={{
+              transform: isManualOverride ? `scale(${manualZoom})` : "scale(1)",
+            }}
+          >
+            <video
+              ref={videoRef}
+              key={videoSrc}
+              src={videoSrc}
+              playsInline
+              muted
+              loop
+              autoPlay={false}
+              onCanPlay={(e) => {
+                if (isPlaying) {
+                  (e.target as HTMLVideoElement).play().catch(() => {});
+                }
+              }}
+              style={{
+                filter: isOcean
+                  ? `hue-rotate(${(depthMeters / 1000) * 35}deg) brightness(${
+                      1 - (depthMeters / 1000) * 0.40
+                    }) saturate(${1 - (depthMeters / 1000) * 0.30})`
+                  : undefined,
+              }}
+              className={`w-full h-full ${
+                fitMode === "contain" ? "object-contain" : "object-cover"
+              } select-none pointer-events-none transition-all duration-300 ${
+                contrastBoost
+                  ? "brightness-125 contrast-140 saturate-150"
+                  : "brightness-100 contrast-100"
+              }`}
+            />
+
+            {/* Oceanographic Fluid Telemetry Card */}
+            <div className="absolute top-4 left-4 max-w-sm bg-slate-950/90 backdrop-blur-md border border-teal-500/60 rounded-2xl p-3.5 shadow-2xl z-20">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[10px] font-mono text-teal-400 font-bold tracking-wider flex items-center gap-1 uppercase">
+                  <Waves className="w-3.5 h-3.5 text-teal-400" /> Oceanographic Telemetry
+                </span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border bg-teal-950/60 text-teal-300 border-teal-700">
+                  ECCO2 Model
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white tracking-tight">GLOBAL OCEAN CURRENTS</h3>
+              <p className="text-xs text-slate-300 mt-0.5 font-sans leading-tight">
+                Perpetual Ocean: Sea surface temperature and streamline velocity circulation heat transport.
+              </p>
+              <div className="mt-2.5 pt-2 border-t border-slate-800 grid grid-cols-2 gap-2 text-[10px] font-mono">
+                <div>
+                  <span className="text-slate-400">Thermocline SST: </span>
+                  <span className="text-teal-300 font-bold">
+                    {thermoclineTemp}°C {depthMeters > 0 && <span className="text-slate-500 font-normal">({rawSST.toFixed(1)}° at 0m)</span>}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-slate-400">Velocity: </span>
+                  <span className="text-amber-300 font-bold">
+                    {currentFeature?.currentVelocityKnots !== undefined
+                      ? `${currentFeature.currentVelocityKnots.toFixed(1)} kts`
+                      : "1.5 kts"}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-slate-400">Depth & Pressure: </span>
+                  <span className="text-cyan-300 font-bold">
+                    {depthMeters}m • {hydrostaticAtm} atm
+                  </span>
+                </div>
+                <div>
+                  <span className="text-slate-400">Focused Basin: </span>
+                  <span className="text-sky-300 font-bold truncate">
+                    {selectedBasin === "OCEAN_PACIFIC"
+                      ? "Pacific (-0.65)"
+                      : selectedBasin === "OCEAN_ATLANTIC"
+                      ? "Atlantic (0.00)"
+                      : selectedBasin === "OCEAN_INDIAN"
+                      ? "Indian (+0.65)"
+                      : "Global Circuit"}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Thermal Spectrum Legend Bar */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-xl px-4 py-1.5 z-20 flex items-center gap-3 text-[10px] font-mono shadow-2xl">
+              <span className="flex items-center gap-1 text-cyan-400">
+                <span className="w-2 h-2 rounded-full bg-cyan-400"></span> 0°C Polar Cello
+              </span>
+              <span className="text-slate-600">───</span>
+              <span className="flex items-center gap-1 text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span> 15°C Ocean Gyres
+              </span>
+              <span className="text-slate-600">───</span>
+              <span className="flex items-center gap-1 text-rose-400">
+                <span className="w-2 h-2 rounded-full bg-rose-400"></span> 30°C Equatorial Strings
+              </span>
+            </div>
+          </div>
         ) : (
           /* VIEW B: 2D SINGLE-PROJECTION FLAT MAP FOR NIGHT LIGHTS - Natural 16:9 Edge-to-Edge Fit */
           <div

@@ -198,8 +198,53 @@ python scripts/validate_all.py
 [PASS] Peak Audio Headroom <= -3.0 dBFS
 [PASS] Tone.js Event Schedule Synced
 --------------------------------------------------
-Ran 23 tests in 0.329s. 23 Passed, 0 Failed.
+Ran 27 tests in 0.048s. 27 Passed, 0 Failed.
 ```
+
+---
+
+## 🌊 Dataset #2: Sea Surface Currents & Temperatures (NASA SVS #3912)
+
+### 1. Scientific Background & Sensor Pipeline
+* **Official NASA Catalog**: [NASA SVS #3912](https://svs.gsfc.nasa.gov/3912/) — *Perpetual Ocean (ECCO2 Model: Sea Surface Currents & Temperatures)*.
+* **Model / Synthesis**: **ECCO2 (Estimating the Circulation and Climate of the Ocean, Phase II)** output developed jointly by NASA JPL and MIT. Synthesizes satellite altimetry and in-situ ocean observations using the MIT general circulation model (MITgcm).
+* **Physical Phenomenon**: Global thermodynamic fluid heat engine simulating oceanic gyres, western boundary currents (Gulf Stream, Kuroshio), and narrow turbulent eddies transporting heat across planetary basins.
+* **Visual Data Content**: 2001 frames of 2:1 equirectangular fluid streamlines colored by sea surface temperature ($0^\circ\text{C}$ to $32^\circ\text{C}$) over high-resolution bathymetry.
+
+### 2. Thermodynamic & Hydrodynamic Sonification Architecture
+Unlike optical light or transient electrostatic pulses, Sea Surface Currents sonifies **fluid heat transport and velocity**:
+1. **Cold Polar Waters ($0^\circ\text{C} - 10^\circ\text{C}$)**:
+   * Color: Deep Blue / Cyan.
+   * Synthesizer: `oceanCelloSynth` (`Tone.MonoSynth` on triangle waveform with 24 dB/oct lowpass filter cutoff at 180–250 Hz).
+   * Note Register: Deep cello bass ($D_2$ to $G_2$, 73.4 Hz to 98.0 Hz).
+2. **Temperate Ocean Gyres ($10^\circ\text{C} - 22^\circ\text{C}$)**:
+   * Color: Greenish-yellow.
+   * Synthesizer: `oceanStringSynth` (`Tone.PolySynth` on warm open 5th harmonies, notes $A_2$ to $D_3$, 110.0 Hz to 146.8 Hz).
+3. **Warm Equatorial Boundary Currents ($22^\circ\text{C} - 32^\circ\text{C}$)**:
+   * Color: Vibrant Red / Orange (e.g. Gulf Stream Jet, Kuroshio).
+   * Synthesizer: Rich harmonic sawtooth string swell ($E_3$ to $E_4$, 164.8 Hz to 329.6 Hz).
+4. **Current Flow Velocity (Knots) & Fluid Arpeggiator**:
+   * Motion energy maps to dynamic tempo ($55\text{ BPM}$ calm gyres $\to 130\text{ BPM}$ rushing currents).
+   * Rapid currents ($> 85\text{ BPM}$) trigger fast fluid ripple arpeggiator accents (`oceanRippleSynth`).
+5. **Spatial Streamline Direction (West $\leftrightarrow$ East)**:
+   * Flow vector $dx$ directly drives stereo panning: $-0.85$ (Westbound) to $+0.85$ (Eastbound).
+   * Three primary oceanic basins tracked in real-time: Pacific Basin (Left pan $-0.65$), Atlantic Gulf Stream (Center pan $0.0$), and Indian/Southern Ocean (Right pan $+0.65$).
+
+### 3. UI, 2D Stage & 3D Interactive Globe
+* **Dual Visualization**: Hotkey `[2]` or shelf card `[2]` instantly switches to Sea Surface Currents with either the 2D optical stage or interactive Three.js 3D globe with NASA SVS #3912 2K spherical texture.
+* **Interactive 3D Basin Raycasting (Click-to-Listen)**:
+  * Users can click directly on the Pacific, Atlantic, or Indian Oceans on the 3D globe.
+  * Three.js `Raycaster` determines geographic coordinates, triggers smooth spherical rotation interpolation towards that basin, and crossfades the audio spatial panner and localized temperature/velocity profile.
+  * Features 3D pulsing glowing rings at the geographic centers of each basin on the globe surface.
+* **Thermal Depth Slice / Thermocline Selector (0m → 200m → 1000m)**:
+  * Adds an interactive depth slider and quick presets (`0m Surface`, `200m Thermocline`, `1000m Abyssal`).
+  * **Visual Spectrum Shift**: As depth increases, visual rendering on both 2D video and 3D globe dynamically transitions from warm sunlit surface reds/oranges into deep abyssal twilight indigo.
+  * **Acoustic Thermocline Gradient**: Temperatures drop exponentially with depth; at depth $\ge 800\text{m}$, acoustic pitch drops into an authentic **$40\text{ Hz}$ Infrasonic Sub-Bass** drone with heavy oceanic pressure and muted surface ripples.
+* **Dual Audio Architecture**:
+  * **Smooth Procedural Sonification**: Live, velvety, low-pass filtered Tone.js synthesis.
+  * **Master WAV Soundtrack**: Synchronized studio-mixed stereo master (`ocean_currents_ambient.wav`).
+* **Oceanographic HUD Telemetry**: Displays real-time Sea Surface Temperature ($^\circ\text{C}$), current velocity ($\text{kts}$), musical tempo ($\text{BPM}$), hydrostatic pressure ($\text{atm}$), and heading in real-time.
+* **Thermal Spectrum Legend**: Shows color temperature thresholds with live indicator dots.
 
 ---
 
@@ -239,5 +284,6 @@ Developed with ❤️ for the **NASA International Space Apps Challenge 2026**.
 
 * **Dataset Attributions**:
   * NASA SVS #5313: Decadal Night Lights (Suomi NPP VIIRS).
+  * NASA SVS #3912: Sea Surface Currents & Temperatures (ECCO2 Model, NASA JPL / MIT).
   * NASA SVS #5011: ISS Lightning Events (ISS LIS Sensor, GHRC DAAC).
 * **License**: Open Source under the MIT License.

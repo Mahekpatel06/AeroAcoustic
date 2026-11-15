@@ -112,6 +112,9 @@ export default function Home() {
   const [voiceEnabled, setVoiceEnabled] = useState<boolean>(false); // Start voice off by default
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
+  const [oceanAudioMode, setOceanAudioMode] = useState<"procedural" | "stem">("procedural");
+  const [depthMeters, setDepthMeters] = useState<number>(0);
+  const [selectedBasin, setSelectedBasin] = useState<string>("ALL");
   const [activeNote, setActiveNote] = useState<string>("A3");
   const [activeFreq, setActiveFreq] = useState<number>(220.0);
   const [activeScaleName, setActiveScaleName] = useState<string>("C Major Lydian / Pentatonic");
@@ -136,6 +139,8 @@ export default function Home() {
   const lastStrikeTimestampRef = useRef<number>(0);
 
   const activeDatasetRef = useRef<string>("night-lights");
+  const depthMetersRef = useRef<number>(0);
+  const selectedBasinRef = useRef<string>("ALL");
 
   // Sync refs with state
   isPlayingRef.current = isPlaying;
@@ -143,13 +148,17 @@ export default function Home() {
   currentTimeRef.current = currentTime;
   currentModeRef.current = currentMode;
   activeDatasetRef.current = activeDataset;
+  depthMetersRef.current = depthMeters;
+  selectedBasinRef.current = selectedBasin;
 
   // 1. Load Feature Data on Mount or Dataset Switch
   useEffect(() => {
     const jsonUrl =
       activeDataset === "iss-lightning"
         ? "/datasets/iss-lightning/features.json"
-        : "/datasets/night-lights/features.json";
+        : activeDataset === "ocean-currents"
+          ? "/datasets/ocean-currents/features.json"
+          : "/datasets/night-lights/features.json";
 
     fetch(jsonUrl)
       .then((res) => res.json())
@@ -160,6 +169,11 @@ export default function Home() {
           setActiveFreq(55.0);
           setActiveScaleName("A1 Sub-Bass (55Hz) + High FM Chimes");
           setActiveInstrument("FM Glockenspiel & 55Hz Orbital Drone");
+        } else if (activeDataset === "ocean-currents") {
+          setActiveNote("C3");
+          setActiveFreq(130.81);
+          setActiveScaleName("Thermal Scale (0°C–32°C • 55–130 BPM)");
+          setActiveInstrument("Ocean Cello & Thermal String Swell");
         } else {
           setActiveNote("A3");
           setActiveFreq(220.0);
@@ -173,7 +187,7 @@ export default function Home() {
   // Filter frames strictly belonging to the currently selected mode
   const modeFrames = useMemo(() => {
     if (!featureData?.frames) return [];
-    if (activeDataset === "iss-lightning") {
+    if (activeDataset === "iss-lightning" || activeDataset === "ocean-currents") {
       return featureData.frames;
     }
     if (currentMode === "annual") {
@@ -191,11 +205,11 @@ export default function Home() {
   const currentFeature: FrameFeature | null = useMemo(() => {
     if (!featureData?.frames || featureData.frames.length === 0) return null;
 
-    if (activeDataset === "iss-lightning") {
-      const lightningDuration = featureData.durationSeconds || 216.7;
+    if (activeDataset === "iss-lightning" || activeDataset === "ocean-currents") {
+      const datasetDuration = featureData.durationSeconds || (activeDataset === "iss-lightning" ? 216.7 : 66.7);
       const idx = Math.min(
         featureData.frames.length - 1,
-        Math.floor((currentTime / lightningDuration) * featureData.frames.length)
+        Math.floor((currentTime / datasetDuration) * featureData.frames.length)
       );
       return featureData.frames[idx] || featureData.frames[0];
     }
@@ -271,6 +285,82 @@ export default function Home() {
         return;
       }
 
+      // ==========================================
+      // OCEAN CURRENTS SONIFICATION PIPELINE
+      // ==========================================
+      if (activeDatasetRef.current === "ocean-currents") {
+        if (!featureData?.frames || featureData.frames.length === 0) return;
+
+        const oceanDuration = featureData.durationSeconds || 66.7;
+        const frameIdx = Math.min(
+          featureData.frames.length - 1,
+          Math.floor((timeSec / oceanDuration) * featureData.frames.length)
+        );
+        const feat = featureData.frames[frameIdx];
+
+        if (feat) {
+          const nowMs = Date.now();
+          // Breathe at 1500ms cadence instead of harsh 450ms machine-gun
+          if (nowMs - lastRegionalTriggerRef.current >= 1500 || forceInstant) {
+            lastRegionalTriggerRef.current = nowMs;
+
+            // Target Basin Lookup
+            const curBasin = selectedBasinRef.current;
+            const basinGrid = feat.spatialGrid?.find((b) => b.regionId === curBasin);
+            const baseSST = basinGrid?.meanTemperature ?? feat.temperatureCelsius ?? 18.0;
+            const pan = basinGrid?.pan ?? feat.strikePan ?? 0.0;
+            const bpm = feat.tempoBpm || 80;
+            const kts = feat.currentVelocityKnots ?? 1.5;
+
+            // Depth-adjusted thermocline temperature
+            const depth = depthMetersRef.current;
+            const depthFactor = Math.exp(-depth / 350.0);
+            const sst = Number((baseSST * depthFactor + 2.0).toFixed(1));
+
+            // Acoustic note selection adjusted for depth down to 40 Hz infrasound
+            let note = feat.activeNote || "C3";
+            let freq = feat.frequencyHz || 130.81;
+
+            if (depth >= 800) {
+              note = "D1"; // 40 Hz Infrasonic Sub-Bass
+              freq = 38.89;
+              setActiveScaleName(`Abyssal Plain Infrasound (40 Hz • ${sst}°C • 101 atm)`);
+              setActiveInstrument("Infrasonic Sub-Bass (40 Hz Bathypelagic)");
+            } else if (depth >= 400) {
+              note = "A1"; // 55 Hz Deep Sub-Drone
+              freq = 55.0;
+              setActiveScaleName(`Mesopelagic Thermocline (${sst}°C • 21 atm)`);
+              setActiveInstrument("Deep Thermocline Sub-Drone");
+            } else {
+              if (sst < 10.0) {
+                note = "D2";
+                freq = 73.42;
+              } else if (sst < 18.0) {
+                note = "A2";
+                freq = 110.0;
+              }
+              const basinLabel = curBasin !== "ALL" ? ` • ${curBasin.replace("OCEAN_", "")}` : "";
+              setActiveScaleName(`Thermal Scale (SST: ${sst.toFixed(1)}°C • ${bpm} BPM${basinLabel})`);
+              setActiveInstrument(sst < 14 ? `Polar Sub-Cello (${kts} kts)` : `Warm Silky Pad (${kts} kts)`);
+            }
+
+            setActiveNote(note);
+            setActiveFreq(freq);
+
+            // Silky soft velocity (0.60) instead of abrasive punch
+            audioEngine.triggerOceanCurrent(note, sst, pan, 0.60);
+
+            // Subtle liquid droplet accent only for turbulent fast surface currents (> 3.2 knots, depth < 200m)
+            if (kts > 3.2 && depth < 200) {
+              setTimeout(() => {
+                audioEngine.triggerOceanRipple("E4", Math.min(1.0, pan + 0.1), 0.40);
+              }, 250);
+            }
+          }
+        }
+        return;
+      }
+
       const mode = currentModeRef.current;
 
       // ==========================================
@@ -285,13 +375,13 @@ export default function Home() {
           if (!feat) return;
 
           const { root, fifth, norm } = deriveAnnualHarmony(
-            feat.globalMeanBrightness,
-            feat.temporalDelta
+            feat.globalMeanBrightness ?? 0.0525,
+            feat.temporalDelta ?? 0.0
           );
 
           setActiveNote(root.note);
           setActiveFreq(root.freq);
-          setActiveScaleName(`C Major Lydian / Pentatonic (Luma ${(feat.globalMeanBrightness * 100).toFixed(2)}%)`);
+          setActiveScaleName(`C Major Lydian / Pentatonic (Luma ${((feat.globalMeanBrightness ?? 0.0525) * 100).toFixed(2)}%)`);
           setActiveInstrument("Sine Pad + 3-Zone Longitudinal Sweep");
 
           const velocity = Math.min(0.9, Math.max(0.5, 0.6 + 0.3 * norm));
@@ -442,14 +532,16 @@ export default function Home() {
         const maxDuration =
           activeDatasetRef.current === "iss-lightning"
             ? (featureData?.durationSeconds || 216.7)
-            : MODE_DURATIONS[currentModeRef.current];
+            : activeDatasetRef.current === "ocean-currents"
+              ? (featureData?.durationSeconds || 66.7)
+              : MODE_DURATIONS[currentModeRef.current];
 
-        // MASTER CLOCK: For ISS Lightning, lock directly to hardware video presentation timestamp (PTS)
+        // MASTER CLOCK: For ISS Lightning & Ocean Currents, lock directly to hardware video presentation timestamp (PTS)
         // For Night Lights modes, increment smoothly at 60 FPS (zero video buffering freeze)
         let nextTime: number;
 
         if (
-          activeDatasetRef.current === "iss-lightning" &&
+          (activeDatasetRef.current === "iss-lightning" || activeDatasetRef.current === "ocean-currents") &&
           videoRef.current &&
           !videoRef.current.paused &&
           !videoRef.current.seeking &&
@@ -475,7 +567,7 @@ export default function Home() {
           if (videoRef.current) {
             videoRef.current.currentTime = 0.0;
             if (isPlayingRef.current) {
-              videoRef.current.play().catch(() => {});
+              videoRef.current.play().catch(() => { });
             }
           }
         }
@@ -509,10 +601,16 @@ export default function Home() {
     if (willPlay) {
       if (videoRef.current) {
         videoRef.current.playbackRate = playbackSpeed;
-        videoRef.current.play().catch(() => {});
+        videoRef.current.play().catch(() => { });
       }
       if (activeDatasetRef.current === "iss-lightning") {
         audioEngine.startOrbitalDrone();
+      } else if (activeDatasetRef.current === "ocean-currents") {
+        if (audioEngine.isOceanStemActive()) {
+          audioEngine.startOceanStem(currentTimeRef.current);
+        } else {
+          audioEngine.startOceanAmbience();
+        }
       }
       playModeSound(currentTimeRef.current, true);
       const modeTitles = {
@@ -523,7 +621,9 @@ export default function Home() {
       const title =
         activeDatasetRef.current === "iss-lightning"
           ? "ISS Lightning Events (NASA SVS #5011)"
-          : modeTitles[currentMode];
+          : activeDatasetRef.current === "ocean-currents"
+            ? "Sea Surface Currents (NASA SVS #3912)"
+            : modeTitles[currentMode];
       if (voiceEnabled) {
         speechNarrator.speak(`Playing ${title} on repeat.`);
       }
@@ -557,7 +657,7 @@ export default function Home() {
     if (videoRef.current) {
       videoRef.current.currentTime = 0.0;
       if (isPlayingRef.current) {
-        videoRef.current.play().catch(() => {});
+        videoRef.current.play().catch(() => { });
       } else {
         videoRef.current.pause();
       }
@@ -595,7 +695,7 @@ export default function Home() {
     if (videoRef.current) {
       videoRef.current.currentTime = 0.0;
       if (isPlayingRef.current) {
-        videoRef.current.play().catch(() => {});
+        videoRef.current.play().catch(() => { });
       }
     }
 
@@ -610,12 +710,19 @@ export default function Home() {
   // 7. Prev / Next Step (Steps through current mode)
   const handlePrev = () => {
     const maxDur =
-      activeDatasetRef.current === "iss-lightning" ? (featureData?.durationSeconds || 216.7) : MODE_DURATIONS[currentMode];
+      activeDatasetRef.current === "iss-lightning"
+        ? (featureData?.durationSeconds || 216.7)
+        : activeDatasetRef.current === "ocean-currents"
+          ? (featureData?.durationSeconds || 66.7)
+          : MODE_DURATIONS[currentMode];
     let nextT = currentTimeRef.current - 1.0;
     if (nextT < 0) nextT = maxDur - 1.0;
     setCurrentTime(nextT);
     currentTimeRef.current = nextT;
     if (videoRef.current) videoRef.current.currentTime = nextT;
+    if (activeDatasetRef.current === "ocean-currents") {
+      audioEngine.seekOceanStem(nextT);
+    }
     if (isPlayingRef.current) {
       playModeSound(nextT, true);
     }
@@ -623,11 +730,18 @@ export default function Home() {
 
   const handleNext = () => {
     const maxDur =
-      activeDatasetRef.current === "iss-lightning" ? (featureData?.durationSeconds || 216.7) : MODE_DURATIONS[currentMode];
+      activeDatasetRef.current === "iss-lightning"
+        ? (featureData?.durationSeconds || 216.7)
+        : activeDatasetRef.current === "ocean-currents"
+          ? (featureData?.durationSeconds || 66.7)
+          : MODE_DURATIONS[currentMode];
     let nextT = (currentTimeRef.current + 1.0) % maxDur;
     setCurrentTime(nextT);
     currentTimeRef.current = nextT;
     if (videoRef.current) videoRef.current.currentTime = nextT;
+    if (activeDatasetRef.current === "ocean-currents") {
+      audioEngine.seekOceanStem(nextT);
+    }
     if (isPlayingRef.current) {
       playModeSound(nextT, true);
     }
@@ -636,12 +750,19 @@ export default function Home() {
   // 7b. Interactive Seek Handler for Timeline Progress Scrubber
   const handleSeek = (targetSec: number) => {
     const maxDur =
-      activeDatasetRef.current === "iss-lightning" ? (featureData?.durationSeconds || 216.7) : MODE_DURATIONS[currentMode];
+      activeDatasetRef.current === "iss-lightning"
+        ? (featureData?.durationSeconds || 216.7)
+        : activeDatasetRef.current === "ocean-currents"
+          ? (featureData?.durationSeconds || 66.7)
+          : MODE_DURATIONS[currentMode];
     const clamped = Math.max(0, Math.min(maxDur, targetSec));
     setCurrentTime(clamped);
     currentTimeRef.current = clamped;
     if (videoRef.current) {
       videoRef.current.currentTime = clamped;
+    }
+    if (activeDatasetRef.current === "ocean-currents") {
+      audioEngine.seekOceanStem(clamped);
     }
     if (isPlayingRef.current) {
       playModeSound(clamped, true);
@@ -657,6 +778,48 @@ export default function Home() {
     }
   };
 
+  // 8b. Toggle Ocean Audio Mode between Smooth Procedural Synth and Master WAV Soundtrack
+  const handleToggleOceanAudioMode = () => {
+    const nextMode = oceanAudioMode === "procedural" ? "stem" : "procedural";
+    setOceanAudioMode(nextMode);
+    audioEngine.setOceanAudioMode(nextMode);
+    if (isPlayingRef.current) {
+      if (nextMode === "stem") {
+        audioEngine.startOceanStem(currentTimeRef.current);
+      } else {
+        audioEngine.startOceanAmbience();
+      }
+    }
+    const modeName = nextMode === "stem" ? "Master WAV Soundtrack" : "Smooth Sonification";
+    if (voiceEnabled) speechNarrator.speak(`Ocean audio set to ${modeName}.`);
+    setAriaAnnouncement(`Ocean audio mode switched to ${modeName}.`);
+  };
+
+  // 8c. Thermocline Depth Handler (0m -> 200m -> 1000m)
+  const handleChangeDepth = (depth: number) => {
+    setDepthMeters(depth);
+    depthMetersRef.current = depth;
+    audioEngine.setOceanDepth(depth);
+    const depthName = depth >= 800 ? "1000m Abyssal Sub-Bass (40 Hz)" : depth >= 200 ? "200m Thermocline" : "Surface 0m";
+    if (voiceEnabled) speechNarrator.speak(`Thermocline depth set to ${depthName}.`);
+    setAriaAnnouncement(`Thermocline depth set to ${depthName}.`);
+    if (isPlayingRef.current) {
+      playModeSound(currentTimeRef.current, true);
+    }
+  };
+
+  // 8d. Ocean Basin Raycast & Selector Handler (Click-to-Listen)
+  const handleSelectBasin = (basinId: string, basinName: string, pan: number) => {
+    setSelectedBasin(basinId);
+    selectedBasinRef.current = basinId;
+    audioEngine.setOceanBasin(basinId, pan);
+    if (voiceEnabled) speechNarrator.speak(`Focused on ${basinName}. Stereo pan ${pan > 0 ? "Right" : pan < 0 ? "Left" : "Center"}.`);
+    setAriaAnnouncement(`Focused on ${basinName}.`);
+    if (isPlayingRef.current) {
+      playModeSound(currentTimeRef.current, true);
+    }
+  };
+
   // 9. Dataset Switching
   const handleSelectDataset = (id: string) => {
     if (id === activeDataset) return;
@@ -664,6 +827,7 @@ export default function Home() {
 
     if (id === "night-lights") {
       audioEngine.stopOrbitalDrone();
+      audioEngine.stopOceanAmbience();
       setActiveDataset(id);
       activeDatasetRef.current = id;
       setCurrentTime(0.0);
@@ -673,6 +837,7 @@ export default function Home() {
       if (voiceEnabled) speechNarrator.speak("Decadal Night Lights active.");
       setAriaAnnouncement("Decadal Night Lights active (NASA SVS #5313). Press Space to play.");
     } else if (id === "iss-lightning") {
+      audioEngine.stopOceanAmbience();
       setActiveDataset(id);
       activeDatasetRef.current = id;
       setCurrentTime(0.0);
@@ -684,9 +849,26 @@ export default function Home() {
       }
       if (voiceEnabled) speechNarrator.speak("ISS Lightning Events active.");
       setAriaAnnouncement("ISS Lightning Events active (NASA SVS #5011). Press Space to play.");
+    } else if (id === "ocean-currents") {
+      audioEngine.stopOrbitalDrone();
+      setActiveDataset(id);
+      activeDatasetRef.current = id;
+      setCurrentTime(0.0);
+      currentTimeRef.current = 0.0;
+      lastEvaluatedSecondRef.current = -1;
+      lastRegionalTriggerRef.current = -1;
+      if (videoRef.current) videoRef.current.currentTime = 0.0;
+      if (isPlayingRef.current) {
+        if (audioEngine.isOceanStemActive()) {
+          audioEngine.startOceanStem(0.0);
+        } else {
+          audioEngine.startOceanAmbience();
+        }
+      }
+      if (voiceEnabled) speechNarrator.speak("Sea Surface Currents active.");
+      setAriaAnnouncement("Sea Surface Currents active (NASA SVS #3912). Press Space to play.");
     } else {
       const titles: Record<string, string> = {
-        "ocean-currents": "Sea Surface Currents",
         "dyamond-co2": "DYAMOND Global CO2",
       };
       const title = titles[id] || id;
@@ -747,23 +929,26 @@ export default function Home() {
         onGoHome={() => setHasEntered(false)}
       />
 
-      {/* Main Workspace - Ultra-Responsive Viewport Optimized Layout */}
-      <main className="flex-1 max-w-[1700px] w-full mx-auto p-2.5 sm:p-3 md:p-4 flex flex-col gap-3 sm:gap-4">
-        {/* Top Split: Left 70% (Cinematic Video Stage + Attached Controller), Right 30% (Acoustic Stage + Explain Panel) */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-start">
-          {/* Left Column: 70% Width (col-span-8 in 12-col grid) */}
-          <div className="lg:col-span-8 flex flex-col gap-2.5 sm:gap-3">
-            <SatelliteStage
-              currentDataset={activeDataset}
-              currentFeature={currentFeature}
-              currentTime={currentTime}
-              currentMode={currentMode}
-              selectedRegion={selectedRegion}
-              isPlaying={isPlaying}
-              onSelectRegion={handleSelectRegion}
-              onSeek={handleSeek}
-              videoRef={videoRef}
-            />
+      {/* Main Workspace */}
+      <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
+        {/* 2. Hero Satellite Optical Stage (Clean Projection • High-Precision Timeline Progress Bar) */}
+        <section className="w-full">
+          <SatelliteStage
+            currentDataset={activeDataset}
+            currentFeature={currentFeature}
+            currentTime={currentTime}
+            currentMode={currentMode}
+            selectedRegion={selectedRegion}
+            isPlaying={isPlaying}
+            onSelectRegion={handleSelectRegion}
+            onSeek={handleSeek}
+            videoRef={videoRef}
+            depthMeters={depthMeters}
+            onChangeDepth={handleChangeDepth}
+            selectedBasin={selectedBasin}
+            onSelectBasin={handleSelectBasin}
+          />
+        </section>
 
             {/* Seamless Attached Master Controller directly beneath the video */}
             <MasterController
@@ -777,7 +962,7 @@ export default function Home() {
               playbackSpeed={playbackSpeed}
               onChangeSpeed={handleChangeSpeed}
               loopMode={true}
-              onToggleLoopMode={() => {}}
+              onToggleLoopMode={() => { }}
             />
           </div>
 
@@ -791,6 +976,8 @@ export default function Home() {
               activeFreq={activeFreq}
               activeScaleName={activeScaleName}
               activeInstrument={activeInstrument}
+              oceanAudioMode={oceanAudioMode}
+              onToggleOceanAudioMode={handleToggleOceanAudioMode}
             />
 
             <ExplainPanel
