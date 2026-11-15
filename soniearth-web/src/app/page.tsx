@@ -298,63 +298,67 @@ export default function Home() {
         const feat = featureData.frames[frameIdx];
 
         if (feat) {
+          // Target Basin Lookup
+          const curBasin = selectedBasinRef.current;
+          const basinGrid = feat.spatialGrid?.find((b) => b.regionId === curBasin);
+          const baseSST = basinGrid?.meanTemperature ?? feat.temperatureCelsius ?? 19.5;
+          const pan = basinGrid?.pan ?? feat.strikePan ?? 0.0;
+          const bpm = feat.tempoBpm || 80;
+          const kts = feat.currentVelocityKnots ?? 3.5;
+
+          // Depth-adjusted thermocline temperature
+          const depth = depthMetersRef.current;
+          const depthFactor = Math.exp(-depth / 350.0);
+          const sst = Number((baseSST * depthFactor + 2.0).toFixed(1));
+
+          // Real-time continuous hydrodynamic flow modulation (swells with video currents)
+          audioEngine.updateOceanCurrentDynamics(kts, sst, pan);
+
           const nowMs = Date.now();
-          // Breathe at 1500ms cadence instead of harsh 450ms machine-gun
-          if (nowMs - lastRegionalTriggerRef.current >= 1500 || forceInstant) {
+          // Breathe at soft, spacious 2800ms cadence (or instant on seek/click) so notes crossfade like ocean tides
+          if (nowMs - lastRegionalTriggerRef.current >= 2800 || forceInstant) {
             lastRegionalTriggerRef.current = nowMs;
 
-            // Target Basin Lookup
-            const curBasin = selectedBasinRef.current;
-            const basinGrid = feat.spatialGrid?.find((b) => b.regionId === curBasin);
-            const baseSST = basinGrid?.meanTemperature ?? feat.temperatureCelsius ?? 18.0;
-            const pan = basinGrid?.pan ?? feat.strikePan ?? 0.0;
-            const bpm = feat.tempoBpm || 80;
-            const kts = feat.currentVelocityKnots ?? 1.5;
-
-            // Depth-adjusted thermocline temperature
-            const depth = depthMetersRef.current;
-            const depthFactor = Math.exp(-depth / 350.0);
-            const sst = Number((baseSST * depthFactor + 2.0).toFixed(1));
-
-            // Acoustic note selection adjusted for depth down to 40 Hz infrasound
-            let note = feat.activeNote || "C3";
-            let freq = feat.frequencyHz || 130.81;
+            // Authentic Oceanic Modal Harmony
+            let note = feat.activeNote || "E3";
+            let freq = feat.frequencyHz || 164.81;
 
             if (depth >= 800) {
               note = "D1"; // 40 Hz Infrasonic Sub-Bass
               freq = 38.89;
               setActiveScaleName(`Abyssal Plain Infrasound (40 Hz • ${sst}°C • 101 atm)`);
-              setActiveInstrument("Infrasonic Sub-Bass (40 Hz Bathypelagic)");
+              setActiveInstrument("Abyssal Sub-Bass Drone");
             } else if (depth >= 400) {
               note = "A1"; // 55 Hz Deep Sub-Drone
               freq = 55.0;
               setActiveScaleName(`Mesopelagic Thermocline (${sst}°C • 21 atm)`);
-              setActiveInstrument("Deep Thermocline Sub-Drone");
+              setActiveInstrument("Thermocline Velvet Drone");
             } else {
-              if (sst < 10.0) {
-                note = "D2";
-                freq = 73.42;
-              } else if (sst < 18.0) {
-                note = "A2";
-                freq = 110.0;
+              // Basin-specific tonal coloration
+              if (curBasin === "OCEAN_PACIFIC") {
+                if (sst < 16.0) { note = "D3"; freq = 146.83; }
+                else { note = "A3"; freq = 220.0; }
+              } else if (curBasin === "OCEAN_ATLANTIC") {
+                if (sst > 20.0) { note = "C4"; freq = 261.63; }
+                else { note = "E3"; freq = 164.81; }
+              } else if (curBasin === "OCEAN_INDIAN") {
+                if (sst < 17.0) { note = "A2"; freq = 110.0; }
+                else { note = "G3"; freq = 196.0; }
+              } else {
+                note = feat.activeNote || "E3";
+                freq = feat.frequencyHz || 164.81;
               }
+
               const basinLabel = curBasin !== "ALL" ? ` • ${curBasin.replace("OCEAN_", "")}` : "";
-              setActiveScaleName(`Thermal Scale (SST: ${sst.toFixed(1)}°C • ${bpm} BPM${basinLabel})`);
-              setActiveInstrument(sst < 14 ? `Polar Sub-Cello (${kts} kts)` : `Warm Silky Pad (${kts} kts)`);
+              setActiveScaleName(`Ocean Thermal Scale (${sst.toFixed(1)}°C • ${bpm} BPM${basinLabel})`);
+              setActiveInstrument(sst < 16 ? `Velvet Ocean Cello (${kts} kts)` : `Warm Silky Pad (${kts} kts)`);
             }
 
             setActiveNote(note);
             setActiveFreq(freq);
 
-            // Silky soft velocity (0.60) instead of abrasive punch
-            audioEngine.triggerOceanCurrent(note, sst, pan, 0.60);
-
-            // Subtle liquid droplet accent only for turbulent fast surface currents (> 3.2 knots, depth < 200m)
-            if (kts > 3.2 && depth < 200) {
-              setTimeout(() => {
-                audioEngine.triggerOceanRipple("E4", Math.min(1.0, pan + 0.1), 0.40);
-              }, 250);
-            }
+            // Velvety soft velocity (0.48) with slow 0.85s attack and 3.2s release
+            audioEngine.triggerOceanCurrent(note, sst, pan, 0.48);
           }
         }
         return;

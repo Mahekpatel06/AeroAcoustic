@@ -176,55 +176,55 @@ class SoniEarthAudioEngine {
       // 10. Ocean Currents Spatial Panner
       this.oceanPanner = new Tone.Panner(0.0).connect(this.duckGain);
 
-      // 11. Ocean Cello Synth (Cold Polar Waters: Velvet Warmth with 2nd/3rd Harmonics for Laptop Speaker Clarity)
-      this.oceanCelloFilter = new Tone.Filter(480, "lowpass", -12).connect(this.oceanPanner);
+      // 11. Ocean Cello Synth (Velvet Acoustic Bowed Cello for Deep / Cold Currents)
+      this.oceanCelloFilter = new Tone.Filter(380, "lowpass", -12).connect(this.oceanPanner);
       this.oceanCelloSynth = new Tone.MonoSynth({
-        oscillator: { type: "triangle8" as const },
-        filter: { Q: 0.8, type: "lowpass" as const, rolloff: -12 },
-        envelope: { attack: 0.35, decay: 0.8, sustain: 0.85, release: 2.2 },
-        filterEnvelope: { attack: 0.25, decay: 0.7, sustain: 0.75, baseFrequency: 240, octaves: 1.8 }
+        oscillator: { type: "fatsine", count: 2, spread: 15 },
+        filter: { Q: 0.5, type: "lowpass" as const, rolloff: -12 },
+        envelope: { attack: 0.85, decay: 1.6, sustain: 0.85, release: 3.2 },
+        filterEnvelope: { attack: 0.6, decay: 1.2, sustain: 0.8, baseFrequency: 160, octaves: 1.2 }
       }).connect(this.oceanCelloFilter);
-      this.oceanCelloSynth.volume.value = -6.0;
+      this.oceanCelloSynth.volume.value = -10.0;
 
-      // 12. Ocean String Swell (Warm Waters: Silky Harmonic Pad with Full Mid-Range Presence)
-      this.oceanStringFilter = new Tone.Filter(1100, "lowpass", -12).connect(this.oceanPanner);
+      // 12. Ocean String Swell (Warm Sunlit Waters: Silky, Soft, Ambient Harmonic Pad)
+      this.oceanStringFilter = new Tone.Filter(580, "lowpass", -12).connect(this.oceanPanner);
       this.oceanStringSynth = new Tone.PolySynth(Tone.Synth, {
-        oscillator: { type: "triangle" as const },
-        envelope: { attack: 0.5, decay: 1.2, sustain: 0.85, release: 2.5 }
+        oscillator: { type: "sine" as const },
+        envelope: { attack: 1.1, decay: 2.0, sustain: 0.85, release: 3.5 }
       }).connect(this.oceanStringFilter);
-      this.oceanStringSynth.volume.value = -7.0;
+      this.oceanStringSynth.volume.value = -11.0;
 
-      // 13. Ocean Ripple Arpeggiator (Liquid Streamline Droplets)
+      // 13. Ocean Ripple Arpeggiator (Subtle Fluid Resonance)
       this.oceanRippleSynth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "sine" as const },
-        envelope: { attack: 0.03, decay: 0.3, sustain: 0.1, release: 0.5 }
+        envelope: { attack: 0.15, decay: 0.4, sustain: 0.1, release: 0.8 }
       }).connect(this.oceanPanner);
-      this.oceanRippleSynth.volume.value = -13;
+      this.oceanRippleSynth.volume.value = -22;
 
-      // 14. Ocean Hydrophone Fluid Wave Swell (Bandpass-filtered Pink Noise for Organic Tidal Surf on Laptop Speakers)
+      // 14. Ocean Hydrophone Fluid Wave Swell (Organic Brown Noise with Gentle 0.08 Hz Tidal Breathing)
       this.oceanFilterNode = new Tone.AutoFilter({
-        frequency: 0.10,
+        frequency: 0.08,
         type: "sine",
-        depth: 0.65,
-        baseFrequency: 350,
-        octaves: 2.2,
+        depth: 0.60,
+        baseFrequency: 240,
+        octaves: 1.6,
         filter: {
-          type: "bandpass",
+          type: "lowpass",
           rolloff: -12,
-          Q: 0.8
+          Q: 0.6
         }
       }).connect(this.oceanPanner);
       this.oceanFilterNode.start();
 
-      this.oceanNoiseNode = new Tone.Noise("pink").connect(this.oceanFilterNode);
-      this.oceanNoiseNode.volume.value = -16;
+      this.oceanNoiseNode = new Tone.Noise("brown").connect(this.oceanFilterNode);
+      this.oceanNoiseNode.volume.value = -19;
 
-      // 15. Infrasonic Abyssal Depth Sub-Drone (Reaches 40 Hz at 1000m with Harmonic Overtones)
+      // 15. Infrasonic Abyssal Depth Sub-Drone (Reaches 40 Hz at 1000m with Soft Velvet Warmth)
       this.oceanDepthDrone = new Tone.Synth({
         oscillator: { type: "triangle" as const },
-        envelope: { attack: 1.5, decay: 1.0, sustain: 1.0, release: 2.0 }
+        envelope: { attack: 1.8, decay: 1.2, sustain: 1.0, release: 2.5 }
       }).connect(this.oceanPanner);
-      this.oceanDepthDrone.volume.value = -20;
+      this.oceanDepthDrone.volume.value = -24;
 
       this.isInitialized = true;
       return true;
@@ -403,22 +403,22 @@ class SoniEarthAudioEngine {
     this.oceanDepthMeters = Math.max(0, Math.min(1000, depthMeters));
     const depthRatio = this.oceanDepthMeters / 1000.0;
 
-    // Filter frequency modulation preserving laptop speaker presence
+    // Filter frequency modulation preserving laptop speaker presence while sounding deep
     if (this.oceanStringFilter) {
-      const targetCutoff = 1100 * (1 - depthRatio * 0.75) + 260;
+      const targetCutoff = 580 * (1 - depthRatio * 0.70) + 180;
       this.oceanStringFilter.frequency.rampTo(targetCutoff, 0.25);
     }
     if (this.oceanCelloFilter) {
-      const targetCutoff = 480 * (1 - depthRatio * 0.65) + 160;
+      const targetCutoff = 380 * (1 - depthRatio * 0.60) + 140;
       this.oceanCelloFilter.frequency.rampTo(targetCutoff, 0.25);
     }
 
-    // Infrasonic Abyssal Drone (down to 40 Hz at 1000m with psychoacoustic harmonics)
+    // Infrasonic Abyssal Drone (down to 40 Hz at 1000m with soft velvet warmth)
     if (this.oceanDepthDrone) {
       if (this.oceanDepthMeters > 50) {
         // Interpolate pitch down to 40.0 Hz (D1/Eb1)
         const targetHz = Math.round((65.0 - depthRatio * 25.0) * 10) / 10;
-        const targetVol = -20 + depthRatio * 10; // Ramps up to -10 dB
+        const targetVol = -26 + depthRatio * 12; // Ramps smoothly from -26 dB to -14 dB
         this.oceanDepthDrone.volume.rampTo(targetVol, 0.25);
 
         if (!this.isOceanDepthDroneActive && Tone.context.state === "running") {
@@ -447,7 +447,7 @@ class SoniEarthAudioEngine {
   public setOceanBasin(basinId: string, pan = 0.0) {
     this.oceanBasinId = basinId;
     if (this.oceanPanner) {
-      this.oceanPanner.pan.rampTo(Math.max(-0.85, Math.min(0.85, pan)), 0.35);
+      this.oceanPanner.pan.rampTo(Math.max(-0.75, Math.min(0.75, pan)), 0.35);
     }
   }
 
@@ -457,15 +457,14 @@ class SoniEarthAudioEngine {
 
   /**
    * Triggers sea surface currents sonification based on water temperature and velocity.
-   * Mastered with warm harmonic saturation for rich clarity on internal laptop speakers
-   * and lush sub-bass depth in headphones.
+   * Mastered with soft, silky acoustic envelopes for soothing organic ocean ambiance.
    * Supports thermocline depth layers (0m to 1000m) down to 40 Hz infrasound.
    */
-  public triggerOceanCurrent(note: string, sstCelsius: number, pan = 0.0, velocity = 0.70) {
+  public triggerOceanCurrent(note: string, sstCelsius: number, pan = 0.0, velocity = 0.50) {
     if (!this.isInitialized || this.isMuted) return;
     try {
       if (this.oceanPanner) {
-        this.oceanPanner.pan.rampTo(Math.max(-0.85, Math.min(0.85, pan)), 0.1);
+        this.oceanPanner.pan.rampTo(Math.max(-0.75, Math.min(0.75, pan)), 0.2);
       }
 
       // Depth-adjusted temperature and pitch (thermocline gradient)
@@ -477,22 +476,37 @@ class SoniEarthAudioEngine {
         effectiveNote = "D2"; // Transposed to D2 (73.4 Hz) with rich harmonics so 40Hz sub-drone anchors infrasound
       } else if (this.oceanDepthMeters >= 450) {
         effectiveNote = "A2"; // 110 Hz Deep sub-bass with audible presence
-      } else if (effectiveSST < 10.0) {
-        effectiveNote = "D2"; // Polar cold cello
-      } else if (effectiveSST < 18.0) {
-        effectiveNote = "A2"; // Temperate
       }
 
-      if (effectiveSST < 14.0 || this.oceanDepthMeters > 300) {
-        // Cold polar waters or deep bathypelagic layers: rich velvet cello bass
-        this.oceanCelloSynth?.triggerAttackRelease(effectiveNote, 2.2, undefined, velocity);
+      if (effectiveSST < 16.0 || this.oceanDepthMeters > 300) {
+        // Cold polar waters or deep bathypelagic layers: velvet acoustic cello
+        this.oceanCelloSynth?.triggerAttackRelease(effectiveNote, 3.0, undefined, velocity);
       } else {
-        // Warm sunlit surface waters: silky warm harmonic string pad
-        this.oceanStringSynth?.triggerAttackRelease(effectiveNote, 2.0, undefined, velocity * 0.9);
+        // Warm sunlit surface waters: silky warm ambient pad
+        this.oceanStringSynth?.triggerAttackRelease(effectiveNote, 3.2, undefined, velocity * 0.85);
       }
     } catch (e) {
       // Ignore transient polyphony warnings
     }
+  }
+
+  /**
+   * Smoothly modulates continuous hydrodynamic flow parameters (wave swell, filter resonance, spatial pan)
+   * in real time to match video currents.
+   */
+  public updateOceanCurrentDynamics(velocityKnots: number, sstCelsius: number, pan: number) {
+    if (!this.isInitialized || this.isMuted) return;
+    try {
+      if (this.oceanPanner) {
+        this.oceanPanner.pan.rampTo(Math.max(-0.75, Math.min(0.75, pan)), 0.35);
+      }
+      if (this.oceanNoiseNode) {
+        // As current velocity surges, the hydrophone wave swell softly opens by up to +3.5 dB
+        const velNormalized = Math.min(1.0, Math.max(0.0, (velocityKnots - 1.0) / 4.5));
+        const targetVol = -21.0 + velNormalized * 3.5;
+        this.oceanNoiseNode.volume.rampTo(targetVol, 0.3);
+      }
+    } catch (e) {}
   }
 
   /**
