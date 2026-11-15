@@ -128,30 +128,6 @@ def process_dyamond_co2():
         else:
             cx, cy = 0.5, 0.5
 
-        # Longitudinal Region Identification & Spatial Stereo Panning
-        if cx < 0.35:
-            dominant_region = "North America Industrial Corridor"
-            stereo_pan = round(float(np.clip(((cx - 0.175) / 0.175) * 0.75 - 0.75, -0.85, -0.30)), 2)
-        elif cx < 0.65:
-            dominant_region = "European Grid & African Biomass"
-            stereo_pan = round(float(np.clip(((cx - 0.50) / 0.15) * 0.40, -0.30, 0.30)), 2)
-        else:
-            dominant_region = "East Asia Megacities & Industrial Basin"
-            stereo_pan = round(float(np.clip(((cx - 0.825) / 0.175) * 0.75 + 0.35, 0.30, 0.85)), 2)
-
-        # Musical Note, Frequency, Harmonic Tension & Pitch Level (LOW / MID / HIGH)
-        active_note, active_freq, tension_score, pitch_level = get_note_for_ppm(co2_ppm)
-
-        # Plume burst transient trigger: fires on rate surges (flux >= 0.08) or high red ratio (> 11.2%)
-        is_plume_burst = bool(abs(flux_delta) >= 0.08 or red_ratio >= 0.112)
-
-        # Exact Synchronized Simulation Calendar Timestamp
-        time_prog = min(1.0, max(0.0, t_sec / duration))
-        sim_dt = start_dt + timedelta(days=time_prog * total_sim_days)
-        sim_day_num = int(time_prog * total_sim_days) + 1
-        sim_date_str = sim_dt.strftime("%b %d, %Y")
-        sim_utc_str = sim_dt.strftime("%H:%M UTC")
-
         # Spatial 3-Zone Planetary Discretization
         w1 = int(w * 0.35)
         w2 = int(w * 0.65)
@@ -167,6 +143,17 @@ def process_dyamond_co2():
         west_ppm = round(408.5 + west_norm * 12.5, 1)
         center_ppm = round(408.5 + center_norm * 12.5, 1)
         east_ppm = round(408.5 + east_norm * 12.5, 1)
+
+        # Dynamic Regional Dominance & Calibrated Spatial Stereo Panning
+        if west_ppm > center_ppm and west_ppm > east_ppm:
+            dominant_region = "North America Industrial Corridor"
+            stereo_pan = -0.65
+        elif east_ppm > center_ppm and east_ppm >= west_ppm:
+            dominant_region = "East Asia Megacities & Industrial Basin"
+            stereo_pan = 0.65
+        else:
+            dominant_region = "European Grid & African Biomass"
+            stereo_pan = 0.0
 
         w_note, w_freq, w_level = get_regional_note_for_ppm(west_ppm)
         c_note, c_freq, c_level = get_regional_note_for_ppm(center_ppm)

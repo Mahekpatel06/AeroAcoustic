@@ -18,6 +18,10 @@ assets/original/*.mp4
 assets/original/*.mov
 soniearth-nightlights/assets/original/*.mp4
 
+# Allow optimized frontend dataset video clips
+!soniearth-web/public/datasets/**/*.mp4
+!soniearth-web/public/datasets/**/*.webm
+
 # Python
 __pycache__/
 *.py[cod]

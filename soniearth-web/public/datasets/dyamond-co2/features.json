@@ -26,7 +26,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.637,
         0.344
@@ -80,7 +80,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.631,
         0.337
@@ -134,7 +134,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.591,
         0.353
@@ -188,7 +188,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.579,
         0.332
@@ -242,7 +242,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.19,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.57,
         0.336
@@ -296,12 +296,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.594,
         0.303
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 20, 2020",
       "simulationTimeUtc": "12:33 UTC",
       "simulationDay": 1,
@@ -350,12 +350,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.616,
         0.307
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 20, 2020",
       "simulationTimeUtc": "15:03 UTC",
       "simulationDay": 1,
@@ -404,12 +404,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.621,
         0.299
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 20, 2020",
       "simulationTimeUtc": "17:34 UTC",
       "simulationDay": 1,
@@ -458,7 +458,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.614,
         0.313
@@ -512,7 +512,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.586,
         0.309
@@ -566,7 +566,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.554,
         0.33
@@ -620,7 +620,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.539,
         0.308
@@ -674,7 +674,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.537,
         0.305
@@ -728,7 +728,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.562,
         0.278
@@ -782,7 +782,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.587,
         0.285
@@ -836,7 +836,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.597,
         0.279
@@ -890,7 +890,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.601,
         0.295
@@ -944,7 +944,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.592,
         0.3
@@ -998,7 +998,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.565,
         0.327
@@ -1052,7 +1052,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.566,
         0.318
@@ -1106,7 +1106,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.19,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.57,
         0.348
@@ -1160,7 +1160,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.28,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.606,
         0.335
@@ -1214,12 +1214,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.64,
         0.343
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 22, 2020",
       "simulationTimeUtc": "07:13 UTC",
       "simulationDay": 3,
@@ -1268,12 +1268,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.644,
         0.345
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 22, 2020",
       "simulationTimeUtc": "09:44 UTC",
       "simulationDay": 3,
@@ -1322,7 +1322,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.634,
         0.367
@@ -1376,7 +1376,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.612,
         0.366
@@ -1430,7 +1430,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.564,
         0.381
@@ -1484,7 +1484,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.547,
         0.369
@@ -1538,7 +1538,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.546,
         0.376
@@ -1592,7 +1592,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.2,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.573,
         0.344
@@ -1646,12 +1646,12 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.28,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.605,
         0.348
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 23, 2020",
       "simulationTimeUtc": "03:18 UTC",
       "simulationDay": 4,
@@ -1700,12 +1700,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.617,
         0.346
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 23, 2020",
       "simulationTimeUtc": "05:48 UTC",
       "simulationDay": 4,
@@ -1754,7 +1754,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.613,
         0.353
@@ -1808,7 +1808,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.6,
         0.352
@@ -1862,7 +1862,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.561,
         0.381
@@ -1916,7 +1916,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.547,
         0.368
@@ -1970,7 +1970,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.544,
         0.361
@@ -2024,12 +2024,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.19,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.571,
         0.337
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 23, 2020",
       "simulationTimeUtc": "20:52 UTC",
       "simulationDay": 4,
@@ -2078,12 +2078,12 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.29,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.608,
         0.344
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 23, 2020",
       "simulationTimeUtc": "23:23 UTC",
       "simulationDay": 4,
@@ -2132,12 +2132,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.29,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.61,
         0.336
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 24, 2020",
       "simulationTimeUtc": "01:53 UTC",
       "simulationDay": 5,
@@ -2186,12 +2186,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.618,
         0.357
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 24, 2020",
       "simulationTimeUtc": "04:24 UTC",
       "simulationDay": 5,
@@ -2240,7 +2240,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.29,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.608,
         0.349
@@ -2294,7 +2294,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.569,
         0.36
@@ -2348,7 +2348,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.15,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.556,
         0.352
@@ -2402,7 +2402,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.15,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.557,
         0.354
@@ -2456,12 +2456,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.24,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.589,
         0.313
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 24, 2020",
       "simulationTimeUtc": "16:57 UTC",
       "simulationDay": 5,
@@ -2510,12 +2510,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.615,
         0.309
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 24, 2020",
       "simulationTimeUtc": "19:28 UTC",
       "simulationDay": 5,
@@ -2564,12 +2564,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.616,
         0.301
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 24, 2020",
       "simulationTimeUtc": "21:58 UTC",
       "simulationDay": 5,
@@ -2618,7 +2618,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.612,
         0.318
@@ -2672,7 +2672,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.598,
         0.311
@@ -2726,7 +2726,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.567,
         0.336
@@ -2780,7 +2780,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.549,
         0.325
@@ -2834,7 +2834,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.323
@@ -2888,7 +2888,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.578,
         0.307
@@ -2942,7 +2942,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.601,
         0.321
@@ -2996,7 +2996,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.29,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.609,
         0.322
@@ -3050,7 +3050,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.29,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.608,
         0.341
@@ -3104,7 +3104,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.59,
         0.342
@@ -3158,7 +3158,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.56,
         0.367
@@ -3212,7 +3212,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.11,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.541,
         0.355
@@ -3266,7 +3266,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.11,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.54,
         0.362
@@ -3320,7 +3320,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.562,
         0.341
@@ -3374,7 +3374,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.591,
         0.342
@@ -3428,7 +3428,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.598,
         0.345
@@ -3482,7 +3482,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.6,
         0.366
@@ -3536,7 +3536,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.22,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.581,
         0.36
@@ -3590,7 +3590,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.373
@@ -3644,7 +3644,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.531,
         0.363
@@ -3698,7 +3698,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.09,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.532,
         0.37
@@ -3752,7 +3752,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.347
@@ -3806,7 +3806,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.586,
         0.353
@@ -3860,7 +3860,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.592,
         0.351
@@ -3914,7 +3914,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.588,
         0.359
@@ -3968,7 +3968,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.569,
         0.36
@@ -4022,7 +4022,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.538,
         0.38
@@ -4076,7 +4076,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.05,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.518,
         0.372
@@ -4130,7 +4130,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.05,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.517,
         0.372
@@ -4184,7 +4184,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.545,
         0.354
@@ -4238,7 +4238,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.2,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.573,
         0.36
@@ -4292,7 +4292,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.587,
         0.355
@@ -4346,7 +4346,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.593,
         0.371
@@ -4400,7 +4400,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.22,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.581,
         0.368
@@ -4454,7 +4454,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.539,
         0.384
@@ -4508,7 +4508,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.07,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.527,
         0.376
@@ -4562,7 +4562,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.53,
         0.382
@@ -4616,7 +4616,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.568,
         0.349
@@ -4670,12 +4670,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.28,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.605,
         0.346
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 28, 2020",
       "simulationTimeUtc": "23:52 UTC",
       "simulationDay": 9,
@@ -4724,12 +4724,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.618,
         0.343
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 29, 2020",
       "simulationTimeUtc": "02:23 UTC",
       "simulationDay": 10,
@@ -4778,7 +4778,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.618,
         0.362
@@ -4832,7 +4832,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.28,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.603,
         0.356
@@ -4886,7 +4886,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.19,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.57,
         0.375
@@ -4940,7 +4940,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.366
@@ -4994,7 +4994,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.359
@@ -5048,12 +5048,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.23,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.585,
         0.327
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 29, 2020",
       "simulationTimeUtc": "17:26 UTC",
       "simulationDay": 10,
@@ -5102,12 +5102,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.616,
         0.332
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 29, 2020",
       "simulationTimeUtc": "19:57 UTC",
       "simulationDay": 10,
@@ -5156,12 +5156,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.627,
         0.327
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 29, 2020",
       "simulationTimeUtc": "22:28 UTC",
       "simulationDay": 10,
@@ -5210,7 +5210,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.624,
         0.332
@@ -5264,7 +5264,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.28,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.606,
         0.34
@@ -5318,7 +5318,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.566,
         0.344
@@ -5372,7 +5372,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.548,
         0.336
@@ -5426,12 +5426,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.11,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.541,
         0.327
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 30, 2020",
       "simulationTimeUtc": "11:01 UTC",
       "simulationDay": 11,
@@ -5480,12 +5480,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.17,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.565,
         0.295
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 30, 2020",
       "simulationTimeUtc": "13:31 UTC",
       "simulationDay": 11,
@@ -5534,12 +5534,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.594,
         0.297
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 30, 2020",
       "simulationTimeUtc": "16:02 UTC",
       "simulationDay": 11,
@@ -5588,12 +5588,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.26,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.599,
         0.297
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 30, 2020",
       "simulationTimeUtc": "18:33 UTC",
       "simulationDay": 11,
@@ -5642,12 +5642,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.25,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.595,
         0.311
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 30, 2020",
       "simulationTimeUtc": "21:03 UTC",
       "simulationDay": 11,
@@ -5696,7 +5696,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.58,
         0.307
@@ -5750,7 +5750,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.549,
         0.316
@@ -5804,7 +5804,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.531,
         0.307
@@ -5858,7 +5858,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.06,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.523,
         0.307
@@ -5912,12 +5912,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.14,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.552,
         0.275
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 31, 2020",
       "simulationTimeUtc": "09:36 UTC",
       "simulationDay": 12,
@@ -5966,12 +5966,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.22,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.582,
         0.279
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 31, 2020",
       "simulationTimeUtc": "12:07 UTC",
       "simulationDay": 12,
@@ -6020,12 +6020,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.24,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.59,
         0.281
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Jan 31, 2020",
       "simulationTimeUtc": "14:37 UTC",
       "simulationDay": 12,
@@ -6074,7 +6074,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.587,
         0.292
@@ -6128,7 +6128,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.2,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.575,
         0.294
@@ -6182,7 +6182,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.539,
         0.318
@@ -6236,7 +6236,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.531,
         0.309
@@ -6290,7 +6290,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.531,
         0.305
@@ -6344,12 +6344,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.17,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.563,
         0.275
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 01, 2020",
       "simulationTimeUtc": "05:41 UTC",
       "simulationDay": 13,
@@ -6398,12 +6398,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.21,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.58,
         0.283
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 01, 2020",
       "simulationTimeUtc": "08:12 UTC",
       "simulationDay": 13,
@@ -6452,12 +6452,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.25,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.593,
         0.281
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 01, 2020",
       "simulationTimeUtc": "10:42 UTC",
       "simulationDay": 13,
@@ -6506,7 +6506,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.596,
         0.307
@@ -6560,7 +6560,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.22,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.584,
         0.313
@@ -6614,7 +6614,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.545,
         0.326
@@ -6668,7 +6668,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.11,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.542,
         0.316
@@ -6722,7 +6722,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.536,
         0.325
@@ -6776,7 +6776,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.565,
         0.29
@@ -6830,12 +6830,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.594,
         0.292
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 02, 2020",
       "simulationTimeUtc": "04:17 UTC",
       "simulationDay": 14,
@@ -6884,7 +6884,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.602,
         0.289
@@ -6938,7 +6938,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.6,
         0.309
@@ -6992,7 +6992,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.587,
         0.305
@@ -7046,7 +7046,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.561,
         0.324
@@ -7100,7 +7100,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.544,
         0.32
@@ -7154,7 +7154,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.545,
         0.318
@@ -7208,7 +7208,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.19,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.572,
         0.292
@@ -7262,7 +7262,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.594,
         0.303
@@ -7316,12 +7316,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.28,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.605,
         0.301
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 03, 2020",
       "simulationTimeUtc": "02:52 UTC",
       "simulationDay": 15,
@@ -7370,7 +7370,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.29,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.608,
         0.305
@@ -7424,7 +7424,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.598,
         0.305
@@ -7478,7 +7478,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.568,
         0.324
@@ -7532,7 +7532,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.15,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.556,
         0.311
@@ -7586,7 +7586,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.553,
         0.314
@@ -7640,12 +7640,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.22,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.584,
         0.28
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 03, 2020",
       "simulationTimeUtc": "17:56 UTC",
       "simulationDay": 15,
@@ -7694,12 +7694,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.29,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.608,
         0.277
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 03, 2020",
       "simulationTimeUtc": "20:26 UTC",
       "simulationDay": 15,
@@ -7748,7 +7748,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.615,
         0.275
@@ -7802,7 +7802,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.615,
         0.296
@@ -7856,7 +7856,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.28,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.606,
         0.294
@@ -7910,7 +7910,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.19,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.571,
         0.312
@@ -7964,7 +7964,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.56,
         0.308
@@ -8018,7 +8018,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.553,
         0.313
@@ -8072,7 +8072,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.22,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.582,
         0.285
@@ -8126,12 +8126,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.616,
         0.298
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 04, 2020",
       "simulationTimeUtc": "16:31 UTC",
       "simulationDay": 16,
@@ -8180,7 +8180,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.621,
         0.299
@@ -8234,7 +8234,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.619,
         0.309
@@ -8288,7 +8288,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.602,
         0.311
@@ -8342,7 +8342,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.562,
         0.341
@@ -8396,7 +8396,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.547,
         0.338
@@ -8450,7 +8450,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.545,
         0.341
@@ -8504,7 +8504,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.579,
         0.319
@@ -8558,7 +8558,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.29,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.61,
         0.33
@@ -8612,7 +8612,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.615,
         0.329
@@ -8666,7 +8666,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.615,
         0.341
@@ -8720,7 +8720,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.601,
         0.341
@@ -8774,7 +8774,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.566,
         0.354
@@ -8828,7 +8828,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.352
@@ -8882,7 +8882,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.549,
         0.361
@@ -8936,7 +8936,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.2,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.576,
         0.334
@@ -8990,12 +8990,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.617,
         0.34
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 06, 2020",
       "simulationTimeUtc": "08:41 UTC",
       "simulationDay": 18,
@@ -9044,12 +9044,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.626,
         0.336
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 06, 2020",
       "simulationTimeUtc": "11:12 UTC",
       "simulationDay": 18,
@@ -9098,7 +9098,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.626,
         0.351
@@ -9152,7 +9152,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.619,
         0.345
@@ -9206,7 +9206,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.593,
         0.357
@@ -9260,7 +9260,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.58,
         0.348
@@ -9314,7 +9314,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.22,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.583,
         0.339
@@ -9368,12 +9368,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.618,
         0.311
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 07, 2020",
       "simulationTimeUtc": "02:15 UTC",
       "simulationDay": 19,
@@ -9422,12 +9422,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.641,
         0.32
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 07, 2020",
       "simulationTimeUtc": "04:46 UTC",
       "simulationDay": 19,
@@ -9476,12 +9476,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.639,
         0.314
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 07, 2020",
       "simulationTimeUtc": "07:17 UTC",
       "simulationDay": 19,
@@ -9530,7 +9530,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.632,
         0.326
@@ -9584,7 +9584,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.619,
         0.324
@@ -9638,7 +9638,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.592,
         0.347
@@ -9692,7 +9692,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.22,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.582,
         0.333
@@ -9746,7 +9746,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.22,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.584,
         0.337
@@ -9800,12 +9800,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.62,
         0.306
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 07, 2020",
       "simulationTimeUtc": "22:20 UTC",
       "simulationDay": 19,
@@ -9854,12 +9854,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.639,
         0.307
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 08, 2020",
       "simulationTimeUtc": "00:51 UTC",
       "simulationDay": 20,
@@ -9908,12 +9908,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.639,
         0.306
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 08, 2020",
       "simulationTimeUtc": "03:22 UTC",
       "simulationDay": 20,
@@ -9962,7 +9962,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.629,
         0.322
@@ -10016,7 +10016,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.28,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.607,
         0.309
@@ -10070,7 +10070,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.566,
         0.325
@@ -10124,7 +10124,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.545,
         0.311
@@ -10178,7 +10178,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.11,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.54,
         0.315
@@ -10232,7 +10232,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.561,
         0.274
@@ -10286,12 +10286,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.592,
         0.284
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 08, 2020",
       "simulationTimeUtc": "20:56 UTC",
       "simulationDay": 20,
@@ -10340,12 +10340,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.24,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.591,
         0.284
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 08, 2020",
       "simulationTimeUtc": "23:26 UTC",
       "simulationDay": 20,
@@ -10394,7 +10394,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.59,
         0.299
@@ -10448,7 +10448,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.577,
         0.295
@@ -10502,7 +10502,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.538,
         0.326
@@ -10556,7 +10556,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.07,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.528,
         0.311
@@ -10610,7 +10610,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.09,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.534,
         0.305
@@ -10664,7 +10664,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.561,
         0.275
@@ -10718,7 +10718,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.593,
         0.288
@@ -10772,12 +10772,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.612,
         0.285
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 09, 2020",
       "simulationTimeUtc": "19:31 UTC",
       "simulationDay": 21,
@@ -10826,7 +10826,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.29,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.61,
         0.302
@@ -10880,7 +10880,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.599,
         0.3
@@ -10934,7 +10934,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.563,
         0.314
@@ -10988,7 +10988,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.15,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.556,
         0.303
@@ -11042,7 +11042,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.55,
         0.309
@@ -11096,7 +11096,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.568,
         0.276
@@ -11150,12 +11150,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.27,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.601,
         0.274
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 10, 2020",
       "simulationTimeUtc": "13:06 UTC",
       "simulationDay": 22,
@@ -11204,12 +11204,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.28,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.606,
         0.281
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 10, 2020",
       "simulationTimeUtc": "15:36 UTC",
       "simulationDay": 22,
@@ -11258,7 +11258,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.28,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.605,
         0.305
@@ -11312,7 +11312,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.595,
         0.309
@@ -11366,7 +11366,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.561,
         0.326
@@ -11420,7 +11420,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.544,
         0.318
@@ -11474,7 +11474,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.308
@@ -11528,7 +11528,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.2,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.577,
         0.282
@@ -11582,12 +11582,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.27,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.602,
         0.29
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 11, 2020",
       "simulationTimeUtc": "09:11 UTC",
       "simulationDay": 23,
@@ -11636,12 +11636,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.612,
         0.291
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 11, 2020",
       "simulationTimeUtc": "11:41 UTC",
       "simulationDay": 23,
@@ -11690,7 +11690,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.29,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.607,
         0.301
@@ -11744,7 +11744,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.59,
         0.303
@@ -11798,7 +11798,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.559,
         0.323
@@ -11852,7 +11852,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.544,
         0.308
@@ -11906,7 +11906,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.538,
         0.307
@@ -11960,7 +11960,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.561,
         0.278
@@ -12014,12 +12014,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.24,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.592,
         0.274
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 12, 2020",
       "simulationTimeUtc": "05:15 UTC",
       "simulationDay": 24,
@@ -12068,7 +12068,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.28,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.604,
         0.274
@@ -12122,7 +12122,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.602,
         0.296
@@ -12176,7 +12176,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.587,
         0.295
@@ -12230,7 +12230,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.558,
         0.307
@@ -12284,7 +12284,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.11,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.542,
         0.303
@@ -12338,7 +12338,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.09,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.534,
         0.307
@@ -12392,7 +12392,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.559,
         0.277
@@ -12446,12 +12446,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.24,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.589,
         0.282
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 13, 2020",
       "simulationTimeUtc": "01:20 UTC",
       "simulationDay": 25,
@@ -12500,12 +12500,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.27,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.6,
         0.291
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 13, 2020",
       "simulationTimeUtc": "03:51 UTC",
       "simulationDay": 25,
@@ -12554,7 +12554,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.599,
         0.298
@@ -12608,7 +12608,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.577,
         0.3
@@ -12662,7 +12662,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.549,
         0.322
@@ -12716,7 +12716,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.53,
         0.313
@@ -12770,7 +12770,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.529,
         0.305
@@ -12824,12 +12824,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.14,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.552,
         0.287
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 13, 2020",
       "simulationTimeUtc": "18:55 UTC",
       "simulationDay": 25,
@@ -12878,12 +12878,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.22,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.582,
         0.292
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 13, 2020",
       "simulationTimeUtc": "21:25 UTC",
       "simulationDay": 25,
@@ -12932,12 +12932,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.27,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.6,
         0.296
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 13, 2020",
       "simulationTimeUtc": "23:56 UTC",
       "simulationDay": 25,
@@ -12986,12 +12986,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.27,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.601,
         0.311
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 14, 2020",
       "simulationTimeUtc": "02:26 UTC",
       "simulationDay": 26,
@@ -13040,7 +13040,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.593,
         0.315
@@ -13094,7 +13094,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.561,
         0.331
@@ -13148,7 +13148,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.544,
         0.328
@@ -13202,7 +13202,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.09,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.536,
         0.338
@@ -13256,12 +13256,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.16,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.56,
         0.308
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 14, 2020",
       "simulationTimeUtc": "15:00 UTC",
       "simulationDay": 26,
@@ -13310,12 +13310,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.23,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.587,
         0.306
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 14, 2020",
       "simulationTimeUtc": "17:30 UTC",
       "simulationDay": 26,
@@ -13364,12 +13364,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.594,
         0.31
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 14, 2020",
       "simulationTimeUtc": "20:01 UTC",
       "simulationDay": 26,
@@ -13418,7 +13418,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.593,
         0.329
@@ -13472,7 +13472,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.578,
         0.331
@@ -13526,7 +13526,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.352
@@ -13580,7 +13580,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.536,
         0.346
@@ -13634,7 +13634,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.538,
         0.342
@@ -13688,12 +13688,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.21,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.58,
         0.314
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 15, 2020",
       "simulationTimeUtc": "11:04 UTC",
       "simulationDay": 27,
@@ -13742,12 +13742,12 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.29,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.607,
         0.319
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 15, 2020",
       "simulationTimeUtc": "13:35 UTC",
       "simulationDay": 27,
@@ -13796,12 +13796,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.619,
         0.319
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 15, 2020",
       "simulationTimeUtc": "16:06 UTC",
       "simulationDay": 27,
@@ -13850,7 +13850,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.62,
         0.331
@@ -13904,7 +13904,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.28,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.603,
         0.338
@@ -13958,7 +13958,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.565,
         0.365
@@ -14012,7 +14012,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.546,
         0.354
@@ -14066,7 +14066,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.547,
         0.356
@@ -14120,12 +14120,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.2,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.576,
         0.33
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 16, 2020",
       "simulationTimeUtc": "07:09 UTC",
       "simulationDay": 28,
@@ -14174,12 +14174,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.29,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.609,
         0.327
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 16, 2020",
       "simulationTimeUtc": "09:40 UTC",
       "simulationDay": 28,
@@ -14228,12 +14228,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.617,
         0.332
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 16, 2020",
       "simulationTimeUtc": "12:11 UTC",
       "simulationDay": 28,
@@ -14282,7 +14282,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.29,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.609,
         0.352
@@ -14336,7 +14336,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.597,
         0.354
@@ -14390,7 +14390,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.559,
         0.369
@@ -14444,7 +14444,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.549,
         0.359
@@ -14498,7 +14498,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.543,
         0.366
@@ -14552,12 +14552,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.21,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.578,
         0.337
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 17, 2020",
       "simulationTimeUtc": "03:14 UTC",
       "simulationDay": 29,
@@ -14606,12 +14606,12 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.28,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.605,
         0.345
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 17, 2020",
       "simulationTimeUtc": "05:45 UTC",
       "simulationDay": 29,
@@ -14660,12 +14660,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.622,
         0.345
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 17, 2020",
       "simulationTimeUtc": "08:15 UTC",
       "simulationDay": 29,
@@ -14714,7 +14714,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.613,
         0.352
@@ -14768,7 +14768,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.589,
         0.358
@@ -14822,7 +14822,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.547,
         0.377
@@ -14876,7 +14876,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.09,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.533,
         0.36
@@ -14930,7 +14930,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.09,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.532,
         0.351
@@ -14984,12 +14984,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.17,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.563,
         0.328
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 17, 2020",
       "simulationTimeUtc": "23:19 UTC",
       "simulationDay": 29,
@@ -15038,12 +15038,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.26,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.597,
         0.33
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 18, 2020",
       "simulationTimeUtc": "01:50 UTC",
       "simulationDay": 30,
@@ -15092,12 +15092,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.613,
         0.33
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 18, 2020",
       "simulationTimeUtc": "04:20 UTC",
       "simulationDay": 30,
@@ -15146,12 +15146,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.62,
         0.343
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 18, 2020",
       "simulationTimeUtc": "06:51 UTC",
       "simulationDay": 30,
@@ -15200,7 +15200,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.28,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.604,
         0.352
@@ -15254,7 +15254,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.17,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.564,
         0.363
@@ -15308,7 +15308,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.55,
         0.353
@@ -15362,7 +15362,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.15,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.556,
         0.356
@@ -15416,12 +15416,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.2,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.575,
         0.337
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 18, 2020",
       "simulationTimeUtc": "19:24 UTC",
       "simulationDay": 30,
@@ -15470,12 +15470,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.616,
         0.335
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 18, 2020",
       "simulationTimeUtc": "21:55 UTC",
       "simulationDay": 30,
@@ -15524,12 +15524,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.623,
         0.341
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 19, 2020",
       "simulationTimeUtc": "00:25 UTC",
       "simulationDay": 31,
@@ -15578,7 +15578,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.619,
         0.358
@@ -15632,7 +15632,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.599,
         0.361
@@ -15686,7 +15686,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.15,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.556,
         0.382
@@ -15740,7 +15740,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.11,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.54,
         0.374
@@ -15794,7 +15794,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.538,
         0.368
@@ -15848,12 +15848,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.17,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.563,
         0.344
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 19, 2020",
       "simulationTimeUtc": "15:29 UTC",
       "simulationDay": 31,
@@ -15902,12 +15902,12 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.27,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.601,
         0.349
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 19, 2020",
       "simulationTimeUtc": "18:00 UTC",
       "simulationDay": 31,
@@ -15956,12 +15956,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.615,
         0.347
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 19, 2020",
       "simulationTimeUtc": "20:30 UTC",
       "simulationDay": 31,
@@ -16010,7 +16010,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.611,
         0.357
@@ -16064,7 +16064,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.25,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.592,
         0.363
@@ -16118,7 +16118,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.553,
         0.385
@@ -16172,7 +16172,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.536,
         0.371
@@ -16226,7 +16226,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.09,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.535,
         0.375
@@ -16280,7 +16280,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.559,
         0.354
@@ -16334,12 +16334,12 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.27,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.602,
         0.348
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 20, 2020",
       "simulationTimeUtc": "14:04 UTC",
       "simulationDay": 32,
@@ -16388,12 +16388,12 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.29,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.61,
         0.345
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 20, 2020",
       "simulationTimeUtc": "16:35 UTC",
       "simulationDay": 32,
@@ -16442,7 +16442,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.29,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.608,
         0.362
@@ -16496,7 +16496,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.586,
         0.364
@@ -16550,7 +16550,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.547,
         0.378
@@ -16604,7 +16604,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.09,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.534,
         0.37
@@ -16658,7 +16658,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.529,
         0.377
@@ -16712,7 +16712,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.554,
         0.359
@@ -16766,12 +16766,12 @@
       "activeNote": "C2",
       "frequencyHz": 65.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.28,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.603,
         0.369
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 21, 2020",
       "simulationTimeUtc": "10:09 UTC",
       "simulationDay": 33,
@@ -16820,12 +16820,12 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.616,
         0.368
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 21, 2020",
       "simulationTimeUtc": "12:40 UTC",
       "simulationDay": 33,
@@ -16874,7 +16874,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.614,
         0.375
@@ -16928,7 +16928,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.586,
         0.38
@@ -16982,7 +16982,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.549,
         0.398
@@ -17036,7 +17036,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.536,
         0.392
@@ -17090,7 +17090,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.07,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.527,
         0.389
@@ -17144,7 +17144,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.56,
         0.378
@@ -17198,7 +17198,7 @@
       "activeNote": "C2",
       "frequencyHz": 65.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.602,
         0.376
@@ -17252,12 +17252,12 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.615,
         0.374
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 22, 2020",
       "simulationTimeUtc": "08:45 UTC",
       "simulationDay": 34,
@@ -17306,7 +17306,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.613,
         0.388
@@ -17360,7 +17360,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.592,
         0.389
@@ -17414,7 +17414,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.15,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.555,
         0.402
@@ -17468,7 +17468,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.544,
         0.397
@@ -17522,7 +17522,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.11,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.541,
         0.403
@@ -17576,7 +17576,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.58,
         0.378
@@ -17630,12 +17630,12 @@
       "activeNote": "C2",
       "frequencyHz": 65.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.631,
         0.376
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 23, 2020",
       "simulationTimeUtc": "02:19 UTC",
       "simulationDay": 35,
@@ -17684,12 +17684,12 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.644,
         0.377
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 23, 2020",
       "simulationTimeUtc": "04:50 UTC",
       "simulationDay": 35,
@@ -17738,7 +17738,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.638,
         0.392
@@ -17792,7 +17792,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.611,
         0.393
@@ -17846,7 +17846,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.568,
         0.41
@@ -17900,7 +17900,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.548,
         0.406
@@ -17954,7 +17954,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.544,
         0.405
@@ -18008,7 +18008,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.2,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.575,
         0.379
@@ -18062,7 +18062,7 @@
       "activeNote": "C2",
       "frequencyHz": 65.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.615,
         0.381
@@ -18116,12 +18116,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.625,
         0.377
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 24, 2020",
       "simulationTimeUtc": "00:55 UTC",
       "simulationDay": 36,
@@ -18170,7 +18170,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.621,
         0.383
@@ -18224,7 +18224,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.588,
         0.385
@@ -18278,7 +18278,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.548,
         0.406
@@ -18332,7 +18332,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.53,
         0.397
@@ -18386,7 +18386,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.07,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.528,
         0.405
@@ -18440,7 +18440,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.552,
         0.377
@@ -18494,12 +18494,12 @@
       "activeNote": "C2",
       "frequencyHz": 65.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.28,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.603,
         0.373
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 24, 2020",
       "simulationTimeUtc": "18:29 UTC",
       "simulationDay": 36,
@@ -18548,12 +18548,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.615,
         0.372
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 24, 2020",
       "simulationTimeUtc": "21:00 UTC",
       "simulationDay": 36,
@@ -18602,7 +18602,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.617,
         0.386
@@ -18656,7 +18656,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.59,
         0.386
@@ -18710,7 +18710,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.549,
         0.398
@@ -18764,7 +18764,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.07,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.525,
         0.394
@@ -18818,7 +18818,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.07,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.527,
         0.403
@@ -18872,7 +18872,7 @@
       "activeNote": "E2",
       "frequencyHz": 82.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.544,
         0.372
@@ -18926,7 +18926,7 @@
       "activeNote": "C2",
       "frequencyHz": 65.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.586,
         0.376
@@ -18980,12 +18980,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.27,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.602,
         0.376
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 25, 2020",
       "simulationTimeUtc": "17:04 UTC",
       "simulationDay": 37,
@@ -19034,7 +19034,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.601,
         0.38
@@ -19088,7 +19088,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.22,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.581,
         0.381
@@ -19142,7 +19142,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.546,
         0.406
@@ -19196,7 +19196,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.53,
         0.39
@@ -19250,7 +19250,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.529,
         0.386
@@ -19304,7 +19304,7 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.568,
         0.357
@@ -19358,12 +19358,12 @@
       "activeNote": "C2",
       "frequencyHz": 65.41,
       "pitchLevel": "LOW",
-      "strikePan": 0.28,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.607,
         0.362
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 26, 2020",
       "simulationTimeUtc": "10:39 UTC",
       "simulationDay": 38,
@@ -19412,12 +19412,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.625,
         0.357
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 26, 2020",
       "simulationTimeUtc": "13:09 UTC",
       "simulationDay": 38,
@@ -19466,7 +19466,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.621,
         0.368
@@ -19520,7 +19520,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.602,
         0.374
@@ -19574,7 +19574,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.18,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.566,
         0.388
@@ -19628,7 +19628,7 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.371
@@ -19682,7 +19682,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.553,
         0.371
@@ -19736,7 +19736,7 @@
       "activeNote": "C3",
       "frequencyHz": 130.81,
       "pitchLevel": "MID",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.58,
         0.335
@@ -19790,12 +19790,12 @@
       "activeNote": "G2",
       "frequencyHz": 98.0,
       "pitchLevel": "LOW",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.622,
         0.32
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 27, 2020",
       "simulationTimeUtc": "06:44 UTC",
       "simulationDay": 39,
@@ -19844,12 +19844,12 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.637,
         0.316
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 27, 2020",
       "simulationTimeUtc": "09:14 UTC",
       "simulationDay": 39,
@@ -19898,7 +19898,7 @@
       "activeNote": "E3",
       "frequencyHz": 164.81,
       "pitchLevel": "MID",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.636,
         0.33
@@ -19952,7 +19952,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.3,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.616,
         0.32
@@ -20006,7 +20006,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.23,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.585,
         0.327
@@ -20060,7 +20060,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.16,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.558,
         0.312
@@ -20114,7 +20114,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.14,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.551,
         0.304
@@ -20168,12 +20168,12 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.18,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.569,
         0.271
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 28, 2020",
       "simulationTimeUtc": "00:18 UTC",
       "simulationDay": 40,
@@ -20222,12 +20222,12 @@
       "activeNote": "G3",
       "frequencyHz": 196.0,
       "pitchLevel": "MID",
-      "strikePan": 0.26,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.596,
         0.272
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 28, 2020",
       "simulationTimeUtc": "02:48 UTC",
       "simulationDay": 40,
@@ -20276,7 +20276,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.27,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.599,
         0.273
@@ -20330,7 +20330,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.26,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.599,
         0.282
@@ -20384,7 +20384,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.2,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.576,
         0.29
@@ -20438,7 +20438,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.12,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.546,
         0.309
@@ -20492,7 +20492,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.09,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.533,
         0.298
@@ -20546,7 +20546,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.08,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.531,
         0.302
@@ -20600,7 +20600,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.547,
         0.275
@@ -20654,12 +20654,12 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.19,
+      "strikePan": 0.65,
       "plumeCentroid": [
         0.571,
         0.269
       ],
-      "dominantSourceRegion": "European Grid & African Biomass",
+      "dominantSourceRegion": "East Asia Megacities & Industrial Basin",
       "simulationDate": "Feb 28, 2020",
       "simulationTimeUtc": "22:53 UTC",
       "simulationDay": 40,
@@ -20708,7 +20708,7 @@
       "activeNote": "E4",
       "frequencyHz": 329.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.21,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.578,
         0.272
@@ -20762,7 +20762,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.22,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.583,
         0.288
@@ -20816,7 +20816,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.19,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.572,
         0.298
@@ -20870,7 +20870,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.1,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.539,
         0.31
@@ -20924,7 +20924,7 @@
       "activeNote": "G4",
       "frequencyHz": 392.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.07,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.528,
         0.298
@@ -20978,7 +20978,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.07,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.525,
         0.302
@@ -21032,7 +21032,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.13,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.549,
         0.267
@@ -21086,7 +21086,7 @@
       "activeNote": "A3",
       "frequencyHz": 220.0,
       "pitchLevel": "HIGH",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.591,
         0.265
@@ -21140,7 +21140,7 @@
       "activeNote": "C4",
       "frequencyHz": 261.63,
       "pitchLevel": "HIGH",
-      "strikePan": 0.24,
+      "strikePan": 0.0,
       "plumeCentroid": [
         0.59,
         0.273

@@ -119,6 +119,12 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   const [isManualOverride, setIsManualOverride] = useState<boolean>(false);
   const [fitMode, setFitMode] = useState<"contain" | "cover">("contain");
   const [regionalSubView, setRegionalSubView] = useState<"change" | "compare">("change");
+  const [videoError, setVideoError] = useState<boolean>(false);
+
+  // Reset video error state on dataset switch
+  useEffect(() => {
+    setVideoError(false);
+  }, [currentDataset]);
 
   const isLightning = currentDataset === "iss-lightning";
   const isOcean = currentDataset === "ocean-currents";
@@ -678,27 +684,48 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               transform: isManualOverride ? `scale(${manualZoom})` : "scale(1)",
             }}
           >
-            <video
-              ref={videoRef}
-              key={videoSrc}
-              src={videoSrc}
-              playsInline
-              muted
-              loop
-              autoPlay={false}
-              onCanPlay={(e) => {
-                if (isPlaying) {
-                  (e.target as HTMLVideoElement).play().catch(() => {});
-                }
-              }}
-              className={`w-full h-full ${
-                fitMode === "contain" ? "object-contain" : "object-cover"
-              } select-none pointer-events-none transition-all duration-300 ${
-                contrastBoost
-                  ? "brightness-110 contrast-125 saturate-125"
-                  : "brightness-100 contrast-100"
-              }`}
-            />
+            {videoError ? (
+              /* Zero-latency high-res frame playback fallback from committed 20-frame repository suite */
+              <img
+                src={`/datasets/dyamond-co2/frames/frame_${String(
+                  1 + (Math.floor(((currentTime % 39.2) / 39.2) * 20) % 20)
+                ).padStart(4, "0")}.jpg`}
+                alt="DYAMOND CO2 Planetary Fluid Dynamic Visualization"
+                className={`w-full h-full ${
+                  fitMode === "contain" ? "object-contain" : "object-cover"
+                } select-none pointer-events-none transition-all duration-300 ${
+                  contrastBoost
+                    ? "brightness-110 contrast-125 saturate-125"
+                    : "brightness-100 contrast-100"
+                }`}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "/datasets/dyamond-co2/dyamond_co2_globe_2k.jpg";
+                }}
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                key={videoSrc}
+                src={videoSrc}
+                playsInline
+                muted
+                loop
+                autoPlay={false}
+                onError={() => setVideoError(true)}
+                onCanPlay={(e) => {
+                  if (isPlaying) {
+                    (e.target as HTMLVideoElement).play().catch(() => {});
+                  }
+                }}
+                className={`w-full h-full ${
+                  fitMode === "contain" ? "object-contain" : "object-cover"
+                } select-none pointer-events-none transition-all duration-300 ${
+                  contrastBoost
+                    ? "brightness-110 contrast-125 saturate-125"
+                    : "brightness-100 contrast-100"
+                }`}
+              />
+            )}
 
             {/* Sleek Minimalist DYAMOND CO2 Telemetry Pill - 100% Unobstructed Video */}
             <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-20 pointer-events-none">
