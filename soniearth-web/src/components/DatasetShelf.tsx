@@ -21,11 +21,11 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       years: "2012–2023",
       description: "Planetary illumination, electrification, and blackout corridors mapped to data-driven harmonies.",
       icon: Moon,
-      color: "from-emerald-400 to-teal-500",
-      activeRing: "border-emerald-400 shadow-[0_0_20px_rgba(0,245,155,0.4)]",
+      color: "from-cyan-400 to-teal-500",
+      activeRing: "border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)]",
       isAvailable: true,
       badge: "Phase 1 Live",
-      badgeColor: "bg-emerald-950/80 text-emerald-300 border-emerald-500/50",
+      badgeColor: "bg-cyan-950/80 text-cyan-300 border-cyan-500/50",
     },
     {
       id: "ocean-currents",
@@ -35,11 +35,11 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       years: "2005–2007",
       description: "ECCO2 thermal fluid motion & streamlines mapped to deep cello, warm string swells, and dynamic stereo panning.",
       icon: Waves,
-      color: "from-teal-600 to-emerald-700",
-      activeRing: "border-teal-400 shadow-[0_0_15px_rgba(45,212,191,0.35)]",
+      color: "from-cyan-400 to-teal-500",
+      activeRing: "border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)]",
       isAvailable: true,
       badge: "Phase 2 Live",
-      badgeColor: "bg-teal-950/80 text-teal-300 border-teal-700/60",
+      badgeColor: "bg-cyan-950/80 text-cyan-300 border-cyan-500/50",
     },
     {
       id: "iss-lightning",
@@ -49,11 +49,11 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       years: "2017–2023",
       description: "Severe optical thunderstorm strikes mapped to high metallic chimes, dynamic stereo pan, and haptic pulses.",
       icon: Zap,
-      color: "from-emerald-400 to-teal-500",
-      activeRing: "border-emerald-400 shadow-[0_0_20px_rgba(0,245,155,0.4)]",
+      color: "from-cyan-400 to-teal-500",
+      activeRing: "border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)]",
       isAvailable: true,
       badge: "Phase 2 Live",
-      badgeColor: "bg-emerald-950/80 text-emerald-300 border-emerald-500/50",
+      badgeColor: "bg-cyan-950/80 text-cyan-300 border-cyan-500/50",
     },
     {
       id: "dyamond-co2",
@@ -63,22 +63,22 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       years: "2020",
       description: "Atmospheric carbon respiration & plume transport mapped to harmonic pads and emission chimes.",
       icon: Wind,
-      color: "from-emerald-400 to-teal-500",
-      activeRing: "border-emerald-400 shadow-[0_0_20px_rgba(0,245,155,0.4)]",
+      color: "from-cyan-400 to-teal-500",
+      activeRing: "border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)]",
       isAvailable: true,
       badge: "Phase 2 Live",
-      badgeColor: "bg-emerald-950/80 text-emerald-300 border-emerald-500/50",
+      badgeColor: "bg-cyan-950/80 text-cyan-300 border-cyan-500/50",
     },
   ];
 
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-xs font-semibold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
+        <h3 className="text-xs font-semibold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5 font-mono">
           <span>NASA Planetary Playlist Shelf</span>
           <span className="text-slate-600">•</span>
           <span className="text-[11px] font-mono text-slate-400 font-normal">
-            Phase 1 & Phase 2 Datasets Live • Keys [1], [2], [3] & [4] Active
+            All 4 Datasets Live • Keys [1], [2], [3] & [4] Active
           </span>
         </h3>
       </div>
@@ -99,9 +99,9 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
               }}
               className={`relative text-left p-3.5 rounded-2xl border transition-all duration-300 flex flex-col justify-between backdrop-blur-md ${
                 isActive
-                  ? `bg-[#080D12]/95 ${ds.activeRing} ring-2 ring-emerald-400/50 shadow-[0_0_25px_rgba(0,245,155,0.3)] scale-[1.02]`
+                  ? `bg-[#06121D]/95 ${ds.activeRing} ring-2 ring-cyan-400/50 shadow-[0_0_25px_rgba(6,182,212,0.4)] scale-[1.02]`
                   : ds.isAvailable
-                  ? "bg-[#080D12]/60 border-emerald-500/20 hover:bg-[#080D12]/90 hover:border-emerald-400/60 hover:scale-[1.01] hover:shadow-[0_0_15px_rgba(0,245,155,0.2)] cursor-pointer"
+                  ? "bg-[#06121D]/60 border-cyan-500/20 hover:bg-[#06121D]/90 hover:border-cyan-400/60 hover:scale-[1.01] hover:shadow-[0_0_15px_rgba(6,182,212,0.25)] cursor-pointer"
                   : "bg-black/30 border-slate-900/60 opacity-30 cursor-not-allowed"
               }`}
             >
@@ -122,7 +122,7 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
                       {ds.badge}
                     </span>
                     {ds.isAvailable && (
-                      <span className="font-mono text-xs px-2 py-0.5 rounded-md bg-black/80 border border-emerald-500/40 text-emerald-300 font-bold">
+                      <span className="font-mono text-xs px-2 py-0.5 rounded-md bg-black/80 border border-cyan-500/40 text-cyan-300 font-bold">
                         [{ds.key}]
                       </span>
                     )}
@@ -133,7 +133,7 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
                   {ds.title}
                 </h4>
                 <div className="flex items-center gap-2 text-[10px] font-mono text-slate-400 mt-0.5">
-                  <span className="text-emerald-400 font-bold">{ds.svs}</span>
+                  <span className="text-cyan-400 font-bold">{ds.svs}</span>
                   <span>•</span>
                   <span>{ds.years}</span>
                 </div>

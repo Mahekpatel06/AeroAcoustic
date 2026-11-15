@@ -262,20 +262,20 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   };
 
   return (
-    <div className="relative flex flex-col bg-[#080D12]/90 backdrop-blur-xl border border-emerald-500/25 rounded-2xl p-2.5 sm:p-3 shadow-[0_8px_32px_rgba(0,0,0,0.8)] overflow-hidden group">
+    <div className="relative flex flex-col bg-[#06121D]/90 backdrop-blur-xl border border-cyan-500/25 rounded-2xl p-2.5 sm:p-3 shadow-[0_8px_32px_rgba(0,0,0,0.8)] overflow-hidden group">
       {/* 1. STAGE TOP CONTROL BAR */}
       <div className="flex flex-wrap items-center justify-between gap-2 mb-2 text-xs">
         {/* Left: Telemetry & Status */}
         <div className="flex items-center gap-2.5">
           <span className="flex items-center gap-1.5 font-mono font-bold text-slate-200">
             {isCO2 ? (
-              <Wind className="w-4 h-4 text-emerald-400" />
+              <Wind className="w-4 h-4 text-cyan-400" />
             ) : isOcean ? (
               <Waves className="w-4 h-4 text-teal-400" />
             ) : isLightning ? (
               <Zap className="w-4 h-4 text-amber-400" />
             ) : (
-              <Scan className="w-4 h-4 text-sky-400" />
+              <Scan className="w-4 h-4 text-cyan-400" />
             )}
             {isCO2
               ? "NASA DYAMOND Global CO2 Stage"
@@ -285,16 +285,16 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               ? "ISS Optical Lightning Stage"
               : "NASA Satellite Optical Stage"}
           </span>
-          <span className="text-emerald-900">|</span>
+          <span className="text-cyan-900">|</span>
           <span
             className={`font-mono font-semibold px-2.5 py-0.5 rounded border ${
               isCO2
-                ? "text-emerald-300 bg-emerald-950/60 border-emerald-800/40"
+                ? "text-cyan-300 bg-cyan-950/60 border-cyan-800/40"
                 : isOcean
                 ? "text-teal-300 bg-teal-950/60 border-teal-800/40"
                 : isLightning
                 ? "text-amber-300 bg-amber-950/60 border-amber-800/40"
-                : "text-sky-400 bg-sky-950/60 border-sky-800/40"
+                : "text-cyan-300 bg-cyan-950/60 border-cyan-800/40"
             }`}
           >
             {isCO2
@@ -310,14 +310,14 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               : `Mode C: Regional Insets (${selectedRegion})`}
           </span>
           {isCO2 && (
-            <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-800/40 hidden md:inline-flex items-center gap-1.5 shadow-[0_0_8px_rgba(0,245,155,0.15)]">
+            <span className="font-mono text-cyan-400 text-xs font-bold px-2 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-800/40 hidden md:inline-flex items-center gap-1.5 shadow-[0_0_8px_rgba(6,182,212,0.15)]">
               <span>Model: GEOS-5 3D</span>
               <span className="text-slate-600">•</span>
               <span>Baseline: 414.3 ppm</span>
             </span>
           )}
           {isLightning && (
-            <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-800/40 hidden md:inline-flex items-center gap-1.5 shadow-[0_0_8px_rgba(0,245,155,0.15)]">
+            <span className="font-mono text-cyan-400 text-xs font-bold px-2 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-800/40 hidden md:inline-flex items-center gap-1.5 shadow-[0_0_8px_rgba(6,182,212,0.15)]">
               <span>Alt: 408 km</span>
               <span className="text-slate-600">•</span>
               <span>Speed: 7.66 km/s</span>
@@ -333,7 +333,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
           {/* Mode A: Clean Calendar Year */}
           {!isLightning && !isOcean && !isCO2 && currentMode === "annual" && (
-            <span className="font-mono text-emerald-400 text-xs font-bold px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40 flex items-center gap-1">
+            <span className="font-mono text-cyan-400 text-xs font-bold px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-800/40 flex items-center gap-1">
               <Calendar className="w-3 h-3" />
               Year {currentYear}
             </span>
@@ -344,12 +344,12 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
         <div className="flex flex-wrap items-center gap-2">
           {/* 2D Flat Map vs 3D Interactive Globe Toggle (Enabled for Night Lights, Ocean Currents & DYAMOND CO2) */}
           {!isLightning && (
-            <div className="flex items-center bg-black/60 rounded-xl border border-emerald-500/20 p-0.5 text-[11px] font-mono shadow-md">
+            <div className="flex items-center bg-black/60 rounded-xl border border-cyan-500/20 p-0.5 text-[11px] font-mono shadow-md">
               <button
                 onClick={() => setViewFormat("2d")}
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-lg transition-all ${
                   viewFormat === "2d"
-                    ? "bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 font-bold shadow-[0_0_10px_rgba(0,245,155,0.4)]"
+                    ? "bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 text-slate-950 font-bold shadow-[0_0_10px_rgba(6,182,212,0.4)]"
                     : "text-slate-400 hover:text-slate-200"
                 }`}
                 title="Switch to 2D Single-Projection Flat Map"
@@ -361,7 +361,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                 onClick={() => setViewFormat("3d")}
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-lg transition-all ${
                   viewFormat === "3d"
-                    ? "bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 font-bold shadow-[0_0_10px_rgba(0,245,155,0.4)]"
+                    ? "bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 text-slate-950 font-bold shadow-[0_0_10px_rgba(6,182,212,0.4)]"
                     : "text-slate-400 hover:text-slate-200"
                 }`}
                 title="Switch to NASA SVS #5475 Interactive 3D Globe"
@@ -381,33 +381,33 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                 title="Toggle High-Contrast Satellite Radiance Boost"
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all border ${
                   contrastBoost
-                    ? "bg-emerald-950/70 text-emerald-300 border-emerald-500/40 shadow-[0_0_10px_rgba(0,245,155,0.25)]"
-                    : "bg-black/60 text-slate-400 border-emerald-500/20 hover:text-slate-200"
+                    ? "bg-cyan-950/70 text-cyan-300 border-cyan-500/40 shadow-[0_0_10px_rgba(6,182,212,0.25)]"
+                    : "bg-black/60 text-slate-400 border-cyan-500/20 hover:text-slate-200"
                 }`}
               >
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
                 <span>Radiance Boost: {contrastBoost ? "ON" : "OFF"}</span>
               </button>
 
               {/* Interactive Zoom Tools */}
-              <div className="flex items-center bg-black/80 rounded-lg border border-emerald-500/20 p-0.5">
+              <div className="flex items-center bg-black/80 rounded-lg border border-cyan-500/20 p-0.5">
                 <button
                   onClick={handleManualZoomIn}
-                  className="p-1 hover:bg-emerald-950/60 rounded text-slate-300 hover:text-emerald-400"
+                  className="p-1 hover:bg-cyan-950/60 rounded text-slate-300 hover:text-cyan-400"
                   title="Zoom In"
                 >
                   <ZoomIn className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={handleManualZoomOut}
-                  className="p-1 hover:bg-emerald-950/60 rounded text-slate-300 hover:text-emerald-400"
+                  className="p-1 hover:bg-cyan-950/60 rounded text-slate-300 hover:text-cyan-400"
                   title="Zoom Out"
                 >
                   <ZoomOut className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={handleResetZoom}
-                  className="p-1 hover:bg-emerald-950/60 rounded text-slate-400 hover:text-emerald-400"
+                  className="p-1 hover:bg-cyan-950/60 rounded text-slate-400 hover:text-cyan-400"
                   title="Reset View"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
@@ -424,11 +424,11 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           {/* Target Metadata Info */}
           <div className="flex flex-col gap-0.5 min-w-[260px]">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1">
+              <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5" /> Regional Telemetry Target
               </span>
               <span
-                className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border bg-emerald-950/70 text-emerald-300 border-emerald-500/40 shadow-[0_0_8px_rgba(0,245,155,0.2)]"
+                className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border bg-cyan-950/70 text-cyan-300 border-cyan-500/40 shadow-[0_0_8px_rgba(6,182,212,0.2)]"
               >
                 {activeBounds.deltaText}
               </span>
@@ -440,12 +440,12 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           </div>
 
           {/* Layer Selector */}
-          <div className="flex items-center gap-1.5 bg-[#06080A] p-1 rounded-xl border border-emerald-500/20 shadow-inner">
+          <div className="flex items-center gap-1.5 bg-[#06080A] p-1 rounded-xl border border-cyan-500/20 shadow-inner">
             <button
               onClick={() => setRegionalSubView("change")}
               className={`flex items-center gap-1 px-3 py-1 rounded-lg text-[11px] font-mono transition-all border ${
                 regionalSubView === "change"
-                  ? "bg-emerald-500/25 text-emerald-200 border-emerald-400 shadow-[0_0_10px_rgba(0,245,155,0.3)] font-bold"
+                  ? "bg-cyan-500/25 text-cyan-200 border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.3)] font-bold"
                   : "bg-transparent text-slate-400 border-transparent hover:text-slate-200"
               }`}
             >
@@ -456,7 +456,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               onClick={() => setRegionalSubView("compare")}
               className={`flex items-center gap-1 px-3 py-1 rounded-lg text-[11px] font-mono transition-all border ${
                 regionalSubView === "compare"
-                  ? "bg-emerald-500/25 text-emerald-200 border-emerald-400 shadow-[0_0_10px_rgba(0,245,155,0.3)] font-bold"
+                  ? "bg-cyan-500/25 text-cyan-200 border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.3)] font-bold"
                   : "bg-transparent text-slate-400 border-transparent hover:text-slate-200"
               }`}
             >
@@ -575,17 +575,17 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
             {/* Sleek Minimalist ISS Telemetry Pill - 100% Unobstructed Video */}
             <div className="absolute top-3 left-3 flex items-center gap-2 z-20 pointer-events-none">
-              <span className="font-mono text-[11px] font-bold text-white bg-[#06080A]/85 px-3 py-1 rounded-xl border border-emerald-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-xl">
-                <Zap className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="font-mono text-[11px] font-bold text-white bg-[#06121D]/85 px-3 py-1 rounded-xl border border-cyan-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-xl">
+                <Zap className="w-3.5 h-3.5 text-cyan-400" />
                 <span>ISS LIS Orbit</span>
                 <span className="text-slate-600">•</span>
-                <span className="text-emerald-300 font-normal">LEO 51.6°</span>
+                <span className="text-cyan-300 font-normal">LEO 51.6°</span>
               </span>
 
               {/* Dynamic Live Strike Readout Pill */}
               {isPlaying && currentFeature?.isStrike && (
-                <span className="font-mono text-[11px] font-bold text-emerald-300 bg-emerald-950/90 px-3 py-1 rounded-xl border border-emerald-400/80 shadow-[0_0_15px_rgba(0,245,155,0.4)] flex items-center gap-1.5 animate-pulse">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block"></span>
+                <span className="font-mono text-[11px] font-bold text-cyan-300 bg-cyan-950/90 px-3 py-1 rounded-xl border border-cyan-400/80 shadow-[0_0_15px_rgba(6,182,212,0.4)] flex items-center gap-1.5 animate-pulse">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping inline-block"></span>
                   <span>FLASH: {Math.round(currentFeature.strikeEnergyMicroJoules || 450)} µJ</span>
                 </span>
               )}
@@ -665,8 +665,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                 <span className="w-2 h-2 rounded-full bg-cyan-400"></span> 0°C Polar Cello
               </span>
               <span className="text-slate-600">───</span>
-              <span className="flex items-center gap-1 text-emerald-400">
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span> 15°C Ocean Gyres
+              <span className="flex items-center gap-1 text-teal-400">
+                <span className="w-2 h-2 rounded-full bg-teal-400"></span> 15°C Ocean Gyres
               </span>
               <span className="text-slate-600">───</span>
               <span className="flex items-center gap-1 text-rose-400">
@@ -729,17 +729,17 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
             {/* Sleek Minimalist DYAMOND CO2 Telemetry Pill - 100% Unobstructed Video */}
             <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-20 pointer-events-none">
-              <span className="font-mono text-[11px] font-bold text-white bg-[#06080A]/85 px-3 py-1 rounded-xl border border-emerald-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-xl">
-                <Wind className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="font-mono text-[11px] font-bold text-white bg-[#06121D]/85 px-3 py-1 rounded-xl border border-cyan-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-xl">
+                <Wind className="w-3.5 h-3.5 text-cyan-400" />
                 <span>DYAMOND CO2</span>
                 <span className="text-slate-600">•</span>
-                <span className="text-emerald-300 font-bold">{currentFeature?.co2Ppm ? currentFeature.co2Ppm.toFixed(1) : "415.0"} ppm</span>
+                <span className="text-cyan-300 font-bold">{currentFeature?.co2Ppm ? currentFeature.co2Ppm.toFixed(1) : "415.0"} ppm</span>
                 <span className="text-slate-600">•</span>
                 <span className="text-amber-300 font-normal">{currentFeature?.dominantSourceRegion || "Global Circulation"}</span>
               </span>
 
               {/* Real-time Sonic Pitch Level & Frequency Equalizer Waveform */}
-              <div className="flex items-center gap-2 bg-[#06080A]/90 backdrop-blur-md px-3 py-1 rounded-xl border border-emerald-500/30 shadow-xl">
+              <div className="flex items-center gap-2 bg-[#06121D]/90 backdrop-blur-md px-3 py-1 rounded-xl border border-cyan-500/30 shadow-xl">
                 <span className="text-[10px] font-mono font-bold text-slate-400">PITCH:</span>
                 <span
                   className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold transition-all ${
@@ -747,7 +747,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                       ? "bg-rose-950 text-rose-300 border border-rose-500/80 shadow-[0_0_10px_rgba(244,63,94,0.4)] animate-pulse"
                       : currentFeature?.pitchLevel === "LOW"
                       ? "bg-cyan-950 text-cyan-300 border border-cyan-500/60 shadow-[0_0_10px_rgba(6,182,212,0.3)]"
-                      : "bg-emerald-950 text-emerald-300 border border-emerald-500/60 shadow-[0_0_10px_rgba(0,245,155,0.3)]"
+                      : "bg-cyan-950 text-cyan-300 border border-cyan-500/60 shadow-[0_0_10px_rgba(6,182,212,0.3)]"
                   }`}
                 >
                   {currentFeature?.pitchLevel || "MID"} ({currentFeature?.activeNote || "G3"} • {currentFeature?.frequencyHz ? Math.round(currentFeature.frequencyHz) : 196} Hz)
@@ -766,7 +766,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                       <div
                         key={i}
                         className={`w-1 rounded-full transition-all duration-75 ${
-                          isHigh ? "bg-rose-400" : isLow ? "bg-cyan-400" : "bg-[#00F59B]"
+                          isHigh ? "bg-rose-400" : isLow ? "bg-cyan-400" : "bg-[#00F2FE]"
                         }`}
                         style={{ height: `${Math.max(18, Math.min(100, heightPct))}%` }}
                       />
@@ -789,8 +789,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                 <span className="w-2 h-2 rounded-full bg-cyan-400"></span> &lt; 405 ppm (Clean Air)
               </span>
               <span className="text-slate-600">───</span>
-              <span className="flex items-center gap-1 text-emerald-400">
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span> 410–414 ppm (Baseline)
+              <span className="flex items-center gap-1 text-teal-400">
+                <span className="w-2 h-2 rounded-full bg-teal-400"></span> 410–414 ppm (Baseline)
               </span>
               <span className="text-slate-600">───</span>
               <span className="flex items-center gap-1 text-rose-400">
@@ -833,8 +833,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                 className="absolute top-0 bottom-0 pointer-events-none z-20"
                 style={{ left: `${laserPercent}%`, width: "2px" }}
               >
-                <div className="w-full h-full bg-[#00F59B] shadow-[0_0_16px_#00F59B]"></div>
-                <div className="absolute -top-1 -left-1.5 w-4 h-4 rounded-full bg-emerald-300 shadow-[0_0_12px_#00F59B] opacity-85"></div>
+                <div className="w-full h-full bg-[#00F2FE] shadow-[0_0_16px_#00F2FE]"></div>
+                <div className="absolute -top-1 -left-1.5 w-4 h-4 rounded-full bg-cyan-300 shadow-[0_0_12px_#00F2FE] opacity-85"></div>
               </div>
             )}
 
@@ -844,16 +844,16 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                 className="absolute top-0 bottom-0 pointer-events-none z-20"
                 style={{ left: `${(currentTime / maxDuration) * 100}%`, width: "2.5px" }}
               >
-                <div className="w-full h-full bg-gradient-to-b from-emerald-400 via-teal-300 to-[#00F59B] shadow-[0_0_18px_#00F59B]"></div>
-                <div className="absolute top-2 -left-2 w-5 h-5 rounded-full bg-[#00F59B] shadow-[0_0_14px_#00F59B] opacity-90 animate-pulse"></div>
+                <div className="w-full h-full bg-gradient-to-b from-cyan-400 via-teal-300 to-[#00F2FE] shadow-[0_0_18px_#00F2FE]"></div>
+                <div className="absolute top-2 -left-2 w-5 h-5 rounded-full bg-[#00F2FE] shadow-[0_0_14px_#00F2FE] opacity-90 animate-pulse"></div>
               </div>
             )}
 
             {/* MODE B: ORANGE SECTOR SCAN DETECT (UKRAINE & LEVANT OUTAGE CORRIDOR) */}
             {isPlaying && isChangePhase && currentTime >= 4.8 && currentTime < 7.4 && (
-              <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-[#06080A]/95 border border-emerald-500/80 rounded-xl px-3.5 py-1.5 shadow-[0_0_24px_rgba(0,245,155,0.4)] flex items-center gap-2 z-30 animate-pulse">
-                <Flame className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="font-mono text-xs text-emerald-200 font-bold tracking-tight">
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-[#06121D]/95 border border-cyan-500/80 rounded-xl px-3.5 py-1.5 shadow-[0_0_24px_rgba(6,182,212,0.4)] flex items-center gap-2 z-30 animate-pulse">
+                <Flame className="w-4 h-4 text-cyan-400 shrink-0" />
+                <span className="font-mono text-xs text-cyan-200 font-bold tracking-tight">
                   SECTOR SCAN: Ukraine & Levant Outage Corridor (-42.1%) • Bowed Cello
                 </span>
               </div>
@@ -861,9 +861,9 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
             {/* MODE B: PURPLE SECTOR SCAN DETECT (SOUTH ASIA ELECTRIFICATION) */}
             {isPlaying && isChangePhase && currentTime >= 7.8 && currentTime <= 11.5 && (
-              <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-[#06080A]/95 border border-emerald-500/80 rounded-xl px-3.5 py-1.5 shadow-[0_0_24px_rgba(0,245,155,0.4)] flex items-center gap-2 z-30 animate-pulse">
-                <Zap className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="font-mono text-xs text-emerald-200 font-bold tracking-tight">
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-[#06121D]/95 border border-cyan-500/80 rounded-xl px-3.5 py-1.5 shadow-[0_0_24px_rgba(6,182,212,0.4)] flex items-center gap-2 z-30 animate-pulse">
+                <Zap className="w-4 h-4 text-cyan-400 shrink-0" />
+                <span className="font-mono text-xs text-cyan-200 font-bold tracking-tight">
                   SECTOR SCAN: South Asia Rural Electrification (+34.2%) • Chimes
                 </span>
               </div>
@@ -871,9 +871,9 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
             {/* MODE C: DYNAMIC 2012 -> 2023 EVOLUTION BADGE */}
             {isRegional && isPlaying && (
-              <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-[#06080A]/95 border border-emerald-500/60 rounded-xl px-3.5 py-1.5 shadow-2xl flex items-center gap-2 z-30 animate-fadeIn">
-                <Activity className="w-3.5 h-3.5 text-emerald-400 animate-spin" />
-                <span className="font-mono text-xs text-emerald-200 font-bold">
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-[#06121D]/95 border border-cyan-500/60 rounded-xl px-3.5 py-1.5 shadow-2xl flex items-center gap-2 z-30 animate-fadeIn">
+                <Activity className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
+                <span className="font-mono text-xs text-cyan-200 font-bold">
                   {regionalSubView === "compare"
                     ? "Side-by-Side Dual Telemetry Active"
                     : currentTime < 3.5
@@ -889,23 +889,23 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
         {/* MODE B SCIENTIFIC SPECTRAL SCALE HUD (Only for Night Lights in 2D) */}
         {!isLightning && isChangePhase && viewFormat === "2d" && (
-          <div className="absolute bottom-3 right-3 bg-[#06080A]/85 backdrop-blur-md border border-emerald-500/30 rounded-xl px-3 py-2 shadow-xl z-20 max-w-xs">
+          <div className="absolute bottom-3 right-3 bg-[#06121D]/85 backdrop-blur-md border border-cyan-500/30 rounded-xl px-3 py-2 shadow-xl z-20 max-w-xs">
             <div className="flex items-center justify-between mb-1 text-[11px] font-mono">
               <span className="font-bold text-white flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-emerald-400" />
+                <Layers className="w-3.5 h-3.5 text-cyan-400" />
                 Decadal Lighting Intensity Scale
               </span>
-              <span className="text-emerald-400 font-semibold">+1.53% Net</span>
+              <span className="text-cyan-400 font-semibold">+1.53% Net</span>
             </div>
-            <div className="relative w-full h-2 rounded-full overflow-hidden shadow-inner border border-emerald-500/20">
-              <div className="w-full h-full bg-gradient-to-r from-slate-700 via-emerald-800 to-[#00F59B]"></div>
+            <div className="relative w-full h-2 rounded-full overflow-hidden shadow-inner border border-cyan-500/20">
+              <div className="w-full h-full bg-gradient-to-r from-slate-700 via-cyan-800 to-[#00F2FE]"></div>
             </div>
             <div className="flex items-center justify-between mt-1 text-[9px] font-mono">
               <span className="text-slate-400 flex items-center gap-1">
                 <Flame className="w-2.5 h-2.5 text-slate-400" /> Less Light (Cello)
               </span>
-              <span className="text-emerald-300 font-semibold flex items-center gap-1">
-                <Zap className="w-2.5 h-2.5 text-emerald-400" /> More Light (Chimes)
+              <span className="text-cyan-300 font-semibold flex items-center gap-1">
+                <Zap className="w-2.5 h-2.5 text-cyan-400" /> More Light (Chimes)
               </span>
             </div>
           </div>
@@ -922,8 +922,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                   onClick={() => onSelectRegion?.(regName)}
                   className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-semibold transition-all border ${
                     isCurrent
-                      ? "bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 border-emerald-300 shadow-[0_0_10px_rgba(0,245,155,0.4)] font-bold"
-                      : "bg-[#06080A]/80 text-slate-300 border-emerald-500/20 hover:bg-emerald-950/40 hover:border-emerald-500/40"
+                      ? "bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 text-slate-950 border-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.4)] font-bold"
+                      : "bg-[#06121D]/80 text-slate-300 border-cyan-500/20 hover:bg-cyan-950/40 hover:border-cyan-500/40"
                   }`}
                 >
                   {regName}
@@ -936,21 +936,21 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
         {/* RIGHT SIDE BOTTOM CORNER: Scientific Dataset Timeline & Verified Simulation Epoch */}
         <div className="absolute bottom-3 right-3 z-20 flex flex-col items-end gap-1 pointer-events-none">
           {isCO2 ? (
-            <div className="bg-[#06080A]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-emerald-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
+            <div className="bg-[#06121D]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-cyan-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
               <div className="flex items-center gap-1.5 text-[11px] font-bold text-white">
-                <Calendar className="w-3.5 h-3.5 text-emerald-400" />
+                <Calendar className="w-3.5 h-3.5 text-cyan-400" />
                 <span>{currentFeature?.simulationDate || "Jan 20, 2020"}</span>
                 <span className="text-slate-500">•</span>
-                <span className="text-emerald-300 font-semibold">{currentFeature?.simulationTimeUtc || "00:00 UTC"}</span>
+                <span className="text-cyan-300 font-semibold">{currentFeature?.simulationTimeUtc || "00:00 UTC"}</span>
               </div>
               <div className="text-[9px] text-slate-400 mt-0.5 flex items-center gap-1.5">
-                <span>Simulation: <strong className="text-emerald-400">Jan 20 – Mar 01, 2020 (Winter 2020)</strong></span>
+                <span>Simulation: <strong className="text-cyan-400">Jan 20 – Mar 01, 2020 (Winter 2020)</strong></span>
                 <span className="text-slate-600">•</span>
                 <span className="text-slate-300">Day {currentFeature?.simulationDay || 1}/42</span>
               </div>
             </div>
           ) : isOcean ? (
-            <div className="bg-[#06080A]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-teal-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
+            <div className="bg-[#06121D]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-teal-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
               <div className="flex items-center gap-1.5 text-[11px] font-bold text-white">
                 <Clock className="w-3.5 h-3.5 text-teal-400" />
                 <span>June 2005 – Dec 2007 (Continuous Run)</span>
@@ -960,9 +960,9 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               </div>
             </div>
           ) : isLightning ? (
-            <div className="bg-[#06080A]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-emerald-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
+            <div className="bg-[#06121D]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-cyan-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
               <div className="flex items-center gap-1.5 text-[11px] font-bold text-white">
-                <Zap className="w-3.5 h-3.5 text-emerald-400" />
+                <Zap className="w-3.5 h-3.5 text-cyan-400" />
                 <span>ISS LIS Real-Time Flight Pass</span>
               </div>
               <div className="text-[9px] text-slate-400 mt-0.5">
@@ -970,9 +970,9 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               </div>
             </div>
           ) : (
-            <div className="bg-[#06080A]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-emerald-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
+            <div className="bg-[#06121D]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-cyan-500/40 text-right font-mono shadow-2xl flex flex-col items-end">
               <div className="flex items-center gap-1.5 text-[11px] font-bold text-white">
-                <Calendar className="w-3.5 h-3.5 text-emerald-400" />
+                <Calendar className="w-3.5 h-3.5 text-cyan-400" />
                 <span>2012 – 2023 Decadal Epoch</span>
               </div>
               <div className="text-[9px] text-slate-400 mt-0.5">
@@ -984,16 +984,16 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
       </div>
 
       {/* 4. SCIENTIFIC PLAYBACK TIMELINE & PROGRESS SCRUBBER BAR */}
-      <div className="mt-2.5 pt-2.5 border-t border-emerald-500/20 flex flex-col gap-2">
+      <div className="mt-2.5 pt-2.5 border-t border-cyan-500/20 flex flex-col gap-2">
         {/* Interactive Clickable Scrubber Track with glowing thumb/head */}
         <div
           onClick={handleTimelineClick}
-          className="relative w-full h-2.5 bg-black/80 rounded-full overflow-hidden border border-emerald-500/30 cursor-pointer group hover:h-3 transition-all"
+          className="relative w-full h-2.5 bg-black/80 rounded-full overflow-hidden border border-cyan-500/30 cursor-pointer group hover:h-3 transition-all"
           title="Click to seek along timeline"
         >
-          {/* Active Elapsed Fill with Laser Mint Glow */}
+          {/* Active Elapsed Fill with Electric Cyan Glow */}
           <div
-            className="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-[#00F59B] shadow-[0_0_15px_rgba(0,245,155,0.8)] transition-all duration-75"
+            className="h-full bg-gradient-to-r from-cyan-500 via-teal-400 to-[#00F2FE] shadow-[0_0_15px_rgba(6,182,212,0.8)] transition-all duration-75"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -1002,8 +1002,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
         <div className="flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400 gap-2">
           {/* Left: Elapsed Time */}
           <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1 font-bold text-white bg-black/80 px-2 py-0.5 rounded border border-emerald-500/30 shadow-inner">
-              <Clock className="w-3 h-3 text-emerald-400" />
+            <span className="flex items-center gap-1 font-bold text-white bg-black/80 px-2 py-0.5 rounded border border-cyan-500/30 shadow-inner">
+              <Clock className="w-3 h-3 text-cyan-400" />
               <span>{formatTime(currentTime)}</span>
             </span>
             <span className="text-slate-600">/</span>
@@ -1012,13 +1012,13 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
             {/* In Lightning Mode: Dynamic Optical Strike Indicator */}
             {isLightning ? (
               currentFeature?.isStrike ? (
-                <span className="flex items-center gap-1 text-emerald-300 font-bold bg-emerald-950/80 border border-emerald-500/80 px-2.5 py-0.5 rounded text-[10px] animate-pulse shadow-[0_0_10px_rgba(0,245,155,0.5)]">
-                  <Zap className="w-3 h-3 text-emerald-300 fill-emerald-300" />
+                <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/80 border border-cyan-500/80 px-2.5 py-0.5 rounded text-[10px] animate-pulse shadow-[0_0_10px_rgba(6,182,212,0.5)]">
+                  <Zap className="w-3 h-3 text-cyan-300 fill-cyan-300" />
                   <span>BURST: {currentFeature.strikeEnergyMicroJoules} µJ</span>
                 </span>
               ) : (
-                <span className="flex items-center gap-1 text-emerald-400/80 bg-black/60 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">
-                  <Zap className="w-3 h-3 text-emerald-400/50" />
+                <span className="flex items-center gap-1 text-cyan-400/80 bg-black/60 border border-cyan-500/20 px-2 py-0.5 rounded text-[10px]">
+                  <Zap className="w-3 h-3 text-cyan-400/50" />
                   <span>55 Hz Sub-Bass Orbit</span>
                 </span>
               )
@@ -1026,24 +1026,24 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
             {/* In CO2 Mode: Dynamic Plume Readout */}
             {isCO2 && currentFeature?.co2Ppm && (
-              <span className="flex items-center gap-1 text-emerald-300 font-bold bg-emerald-950/80 border border-emerald-500/80 px-2.5 py-0.5 rounded text-[10px] shadow-[0_0_8px_rgba(0,245,155,0.2)]">
-                <Wind className="w-3 h-3 text-emerald-400" />
+              <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/80 border border-cyan-500/80 px-2.5 py-0.5 rounded text-[10px] shadow-[0_0_8px_rgba(6,182,212,0.2)]">
+                <Wind className="w-3 h-3 text-cyan-400" />
                 <span>{currentFeature.co2Ppm.toFixed(1)} ppm</span>
               </span>
             )}
 
             {/* In Mode A: Current Calendar Year Indicator */}
             {!isLightning && !isOcean && !isCO2 && currentMode === "annual" && (
-              <span className="flex items-center gap-1 text-emerald-300 font-bold bg-emerald-950/60 border border-emerald-500/40 px-2 py-0.5 rounded text-[10px] shadow-[0_0_8px_rgba(0,245,155,0.15)]">
+              <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/60 border border-cyan-500/40 px-2 py-0.5 rounded text-[10px] shadow-[0_0_8px_rgba(6,182,212,0.15)]">
                 <Calendar className="w-3 h-3" />
                 <span>Year {currentYear}</span>
-                <span className="text-emerald-500/70">({Math.min(12, Math.floor(currentTime) + 1)}/12)</span>
+                <span className="text-cyan-500/70">({Math.min(12, Math.floor(currentTime) + 1)}/12)</span>
               </span>
             )}
 
             {/* In Mode C: Target Region Name */}
             {!isLightning && !isOcean && !isCO2 && currentMode === "regional" && (
-              <span className="flex items-center gap-1 text-emerald-300 font-bold bg-emerald-950/60 border border-emerald-500/40 px-2 py-0.5 rounded text-[10px]">
+              <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/60 border border-cyan-500/40 px-2 py-0.5 rounded text-[10px]">
                 <MapPin className="w-3 h-3" />
                 <span>{selectedRegion}</span>
               </span>
@@ -1053,16 +1053,16 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           {/* Right: Progress Percentage & Status */}
           <div className="flex items-center gap-2.5">
             <span className="text-[10px] text-slate-400">
-              Progress: <strong className="text-emerald-300">{progressPercent.toFixed(0)}%</strong>
+              Progress: <strong className="text-cyan-300">{progressPercent.toFixed(0)}%</strong>
             </span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-700"></span>
             <span className="text-[10px] text-slate-400 flex items-center gap-1">
-              <Activity className="w-3 h-3 text-emerald-400" />
+              <Activity className="w-3 h-3 text-cyan-400" />
               {isPlaying ? (
                 progressPercent >= 99 ? (
-                  <span className="text-emerald-300 font-bold">Looping...</span>
+                  <span className="text-cyan-300 font-bold">Looping...</span>
                 ) : (
-                  <span className="text-emerald-400">Playing</span>
+                  <span className="text-cyan-400">Playing</span>
                 )
               ) : (
                 <span className="text-slate-500">Paused</span>

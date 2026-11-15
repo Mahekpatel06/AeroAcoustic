@@ -124,10 +124,10 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
     scene.add(sphere);
     sphereRef.current = sphere;
 
-    // Atmospheric Glow Halo in Laser Mint
+    // Atmospheric Glow Halo in Electric Cyan
     const atmosGeo = new THREE.SphereGeometry(1.025, 64, 64);
     const atmosMat = new THREE.MeshBasicMaterial({
-      color: new THREE.Color(0x00f59b),
+      color: new THREE.Color(0x06b6d4),
       transparent: true,
       opacity: 0.18,
       side: THREE.BackSide,
@@ -199,7 +199,7 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
       };
 
       // North America Industrial Corridor (38°N, -95°W)
-      co2Group.add(createCO2Marker(38, -95, 0x00f59b));
+      co2Group.add(createCO2Marker(38, -95, 0x06b6d4));
       // Central EMEA / Europe & Africa (48°N, 15°E)
       co2Group.add(createCO2Marker(48, 15, 0xf59e0b));
       // East Asia Industrial Basin (34°N, 115°E)
@@ -633,19 +633,19 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
         {/* DYAMOND Global CO2 Dynamic Telemetry Indicator */}
         {currentDataset === "dyamond-co2" && (
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="font-mono text-[10px] font-bold text-emerald-300 bg-emerald-950/85 px-2.5 py-1 rounded-lg border border-emerald-500/50 shadow-xl flex items-center gap-1">
-              <Wind className="w-3 h-3 text-emerald-400" />
+            <span className="font-mono text-[10px] font-bold text-cyan-300 bg-cyan-950/85 px-2.5 py-1 rounded-lg border border-cyan-500/50 shadow-xl flex items-center gap-1">
+              <Wind className="w-3 h-3 text-cyan-400" />
               NASA GEOS 3D
             </span>
-            <span className="font-mono text-[10px] font-bold text-white bg-slate-950/90 px-2.5 py-1 rounded-lg border border-emerald-500/30 shadow-xl flex items-center gap-1.5">
-              <Calendar className="w-3 h-3 text-emerald-400" />
+            <span className="font-mono text-[10px] font-bold text-white bg-slate-950/90 px-2.5 py-1 rounded-lg border border-cyan-500/30 shadow-xl flex items-center gap-1.5">
+              <Calendar className="w-3 h-3 text-cyan-400" />
               <span>{currentFeature?.simulationDate || "Jan 20, 2020"}</span>
               <span className="text-slate-600">•</span>
-              <span className="text-emerald-300">Day {currentFeature?.simulationDay || 1}/42</span>
+              <span className="text-cyan-300">Day {currentFeature?.simulationDay || 1}/42</span>
             </span>
-            <span className="font-mono text-[10px] font-bold text-white bg-slate-950/90 px-2.5 py-1 rounded-lg border border-emerald-500/30 shadow-xl flex items-center gap-1.5">
+            <span className="font-mono text-[10px] font-bold text-white bg-slate-950/90 px-2.5 py-1 rounded-lg border border-cyan-500/30 shadow-xl flex items-center gap-1.5">
               <span className="text-slate-400">PPM:</span>
-              <span className="text-emerald-300 font-bold">{currentFeature?.co2Ppm ? currentFeature.co2Ppm.toFixed(1) : "415.0"}</span>
+              <span className="text-cyan-300 font-bold">{currentFeature?.co2Ppm ? currentFeature.co2Ppm.toFixed(1) : "415.0"}</span>
               <span className="text-slate-600">•</span>
               <span
                 className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
@@ -653,7 +653,7 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
                     ? "bg-rose-950 text-rose-300 border border-rose-500/80 animate-pulse"
                     : currentFeature?.pitchLevel === "LOW"
                     ? "bg-cyan-950 text-cyan-300 border border-cyan-500/60"
-                    : "bg-emerald-950 text-emerald-300 border border-emerald-500/60"
+                    : "bg-cyan-950 text-cyan-300 border border-cyan-500/60"
                 }`}
               >
                 {currentFeature?.pitchLevel || "MID"} PITCH ({currentFeature?.activeNote || "G3"})
@@ -664,25 +664,25 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
 
         {/* Mode A: Clean Annual Indicator (Only for Night Lights) */}
         {currentDataset === "night-lights" && currentMode === "annual" && (
-          <span className="font-mono text-[10px] font-bold text-sky-300 bg-sky-950/85 px-2.5 py-1 rounded-lg border border-sky-700/60 shadow-xl flex items-center gap-1">
+          <span className="font-mono text-[10px] font-bold text-cyan-300 bg-cyan-950/85 px-2.5 py-1 rounded-lg border border-cyan-500/60 shadow-xl flex items-center gap-1">
             Annual Evolution • Year {currentYear}
           </span>
         )}
 
         {/* Mode B: Clean Decadal Change Indicator (Only for Night Lights) */}
         {currentDataset === "night-lights" && currentMode === "change" && (
-          <span className="font-mono text-[10px] font-bold text-emerald-300 bg-emerald-950/85 px-2.5 py-1 rounded-lg border border-emerald-500/50 shadow-xl flex items-center gap-1">
+          <span className="font-mono text-[10px] font-bold text-cyan-300 bg-cyan-950/85 px-2.5 py-1 rounded-lg border border-cyan-500/50 shadow-xl flex items-center gap-1">
             Decadal Change
           </span>
         )}
 
         {/* Mode C: Both Options Available to Compare Together (Only for Night Lights) */}
         {currentDataset === "night-lights" && currentMode === "regional" && (
-          <div className="flex items-center bg-[#06080A]/90 backdrop-blur-md rounded-lg border border-emerald-500/30 p-0.5 text-[10px] font-mono shadow-xl">
+          <div className="flex items-center bg-[#06121D]/90 backdrop-blur-md rounded-lg border border-cyan-500/30 p-0.5 text-[10px] font-mono shadow-xl">
             <button
               onClick={() => setActiveTextureType("annual")}
               className={`px-2.5 py-1 rounded-md transition-all ${activeTextureType === "annual"
-                  ? "bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 font-bold shadow-[0_0_8px_rgba(0,245,155,0.4)]"
+                  ? "bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 text-slate-950 font-bold shadow-[0_0_8px_rgba(6,182,212,0.5)]"
                   : "text-slate-400 hover:text-slate-200"
                 }`}
             >
@@ -691,7 +691,7 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
             <button
               onClick={() => setActiveTextureType("change")}
               className={`px-2.5 py-1 rounded-md transition-all ${activeTextureType === "change"
-                  ? "bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 font-bold shadow-[0_0_8px_rgba(0,245,155,0.4)]"
+                  ? "bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 text-slate-950 font-bold shadow-[0_0_8px_rgba(6,182,212,0.5)]"
                   : "text-slate-400 hover:text-slate-200"
                 }`}
             >
@@ -702,36 +702,36 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
       </div>
 
       {/* Right Controls: Auto-spin, Reset, Zoom */}
-      <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20 bg-[#06080A]/90 backdrop-blur-md p-1 rounded-xl border border-emerald-500/25 shadow-xl">
+      <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20 bg-[#06121D]/90 backdrop-blur-md p-1 rounded-xl border border-cyan-500/25 shadow-xl">
         <button
           onClick={() => setAutoRotate(!autoRotate)}
           className={`px-2.5 py-1 rounded-lg text-[10px] font-mono flex items-center gap-1 border transition-all ${autoRotate
-              ? "bg-emerald-950/90 text-emerald-300 border-emerald-500/50 shadow-[0_0_8px_rgba(0,245,155,0.2)]"
-              : "bg-black/60 text-slate-400 border-emerald-500/20 hover:text-slate-200"
+              ? "bg-cyan-950/90 text-cyan-300 border-cyan-500/50 shadow-[0_0_8px_rgba(6,182,212,0.3)]"
+              : "bg-black/60 text-slate-400 border-cyan-500/20 hover:text-slate-200"
             }`}
           title="Toggle Auto-Spin Rotation"
         >
-          {autoRotate ? <Pause className="w-3 h-3 text-emerald-400" /> : <Play className="w-3 h-3 text-emerald-400" />}
+          {autoRotate ? <Pause className="w-3 h-3 text-cyan-400" /> : <Play className="w-3 h-3 text-cyan-400" />}
           <span>{autoRotate ? "Spin: ON" : "Spin: OFF"}</span>
         </button>
 
         <button
           onClick={() => handleZoom(-0.3)}
-          className="p-1 hover:bg-emerald-950/60 rounded text-slate-300 hover:text-emerald-300"
+          className="p-1 hover:bg-cyan-950/60 rounded text-slate-300 hover:text-cyan-300"
           title="Zoom In"
         >
           <ZoomIn className="w-3.5 h-3.5" />
         </button>
         <button
           onClick={() => handleZoom(0.3)}
-          className="p-1 hover:bg-emerald-950/60 rounded text-slate-300 hover:text-emerald-300"
+          className="p-1 hover:bg-cyan-950/60 rounded text-slate-300 hover:text-cyan-300"
           title="Zoom Out"
         >
           <ZoomOut className="w-3.5 h-3.5" />
         </button>
         <button
           onClick={handleResetAngle}
-          className="p-1 hover:bg-emerald-950/60 rounded text-slate-400 hover:text-emerald-400"
+          className="p-1 hover:bg-cyan-950/60 rounded text-slate-400 hover:text-cyan-400"
           title="Reset Globe Orientation"
         >
           <RotateCcw className="w-3.5 h-3.5" />
@@ -739,8 +739,8 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
       </div>
 
       {/* Bottom Hint */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none bg-[#06080A]/90 backdrop-blur-sm px-3.5 py-1 rounded-full text-[10px] font-mono text-slate-300 border border-emerald-500/30 z-20 flex items-center gap-1.5 shadow-xl">
-        <span className="text-emerald-400">✦</span>
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none bg-[#06121D]/90 backdrop-blur-sm px-3.5 py-1 rounded-full text-[10px] font-mono text-slate-300 border border-cyan-500/30 z-20 flex items-center gap-1.5 shadow-xl">
+        <span className="text-cyan-400">✦</span>
         <span>Click & drag to rotate freely • Scroll to zoom</span>
       </div>
     </div>
