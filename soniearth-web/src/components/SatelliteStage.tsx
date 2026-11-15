@@ -559,6 +559,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               ref={videoRef}
               key={videoSrc}
               src={videoSrc}
+              preload="auto"
               playsInline
               muted
               loop
@@ -622,6 +623,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               ref={videoRef}
               key={videoSrc}
               src={videoSrc}
+              preload="auto"
               playsInline
               muted
               loop
@@ -709,6 +711,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
                 ref={videoRef}
                 key={videoSrc}
                 src={videoSrc}
+                preload="auto"
                 playsInline
                 muted
                 loop
@@ -823,6 +826,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
             <video
               ref={videoRef}
               src="/datasets/night-lights/chunk_mode_a.webm"
+              preload="auto"
               playsInline
               muted
               loop

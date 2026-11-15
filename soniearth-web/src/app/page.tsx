@@ -599,26 +599,33 @@ export default function Home() {
               ? (featureData?.durationSeconds || 66.7)
               : MODE_DURATIONS[currentModeRef.current];
 
-        // MASTER CLOCK: For ISS Lightning, Ocean Currents & DYAMOND CO2, lock directly to hardware video presentation timestamp (PTS)
-        // For Night Lights modes, increment smoothly at 60 FPS (zero video buffering freeze)
+        // MASTER CLOCK: Strict audio-video lockstep
+        // For video-driven datasets (CO2, Lightning, Ocean), audio NEVER advances ahead of video frames!
         let nextTime: number;
 
-        if (
-          (activeDatasetRef.current === "iss-lightning" ||
-            activeDatasetRef.current === "ocean-currents" ||
-            activeDatasetRef.current === "dyamond-co2") &&
-          videoRef.current &&
-          !videoRef.current.paused &&
-          !videoRef.current.seeking &&
-          videoRef.current.readyState >= 2
-        ) {
-          // Absolute hardware video presentation timestamp lock (0ms drift audio-visual parallelism)
+        const isVideoDriven =
+          activeDatasetRef.current === "iss-lightning" ||
+          activeDatasetRef.current === "ocean-currents" ||
+          activeDatasetRef.current === "dyamond-co2";
+
+        if (isVideoDriven && videoRef.current) {
+          // If video is buffering, waiting for network, or seeking on remote CDN: PAUSE CLOCK & AUDIO!
+          if (videoRef.current.readyState < 2 || videoRef.current.seeking || videoRef.current.paused) {
+            // Keep clock locked to video's exact timestamp, do not race ahead!
+            nextTime = videoRef.current.currentTime;
+            currentTimeRef.current = nextTime;
+            setCurrentTime(nextTime);
+            lastTimeRef.current = timestamp;
+            animId = requestAnimationFrame(clockLoop);
+            return;
+          }
+          // Absolute hardware video presentation timestamp lock (0ms drift)
           nextTime = videoRef.current.currentTime;
         } else {
           nextTime = currentTimeRef.current + safeDelta * playbackSpeedRef.current;
 
-          // Soft Video Synchronization with 100% local WebM chunks
-          if (videoRef.current && !videoRef.current.seeking) {
+          // Soft Video Synchronization
+          if (videoRef.current && !videoRef.current.seeking && videoRef.current.readyState >= 2) {
             const currentVidTime = videoRef.current.currentTime;
             if (Math.abs(currentVidTime - nextTime) > 0.35) {
               videoRef.current.currentTime = nextTime;
@@ -675,7 +682,13 @@ export default function Home() {
       } else if (activeDatasetRef.current === "dyamond-co2") {
         audioEngine.startCO2Atmosphere();
       }
-      playModeSound(currentTimeRef.current, true);
+      const isVideoTrack =
+        activeDatasetRef.current === "iss-lightning" ||
+        activeDatasetRef.current === "ocean-currents" ||
+        activeDatasetRef.current === "dyamond-co2";
+      if (!isVideoTrack || (videoRef.current && videoRef.current.readyState >= 2)) {
+        playModeSound(currentTimeRef.current, true);
+      }
       const modeTitles = {
         annual: "Mode A: Annual Evolution (2012 to 2023)",
         change: "Mode B: Decadal Change Map",
@@ -849,7 +862,13 @@ export default function Home() {
     if (voiceEnabled) speechNarrator.speak(`Thermocline depth set to ${depthName}.`);
     setAriaAnnouncement(`Thermocline depth set to ${depthName}.`);
     if (isPlayingRef.current) {
-      playModeSound(currentTimeRef.current, true);
+      const isVideoTrack =
+        activeDatasetRef.current === "iss-lightning" ||
+        activeDatasetRef.current === "ocean-currents" ||
+        activeDatasetRef.current === "dyamond-co2";
+      if (!isVideoTrack || (videoRef.current && videoRef.current.readyState >= 2)) {
+        playModeSound(currentTimeRef.current, true);
+      }
     }
   };
 
@@ -861,7 +880,13 @@ export default function Home() {
     if (voiceEnabled) speechNarrator.speak(`Focused on ${basinName}. Stereo pan ${pan > 0 ? "Right" : pan < 0 ? "Left" : "Center"}.`);
     setAriaAnnouncement(`Focused on ${basinName}.`);
     if (isPlayingRef.current) {
-      playModeSound(currentTimeRef.current, true);
+      const isVideoTrack =
+        activeDatasetRef.current === "iss-lightning" ||
+        activeDatasetRef.current === "ocean-currents" ||
+        activeDatasetRef.current === "dyamond-co2";
+      if (!isVideoTrack || (videoRef.current && videoRef.current.readyState >= 2)) {
+        playModeSound(currentTimeRef.current, true);
+      }
     }
   };
 
