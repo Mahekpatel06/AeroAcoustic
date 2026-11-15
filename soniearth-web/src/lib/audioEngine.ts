@@ -60,6 +60,9 @@ class SoniEarthAudioEngine {
   private oceanFilterNode: Tone.AutoFilter | null = null;
   private oceanCelloFilter: Tone.Filter | null = null;
   private oceanStringFilter: Tone.Filter | null = null;
+  private oceanStemPlayer: Tone.Player | null = null;
+  private isOceanStemMode = false;
+  private isStemPlaying = false;
   private oceanDepthMeters: number = 0;
   private oceanDepthDrone: Tone.Synth | null = null;
   private isOceanDepthDroneActive = false;
@@ -226,6 +229,18 @@ class SoniEarthAudioEngine {
       }).connect(this.oceanPanner);
       this.oceanDepthDrone.volume.value = -24;
 
+      // 16. Ocean Master Stem Player (Pre-rendered 66.7s studio master WAV soundtrack)
+      try {
+        this.oceanStemPlayer = new Tone.Player({
+          url: "/datasets/ocean-currents/audio/ocean_currents_ambient.wav",
+          loop: true,
+          autostart: false,
+          volume: -7,
+        }).connect(this.duckGain);
+      } catch (e) {
+        console.warn("Ocean stem player load deferred:", e);
+      }
+
       this.isInitialized = true;
       return true;
     } catch (err) {
@@ -352,6 +367,7 @@ class SoniEarthAudioEngine {
    * Starts the organic ocean hydrophone wave ambience (pink noise tidal swell).
    */
   public startOceanAmbience() {
+    if (this.isOceanStemMode) return;
     if (!this.isInitialized || this.isMuted || !this.oceanNoiseNode || this.isOceanDroneActive) return;
     try {
       if (Tone.context.state !== "running") {
@@ -376,6 +392,64 @@ class SoniEarthAudioEngine {
       }
     } catch (e) {
       this.isOceanDroneActive = false;
+    }
+  }
+
+  /**
+   * Configures Ocean Current audio playback mode:
+   * - "procedural": Soft, velvety, real-time procedural data sonification.
+   * - "stem": Studio-quality master WAV soundtrack (ocean_currents_ambient.wav).
+   */
+  public setOceanAudioMode(mode: "procedural" | "stem") {
+    this.isOceanStemMode = mode === "stem";
+    if (this.isOceanStemMode) {
+      this.oceanCelloSynth?.triggerRelease();
+      this.oceanStringSynth?.releaseAll();
+      this.oceanRippleSynth?.releaseAll();
+      this.stopOceanAmbience();
+    } else {
+      this.stopOceanStem();
+    }
+  }
+
+  public getOceanAudioMode(): "procedural" | "stem" {
+    return this.isOceanStemMode ? "stem" : "procedural";
+  }
+
+  public isOceanStemActive(): boolean {
+    return this.isOceanStemMode;
+  }
+
+  public startOceanStem(seekTime = 0) {
+    if (!this.isInitialized || this.isMuted || !this.oceanStemPlayer) return;
+    try {
+      if (Tone.context.state !== "running") Tone.context.resume();
+      if (this.oceanStemPlayer.loaded) {
+        this.oceanStemPlayer.start(undefined, Math.max(0, seekTime % 66.7));
+        this.isStemPlaying = true;
+      }
+    } catch (e) {}
+  }
+
+  public stopOceanStem() {
+    if (!this.oceanStemPlayer) return;
+    try {
+      if (this.isStemPlaying) {
+        this.oceanStemPlayer.stop();
+        this.isStemPlaying = false;
+      }
+    } catch (e) {
+      this.isStemPlaying = false;
+    }
+  }
+
+  public seekOceanStem(timeSec: number) {
+    if (!this.oceanStemPlayer || !this.oceanStemPlayer.loaded) return;
+    if (this.isStemPlaying) {
+      try {
+        this.oceanStemPlayer.stop();
+        this.oceanStemPlayer.start(undefined, Math.max(0, timeSec % 66.7));
+      } catch (e) {}
     }
   }
 
@@ -461,7 +535,7 @@ class SoniEarthAudioEngine {
    * Supports thermocline depth layers (0m to 1000m) down to 40 Hz infrasound.
    */
   public triggerOceanCurrent(note: string, sstCelsius: number, pan = 0.0, velocity = 0.50) {
-    if (!this.isInitialized || this.isMuted) return;
+    if (!this.isInitialized || this.isMuted || this.isOceanStemMode) return;
     try {
       if (this.oceanPanner) {
         this.oceanPanner.pan.rampTo(Math.max(-0.75, Math.min(0.75, pan)), 0.2);
@@ -513,8 +587,8 @@ class SoniEarthAudioEngine {
    * Triggers oceanic fluid ripple arpeggiator accents (soft liquid droplets).
    */
   public triggerOceanRipple(note: string, pan = 0.0, velocity = 0.5) {
-    // Surface streamline plucks are silenced in the deep ocean below 200m
-    if (!this.isInitialized || this.isMuted || this.oceanDepthMeters > 200 || !this.oceanRippleSynth) return;
+    // Surface streamline plucks are silenced in the deep ocean below 200m or when stem is active
+    if (!this.isInitialized || this.isMuted || this.isOceanStemMode || this.oceanDepthMeters > 200 || !this.oceanRippleSynth) return;
     try {
       this.oceanRippleSynth.triggerAttackRelease(note, 0.4, undefined, velocity);
     } catch (e) {}
@@ -535,6 +609,7 @@ class SoniEarthAudioEngine {
     this.oceanRippleSynth?.releaseAll();
     this.stopOrbitalDrone();
     this.stopOceanAmbience();
+    this.stopOceanStem();
     if (this.isOceanDepthDroneActive && this.oceanDepthDrone) {
       this.oceanDepthDrone.triggerRelease();
       this.isOceanDepthDroneActive = false;

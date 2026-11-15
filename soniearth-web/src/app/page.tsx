@@ -112,6 +112,7 @@ export default function Home() {
   const [voiceEnabled, setVoiceEnabled] = useState<boolean>(false); // Start voice off by default
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
+  const [oceanAudioMode, setOceanAudioMode] = useState<"procedural" | "stem">("procedural");
   const [depthMeters, setDepthMeters] = useState<number>(0);
   const [selectedBasin, setSelectedBasin] = useState<string>("ALL");
   const [activeNote, setActiveNote] = useState<string>("A3");
@@ -609,7 +610,11 @@ export default function Home() {
       if (activeDatasetRef.current === "iss-lightning") {
         audioEngine.startOrbitalDrone();
       } else if (activeDatasetRef.current === "ocean-currents") {
-        audioEngine.startOceanAmbience();
+        if (audioEngine.isOceanStemActive()) {
+          audioEngine.startOceanStem(currentTimeRef.current);
+        } else {
+          audioEngine.startOceanAmbience();
+        }
       }
       playModeSound(currentTimeRef.current, true);
       const modeTitles = {
@@ -719,6 +724,9 @@ export default function Home() {
     setCurrentTime(nextT);
     currentTimeRef.current = nextT;
     if (videoRef.current) videoRef.current.currentTime = nextT;
+    if (activeDatasetRef.current === "ocean-currents") {
+      audioEngine.seekOceanStem(nextT);
+    }
     if (isPlayingRef.current) {
       playModeSound(nextT, true);
     }
@@ -735,6 +743,9 @@ export default function Home() {
     setCurrentTime(nextT);
     currentTimeRef.current = nextT;
     if (videoRef.current) videoRef.current.currentTime = nextT;
+    if (activeDatasetRef.current === "ocean-currents") {
+      audioEngine.seekOceanStem(nextT);
+    }
     if (isPlayingRef.current) {
       playModeSound(nextT, true);
     }
@@ -754,6 +765,9 @@ export default function Home() {
     if (videoRef.current) {
       videoRef.current.currentTime = clamped;
     }
+    if (activeDatasetRef.current === "ocean-currents") {
+      audioEngine.seekOceanStem(clamped);
+    }
     if (isPlayingRef.current) {
       playModeSound(clamped, true);
     }
@@ -766,6 +780,23 @@ export default function Home() {
     if (videoRef.current) {
       videoRef.current.playbackRate = speed;
     }
+  };
+
+  // 8b. Toggle Ocean Audio Mode between Smooth Procedural Synth and Master WAV Soundtrack
+  const handleToggleOceanAudioMode = () => {
+    const nextMode = oceanAudioMode === "procedural" ? "stem" : "procedural";
+    setOceanAudioMode(nextMode);
+    audioEngine.setOceanAudioMode(nextMode);
+    if (isPlayingRef.current) {
+      if (nextMode === "stem") {
+        audioEngine.startOceanStem(currentTimeRef.current);
+      } else {
+        audioEngine.startOceanAmbience();
+      }
+    }
+    const modeName = nextMode === "stem" ? "Master WAV Soundtrack" : "Smooth Sonification";
+    if (voiceEnabled) speechNarrator.speak(`Ocean audio set to ${modeName}.`);
+    setAriaAnnouncement(`Ocean audio mode switched to ${modeName}.`);
   };
 
   // 8b. Thermocline Depth Handler (0m -> 200m -> 1000m)
@@ -832,7 +863,11 @@ export default function Home() {
       lastRegionalTriggerRef.current = -1;
       if (videoRef.current) videoRef.current.currentTime = 0.0;
       if (isPlayingRef.current) {
-        audioEngine.startOceanAmbience();
+        if (audioEngine.isOceanStemActive()) {
+          audioEngine.startOceanStem(0.0);
+        } else {
+          audioEngine.startOceanAmbience();
+        }
       }
       if (voiceEnabled) speechNarrator.speak("Sea Surface Currents active.");
       setAriaAnnouncement("Sea Surface Currents active (NASA SVS #3912). Press Space to play.");
@@ -947,6 +982,8 @@ export default function Home() {
               activeFreq={activeFreq}
               activeScaleName={activeScaleName}
               activeInstrument={activeInstrument}
+              oceanAudioMode={oceanAudioMode}
+              onToggleOceanAudioMode={handleToggleOceanAudioMode}
             />
 
             <ExplainPanel

@@ -240,9 +240,10 @@ Unlike optical light or transient electrostatic pulses, Sea Surface Currents son
   * Adds an interactive depth slider and quick presets (`0m Surface`, `200m Thermocline`, `1000m Abyssal`).
   * **Visual Spectrum Shift**: As depth increases, visual rendering on both 2D video and 3D globe dynamically transitions from warm sunlit surface reds/oranges into deep abyssal twilight indigo.
   * **Acoustic Thermocline Gradient**: Temperatures drop exponentially with depth; at depth $\ge 800\text{m}$, acoustic pitch drops into an authentic **$40\text{ Hz}$ Infrasonic Sub-Bass** drone with heavy oceanic pressure and muted surface ripples.
-* **Psychoacoustically Mastered Sonification Engine**:
-  * **Smooth Procedural Sonification**: Live, velvety Tone.js multi-oscillator synthesis tuned with harmonic saturation (2nd and 3rd harmonics) for full presence on internal laptop speakers without losing sub-bass depth in headphones.
-  * **Dynamic Acoustic Thermocline**: Synthesizers smoothly modulate based on depth ($0\text{m} \to 1000\text{m}$) and basin selection in real time.
+* **Dual Ocean Audio Architecture (Interactive Mode Toggle)**:
+  * **Smooth Synth Mode**: Real-time velvety Tone.js procedural synthesis with acoustic cello and warm harmonic strings, dynamically modulating based on thermocline depth ($0\text{m} \to 1000\text{m}$), 3D basin click raycasting, and video current velocity.
+  * **Master WAV Mode**: Synchronized studio master ambient soundtrack (`ocean_currents_ambient.wav`) locked to video playback and timeline scrubbers.
+  * **UI Toggle Button**: One-click switch in the Acoustic Stage header allows instant toggling between "Smooth Synth" and "Master WAV".
 * **Oceanographic HUD Telemetry**: Displays real-time Sea Surface Temperature ($^\circ\text{C}$), current velocity ($\text{kts}$), musical tempo ($\text{BPM}$), hydrostatic pressure ($\text{atm}$), and heading in real-time.
 * **Thermal Spectrum Legend**: Shows color temperature thresholds with live indicator dots.
 
