@@ -2,7 +2,7 @@
 
 import React from "react";
 import { FrameFeature } from "@/types";
-import { HelpCircle, Grid, Compass } from "lucide-react";
+import { HelpCircle, Compass } from "lucide-react";
 
 interface ExplainPanelProps {
   currentDataset?: string;
@@ -72,18 +72,18 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
   const spatialGrid = currentFeature?.spatialGrid || [];
 
   return (
-    <div className="w-full bg-slate-900/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3 text-xs">
+    <div className="w-full bg-[#080D12]/85 backdrop-blur-xl border border-emerald-500/25 rounded-2xl p-4 shadow-[0_8px_32px_rgba(0,0,0,0.8)] flex flex-col gap-3 text-xs">
       {/* Top Banner */}
       <div className="flex items-start gap-3">
-        <div className="p-2 rounded-xl bg-sky-950/60 border border-sky-800/60 text-sky-400 mt-0.5 shrink-0">
+        <div className="p-2 rounded-xl bg-black/60 border border-emerald-500/30 text-emerald-400 mt-0.5 shrink-0 shadow-[0_0_10px_rgba(0,245,155,0.2)]">
           <HelpCircle className="w-4 h-4" />
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
-            <h4 className="font-semibold text-sky-300 uppercase tracking-wider text-[11px]">
+            <h4 className="font-semibold text-white uppercase tracking-wider text-[11px] drop-shadow-[0_0_8px_rgba(0,245,155,0.3)]">
               Why am I hearing this? (Scientific Explainability)
             </h4>
-            <span className="text-[10px] font-mono text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40">
+            <span className="text-[10px] font-mono text-emerald-300 px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 shadow-[0_0_8px_rgba(0,245,155,0.2)]">
               {isLightning ? "NASA SVS #5011 • ISS LIS Science" : "Data-Driven Synthesis"}
             </span>
           </div>
@@ -91,72 +91,34 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
         </div>
       </div>
 
-      {/* Mode A: 3x3 Spatial Grid Notes Telemetry (Night Lights) */}
-      {!isLightning && phase === "annual_series" && spatialGrid.length === 9 && (
-        <div className="mt-1 pt-3 border-t border-slate-800/80">
-          <div className="flex items-center gap-1.5 mb-2 text-[10px] font-mono text-slate-400 uppercase tracking-wider">
-            <Grid className="w-3.5 h-3.5 text-sky-400" />
-            <span>9-Cell Planetary Spatial Grid Notes (West → Center → East Stereo Sweep)</span>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            {spatialGrid.map((cell, idx) => {
-              const cellKey = cell.regionId || `grid_cell_${cell.row ?? Math.floor(idx / 3)}_${cell.col ?? (idx % 3)}_${idx}`;
-              const cellName = cell.name || `Zone ${idx + 1} (${cell.col === 0 ? "West" : cell.col === 1 ? "Center" : "East"})`;
-              const cellPan = cell.pan ?? (cell.col === 0 ? -0.75 : cell.col === 1 ? 0.0 : 0.75);
-              const cellLuma = ((cell.meanBrightness ?? (cell as any).brightness ?? 0) * 100).toFixed(1);
-              const note = cell.activeNote || "C4";
-
-              return (
-                <div
-                  key={cellKey}
-                  className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-2 flex items-center justify-between font-mono text-[10px]"
-                >
-                  <div>
-                    <div className="text-slate-300 font-semibold truncate max-w-[140px]">{cellName}</div>
-                    <div className="text-slate-500 text-[9px]">
-                      Pan {cellPan > 0 ? `+${cellPan}` : cellPan} • Luma {cellLuma}%
-                    </div>
-                  </div>
-                  <div className="px-2 py-0.5 rounded bg-sky-950/80 border border-sky-800/60 text-sky-300 font-bold text-xs">
-                    {note}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
       {/* ISS Lightning: 3-Horizon Stereo Field Telemetry */}
       {isLightning && spatialGrid.length === 3 && (
-        <div className="mt-1 pt-3 border-t border-slate-800/80">
-          <div className="flex items-center gap-1.5 mb-2 text-[10px] font-mono text-amber-400 uppercase tracking-wider">
-            <Compass className="w-3.5 h-3.5 text-amber-400" />
-            <span>3-Horizon Stereo Audio Field (West Horizon → Nadir Track → East Horizon)</span>
+        <div className="mt-1 pt-3 border-t border-emerald-500/20">
+          <div className="flex items-center gap-1.5 mb-2.5 text-[10px] font-mono text-emerald-400 uppercase tracking-wider">
+            <Compass className="w-3.5 h-3.5 text-emerald-400" />
+            <span>3-Horizon Stereo Audio Field (West → Center → East)</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             {spatialGrid.map((cell) => (
               <div
                 key={cell.regionId}
-                className={`border rounded-xl p-2.5 flex items-center justify-between font-mono text-[10px] transition-all ${
+                className={`border rounded-xl p-2.5 flex flex-col items-center justify-between text-center font-mono text-[10px] transition-all ${
                   cell.strikeInZone
-                    ? "bg-amber-950/80 border-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.4)]"
-                    : "bg-slate-950/70 border-slate-800/80"
+                    ? "bg-emerald-950/80 border-emerald-400 shadow-[0_0_15px_rgba(0,245,155,0.4)]"
+                    : "bg-black/60 border-emerald-500/20"
                 }`}
               >
-                <div>
-                  <div className={`font-semibold ${cell.strikeInZone ? "text-amber-300" : "text-slate-300"}`}>
-                    {cell.name}
-                  </div>
-                  <div className="text-slate-500 text-[9px]">
-                    Stereo Pan {cell.pan > 0 ? `+${cell.pan}` : cell.pan}
-                  </div>
+                <div className={`font-semibold ${cell.strikeInZone ? "text-emerald-300" : "text-slate-300"}`}>
+                  {cell.name}
+                </div>
+                <div className="text-slate-500 text-[9px] my-1">
+                  Pan {cell.pan > 0 ? `+${cell.pan}` : cell.pan}
                 </div>
                 <div
-                  className={`px-2 py-0.5 rounded font-bold text-xs ${
+                  className={`px-2 py-0.5 rounded font-bold text-[10px] ${
                     cell.strikeInZone
-                      ? "bg-amber-500 text-black shadow-[0_0_8px_#f59e0b] animate-pulse"
-                      : "bg-slate-900 border border-slate-800 text-slate-400"
+                      ? "bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 shadow-[0_0_10px_rgba(0,245,155,0.5)] animate-pulse"
+                      : "bg-black/80 border border-emerald-500/20 text-slate-400"
                   }`}
                 >
                   {cell.strikeInZone ? "⚡ BURST" : "PASSIVE"}

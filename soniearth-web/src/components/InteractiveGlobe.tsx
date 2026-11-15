@@ -103,12 +103,12 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
     scene.add(sphere);
     sphereRef.current = sphere;
 
-    // Atmospheric Glow Halo
+    // Atmospheric Glow Halo in Laser Mint
     const atmosGeo = new THREE.SphereGeometry(1.025, 64, 64);
     const atmosMat = new THREE.MeshBasicMaterial({
-      color: new THREE.Color(0x38bdf8),
+      color: new THREE.Color(0x00f59b),
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.18,
       side: THREE.BackSide,
     });
     const atmos = new THREE.Mesh(atmosGeo, atmosMat);
@@ -299,32 +299,32 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
 
       {/* Floating 3D Globe HUD Controls */}
       <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-20">
-        <span className="font-mono text-[11px] font-bold text-sky-400 bg-slate-950/85 px-2.5 py-1 rounded-lg border border-sky-800/50 backdrop-blur-md flex items-center gap-1.5 shadow-xl">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+        <span className="font-mono text-[11px] font-bold text-emerald-400 bg-[#06080A]/90 px-2.5 py-1 rounded-lg border border-emerald-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-xl">
+          <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
           Interactive 3D Sphere (NASA SVS #5475)
         </span>
 
         {/* Mode A: Clean Annual Indicator (No Decadal Change option) */}
         {currentMode === "annual" && (
-          <span className="font-mono text-[10px] font-bold text-sky-300 bg-sky-950/85 px-2.5 py-1 rounded-lg border border-sky-700/60 shadow-xl flex items-center gap-1">
+          <span className="font-mono text-[10px] font-bold text-emerald-300 bg-emerald-950/85 px-2.5 py-1 rounded-lg border border-emerald-500/50 shadow-xl flex items-center gap-1">
             Annual Evolution • Year {currentYear}
           </span>
         )}
 
         {/* Mode B: Clean Decadal Change Indicator (No Annual option) */}
         {currentMode === "change" && (
-          <span className="font-mono text-[10px] font-bold text-purple-300 bg-purple-950/85 px-2.5 py-1 rounded-lg border border-purple-700/60 shadow-xl flex items-center gap-1">
+          <span className="font-mono text-[10px] font-bold text-emerald-300 bg-emerald-950/85 px-2.5 py-1 rounded-lg border border-emerald-500/50 shadow-xl flex items-center gap-1">
             Decadal Change
           </span>
         )}
 
         {/* Mode C: Both Options Available to Compare Together */}
         {currentMode === "regional" && (
-          <div className="flex items-center bg-slate-950/85 backdrop-blur-md rounded-lg border border-slate-800 p-0.5 text-[10px] font-mono shadow-xl">
+          <div className="flex items-center bg-[#06080A]/90 backdrop-blur-md rounded-lg border border-emerald-500/30 p-0.5 text-[10px] font-mono shadow-xl">
             <button
               onClick={() => setActiveTextureType("annual")}
               className={`px-2.5 py-1 rounded-md transition-all ${activeTextureType === "annual"
-                  ? "bg-sky-500 text-black font-bold shadow"
+                  ? "bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 font-bold shadow-[0_0_8px_rgba(0,245,155,0.4)]"
                   : "text-slate-400 hover:text-slate-200"
                 }`}
             >
@@ -333,7 +333,7 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
             <button
               onClick={() => setActiveTextureType("change")}
               className={`px-2.5 py-1 rounded-md transition-all ${activeTextureType === "change"
-                  ? "bg-purple-600 text-white font-bold shadow-[0_0_10px_rgba(168,85,247,0.4)]"
+                  ? "bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 font-bold shadow-[0_0_8px_rgba(0,245,155,0.4)]"
                   : "text-slate-400 hover:text-slate-200"
                 }`}
             >
@@ -344,36 +344,36 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
       </div>
 
       {/* Right Controls: Auto-spin, Reset, Zoom */}
-      <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20 bg-slate-950/85 backdrop-blur-md p-1 rounded-xl border border-slate-800 shadow-xl">
+      <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20 bg-[#06080A]/90 backdrop-blur-md p-1 rounded-xl border border-emerald-500/25 shadow-xl">
         <button
           onClick={() => setAutoRotate(!autoRotate)}
           className={`px-2.5 py-1 rounded-lg text-[10px] font-mono flex items-center gap-1 border transition-all ${autoRotate
-              ? "bg-emerald-950/90 text-emerald-300 border-emerald-700/60"
-              : "bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200"
+              ? "bg-emerald-950/90 text-emerald-300 border-emerald-500/50 shadow-[0_0_8px_rgba(0,245,155,0.2)]"
+              : "bg-black/60 text-slate-400 border-emerald-500/20 hover:text-slate-200"
             }`}
           title="Toggle Auto-Spin Rotation"
         >
-          {autoRotate ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
+          {autoRotate ? <Pause className="w-3 h-3 text-emerald-400" /> : <Play className="w-3 h-3 text-emerald-400" />}
           <span>{autoRotate ? "Spin: ON" : "Spin: OFF"}</span>
         </button>
 
         <button
           onClick={() => handleZoom(-0.3)}
-          className="p-1 hover:bg-slate-800 rounded text-slate-300 hover:text-white"
+          className="p-1 hover:bg-emerald-950/60 rounded text-slate-300 hover:text-emerald-300"
           title="Zoom In"
         >
           <ZoomIn className="w-3.5 h-3.5" />
         </button>
         <button
           onClick={() => handleZoom(0.3)}
-          className="p-1 hover:bg-slate-800 rounded text-slate-300 hover:text-white"
+          className="p-1 hover:bg-emerald-950/60 rounded text-slate-300 hover:text-emerald-300"
           title="Zoom Out"
         >
           <ZoomOut className="w-3.5 h-3.5" />
         </button>
         <button
           onClick={handleResetAngle}
-          className="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-yellow-400"
+          className="p-1 hover:bg-emerald-950/60 rounded text-slate-400 hover:text-emerald-400"
           title="Reset Globe Orientation"
         >
           <RotateCcw className="w-3.5 h-3.5" />
@@ -381,7 +381,8 @@ export const InteractiveGlobe: React.FC<InteractiveGlobeProps> = ({
       </div>
 
       {/* Bottom Hint */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none bg-slate-950/85 backdrop-blur-sm px-3.5 py-1 rounded-full text-[10px] font-mono text-slate-400 border border-slate-800/80 z-20 flex items-center gap-1.5 shadow-xl">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none bg-[#06080A]/90 backdrop-blur-sm px-3.5 py-1 rounded-full text-[10px] font-mono text-slate-300 border border-emerald-500/30 z-20 flex items-center gap-1.5 shadow-xl">
+        <span className="text-emerald-400">✦</span>
         <span>Click & drag to rotate freely • Scroll to zoom</span>
       </div>
     </div>

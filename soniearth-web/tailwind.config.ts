@@ -10,15 +10,13 @@ const config: Config = {
     extend: {
       colors: {
         cosmos: {
-          obsidian: "#020617", // slate-950
-          midnight: "#0F172A", // slate-900
-          card: "#1E293B",     // slate-800
-          border: "#334155",   // slate-700
-          cyan: "#38BDF8",     // electric cyan
+          obsidian: "#06080A", // deep obsidian space black
+          midnight: "#080D12", // dark translucent cockpit glass
+          card: "#0D141C",     // titanium cockpit panel card
+          border: "rgba(0, 245, 155, 0.25)", // titanium hairline mint border
+          mint: "#00F59B",     // laser emerald mint
           emerald: "#10B981",  // telemetry emerald
-          focus: "#FACC15",    // high-contrast neon yellow
-          purple: "#C084FC",   // night lights increase
-          orange: "#FB923C",   // night lights decrease
+          focus: "#00F59B",    // accessible focus ring
         },
       },
       fontFamily: {

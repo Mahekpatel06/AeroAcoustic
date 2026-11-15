@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Header } from "@/components/Header";
+import { LandingPage } from "@/components/LandingPage";
 import { SatelliteStage } from "@/components/SatelliteStage";
 import { AcousticStage } from "@/components/AcousticStage";
 import { MasterController } from "@/components/MasterController";
@@ -101,6 +102,7 @@ function deriveAnnualHarmony(meanBrightness: number, delta: number) {
 }
 
 export default function Home() {
+  const [hasEntered, setHasEntered] = useState<boolean>(false);
   const [featureData, setFeatureData] = useState<DatasetFeatureCollection | null>(null);
   const [currentMode, setCurrentMode] = useState<"annual" | "change" | "regional">("annual");
   const [currentTime, setCurrentTime] = useState<number>(0.0);
@@ -731,35 +733,39 @@ export default function Home() {
   });
 
   return (
-    <div className="flex flex-col min-h-screen bg-cosmos-obsidian text-slate-100">
+    <div className="flex flex-col min-h-screen bg-transparent text-slate-100">
+      {!hasEntered ? (
+        <LandingPage onEnter={() => setHasEntered(true)} />
+      ) : (
+        <>
       {/* 1. Header */}
       <Header
         voiceEnabled={voiceEnabled}
         onToggleVoice={() => setVoiceEnabled(speechNarrator.toggle())}
         isMuted={isMuted}
         onToggleMute={() => setIsMuted(audioEngine.toggleMute())}
+        onGoHome={() => setHasEntered(false)}
       />
 
-      {/* Main Workspace */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
-        {/* 2. Hero Satellite Optical Stage (Clean Projection • High-Precision Timeline Progress Bar) */}
-        <section className="w-full">
-          <SatelliteStage
-            currentDataset={activeDataset}
-            currentFeature={currentFeature}
-            currentTime={currentTime}
-            currentMode={currentMode}
-            selectedRegion={selectedRegion}
-            isPlaying={isPlaying}
-            onSelectRegion={handleSelectRegion}
-            onSeek={handleSeek}
-            videoRef={videoRef}
-          />
-        </section>
+      {/* Main Workspace - Ultra-Responsive Viewport Optimized Layout */}
+      <main className="flex-1 max-w-[1700px] w-full mx-auto p-2.5 sm:p-3 md:p-4 flex flex-col gap-3 sm:gap-4">
+        {/* Top Split: Left 70% (Cinematic Video Stage + Attached Controller), Right 30% (Acoustic Stage + Explain Panel) */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-start">
+          {/* Left Column: 70% Width (col-span-8 in 12-col grid) */}
+          <div className="lg:col-span-8 flex flex-col gap-2.5 sm:gap-3">
+            <SatelliteStage
+              currentDataset={activeDataset}
+              currentFeature={currentFeature}
+              currentTime={currentTime}
+              currentMode={currentMode}
+              selectedRegion={selectedRegion}
+              isPlaying={isPlaying}
+              onSelectRegion={handleSelectRegion}
+              onSeek={handleSeek}
+              videoRef={videoRef}
+            />
 
-        {/* 3. Interactive Master Controller & Acoustic Frequency Stage */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-          <div className="lg:col-span-7 flex flex-col">
+            {/* Seamless Attached Master Controller directly beneath the video */}
             <MasterController
               currentDataset={activeDataset}
               isPlaying={isPlaying}
@@ -774,7 +780,9 @@ export default function Home() {
               onToggleLoopMode={() => {}}
             />
           </div>
-          <div className="lg:col-span-5 flex flex-col">
+
+          {/* Right Column: 30% Width (col-span-4) - Stacked Acoustic Telemetry + Explainability */}
+          <div className="lg:col-span-4 flex flex-col gap-2.5 sm:gap-3">
             <AcousticStage
               currentDataset={activeDataset}
               currentFeature={currentFeature}
@@ -784,21 +792,18 @@ export default function Home() {
               activeScaleName={activeScaleName}
               activeInstrument={activeInstrument}
             />
+
+            <ExplainPanel
+              currentDataset={activeDataset}
+              currentFeature={currentFeature}
+              activeNote={activeNote}
+              activeScaleName={activeScaleName}
+            />
           </div>
         </section>
 
-        {/* 4. "Why am I hearing this?" Explainability Panel */}
-        <section>
-          <ExplainPanel
-            currentDataset={activeDataset}
-            currentFeature={currentFeature}
-            activeNote={activeNote}
-            activeScaleName={activeScaleName}
-          />
-        </section>
-
-        {/* 5. Dataset Playlist Shelf */}
-        <section className="pt-2">
+        {/* Bottom Shelf: Dataset Playlist Shelf (Full Width) */}
+        <section className="pt-1">
           <DatasetShelf
             selectedDataset={activeDataset}
             onSelectDataset={handleSelectDataset}
@@ -808,6 +813,8 @@ export default function Home() {
 
       {/* 6. Sticky Accessibility Footer */}
       <AccessibilityFooter ariaAnnouncement={ariaAnnouncement} />
+        </>
+      )}
     </div>
   );
 }

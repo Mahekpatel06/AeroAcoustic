@@ -11,7 +11,7 @@ export const AccessibilityFooter: React.FC<AccessibilityFooterProps> = ({
   ariaAnnouncement,
 }) => {
   return (
-    <footer className="w-full bg-slate-950 border-t border-slate-800/80 px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2 sticky bottom-0 z-50">
+    <footer className="w-full bg-[#06080A]/90 backdrop-blur-xl border-t border-emerald-500/20 px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2 sticky bottom-0 z-50 shadow-[0_-4px_25px_rgba(0,0,0,0.8)]">
       {/* Hidden ARIA Live Region for screen readers */}
       <div
         role="status"
@@ -24,32 +24,32 @@ export const AccessibilityFooter: React.FC<AccessibilityFooterProps> = ({
 
       {/* Visual Status Indicator */}
       <div className="flex items-center gap-2">
-        <Accessibility className="w-4 h-4 text-yellow-400" />
+        <Accessibility className="w-4 h-4 text-emerald-400" />
         <span className="font-mono text-slate-300 text-[11px]">
           WCAG AAA Compliant:
         </span>
-        <span className="text-yellow-400 font-mono text-[11px] truncate max-w-xs md:max-w-md">
+        <span className="text-emerald-400 font-mono text-[11px] truncate max-w-xs md:max-w-md drop-shadow-[0_0_8px_rgba(0,245,155,0.3)]">
           {ariaAnnouncement || "System Ready. Press Space to play sonification."}
         </span>
       </div>
 
       {/* Keyboard Shortcuts Legend */}
       <div className="flex items-center gap-2 text-[11px] font-mono">
-        <Keyboard className="w-3.5 h-3.5 text-sky-400 hidden sm:block" />
+        <Keyboard className="w-3.5 h-3.5 text-emerald-400 hidden sm:block" />
         <span className="hidden sm:inline text-slate-500">Shortcuts:</span>
-        <span className="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+        <span className="px-1.5 py-0.5 rounded bg-black/60 border border-emerald-500/30 text-emerald-300">
           [Space] Play
         </span>
-        <span className="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+        <span className="px-1.5 py-0.5 rounded bg-black/60 border border-emerald-500/30 text-emerald-300">
           [1-4] Dataset
         </span>
-        <span className="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+        <span className="px-1.5 py-0.5 rounded bg-black/60 border border-emerald-500/30 text-emerald-300">
           [← / →] Seek
         </span>
-        <span className="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+        <span className="px-1.5 py-0.5 rounded bg-black/60 border border-emerald-500/30 text-emerald-300">
           [V] Voice
         </span>
-        <span className="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+        <span className="px-1.5 py-0.5 rounded bg-black/60 border border-emerald-500/30 text-emerald-300">
           [M] Mute
         </span>
       </div>

@@ -3,20 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --background: #020617;
+  --background: #06080A;
   --foreground: #f8fafc;
 }
 
 body {
-  background-color: #020617;
+  background-color: #06080A;
   color: #f8fafc;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
+  /* Titanium Laser Mint subtle space telemetry aura */
+  background-image: 
+    radial-gradient(circle at 50% 12%, rgba(0, 245, 155, 0.09) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 15% 70%, rgba(20, 184, 166, 0.05) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='300' viewBox='0 0 1440 300'%3E%3Cpath d='M0 150 C60 110,120 190,180 150 S300 110,360 150 S480 190,540 150 S660 110,720 150 S840 190,900 150 S1020 110,1080 150 S1200 190,1260 150 S1380 110,1440 150' stroke='%2300F59B' stroke-width='1.2' fill='none' opacity='0.08'/%3E%3Cpath d='M0 150 C40 130,80 170,120 150 S200 130,240 150 S320 170,360 150 S440 130,480 150 S560 170,600 150 S680 130,720 150 S800 170,840 150 S920 130,960 150 S1040 170,1080 150 S1160 130,1200 150 S1280 170,1320 150 S1400 130,1440 150' stroke='%2300F59B' stroke-width='0.6' fill='none' opacity='0.05'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center top, center bottom, left center, center 35%;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% auto;
+  background-attachment: fixed;
 }
 
 /* Accessible High-Contrast Focus Ring */
 *:focus-visible {
-  outline: 3px solid #FACC15 !important;
+  outline: 3px solid #00F59B !important;
   outline-offset: 2px !important;
 }
 
@@ -26,14 +36,14 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: #06080A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: rgba(0, 245, 155, 0.25);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: rgba(0, 245, 155, 0.5);
 }
 
 /* Pulsing radar laser animation */
