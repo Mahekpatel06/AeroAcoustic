@@ -2,7 +2,7 @@
 
 import React from "react";
 import { FrameFeature } from "@/types";
-import { HelpCircle, Compass } from "lucide-react";
+import { Compass, Grid, HelpCircle } from "lucide-react";
 
 interface ExplainPanelProps {
   currentDataset?: string;

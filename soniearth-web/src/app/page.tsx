@@ -932,7 +932,9 @@ export default function Home() {
       {/* Main Workspace */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
         {/* 2. Hero Satellite Optical Stage (Clean Projection • High-Precision Timeline Progress Bar) */}
-        <section className="w-full">
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-start">
+          <div className="lg:col-span-8 flex flex-col gap-2.5 sm:gap-3">
+            <section className="w-full">
           <SatelliteStage
             currentDataset={activeDataset}
             currentFeature={currentFeature}
@@ -948,7 +950,7 @@ export default function Home() {
             selectedBasin={selectedBasin}
             onSelectBasin={handleSelectBasin}
           />
-        </section>
+            </section>
 
             {/* Seamless Attached Master Controller directly beneath the video */}
             <MasterController
