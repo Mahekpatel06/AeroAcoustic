@@ -90,13 +90,15 @@ class SoniEarthAudioEngine {
 
       // Master Pipeline in series:
       // duckGain -> muteGain -> masterCompressor -> masterLimiter -> Tone.Destination & analyser
+      Tone.Destination.volume.value = -7.0; // Master 7dB Headroom prevents any digital clipping / distortion
+
       const masterCompressor = new Tone.Compressor({
-        threshold: -12.0,
+        threshold: -16.0,
         ratio: 2.5,
-        attack: 0.015,
-        release: 0.25,
+        attack: 0.02,
+        release: 0.35,
       });
-      this.masterLimiter = new Tone.Limiter(-2.0).toDestination();
+      this.masterLimiter = new Tone.Limiter(-1.5).toDestination();
       masterCompressor.connect(this.masterLimiter);
 
       this.analyser = new Tone.Analyser("fft", 32);
@@ -121,102 +123,113 @@ class SoniEarthAudioEngine {
       // 1. Ambient Baseline Pad Synths (Separated across stereo channels)
       const padConfig = {
         oscillator: { type: "sine" as const },
-        envelope: { attack: 0.08, decay: 0.15, sustain: 0.7, release: 0.3 }
+        envelope: { attack: 0.1, decay: 0.2, sustain: 0.6, release: 0.35 }
       };
       this.padSynthCenter = new Tone.PolySynth(Tone.Synth, padConfig).connect(this.centerPanner);
-      this.padSynthCenter.volume.value = -6;
+      this.padSynthCenter.maxPolyphony = 6;
+      this.padSynthCenter.volume.value = -10.0;
 
       this.padSynthWest = new Tone.PolySynth(Tone.Synth, padConfig).connect(this.westPanner);
-      this.padSynthWest.volume.value = -6;
+      this.padSynthWest.maxPolyphony = 6;
+      this.padSynthWest.volume.value = -10.0;
 
       this.padSynthEast = new Tone.PolySynth(Tone.Synth, padConfig).connect(this.eastPanner);
-      this.padSynthEast.volume.value = -6;
+      this.padSynthEast.maxPolyphony = 6;
+      this.padSynthEast.volume.value = -10.0;
 
       // 2. Crystalline Chimes (Bright bell for Purple increase, Panned Right)
       this.chimeSynth = new Tone.PolySynth(Tone.FMSynth, {
         harmonicity: 2.76,
-        modulationIndex: 2.5,
-        envelope: { attack: 0.01, decay: 0.25, sustain: 0.2, release: 0.45 },
-        modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.4 }
+        modulationIndex: 2.0,
+        envelope: { attack: 0.015, decay: 0.25, sustain: 0.15, release: 0.4 },
+        modulationEnvelope: { attack: 0.015, decay: 0.2, sustain: 0.1, release: 0.35 }
       }).connect(this.chimePanner);
-      this.chimeSynth.volume.value = -4;
+      this.chimeSynth.maxPolyphony = 6;
+      this.chimeSynth.volume.value = -9.0;
 
       // 3. Warm Cello Synth (Mellow triangle for Orange decrease, Panned Left)
       this.celloSynth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "triangle" as const },
-        envelope: { attack: 0.15, decay: 0.3, sustain: 0.6, release: 0.4 }
+        envelope: { attack: 0.15, decay: 0.3, sustain: 0.5, release: 0.4 }
       }).connect(this.celloPanner);
-      this.celloSynth.volume.value = -5;
+      this.celloSynth.maxPolyphony = 6;
+      this.celloSynth.volume.value = -10.0;
 
       // 4. Snappy Marimba Pluck (Fast attack for India rural electrification)
       this.pluckSynth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "triangle8" as const },
-        envelope: { attack: 0.005, decay: 0.22, sustain: 0.1, release: 0.25 }
+        envelope: { attack: 0.01, decay: 0.22, sustain: 0.1, release: 0.25 }
       }).connect(this.pluckPanner);
-      this.pluckSynth.volume.value = -4;
+      this.pluckSynth.maxPolyphony = 6;
+      this.pluckSynth.volume.value = -9.0;
 
       // 5. Crystal Glass Pad (Western Europe LED grid)
       this.glassSynth = new Tone.PolySynth(Tone.AMSynth, {
         harmonicity: 3.01,
         oscillator: { type: "sine" as const },
-        envelope: { attack: 0.12, decay: 0.35, sustain: 0.75, release: 0.5 }
+        envelope: { attack: 0.12, decay: 0.35, sustain: 0.6, release: 0.45 }
       }).connect(this.glassPanner);
-      this.glassSynth.volume.value = -6;
+      this.glassSynth.maxPolyphony = 6;
+      this.glassSynth.volume.value = -11.0;
 
       // 6. Modal Synth (Eastern Mediterranean modal texture)
       this.modalSynth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "sawtooth4" as const },
-        envelope: { attack: 0.06, decay: 0.28, sustain: 0.5, release: 0.4 }
+        envelope: { attack: 0.06, decay: 0.28, sustain: 0.45, release: 0.4 }
       }).connect(this.modalPanner);
-      this.modalSynth.volume.value = -7;
+      this.modalSynth.maxPolyphony = 6;
+      this.modalSynth.volume.value = -11.0;
 
       // 7. ISS Lightning Dynamic Spatial Panner
       this.lightningPanner = new Tone.Panner(0.0).connect(this.duckGain);
 
       // 8. ISS Lightning Strike Synth (High-register metallic FM bell chime)
       this.lightningStrikeSynth = new Tone.PolySynth(Tone.FMSynth, {
-        harmonicity: 3.5,
-        modulationIndex: 3.8,
+        harmonicity: 3.2,
+        modulationIndex: 3.0,
         oscillator: { type: "sine" as const },
-        envelope: { attack: 0.005, decay: 0.28, sustain: 0.05, release: 0.35 },
-        modulationEnvelope: { attack: 0.005, decay: 0.2, sustain: 0.02, release: 0.3 }
+        envelope: { attack: 0.01, decay: 0.28, sustain: 0.05, release: 0.35 },
+        modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0.02, release: 0.3 }
       }).connect(this.lightningPanner);
-      this.lightningStrikeSynth.volume.value = -3;
+      this.lightningStrikeSynth.maxPolyphony = 6;
+      this.lightningStrikeSynth.volume.value = -8.0;
 
       // 9. 55 Hz Ambient Orbital Drone Synth (Low-frequency space station atmosphere on A1)
       this.subDroneSynth = new Tone.Synth({
         oscillator: { type: "triangle" as const },
         envelope: { attack: 1.2, decay: 0.5, sustain: 1.0, release: 1.5 }
       }).connect(this.centerPanner);
-      this.subDroneSynth.volume.value = -14;
+      this.subDroneSynth.volume.value = -18.0;
 
       // 10. Ocean Currents Spatial Panner
       this.oceanPanner = new Tone.Panner(0.0).connect(this.duckGain);
 
       // 11. Ocean Cello Synth (Velvet Acoustic Bowed Cello for Deep / Cold Currents)
-      this.oceanCelloFilter = new Tone.Filter(380, "lowpass", -12).connect(this.oceanPanner);
+      this.oceanCelloFilter = new Tone.Filter(350, "lowpass", -12).connect(this.oceanPanner);
       this.oceanCelloSynth = new Tone.MonoSynth({
-        oscillator: { type: "fatsine", count: 2, spread: 15 },
+        oscillator: { type: "sine" as const },
         filter: { Q: 0.5, type: "lowpass" as const, rolloff: -12 },
-        envelope: { attack: 0.85, decay: 1.6, sustain: 0.85, release: 3.2 },
-        filterEnvelope: { attack: 0.6, decay: 1.2, sustain: 0.8, baseFrequency: 160, octaves: 1.2 }
+        envelope: { attack: 0.85, decay: 1.6, sustain: 0.75, release: 2.8 },
+        filterEnvelope: { attack: 0.6, decay: 1.2, sustain: 0.7, baseFrequency: 140, octaves: 1.0 }
       }).connect(this.oceanCelloFilter);
-      this.oceanCelloSynth.volume.value = -10.0;
+      this.oceanCelloSynth.volume.value = -13.0;
 
       // 12. Ocean String Swell (Warm Sunlit Waters: Silky, Soft, Ambient Harmonic Pad)
-      this.oceanStringFilter = new Tone.Filter(580, "lowpass", -12).connect(this.oceanPanner);
+      this.oceanStringFilter = new Tone.Filter(520, "lowpass", -12).connect(this.oceanPanner);
       this.oceanStringSynth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "sine" as const },
-        envelope: { attack: 1.1, decay: 2.0, sustain: 0.85, release: 3.5 }
+        envelope: { attack: 1.1, decay: 2.0, sustain: 0.75, release: 3.0 }
       }).connect(this.oceanStringFilter);
-      this.oceanStringSynth.volume.value = -11.0;
+      this.oceanStringSynth.maxPolyphony = 6;
+      this.oceanStringSynth.volume.value = -14.0;
 
       // 13. Ocean Ripple Arpeggiator (Subtle Fluid Resonance)
       this.oceanRippleSynth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "sine" as const },
         envelope: { attack: 0.15, decay: 0.4, sustain: 0.1, release: 0.8 }
       }).connect(this.oceanPanner);
-      this.oceanRippleSynth.volume.value = -22;
+      this.oceanRippleSynth.maxPolyphony = 6;
+      this.oceanRippleSynth.volume.value = -25.0;
 
       // 14. Ocean Hydrophone Fluid Wave Swell (Organic Brown Noise with Gentle 0.08 Hz Tidal Breathing)
       this.oceanFilterNode = new Tone.AutoFilter({
@@ -234,14 +247,14 @@ class SoniEarthAudioEngine {
       this.oceanFilterNode.start();
 
       this.oceanNoiseNode = new Tone.Noise("brown").connect(this.oceanFilterNode);
-      this.oceanNoiseNode.volume.value = -19;
+      this.oceanNoiseNode.volume.value = -24.0;
 
       // 15. Infrasonic Abyssal Depth Sub-Drone (Reaches 40 Hz at 1000m with Soft Velvet Warmth)
       this.oceanDepthDrone = new Tone.Synth({
         oscillator: { type: "triangle" as const },
         envelope: { attack: 1.8, decay: 1.2, sustain: 1.0, release: 2.5 }
       }).connect(this.oceanPanner);
-      this.oceanDepthDrone.volume.value = -24;
+      this.oceanDepthDrone.volume.value = -26.0;
 
       // 16. DYAMOND Global CO2 Spatial Panner & Dynamics
       this.co2Panner = new Tone.Panner(0.0).connect(this.duckGain);
@@ -249,17 +262,19 @@ class SoniEarthAudioEngine {
 
       // 17. Atmospheric Greenhouse Baseline Pad Synth (Silky Warm Ambient Pad)
       this.co2DroneSynth = new Tone.PolySynth(Tone.Synth, {
-        oscillator: { type: "fatsine", count: 2, spread: 15 },
-        envelope: { attack: 0.8, decay: 1.2, sustain: 0.75, release: 1.8 }
+        oscillator: { type: "sine" as const },
+        envelope: { attack: 0.8, decay: 1.2, sustain: 0.65, release: 1.8 }
       }).connect(this.co2FilterNode);
-      this.co2DroneSynth.volume.value = -16.0;
+      this.co2DroneSynth.maxPolyphony = 6;
+      this.co2DroneSynth.volume.value = -18.0;
 
       // 18. Plume Burst Alert Chimes (Silky Crystal Bell Chimes)
       this.co2PlumeSynth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "sine" as const },
-        envelope: { attack: 0.02, decay: 0.5, sustain: 0.0, release: 0.8 }
+        envelope: { attack: 0.03, decay: 0.5, sustain: 0.0, release: 0.7 }
       }).connect(this.co2Panner);
-      this.co2PlumeSynth.volume.value = -15.0;
+      this.co2PlumeSynth.maxPolyphony = 6;
+      this.co2PlumeSynth.volume.value = -17.0;
 
       // 19. Global Circulation Jetstream Wind Sweep (Subtle Pink Noise with 0.05 Hz circulation breathing)
       this.co2WindFilter = new Tone.AutoFilter({
@@ -277,7 +292,7 @@ class SoniEarthAudioEngine {
       this.co2WindFilter.start();
 
       this.co2WindNode = new Tone.Noise("pink").connect(this.co2WindFilter);
-      this.co2WindNode.volume.value = -28.0;
+      this.co2WindNode.volume.value = -32.0;
 
       this.isInitialized = true;
       return true;

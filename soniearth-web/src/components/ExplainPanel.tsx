@@ -2,7 +2,7 @@
 
 import React from "react";
 import { FrameFeature } from "@/types";
-import { HelpCircle, Grid, Compass } from "lucide-react";
+import { HelpCircle, Compass } from "lucide-react";
 
 interface ExplainPanelProps {
   currentDataset?: string;
@@ -96,42 +96,6 @@ export const ExplainPanel: React.FC<ExplainPanelProps> = ({
           <p className="text-slate-300 leading-relaxed font-sans">{explanation}</p>
         </div>
       </div>
-
-      {/* Mode A: 3x3 Spatial Grid Notes Telemetry (Night Lights) */}
-      {!isLightning && !isOcean && !isCO2 && phase === "annual_series" && spatialGrid.length === 9 && (
-        <div className="mt-1 pt-3 border-t border-cyan-500/20">
-          <div className="flex items-center gap-1.5 mb-2 text-[10px] font-mono text-cyan-400 uppercase tracking-wider">
-            <Grid className="w-3.5 h-3.5 text-cyan-400" />
-            <span>9-Cell Planetary Spatial Grid Notes (West → Center → East Stereo Sweep)</span>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            {spatialGrid.map((cell, idx) => {
-              const cellKey = cell.regionId || `grid_cell_${cell.row ?? Math.floor(idx / 3)}_${cell.col ?? (idx % 3)}_${idx}`;
-              const cellName = cell.name || `Zone ${idx + 1} (${cell.col === 0 ? "West" : cell.col === 1 ? "Center" : "East"})`;
-              const cellPan = cell.pan ?? (cell.col === 0 ? -0.75 : cell.col === 1 ? 0.0 : 0.75);
-              const cellLuma = ((cell.meanBrightness ?? (cell as any).brightness ?? 0) * 100).toFixed(1);
-              const note = cell.activeNote || "C4";
-
-              return (
-                <div
-                  key={cellKey}
-                  className="bg-black/60 border border-cyan-500/20 rounded-xl p-2 flex items-center justify-between font-mono text-[10px]"
-                >
-                  <div>
-                    <div className="text-slate-300 font-semibold truncate max-w-[140px]">{cellName}</div>
-                    <div className="text-slate-500 text-[9px]">
-                      Pan {cellPan > 0 ? `+${cellPan}` : cellPan} • Luma {cellLuma}%
-                    </div>
-                  </div>
-                  <div className="px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/60 text-cyan-300 font-bold text-xs shadow-sm">
-                    {note}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
 
       {/* ISS Lightning: 3-Horizon Stereo Field Telemetry */}
       {isLightning && spatialGrid.length === 3 && (

@@ -36,6 +36,7 @@ interface SatelliteStageProps {
   isPlaying: boolean;
   onSelectRegion?: (region: string) => void;
   onSeek?: (timeSec: number) => void;
+  onTogglePlay?: () => void;
   videoRef: React.Ref<HTMLVideoElement>;
   depthMeters?: number;
   onChangeDepth?: (depth: number) => void;
@@ -107,6 +108,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
   isPlaying,
   onSelectRegion,
   onSeek,
+  onTogglePlay,
   videoRef,
   depthMeters = 0,
   onChangeDepth,
@@ -543,8 +545,8 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
         </div>
       )}
 
-      {/* 3. MAIN SATELLITE CANVAS */}
-      <div className="relative w-full h-[340px] sm:h-[400px] md:h-[460px] lg:h-[500px] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800/90 shadow-2xl flex items-center justify-center">
+      {/* 3. MAIN SATELLITE CANVAS - Natural 16:9 Cinema-Fit (Zero Side Space, Zero Cut) */}
+      <div className="relative w-full aspect-video bg-[#04070C] rounded-2xl overflow-hidden border border-cyan-500/25 shadow-2xl flex items-center justify-center">
         {/* IF ISS LIGHTNING: Dedicated NASA Optical Flight Deck Video */}
         {isLightning ? (
           <div
@@ -983,41 +985,66 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
         </div>
       </div>
 
-      {/* 4. SCIENTIFIC PLAYBACK TIMELINE & PROGRESS SCRUBBER BAR */}
-      <div className="mt-2.5 pt-2.5 border-t border-cyan-500/20 flex flex-col gap-2">
-        {/* Interactive Clickable Scrubber Track with glowing thumb/head */}
+      {/* 4. YOUTUBE-STYLE SCIENTIFIC PLAYBACK TIMELINE & INTERACTIVE SCRUBBER */}
+      <div className="mt-2.5 pt-2 border-t border-cyan-500/20 flex flex-col gap-2">
+        {/* YouTube-Style Scrubber Bar with Glowing Knob */}
         <div
           onClick={handleTimelineClick}
-          className="relative w-full h-2.5 bg-black/80 rounded-full overflow-hidden border border-cyan-500/30 cursor-pointer group hover:h-3 transition-all"
-          title="Click to seek along timeline"
+          className="relative w-full py-2 cursor-pointer group select-none"
+          title="Click or drag to seek along timeline"
         >
-          {/* Active Elapsed Fill with Electric Cyan Glow */}
+          {/* Background rail */}
+          <div className="w-full h-1.5 bg-slate-950 group-hover:h-2 rounded-full overflow-hidden border border-cyan-500/30 transition-all">
+            {/* Active Elapsed Fill with Electric Cyan Glow */}
+            <div
+              className="h-full bg-gradient-to-r from-cyan-500 via-teal-400 to-[#00F2FE] shadow-[0_0_14px_rgba(6,182,212,0.8)] transition-all duration-75"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+
+          {/* YouTube-Style Glowing Scrubber Thumb Knob */}
           <div
-            className="h-full bg-gradient-to-r from-cyan-500 via-teal-400 to-[#00F2FE] shadow-[0_0_15px_rgba(6,182,212,0.8)] transition-all duration-75"
-            style={{ width: `${progressPercent}%` }}
+            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-cyan-300 border-2 border-slate-950 shadow-[0_0_12px_#00F2FE] group-hover:scale-125 transition-transform pointer-events-none"
+            style={{ left: `${progressPercent}%` }}
           />
         </div>
 
         {/* Timeline Status Display */}
-        <div className="flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400 gap-2">
-          {/* Left: Elapsed Time */}
+        <div className="flex flex-wrap items-center justify-between gap-2.5 text-xs font-mono">
+          {/* Left: YouTube-Style Time Elapsed / Duration Badge + Live State Indicator */}
           <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1 font-bold text-white bg-black/80 px-2 py-0.5 rounded border border-cyan-500/30 shadow-inner">
-              <Clock className="w-3 h-3 text-cyan-400" />
+            {/* Time Elapsed / Duration Badge */}
+            <div className="flex items-center gap-1.5 font-bold text-white bg-black/80 px-2.5 py-1 rounded-xl border border-cyan-500/30 shadow-inner text-[11px]">
+              <Clock className="w-3.5 h-3.5 text-cyan-400" />
               <span>{formatTime(currentTime)}</span>
-            </span>
-            <span className="text-slate-600">/</span>
-            <span className="text-slate-400 font-semibold">{formatTime(maxDuration)}</span>
+              <span className="text-slate-600">/</span>
+              <span className="text-slate-400">{formatTime(maxDuration)}</span>
+            </div>
 
+            {/* Active Playing / Paused indicator */}
+            <span
+              className={`flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-xl border transition-all ${
+                isPlaying
+                  ? "bg-cyan-950/80 text-cyan-300 border-cyan-500/80 shadow-[0_0_10px_rgba(6,182,212,0.3)] animate-pulse"
+                  : "bg-black/60 text-slate-400 border-cyan-500/20"
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${isPlaying ? "bg-cyan-400 animate-ping" : "bg-slate-500"}`} />
+              <span>{isPlaying ? "LIVE PLAYING" : "PAUSED"}</span>
+            </span>
+          </div>
+
+          {/* Right: Dynamic Telemetry & Progress Readout */}
+          <div className="flex items-center gap-2">
             {/* In Lightning Mode: Dynamic Optical Strike Indicator */}
             {isLightning ? (
               currentFeature?.isStrike ? (
-                <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/80 border border-cyan-500/80 px-2.5 py-0.5 rounded text-[10px] animate-pulse shadow-[0_0_10px_rgba(6,182,212,0.5)]">
+                <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/80 border border-cyan-500/80 px-2.5 py-1 rounded-xl text-[10px] animate-pulse shadow-[0_0_10px_rgba(6,182,212,0.5)]">
                   <Zap className="w-3 h-3 text-cyan-300 fill-cyan-300" />
                   <span>BURST: {currentFeature.strikeEnergyMicroJoules} µJ</span>
                 </span>
               ) : (
-                <span className="flex items-center gap-1 text-cyan-400/80 bg-black/60 border border-cyan-500/20 px-2 py-0.5 rounded text-[10px]">
+                <span className="flex items-center gap-1 text-cyan-400/80 bg-black/60 border border-cyan-500/20 px-2 py-1 rounded-xl text-[10px]">
                   <Zap className="w-3 h-3 text-cyan-400/50" />
                   <span>55 Hz Sub-Bass Orbit</span>
                 </span>
@@ -1026,7 +1053,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
             {/* In CO2 Mode: Dynamic Plume Readout */}
             {isCO2 && currentFeature?.co2Ppm && (
-              <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/80 border border-cyan-500/80 px-2.5 py-0.5 rounded text-[10px] shadow-[0_0_8px_rgba(6,182,212,0.2)]">
+              <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/80 border border-cyan-500/80 px-2.5 py-1 rounded-xl text-[10px] shadow-[0_0_8px_rgba(6,182,212,0.2)]">
                 <Wind className="w-3 h-3 text-cyan-400" />
                 <span>{currentFeature.co2Ppm.toFixed(1)} ppm</span>
               </span>
@@ -1034,7 +1061,7 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
             {/* In Mode A: Current Calendar Year Indicator */}
             {!isLightning && !isOcean && !isCO2 && currentMode === "annual" && (
-              <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/60 border border-cyan-500/40 px-2 py-0.5 rounded text-[10px] shadow-[0_0_8px_rgba(6,182,212,0.15)]">
+              <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/60 border border-cyan-500/40 px-2.5 py-1 rounded-xl text-[10px] shadow-[0_0_8px_rgba(6,182,212,0.15)]">
                 <Calendar className="w-3 h-3" />
                 <span>Year {currentYear}</span>
                 <span className="text-cyan-500/70">({Math.min(12, Math.floor(currentTime) + 1)}/12)</span>
@@ -1043,30 +1070,15 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
 
             {/* In Mode C: Target Region Name */}
             {!isLightning && !isOcean && !isCO2 && currentMode === "regional" && (
-              <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/60 border border-cyan-500/40 px-2 py-0.5 rounded text-[10px]">
+              <span className="flex items-center gap-1 text-cyan-300 font-bold bg-cyan-950/60 border border-cyan-500/40 px-2.5 py-1 rounded-xl text-[10px]">
                 <MapPin className="w-3 h-3" />
                 <span>{selectedRegion}</span>
               </span>
             )}
-          </div>
 
-          {/* Right: Progress Percentage & Status */}
-          <div className="flex items-center gap-2.5">
-            <span className="text-[10px] text-slate-400">
-              Progress: <strong className="text-cyan-300">{progressPercent.toFixed(0)}%</strong>
-            </span>
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-700"></span>
-            <span className="text-[10px] text-slate-400 flex items-center gap-1">
-              <Activity className="w-3 h-3 text-cyan-400" />
-              {isPlaying ? (
-                progressPercent >= 99 ? (
-                  <span className="text-cyan-300 font-bold">Looping...</span>
-                ) : (
-                  <span className="text-cyan-400">Playing</span>
-                )
-              ) : (
-                <span className="text-slate-500">Paused</span>
-              )}
+            {/* Progress Percent */}
+            <span className="text-[11px] font-bold text-slate-300 bg-black/60 border border-cyan-500/20 px-2.5 py-1 rounded-xl">
+              <strong className="text-cyan-300">{progressPercent.toFixed(0)}%</strong>
             </span>
           </div>
         </div>

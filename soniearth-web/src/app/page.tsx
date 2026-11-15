@@ -136,6 +136,7 @@ export default function Home() {
   const lastDroneTriggerRef = useRef<number>(-1);
   const lastRegionalTriggerRef = useRef<number>(-1);
   const lastStrikeTimestampRef = useRef<number>(0);
+  const lastDynamicsUpdateRef = useRef<number>(0);
 
   const activeDatasetRef = useRef<string>("night-lights");
   const depthMetersRef = useRef<number>(0);
@@ -273,9 +274,9 @@ export default function Home() {
             setActiveFreq(strikeFreq);
             setActiveInstrument(`FM Lightning Chime (${strikeEnergy} µJ)`);
 
-            // Dynamically scale strike velocity based on calibrated optical flash energy (0.65 to 1.0)
+            // Dynamically scale strike velocity based on calibrated optical flash energy (0.45 to 0.65)
             const normEnergy = Math.min(1.0, Math.max(0.0, (strikeEnergy - 180) / 1320));
-            const strikeVelocity = 0.65 + 0.35 * normEnergy;
+            const strikeVelocity = 0.45 + 0.20 * normEnergy;
 
             // Trigger FM metallic chime attack with spatial stereo panning
             audioEngine.triggerLightningStrike(strikeNote, strikeVelocity, strikePan);
@@ -320,10 +321,13 @@ export default function Home() {
           const depthFactor = Math.exp(-depth / 350.0);
           const sst = Number((baseSST * depthFactor + 2.0).toFixed(1));
 
-          // Real-time continuous hydrodynamic flow modulation (swells with video currents)
-          audioEngine.updateOceanCurrentDynamics(kts, sst, pan);
-
+          // Throttled continuous hydrodynamic flow modulation (prevents audio zipper noise)
           const nowMs = Date.now();
+          if (nowMs - lastDynamicsUpdateRef.current >= 100) {
+            lastDynamicsUpdateRef.current = nowMs;
+            audioEngine.updateOceanCurrentDynamics(kts, sst, pan);
+          }
+
           // Breathe at soft, spacious 2800ms cadence (or instant on seek/click) so notes crossfade like ocean tides
           if (nowMs - lastRegionalTriggerRef.current >= 2800 || forceInstant) {
             lastRegionalTriggerRef.current = nowMs;
@@ -402,10 +406,13 @@ export default function Home() {
               : `${pitchLevel} Pitch Pad (${feat.dominantSourceRegion || "Circulation"})`
           );
 
-          // Real-time continuous stereo and filter cutoff tracking every frame
-          audioEngine.updateCO2Dynamics(pan, tension);
-
+          // Throttled continuous stereo and filter cutoff tracking (prevents audio zipper noise)
           const nowMs = Date.now();
+          if (nowMs - lastDynamicsUpdateRef.current >= 100) {
+            lastDynamicsUpdateRef.current = nowMs;
+            audioEngine.updateCO2Dynamics(pan, tension);
+          }
+
           // Breathe at 1200ms cadence for continuous pad modulation (or instant on seek/click)
           if (nowMs - lastRegionalTriggerRef.current >= 1200 || forceInstant) {
             lastRegionalTriggerRef.current = nowMs;
@@ -446,31 +453,31 @@ export default function Home() {
           setActiveScaleName(`C Major Lydian / Pentatonic (Luma ${((feat.globalMeanBrightness ?? 0.0525) * 100).toFixed(2)}%)`);
           setActiveInstrument("Sine Pad + 3-Zone Longitudinal Sweep");
 
-          const velocity = Math.min(0.9, Math.max(0.5, 0.6 + 0.3 * norm));
+          const velocity = Math.min(0.58, Math.max(0.35, 0.38 + 0.15 * norm));
 
           // Sustained root and fifth harmonic chord
           audioEngine.triggerNote(root.note, 0.9, velocity, 0.0, "sine_pad");
           setTimeout(() => {
-            audioEngine.triggerNote(fifth.note, 0.8, velocity * 0.85, 0.0, "sine_pad");
+            audioEngine.triggerNote(fifth.note, 0.8, velocity * 0.75, 0.0, "sine_pad");
           }, 60);
 
           // Spatial Stereo Accents locked to laser sweep:
           setTimeout(() => {
             const westCell = feat.spatialGrid?.find((c) => c.pan < -0.3);
             const westNote = westCell?.activeNote || root.note;
-            audioEngine.triggerNote(westNote, 0.45, velocity * 0.75, -0.75, "sine_pad");
+            audioEngine.triggerNote(westNote, 0.45, velocity * 0.65, -0.75, "sine_pad");
           }, 150);
 
           setTimeout(() => {
             const centerCell = feat.spatialGrid?.find((c) => Math.abs(c.pan) < 0.2);
             const centerNote = centerCell?.activeNote || fifth.note;
-            audioEngine.triggerNote(centerNote, 0.45, velocity * 0.75, 0.0, "sine_pad");
+            audioEngine.triggerNote(centerNote, 0.45, velocity * 0.65, 0.0, "sine_pad");
           }, 450);
 
           setTimeout(() => {
             const eastCell = feat.spatialGrid?.find((c) => c.pan > 0.3);
             const eastNote = eastCell?.activeNote || root.note;
-            audioEngine.triggerNote(eastNote, 0.45, velocity * 0.75, 0.75, "sine_pad");
+            audioEngine.triggerNote(eastNote, 0.45, velocity * 0.65, 0.75, "sine_pad");
           }, 750);
         }
       }
@@ -486,7 +493,7 @@ export default function Home() {
         const droneSlot = Math.floor(timeSec / 2.4);
         if (forceInstant || droneSlot !== lastDroneTriggerRef.current) {
           lastDroneTriggerRef.current = droneSlot;
-          audioEngine.triggerNote("D3", 1.8, 0.55, 0.0, "sine_pad");
+          audioEngine.triggerNote("D3", 1.8, 0.45, 0.0, "sine_pad");
           setActiveNote("D3");
           setActiveFreq(FREQ_MAP["D3"]);
         }
@@ -496,7 +503,7 @@ export default function Home() {
           const westSlot = Math.floor(timeSec / 1.2);
           if (forceInstant || westSlot !== lastRegionalTriggerRef.current) {
             lastRegionalTriggerRef.current = westSlot;
-            audioEngine.triggerNote("G3", 0.6, 0.65, -0.65, "glass_pad");
+            audioEngine.triggerNote("G3", 0.6, 0.48, -0.65, "glass_pad");
             setActiveNote("G3");
             setActiveFreq(FREQ_MAP["G3"]);
           }
@@ -508,9 +515,9 @@ export default function Home() {
           const celloSlot = Math.floor(timeSec / 1.1);
           if (forceInstant || celloSlot !== lastCelloTriggerRef.current) {
             lastCelloTriggerRef.current = celloSlot;
-            audioEngine.triggerNote("A2", 0.9, 0.9, -0.3, "warm_cello_synth");
+            audioEngine.triggerNote("A2", 0.9, 0.52, -0.3, "warm_cello_synth");
             setTimeout(() => {
-              audioEngine.triggerNote("E3", 0.8, 0.85, -0.2, "warm_cello_synth");
+              audioEngine.triggerNote("E3", 0.8, 0.46, -0.2, "warm_cello_synth");
             }, 180);
             setActiveNote("A2");
             setActiveFreq(FREQ_MAP["A2"]);
@@ -523,9 +530,9 @@ export default function Home() {
           const chimeSlot = Math.floor(timeSec / 0.85);
           if (forceInstant || chimeSlot !== lastChimeTriggerRef.current) {
             lastChimeTriggerRef.current = chimeSlot;
-            audioEngine.triggerNote("A4", 0.45, 0.9, 0.65, "crystalline_chime_bell");
+            audioEngine.triggerNote("A4", 0.45, 0.52, 0.65, "crystalline_chime_bell");
             setTimeout(() => {
-              audioEngine.triggerNote("C5", 0.4, 0.95, 0.75, "crystalline_chime_bell");
+              audioEngine.triggerNote("C5", 0.4, 0.48, 0.75, "crystalline_chime_bell");
             }, 140);
             setActiveNote("C5");
             setActiveFreq(FREQ_MAP["C5"]);
@@ -549,27 +556,27 @@ export default function Home() {
           lastRegionalTriggerRef.current = regionSlot;
 
           if (selectedRegion === "India") {
-            audioEngine.triggerNote("E4", 0.4, 0.85, profile.pan, "marimba_pluck");
+            audioEngine.triggerNote("E4", 0.4, 0.50, profile.pan, "marimba_pluck");
             setTimeout(() => {
-              audioEngine.triggerNote("B4", 0.45, 0.9, profile.pan + 0.1, "marimba_pluck");
+              audioEngine.triggerNote("B4", 0.45, 0.46, profile.pan + 0.1, "marimba_pluck");
             }, 160);
           } else if (selectedRegion === "Ukraine") {
-            audioEngine.triggerNote("E3", 0.75, 0.8, profile.pan, "warm_cello_synth");
+            audioEngine.triggerNote("E3", 0.75, 0.50, profile.pan, "warm_cello_synth");
             setTimeout(() => {
-              audioEngine.triggerNote("A2", 0.9, 0.85, profile.pan - 0.1, "warm_cello_synth");
+              audioEngine.triggerNote("A2", 0.9, 0.46, profile.pan - 0.1, "warm_cello_synth");
             }, 220);
           } else if (selectedRegion === "Western Europe") {
-            audioEngine.triggerNote("G4", 0.9, 0.75, profile.pan, "glass_pad");
+            audioEngine.triggerNote("G4", 0.9, 0.48, profile.pan, "glass_pad");
             setTimeout(() => {
-              audioEngine.triggerNote("D4", 0.85, 0.7, profile.pan - 0.1, "glass_pad");
+              audioEngine.triggerNote("D4", 0.85, 0.44, profile.pan - 0.1, "glass_pad");
             }, 200);
           } else if (selectedRegion === "Eastern Mediterranean") {
-            audioEngine.triggerNote("D3", 0.7, 0.8, profile.pan, "modal_synth");
+            audioEngine.triggerNote("D3", 0.7, 0.50, profile.pan, "modal_synth");
             setTimeout(() => {
-              audioEngine.triggerNote("F#3", 0.75, 0.85, profile.pan + 0.1, "modal_synth");
+              audioEngine.triggerNote("F#3", 0.75, 0.46, profile.pan + 0.1, "modal_synth");
             }, 180);
           } else {
-            audioEngine.triggerNote("C4", 0.8, 0.75, 0.0, "sine_pad");
+            audioEngine.triggerNote("C4", 0.8, 0.48, 0.0, "sine_pad");
           }
         }
       }
@@ -979,28 +986,28 @@ export default function Home() {
             onGoHome={() => setHasEntered(false)}
           />
 
-          {/* Main Workspace */}
-          <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
-            {/* 2. Hero Satellite Optical Stage (Clean Projection • High-Precision Timeline Progress Bar) */}
+          {/* Main Workspace - Ultra-Responsive Viewport Optimized Layout */}
+          <main className="flex-1 max-w-[1700px] w-full mx-auto p-2.5 sm:p-3 md:p-4 flex flex-col gap-3 sm:gap-4">
+            {/* Top Split: Left 70% (Cinematic Video Stage + Attached Controller), Right 30% (Acoustic Stage + Explain Panel) */}
             <section className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-start">
+              {/* Left Column: 70% Width (col-span-8 in 12-col grid) */}
               <div className="lg:col-span-8 flex flex-col gap-2.5 sm:gap-3">
-                <section className="w-full">
-                  <SatelliteStage
-                    currentDataset={activeDataset}
-                    currentFeature={currentFeature}
-                    currentTime={currentTime}
-                    currentMode={currentMode}
-                    selectedRegion={selectedRegion}
-                    isPlaying={isPlaying}
-                    onSelectRegion={handleSelectRegion}
-                    onSeek={handleSeek}
-                    videoRef={videoRef}
-                    depthMeters={depthMeters}
-                    onChangeDepth={handleChangeDepth}
-                    selectedBasin={selectedBasin}
-                    onSelectBasin={handleSelectBasin}
-                  />
-                </section>
+                <SatelliteStage
+                  currentDataset={activeDataset}
+                  currentFeature={currentFeature}
+                  currentTime={currentTime}
+                  currentMode={currentMode}
+                  selectedRegion={selectedRegion}
+                  isPlaying={isPlaying}
+                  onSelectRegion={handleSelectRegion}
+                  onSeek={handleSeek}
+                  onTogglePlay={handleTogglePlay}
+                  videoRef={videoRef}
+                  depthMeters={depthMeters}
+                  onChangeDepth={handleChangeDepth}
+                  selectedBasin={selectedBasin}
+                  onSelectBasin={handleSelectBasin}
+                />
 
                 {/* Seamless Attached Master Controller directly beneath the video */}
                 <MasterController
