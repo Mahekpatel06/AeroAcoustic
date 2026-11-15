@@ -119,7 +119,7 @@ export default function Home() {
   const [activeScaleName, setActiveScaleName] = useState<string>("C Major Lydian / Pentatonic");
   const [activeInstrument, setActiveInstrument] = useState<string>("Ambient Sine Pad (Annual Series)");
   const [ariaAnnouncement, setAriaAnnouncement] = useState<string>(
-    "SoniEarth initialized. Press Space to play."
+    "SoniSphere initialized. Press Space to play."
   );
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -242,10 +242,11 @@ export default function Home() {
 
   // 2. Play Sound for Current Mode with Dedicated Sonification (Strictly when isPlaying is true)
   const playModeSound = useCallback(
-    async (timeSec: number, forceInstant = false) => {
+    (timeSec: number, forceInstant = false) => {
       // Never trigger sound if playback is stopped
       if (!isPlayingRef.current && !forceInstant) return;
-      await audioEngine.initialize();
+      // Synchronous ready check — zero async overhead on animation frames
+      if (!audioEngine.isReady()) return;
 
       // ==========================================
       // ISS LIGHTNING SONIFICATION PIPELINE
@@ -262,7 +263,7 @@ export default function Home() {
 
         if (feat && feat.isStrike) {
           const nowMs = Date.now();
-          if (nowMs - lastStrikeTimestampRef.current >= 180 || forceInstant) {
+          if (nowMs - lastStrikeTimestampRef.current >= 240 || forceInstant) {
             lastStrikeTimestampRef.current = nowMs;
 
             const strikeNote = feat.activeNote || "E5";
@@ -272,13 +273,13 @@ export default function Home() {
 
             setActiveNote(strikeNote);
             setActiveFreq(strikeFreq);
-            setActiveInstrument(`FM Lightning Chime (${strikeEnergy} µJ)`);
+            setActiveInstrument(`Celestial Lightning Chime (${strikeEnergy} µJ)`);
 
-            // Dynamically scale strike velocity based on calibrated optical flash energy (0.45 to 0.65)
+            // Dynamically scale strike velocity (0.55 to 0.80) for clear laptop speaker presence
             const normEnergy = Math.min(1.0, Math.max(0.0, (strikeEnergy - 180) / 1320));
-            const strikeVelocity = 0.45 + 0.20 * normEnergy;
+            const strikeVelocity = 0.55 + 0.25 * normEnergy;
 
-            // Trigger FM metallic chime attack with spatial stereo panning
+            // Trigger pure crystalline chime attack with spatial stereo panning
             audioEngine.triggerLightningStrike(strikeNote, strikeVelocity, strikePan);
 
             // Deaf-Blind Accessibility: Web Vibration API 80ms pulse
@@ -321,18 +322,17 @@ export default function Home() {
           const depthFactor = Math.exp(-depth / 350.0);
           const sst = Number((baseSST * depthFactor + 2.0).toFixed(1));
 
-          // Throttled continuous hydrodynamic flow modulation (prevents audio zipper noise)
+          // Throttled continuous hydrodynamic flow modulation
           const nowMs = Date.now();
-          if (nowMs - lastDynamicsUpdateRef.current >= 100) {
+          if (nowMs - lastDynamicsUpdateRef.current >= 150) {
             lastDynamicsUpdateRef.current = nowMs;
             audioEngine.updateOceanCurrentDynamics(kts, sst, pan);
           }
 
-          // Breathe at soft, spacious 2800ms cadence (or instant on seek/click) so notes crossfade like ocean tides
-          if (nowMs - lastRegionalTriggerRef.current >= 2800 || forceInstant) {
+          // Breathe at soft, spacious 2400ms cadence with seamless crossfades
+          if (nowMs - lastRegionalTriggerRef.current >= 2400 || forceInstant) {
             lastRegionalTriggerRef.current = nowMs;
 
-            // Authentic Oceanic Modal Harmony
             let note = feat.activeNote || "E3";
             let freq = feat.frequencyHz || 164.81;
 
@@ -370,8 +370,8 @@ export default function Home() {
             setActiveNote(note);
             setActiveFreq(freq);
 
-            // Velvety soft velocity (0.48) with slow 0.85s attack and 3.2s release
-            audioEngine.triggerOceanCurrent(note, sst, pan, 0.48);
+            // Resonant velvety velocity (0.65) with smooth 0.75s attack and 2.8s release
+            audioEngine.triggerOceanCurrent(note, sst, pan, 0.65);
           }
         }
         return;
@@ -406,24 +406,24 @@ export default function Home() {
               : `${pitchLevel} Pitch Pad (${feat.dominantSourceRegion || "Circulation"})`
           );
 
-          // Throttled continuous stereo and filter cutoff tracking (prevents audio zipper noise)
+          // Throttled continuous stereo and filter cutoff tracking
           const nowMs = Date.now();
-          if (nowMs - lastDynamicsUpdateRef.current >= 100) {
+          if (nowMs - lastDynamicsUpdateRef.current >= 150) {
             lastDynamicsUpdateRef.current = nowMs;
             audioEngine.updateCO2Dynamics(pan, tension);
           }
 
-          // Breathe at 1200ms cadence for continuous pad modulation (or instant on seek/click)
-          if (nowMs - lastRegionalTriggerRef.current >= 1200 || forceInstant) {
+          // Breathe at 1400ms cadence for continuous silky pad modulation
+          if (nowMs - lastRegionalTriggerRef.current >= 1400 || forceInstant) {
             lastRegionalTriggerRef.current = nowMs;
-            audioEngine.triggerCO2Atmosphere(note, ppm, tension, pan, 0.46);
+            audioEngine.triggerCO2Atmosphere(note, ppm, tension, pan, 0.62);
           }
 
-          // Transient Plume Burst Warning Chime (paced at >= 1200ms to eliminate polyphony distortion)
+          // Transient Plume Burst Warning Chime (soft crystalline bell)
           if (feat.isPlumeBurst) {
-            if (nowMs - lastStrikeTimestampRef.current >= 1200) {
+            if (nowMs - lastStrikeTimestampRef.current >= 1400) {
               lastStrikeTimestampRef.current = nowMs;
-              audioEngine.triggerCO2PlumeBurst(note, pan, 0.40);
+              audioEngine.triggerCO2PlumeBurst(note, pan, 0.52);
             }
           }
         }
@@ -453,32 +453,26 @@ export default function Home() {
           setActiveScaleName(`C Major Lydian / Pentatonic (Luma ${((feat.globalMeanBrightness ?? 0.0525) * 100).toFixed(2)}%)`);
           setActiveInstrument("Sine Pad + 3-Zone Longitudinal Sweep");
 
-          const velocity = Math.min(0.58, Math.max(0.35, 0.38 + 0.15 * norm));
+          const velocity = Math.min(0.78, Math.max(0.48, 0.50 + 0.20 * norm));
 
-          // Sustained root and fifth harmonic chord
-          audioEngine.triggerNote(root.note, 0.9, velocity, 0.0, "sine_pad");
+          // Sustained root and fifth harmonic chord with long 1.3s release so music never cuts out
+          audioEngine.triggerNote(root.note, 1.3, velocity, 0.0, "sine_pad");
           setTimeout(() => {
-            audioEngine.triggerNote(fifth.note, 0.8, velocity * 0.75, 0.0, "sine_pad");
-          }, 60);
+            audioEngine.triggerNote(fifth.note, 1.1, velocity * 0.75, 0.0, "sine_pad");
+          }, 120);
 
-          // Spatial Stereo Accents locked to laser sweep:
+          // Spatial Stereo Accents spaced gracefully across the second:
           setTimeout(() => {
             const westCell = feat.spatialGrid?.find((c) => c.pan < -0.3);
             const westNote = westCell?.activeNote || root.note;
-            audioEngine.triggerNote(westNote, 0.45, velocity * 0.65, -0.75, "sine_pad");
-          }, 150);
-
-          setTimeout(() => {
-            const centerCell = feat.spatialGrid?.find((c) => Math.abs(c.pan) < 0.2);
-            const centerNote = centerCell?.activeNote || fifth.note;
-            audioEngine.triggerNote(centerNote, 0.45, velocity * 0.65, 0.0, "sine_pad");
-          }, 450);
+            audioEngine.triggerNote(westNote, 0.75, velocity * 0.70, -0.75, "sine_pad");
+          }, 350);
 
           setTimeout(() => {
             const eastCell = feat.spatialGrid?.find((c) => c.pan > 0.3);
             const eastNote = eastCell?.activeNote || root.note;
-            audioEngine.triggerNote(eastNote, 0.45, velocity * 0.65, 0.75, "sine_pad");
-          }, 750);
+            audioEngine.triggerNote(eastNote, 0.75, velocity * 0.70, 0.75, "sine_pad");
+          }, 700);
         }
       }
 
@@ -493,47 +487,45 @@ export default function Home() {
         const droneSlot = Math.floor(timeSec / 2.4);
         if (forceInstant || droneSlot !== lastDroneTriggerRef.current) {
           lastDroneTriggerRef.current = droneSlot;
-          audioEngine.triggerNote("D3", 1.8, 0.45, 0.0, "sine_pad");
+          audioEngine.triggerNote("D3", 2.2, 0.60, 0.0, "sine_pad");
           setActiveNote("D3");
           setActiveFreq(FREQ_MAP["D3"]);
         }
 
-        // 2. West Channel Sweep (Americas & Atlantic: t = 1.0s to 3.8s)
+        // 2. West Channel Sweep (Americas & Atlantic: t = 1.2s to 3.8s)
         if (timeSec >= 1.2 && timeSec < 3.8) {
           const westSlot = Math.floor(timeSec / 1.2);
           if (forceInstant || westSlot !== lastRegionalTriggerRef.current) {
             lastRegionalTriggerRef.current = westSlot;
-            audioEngine.triggerNote("G3", 0.6, 0.48, -0.65, "glass_pad");
+            audioEngine.triggerNote("G3", 0.9, 0.62, -0.65, "glass_pad");
             setActiveNote("G3");
             setActiveFreq(FREQ_MAP["G3"]);
           }
         }
 
         // 3. Center Channel Sweep (Orange Blackout Corridors: Ukraine, Syria, Levant: t = 4.8s to 7.4s)
-        // Passes longitude 20E to 45E directly over the war blackout corridors
         if (timeSec >= 4.8 && timeSec < 7.4) {
           const celloSlot = Math.floor(timeSec / 1.1);
           if (forceInstant || celloSlot !== lastCelloTriggerRef.current) {
             lastCelloTriggerRef.current = celloSlot;
-            audioEngine.triggerNote("A2", 0.9, 0.52, -0.3, "warm_cello_synth");
+            audioEngine.triggerNote("A2", 1.2, 0.64, -0.3, "warm_cello_synth");
             setTimeout(() => {
-              audioEngine.triggerNote("E3", 0.8, 0.46, -0.2, "warm_cello_synth");
-            }, 180);
+              audioEngine.triggerNote("E3", 1.0, 0.58, -0.2, "warm_cello_synth");
+            }, 200);
             setActiveNote("A2");
             setActiveFreq(FREQ_MAP["A2"]);
           }
         }
 
         // 4. East Channel Sweep (Purple Electrification Corridors: South Asia, India, East Asia: t = 7.8s to 11.5s)
-        // Passes longitude 70E to 125E directly over India's rural electrification & East Asian expansion
         if (timeSec >= 7.8 && timeSec <= 11.5) {
           const chimeSlot = Math.floor(timeSec / 0.85);
           if (forceInstant || chimeSlot !== lastChimeTriggerRef.current) {
             lastChimeTriggerRef.current = chimeSlot;
-            audioEngine.triggerNote("A4", 0.45, 0.52, 0.65, "crystalline_chime_bell");
+            audioEngine.triggerNote("A4", 0.7, 0.62, 0.65, "crystalline_chime_bell");
             setTimeout(() => {
-              audioEngine.triggerNote("C5", 0.4, 0.48, 0.75, "crystalline_chime_bell");
-            }, 140);
+              audioEngine.triggerNote("C5", 0.6, 0.58, 0.75, "crystalline_chime_bell");
+            }, 160);
             setActiveNote("C5");
             setActiveFreq(FREQ_MAP["C5"]);
           }
@@ -556,27 +548,27 @@ export default function Home() {
           lastRegionalTriggerRef.current = regionSlot;
 
           if (selectedRegion === "India") {
-            audioEngine.triggerNote("E4", 0.4, 0.50, profile.pan, "marimba_pluck");
+            audioEngine.triggerNote("E4", 0.5, 0.65, profile.pan, "marimba_pluck");
             setTimeout(() => {
-              audioEngine.triggerNote("B4", 0.45, 0.46, profile.pan + 0.1, "marimba_pluck");
-            }, 160);
-          } else if (selectedRegion === "Ukraine") {
-            audioEngine.triggerNote("E3", 0.75, 0.50, profile.pan, "warm_cello_synth");
-            setTimeout(() => {
-              audioEngine.triggerNote("A2", 0.9, 0.46, profile.pan - 0.1, "warm_cello_synth");
-            }, 220);
-          } else if (selectedRegion === "Western Europe") {
-            audioEngine.triggerNote("G4", 0.9, 0.48, profile.pan, "glass_pad");
-            setTimeout(() => {
-              audioEngine.triggerNote("D4", 0.85, 0.44, profile.pan - 0.1, "glass_pad");
-            }, 200);
-          } else if (selectedRegion === "Eastern Mediterranean") {
-            audioEngine.triggerNote("D3", 0.7, 0.50, profile.pan, "modal_synth");
-            setTimeout(() => {
-              audioEngine.triggerNote("F#3", 0.75, 0.46, profile.pan + 0.1, "modal_synth");
+              audioEngine.triggerNote("B4", 0.5, 0.60, profile.pan + 0.1, "marimba_pluck");
             }, 180);
+          } else if (selectedRegion === "Ukraine") {
+            audioEngine.triggerNote("E3", 1.2, 0.65, profile.pan, "warm_cello_synth");
+            setTimeout(() => {
+              audioEngine.triggerNote("A2", 1.4, 0.60, profile.pan - 0.1, "warm_cello_synth");
+            }, 240);
+          } else if (selectedRegion === "Western Europe") {
+            audioEngine.triggerNote("G4", 1.2, 0.64, profile.pan, "glass_pad");
+            setTimeout(() => {
+              audioEngine.triggerNote("D4", 1.1, 0.58, profile.pan - 0.1, "glass_pad");
+            }, 220);
+          } else if (selectedRegion === "Eastern Mediterranean") {
+            audioEngine.triggerNote("D3", 1.0, 0.64, profile.pan, "modal_synth");
+            setTimeout(() => {
+              audioEngine.triggerNote("F#3", 1.0, 0.58, profile.pan + 0.1, "modal_synth");
+            }, 200);
           } else {
-            audioEngine.triggerNote("C4", 0.8, 0.48, 0.0, "sine_pad");
+            audioEngine.triggerNote("C4", 1.2, 0.62, 0.0, "sine_pad");
           }
         }
       }
@@ -974,7 +966,12 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-transparent text-slate-100">
       {!hasEntered ? (
-        <LandingPage onEnter={() => setHasEntered(true)} />
+        <LandingPage
+          onEnter={() => {
+            audioEngine.initialize();
+            setHasEntered(true);
+          }}
+        />
       ) : (
         <>
           {/* 1. Header */}

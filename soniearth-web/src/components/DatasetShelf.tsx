@@ -24,8 +24,6 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       color: "from-cyan-400 to-teal-500",
       activeRing: "border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)]",
       isAvailable: true,
-      badge: "Phase 1 Live",
-      badgeColor: "bg-cyan-950/80 text-cyan-300 border-cyan-500/50",
     },
     {
       id: "ocean-currents",
@@ -38,8 +36,6 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       color: "from-cyan-400 to-teal-500",
       activeRing: "border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)]",
       isAvailable: true,
-      badge: "Phase 2 Live",
-      badgeColor: "bg-cyan-950/80 text-cyan-300 border-cyan-500/50",
     },
     {
       id: "iss-lightning",
@@ -52,8 +48,6 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       color: "from-cyan-400 to-teal-500",
       activeRing: "border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)]",
       isAvailable: true,
-      badge: "Phase 2 Live",
-      badgeColor: "bg-cyan-950/80 text-cyan-300 border-cyan-500/50",
     },
     {
       id: "dyamond-co2",
@@ -66,8 +60,6 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
       color: "from-cyan-400 to-teal-500",
       activeRing: "border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.5)]",
       isAvailable: true,
-      badge: "Phase 2 Live",
-      badgeColor: "bg-cyan-950/80 text-cyan-300 border-cyan-500/50",
     },
   ];
 
@@ -115,14 +107,13 @@ export const DatasetShelf: React.FC<DatasetShelfProps> = ({
                     <Icon className="w-4 h-4 text-slate-950 font-bold" />
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <span
-                      className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full border ${ds.badgeColor} flex items-center gap-1`}
-                    >
-                      {!ds.isAvailable && <Lock className="w-2.5 h-2.5" />}
-                      {ds.badge}
-                    </span>
-                    {ds.isAvailable && (
-                      <span className="font-mono text-xs px-2 py-0.5 rounded-md bg-black/80 border border-cyan-500/40 text-cyan-300 font-bold">
+                    {!ds.isAvailable ? (
+                      <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full border bg-slate-900 text-slate-400 border-slate-700 flex items-center gap-1">
+                        <Lock className="w-2.5 h-2.5" />
+                        Locked
+                      </span>
+                    ) : (
+                      <span className="font-mono text-xs px-2.5 py-0.5 rounded-md bg-cyan-950/80 border border-cyan-500/50 text-cyan-300 font-bold shadow-[0_0_8px_rgba(6,182,212,0.3)]">
                         [{ds.key}]
                       </span>
                     )}

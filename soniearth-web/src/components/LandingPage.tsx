@@ -24,7 +24,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="relative mb-2">
           <div className="absolute inset-0 blur-[90px] bg-cyan-500/25 rounded-full scale-150 pointer-events-none" />
           <h1 className="relative text-6xl sm:text-7xl font-black tracking-tight bg-gradient-to-b from-white via-cyan-100 to-[#00F2FE] bg-clip-text text-transparent drop-shadow-[0_0_45px_rgba(6,182,212,0.6)]">
-            SoniEarth
+            SoniSphere
           </h1>
         </div>
         <p className="text-xl sm:text-2xl text-slate-200 font-light mt-1 tracking-wide">
@@ -39,6 +39,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
           {[
             { icon: "🛰️", label: "Real NASA Data" },
             { icon: "🎵", label: "Live Sonification" },
+            { icon: "🎧", label: "3D Spatial Audio" },
             { icon: "♿", label: "Accessible" },
             { icon: "⚡", label: "Real-Time Audio" },
           ].map((pill) => (
@@ -49,6 +50,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               {pill.icon} {pill.label}
             </span>
           ))}
+        </div>
+
+        {/* Headphones Pro-Tip Badge */}
+        <div className="mt-5 flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-400/40 text-cyan-200 text-xs font-mono shadow-[0_0_20px_rgba(6,182,212,0.25)] backdrop-blur-md">
+          <span className="text-sm">🎧</span>
+          <span className="font-semibold text-cyan-300">Pro Tip:</span>
+          <span>Best experienced with headphones for 3D spatial audio &amp; sub-bass</span>
         </div>
 
         {/* CTA Button */}

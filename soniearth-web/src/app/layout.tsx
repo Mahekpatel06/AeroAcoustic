@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SoniEarth — The Earth Information Jukebox",
+  title: "SoniSphere — The Earth Information Jukebox",
   description: "Transforming NASA Earth observation data into real-time accessible musical soundscapes.",
 };
 

@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-cyan-100 to-[#00F2FE] bg-clip-text text-transparent group-hover:drop-shadow-[0_0_12px_rgba(6,182,212,0.6)] transition-all">
-                SoniEarth
+                SoniSphere
               </h1>
               <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 font-semibold tracking-wider shadow-[0_0_8px_rgba(6,182,212,0.3)]">
                 Jukebox
@@ -58,12 +58,15 @@ export const Header: React.FC<HeaderProps> = ({
         )}
       </div>
 
-      {/* NASA Verification Badge */}
-      <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-[#06121D] border border-cyan-500/20 text-xs text-slate-300 backdrop-blur-md shadow-inner">
+      {/* NASA Verification & Headphones Badge */}
+      <div className="hidden md:flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-[#06121D] border border-cyan-500/25 text-xs text-slate-300 backdrop-blur-md shadow-inner">
         <ShieldCheck className="w-4 h-4 text-cyan-400" />
         <span className="font-mono text-cyan-400 font-medium">NASA SVS Data Core</span>
         <span className="text-slate-600">•</span>
-        <span className="text-slate-300">Live Multi-Modal Sonification</span>
+        <span className="flex items-center gap-1.5 text-cyan-200 font-mono text-[11px]">
+          <span>🎧</span>
+          <span>Headphones Recommended (3D Spatial)</span>
+        </span>
       </div>
 
       {/* Accessibility & Audio Controls */}
