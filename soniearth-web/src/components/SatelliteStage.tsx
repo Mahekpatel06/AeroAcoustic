@@ -464,7 +464,32 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
               <p className="text-xs text-slate-300 mt-0.5 font-sans leading-tight">
                 Lightning Imaging Sensor (LIS) nocturnal orbital pass detecting transient optical thunderstorm flashes.
               </p>
+
+              {/* Dynamic Live Strike Readout */}
+              {isPlaying && currentFeature?.isStrike ? (
+                <div className="mt-2.5 pt-2 border-t border-amber-500/40 flex items-center justify-between gap-2 animate-pulse">
+                  <div className="flex items-center gap-1.5">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                    </span>
+                    <span className="text-[11px] font-mono font-bold text-amber-300">
+                      OPTICAL FLASH: {Math.round(currentFeature.strikeEnergyMicroJoules || 450)} µJ
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-900/70 border border-amber-500/80 text-yellow-200">
+                    {currentFeature.activeNote || "E5"} • Pan: {currentFeature.strikePan !== undefined ? (currentFeature.strikePan > 0 ? `+${currentFeature.strikePan.toFixed(2)}` : `${currentFeature.strikePan.toFixed(2)}`) : "0.0"}
+                  </span>
+                </div>
+              ) : (
+                <div className="mt-2.5 pt-2 border-t border-slate-800 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                  <span>Sensor Status: SCANNING</span>
+                  <span>Atmospheric Drone: 55 Hz (A1)</span>
+                </div>
+              )}
             </div>
+
+
           </div>
         ) : viewFormat === "3d" ? (
           /* VIEW A: 3D INTERACTIVE GLOBE (NASA SVS #5475 for Night Lights) */
@@ -612,8 +637,12 @@ export const SatelliteStage: React.FC<SatelliteStageProps> = ({
           </div>
         )}
 
-        {/* Bottom Corner Scientific Watermark */}
-        <div className="absolute bottom-3 right-3 bg-slate-950/90 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-[9px] font-mono text-slate-400 border border-slate-800 max-w-xs text-right leading-tight z-10 hidden sm:block">
+        {/* Scientific Watermark (Moved to top-4 right-4 for Lightning to clear the circular date dial) */}
+        <div
+          className={`absolute ${
+            isLightning ? "top-4 right-4" : "bottom-3 right-3"
+          } bg-slate-950/90 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-[9px] font-mono text-slate-400 border border-slate-800 max-w-xs text-right leading-tight z-10 hidden sm:block`}
+        >
           {isLightning ? (
             <>
               <span className="text-amber-300 font-semibold flex items-center justify-end gap-1 mb-0.5">

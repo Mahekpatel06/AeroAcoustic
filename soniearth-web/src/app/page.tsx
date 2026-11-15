@@ -76,7 +76,7 @@ const FREQ_MAP: Record<string, number> = {
   C3: 130.81, "C#3": 138.59, D3: 146.83, Eb3: 155.56, E3: 164.81, F3: 174.61, "F#3": 185.0, G3: 196.0, "G#3": 207.65, A3: 220.0, Bb3: 233.08, B3: 246.94,
   C4: 261.63, "C#4": 277.18, D4: 293.66, Eb4: 311.13, E4: 329.63, F4: 349.23, "F#4": 369.99, G4: 392.0, "G#4": 415.3, A4: 440.0, Bb4: 466.16, B4: 493.88,
   C5: 523.25, "C#5": 554.37, D5: 587.33, E5: 659.25, "F#5": 739.99, G5: 783.99, A5: 880.0, B5: 987.77,
-  C6: 1046.5,
+  C6: 1046.5, D6: 1174.66, E6: 1318.51,
 };
 
 // Mode durations in seconds
@@ -249,8 +249,12 @@ export default function Home() {
             setActiveFreq(strikeFreq);
             setActiveInstrument(`FM Lightning Chime (${strikeEnergy} µJ)`);
 
+            // Dynamically scale strike velocity based on calibrated optical flash energy (0.65 to 1.0)
+            const normEnergy = Math.min(1.0, Math.max(0.0, (strikeEnergy - 180) / 1320));
+            const strikeVelocity = 0.65 + 0.35 * normEnergy;
+
             // Trigger FM metallic chime attack with spatial stereo panning
-            audioEngine.triggerLightningStrike(strikeNote, 0.9, strikePan);
+            audioEngine.triggerLightningStrike(strikeNote, strikeVelocity, strikePan);
 
             // Deaf-Blind Accessibility: Web Vibration API 80ms pulse
             if (typeof navigator !== "undefined" && navigator.vibrate) {
@@ -438,22 +442,39 @@ export default function Home() {
             ? (featureData?.durationSeconds || 216.7)
             : MODE_DURATIONS[currentModeRef.current];
 
-        // MASTER CLOCK: Always increments smoothly at 60 FPS (zero video buffering freeze)
-        let nextTime = currentTimeRef.current + safeDelta * playbackSpeedRef.current;
+        // MASTER CLOCK: For ISS Lightning, lock directly to hardware video presentation timestamp (PTS)
+        // For Night Lights modes, increment smoothly at 60 FPS (zero video buffering freeze)
+        let nextTime: number;
+
+        if (
+          activeDatasetRef.current === "iss-lightning" &&
+          videoRef.current &&
+          !videoRef.current.paused &&
+          !videoRef.current.seeking &&
+          videoRef.current.readyState >= 2
+        ) {
+          // Absolute hardware video presentation timestamp lock (0ms drift audio-visual parallelism)
+          nextTime = videoRef.current.currentTime;
+        } else {
+          nextTime = currentTimeRef.current + safeDelta * playbackSpeedRef.current;
+
+          // Soft Video Synchronization with 100% local WebM chunks
+          if (videoRef.current && !videoRef.current.seeking) {
+            const currentVidTime = videoRef.current.currentTime;
+            if (Math.abs(currentVidTime - nextTime) > 0.35) {
+              videoRef.current.currentTime = nextTime;
+            }
+          }
+        }
 
         // Loop strictly within this mode chunk on repeat!
         if (nextTime >= maxDuration) {
           nextTime = 0.0;
           if (videoRef.current) {
             videoRef.current.currentTime = 0.0;
-          }
-        }
-
-        // Soft Video Synchronization with 100% local WebM chunks
-        if (videoRef.current && !videoRef.current.seeking) {
-          const currentVidTime = videoRef.current.currentTime;
-          if (Math.abs(currentVidTime - nextTime) > 0.35) {
-            videoRef.current.currentTime = nextTime;
+            if (isPlayingRef.current) {
+              videoRef.current.play().catch(() => {});
+            }
           }
         }
 
